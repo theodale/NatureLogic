@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2021_01_02_124752) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "location"
-    t.string "latlong"
     t.string "latitude"
     t.string "longitude"
     t.integer "farm_area"
