@@ -1,0 +1,28 @@
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: green;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidebar-item * {
+  color: white;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+}
+
+.sidebar-divider {
+  background-color: white;
+  width: 85%;
+}
+
+.sidebar-heading {
+  font-family: Verdana, sans-serif;
+  color: white;
+  text-align: center;
+}
