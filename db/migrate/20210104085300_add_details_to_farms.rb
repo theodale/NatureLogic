@@ -2,9 +2,9 @@ class AddDetailsToFarms < ActiveRecord::Migration[6.0]
   def change
     add_column :farms, :name, :string
     add_column :farms, :location, :string
-
     add_column :farms, :latitude, :string
     add_column :farms, :longitude, :string
+
     add_column :farms, :farm_area, :integer
     add_column :farms, :pasture_area, :integer
     add_column :farms, :crop_area, :integer
@@ -23,7 +23,7 @@ class AddDetailsToFarms < ActiveRecord::Migration[6.0]
 
     add_column :farms, :tillage_area, :integer
     add_column :farms, :sprayage_area, :integer
-    add_column :farms, :artificial_fertiliser_applied, :integer
+    add_column :farms, :annual_applied_artificial_fertiliser, :integer
     add_column :farms, :annual_applied_pesticide, :integer
     add_column :farms, :annual_applied_herbicide, :integer
     add_column :farms, :annual_applied_fungicide, :integer
@@ -34,6 +34,5 @@ class AddDetailsToFarms < ActiveRecord::Migration[6.0]
     add_column :farms, :labour_spend, :integer
     add_column :farms, :feed_spend, :integer
     add_column :farms, :non_fuel_spend, :integer
-
   end
 end

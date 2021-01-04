@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_02_124752) do
+ActiveRecord::Schema.define(version: 2021_01_04_085300) do
 
   create_table "farms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_01_02_124752) do
     t.integer "cows"
     t.integer "tillage_area"
     t.integer "sprayage_area"
-    t.integer "artificial_fertiliser_applied"
+    t.integer "annual_applied_artificial_fertiliser"
     t.integer "annual_applied_pesticide"
     t.integer "annual_applied_herbicide"
     t.integer "annual_applied_fungicide"

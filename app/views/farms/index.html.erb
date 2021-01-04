@@ -1,1 +1,26 @@
-<h1>index</h1>
+<div class="view-farms-div">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Farm Name</th>
+                <th scope="col">Location</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @farms.each do |farm| %>
+            <tr>
+                <td><%= farm.name %></td>
+                <td><%= farm.location %></td>
+                <td>
+                    <button type="button" class="btn btn-primary">View</button>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<div>
+
+</div>

@@ -1,6 +1,7 @@
 class FarmsController < ApplicationController
     def index
         @farms = Farm.all
+        @farm = Farm.new
     end
 
     def create
@@ -43,7 +44,7 @@ class FarmsController < ApplicationController
             :cows,
             :tillage_area,
             :sprayage_area,
-            :artificial_fertiliser_applied,
+            :annual_applied_artificial_fertiliser,
             :annual_applied_pesticide,
             :annual_applied_herbicide,
             :annual_applied_fungicide,

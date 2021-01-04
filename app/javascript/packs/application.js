@@ -5,3 +5,6 @@ require("channels")
 
 require("bootstrap");
 require("@fortawesome/fontawesome-free");
+
+require("chartkick")
+require("chart.js")

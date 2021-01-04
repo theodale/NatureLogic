@@ -1,189 +1,36 @@
 <div class="farm-form-div">
-    <div class="card shadow">
-        <%= form_with(model: @farm) do |f| %>
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Farm Details
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :name %>
-                <%= f.text_field :name, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :location %>
-                <%= f.text_field :location, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :latitude %>
-                <%= f.text_field :latitude, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :longitude %>
-                <%= f.text_field :longitude, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="card shadow">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Land Details
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :farm_area, 'Total Area of Farm (ha)' %>
-                <%= f.number_field :farm_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :pasture_area, 'Area Under Pasture (ha)' %>
-                <%= f.number_field :pasture_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :crop_area, 'Area Under Crops (ha)' %>
-                <%= f.number_field :crop_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :hedgerow_area, 'Hedgerow Area (ha)' %>
-                <%= f.number_field :hedgerow_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :woodland_area, 'Woodland Area (ha)' %>
-                <%= f.number_field :woodland_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :set_aside_1yr_area, 'Area Set Aside - less than 1 year (ha)' %>
-                <%= f.number_field :set_aside_1yr_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :set_aside_1yr_to_5yr_area, 'Area Set Aside - between 1 and 5 years (ha)' %>
-                <%= f.number_field :set_aside_1yr_to_5yr_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :set_aside_5yr_area, 'Area Set Aside - more than 5 years (ha)' %>
-                <%= f.number_field :set_aside_5yr_area, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="card shadow">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Energy Use
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :diesel_use, 'Total Diesel Use (kWh)' %>
-                <%= f.number_field :diesel_use, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :gas_use, 'Total Gas Use (kWh)' %>
-                <%= f.number_field :gas_use, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :electricity_use, 'Total Electricity Use (kWh)' %>
-                <%= f.number_field :electricity_use, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="card shadow">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Animal Rearing
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :sheep, 'Number of Sheep' %>
-                <%= f.number_field :sheep, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :cows, 'Number of Cows' %>
-                <%= f.number_field :cows, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="card shadow">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Soil and Crops Management
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :tillage_area, 'Area of Cropland Under Tillage Regimes (ha)' %>
-                <%= f.number_field :tillage_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :sprayage_area, 'Area of Cropland Under Spraying Regimes (ha)' %>
-                <%= f.number_field :tillage_area, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :artificial_fertiliser_applied, 'Total Amount of Artificial Fertiliser Applied (kg)' %>
-                <%= f.number_field :artificial_fertiliser_applied, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :annual_applied_pesticide, 'Pesticide Applied Annually (kg)' %>
-                <%= f.number_field :annual_applied_pesticide, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :annual_applied_herbicide, 'Herbicide Applied Annually (kg)' %>
-                <%= f.number_field :annual_applied_herbicide, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :annual_applied_fungicide, 'Fungicide Applied Annually (kg)' %>
-                <%= f.number_field :annual_applied_fungicide, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="card shadow">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Certifications
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :organic %>
-                <%= f.check_box :organic, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="card shadow">
-        <div class="card-header">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Procurement and Labour
-            </h6>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <%= f.label :machinery_spend, 'Spend on Machinery (£)' %>
-                <%= f.number_field :machinery_spend, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :labour_spend, 'Spend on Labour (£)' %>
-                <%= f.number_field :labour_spend, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :feed_spend, 'Spend on Feed (£)' %>
-                <%= f.number_field :feed_spend, class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= f.label :non_fuel_spend, 'Further Non-Fuel Spend (£)' %>
-                <%= f.number_field :non_fuel_spend, class: "form-control" %>
-            </div>
-        </div>
-    </div>
-    <div class="farm-submit-div">
-        <%= f.submit "Create", class: "btn btn-default btn-primary" %>
-        <% end %>
-    </div>
+
+    <%= bootstrap_form_with(model: @farm, local: true) do |f| %>
+    <%= f.text_field :name, label: "Name" %>
+    <%= f.text_field :location,  label: "Location" %>
+    <%= f.text_field :latitude,  label: "Latitude" %>
+    <%= f.text_field :longitude, label: "Longitude" %>
+    <%= f.number_field :farm_area, label: "Total Area of Farm (ha)" %>
+    <%= f.number_field :pasture_area, label: "Area Under Pasture (ha)"%>
+    <%= f.number_field :crop_area, label: "Area Under Crops (ha)" %>
+    <%= f.number_field :hedgerow_area, label: "Hedgerow Area (ha)" %>
+    <%= f.number_field :woodland_area, label: "Woodland Area (ha)" %>
+    <%= f.number_field :set_aside_1yr_area, label: "Area Set Aside - less than 1 year (ha)" %>
+    <%= f.number_field :set_aside_1yr_to_5yr_area, label: "Area Set Aside - between 1 and 5 years (ha)" %>
+    <%= f.number_field :set_aside_5yr_area, label: "Area Set Aside - more than 5 years (ha)"%>
+    <%= f.number_field :diesel_use, label: "Total Diesel Use (kWh/yr)" %>
+    <%= f.number_field :gas_use, label: "Total Gas Use (kWh/yr)" %>
+    <%= f.number_field :electricity_use, label: "Total Electricity Use (kWh/yr)" %>
+    <%= f.number_field :sheep, label: "Number of Sheep" %>
+    <%= f.number_field :cows, label: "Number of Cows" %>
+    <%= f.number_field :tillage_area, label: "Area of Cropland Under Tillage Regimes (ha)" %>
+    <%= f.number_field :sprayage_area, label: "Area of Cropland Under Spraying Regimes (ha)" %>
+    <%= f.number_field :annual_applied_artificial_fertiliser, label: "Artificial Fertiliser Applied Annually (kg/year)" %>
+    <%= f.number_field :annual_applied_pesticide, label: "Pesticide Applied Annually (kg/year)" %>
+    <%= f.number_field :annual_applied_herbicide, label: "Herbicide Applied Annually (kg/year)" %>
+    <%= f.number_field :annual_applied_fungicide, label: "Fungicide Applied Annually (kg/year)" %>
+    <%= f.check_box :organic, label: "Organic" %>
+    <%= f.number_field :machinery_spend, label: "Spend on Machinery (£/year)" %>
+    <%= f.number_field :labour_spend, label: "Spend on Labour (£/year)" %>
+    <%= f.number_field :feed_spend, label: "Spend on Feed (£/year)" %>
+    <%= f.number_field :non_fuel_spend, label: "Further Non-Fuel Spend (£/year)" %>
+    <%= f.submit "Create", class: "btn btn-default btn-primary" %>
+    <% end %>
+
     <div style="height: 100px;"></div>
 </div>
