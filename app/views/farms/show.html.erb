@@ -1,19 +1,58 @@
-<div class="row">
-    <div class="col">
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+<div class="farm-content">
+    <div class="row">
+        <div class="col-6">
+
+
+            <div class="jumbotron">
+                <h1 class="display-4"><%= @farm.name %></h1>
+                <hr class="my-4">
+                <p class="lead"><%= @farm.location %> - 51.78° N, 0.95° W </p>
+            </div>
+
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> 1000 Hectares</li>
+                    <li class="list-group-item">150 Sheep</li>
+                    <li class="list-group-item">50 Cows</li>
+                </ul>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="farm-carbon-div">
+                <h3 class="text-center">Expenditure</h3>
+                <%= bar_chart [
+                    ["Labour", @farm.labour_spend],
+                    ["Feed", @farm.feed_spend],
+                    ["Non-Fuel", @farm.non_fuel_spend],
+                ] %>
+            </div>
+
+        </div>
+        <div class="col-6">
+
+            <div class="farm-carbon-div">
+                <h3 class="text-center">Carbon Emissions</h3>
+
+                <%= pie_chart [
+                    ["Diesel", @farm.diesel_use*0.4],
+                    ["Gas", @farm.gas_use],
+                    ["Electricity", @farm.electricity_use],
+                ] %>
+
+                <br>
+                <br>
+
+                <%= column_chart [
+                    ["Diesel", @farm.diesel_use*0.4],
+                    ["Gas", @farm.gas_use],
+                    ["Electricity", @farm.electricity_use],
+                ] %>
+            </div>
+
         </div>
     </div>
 </div>
 
-<div class="row">
 
-</div>
-
-<div class="row">
-
-</div>

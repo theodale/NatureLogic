@@ -13,14 +13,10 @@
                 <td><%= farm.name %></td>
                 <td><%= farm.location %></td>
                 <td>
-                    <button type="button" class="btn btn-primary">View</button>
+                    <%= link_to "View", farm, class: "btn btn-primary" %>
                 </td>
             </tr>
             <% end %>
         </tbody>
     </table>
-</div>
-
-<div>
-
 </div>
