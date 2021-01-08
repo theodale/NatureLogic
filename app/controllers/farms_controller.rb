@@ -1,7 +1,6 @@
 class FarmsController < ApplicationController
     def index
         @farms = Farm.all
-        @farm = Farm.new
     end
 
     def create
@@ -15,6 +14,8 @@ class FarmsController < ApplicationController
 
     def new
         @farm = Farm.new
+        @farm.build_target
+        @farm.lands.build
     end
 
     def show
@@ -24,34 +25,33 @@ class FarmsController < ApplicationController
     private
 
     def farm_params
-        params.require(:farm).permit(
-            :name,
-            :location,
-            :latitude,
-            :longitude,
-            :farm_area,
-            :pasture_area,
-            :crop_area,
-            :hedgerow_area,
-            :woodland_area,
-            :set_aside_1yr_area,
-            :set_aside_1yr_to_5yr_area,
-            :set_aside_5yr_area,
-            :diesel_use,
-            :gas_use,
-            :electricity_use,
-            :sheep,
-            :cows,
-            :tillage_area,
-            :sprayage_area,
-            :annual_applied_artificial_fertiliser,
-            :annual_applied_pesticide,
-            :annual_applied_herbicide,
-            :annual_applied_fungicide,
-            :organic, :machinery_spend,
-            :labour_spend,
-            :feed_spend,
-            :non_fuel_spend
-        )
+        params.require(:farm).permit!
+        # (
+        #     :name,
+        #     :location,
+        #     :latitude,
+        #     :longitude,
+        #     :total_diesel_use,
+        #     :total_gas_use,
+        #     :total_electricity_use,
+        #     :artificial_fertiliser_use,
+        #     :agriculture_products_spend,
+        #     :wood_and_wood_products_spend,
+        #     :pesticides_spend,
+        #     :machinery_and_equipment_spend,
+        #     :other_spend,
+        #     :number_of_sheep,
+        #     :number_of_cows,
+        #     target_attributes: [
+        #         :net_carbon_emission,
+        #         :defra_habitat_score,
+        #         :space_for_nature_score,
+        #         :countryside_stewardship_score,
+        #         :biodiversity_score,
+        #         :field_based_soil_health_score,
+        #         :lab_based_soil_health_score,
+        #         :mean_SOC,
+        #     ]
+        # )
     end
 end

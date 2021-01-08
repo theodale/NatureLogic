@@ -1,6 +1,7 @@
 class CreateTargets < ActiveRecord::Migration[6.0]
   def change
     create_table :targets do |t|
+      t.belongs_to :farm
       t.decimal :net_carbon_emission, limit: 100
       t.decimal :defra_habitat_score, limit: 100
       t.decimal :space_for_nature_score, limit: 100

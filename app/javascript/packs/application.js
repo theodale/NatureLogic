@@ -1,10 +1,10 @@
-require("@rails/ujs").start()
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+require("@rails/ujs").start();
+require("turbolinks").start();
+require("@rails/activestorage").start();
+require("channels");
 
 require("bootstrap");
 require("@fortawesome/fontawesome-free");
 
-require("chartkick")
-require("chart.js")
+require("chartkick");
+require("chart.js");
