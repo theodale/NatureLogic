@@ -1,5 +1,5 @@
-<div class="land-fields">
-    <div>
-        <%= f.number_field :area, label: "Area (ha)" %>
-    </div>
+<div class="nested-land-fields">
+    <%= f.hidden_field :_destroy %>
+    <%= f.number_field :area, hide_label: true %>
 </div>
+

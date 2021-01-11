@@ -9,9 +9,8 @@ module FarmsHelper
         fields = f.fields_for(:lands, new_land, child_index: id) do |builder|
             render("layouts/land_fields", f: builder)
         end
-        link_to("Add New Land", '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+        link_to("Add New Land", '#', class: "add_land btn btn-success", data: {id: id, fields: fields.gsub("\n", "")})
     end
 
 end
 
-# may need to change from lands to lands
