@@ -6,7 +6,9 @@
 }
 
 .farm-content {
-  margin: 50px;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .farm-carbon-div {
@@ -22,4 +24,43 @@
 
 .land-btn-div {
   text-align: right;
+}
+
+.farm-name {
+  color: white !important;
+}
+
+.farm-navbar {
+  background-color: steelblue;
+  color: white;
+}
+
+.navbar-link {
+  color: white;
+}
+
+.success {
+  color: lightgreen;
+}
+
+.fail {
+  color: red;
+}
+
+.score-badge {
+  background-color: #6495ed;
+}
+
+.targets-table-head {
+  background-color: #00008b;
+  color: white;
+  border: none;
+}
+
+.table td {
+  text-align: center;
+}
+
+.standards-card-header {
+  color: white;
 }
