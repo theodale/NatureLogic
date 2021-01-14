@@ -1,4 +1,6 @@
 <div class="farm-content">
+
+    <!-- farm navbar -->
     <div class="row">
         <div class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light farm-navbar">
@@ -10,119 +12,14 @@
                     <i class="fas fa-cog"></i>
                 </div>
             </nav>
-        <br>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-6">
-
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Name</th>
-                        <th>Target</th>
-                        <th>Result</th>
-                        <th>Achieved</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Net Emissions</th>
-                        <td>0 kg</td>
-                        <td>0 kg</td>
-                        <td><i class="fas fa-check-circle fa-lg success"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Defra Habitat Score</th>
-                        <td>50%</td>
-                        <td>25%</td>
-                        <td><i class="fas fa-times-circle target-card-icon fa-lg fail"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Space For Nature Score</th>
-                        <td>20%</td>
-                        <td>33%</td>
-                        <td><i class="fas fa-check-circle fa-lg success"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Countryside Stewardship Score</th>
-                        <td>50%</td>
-                        <td>75%</td>
-                        <td><i class="fas fa-check-circle fa-lg success"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Biodiversity Score</th>
-                        <td>75%</td>
-                        <td>60%</td>
-                        <td><i class="fas fa-times-circle target-card-icon fa-lg fail"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Field-Based Soil Health Score</th>
-                        <td>60%</td>
-                        <td>75%</td>
-                        <td><i class="fas fa-check-circle fa-lg success"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Lab-Based Soil Health Score</th>
-                        <td>50%</td>
-                        <td>70%</td>
-                        <td><i class="fas fa-check-circle fa-lg success"></i></td>
-                    </tr>
-                    <tr>
-                        <th>Mean SOC</th>
-                        <td>20%</td>
-                        <td>25%</td>
-                        <td><i class="fas fa-check-circle fa-lg success"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <br>
-
-        </div>
-        <div class="col-6">
-
-            <div class="card">
-                <div class="card-header bg-dark standards-card-header">
-                    Standards
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item  d-flex justify-content-between align-items-center">
-                        ROC Compliance
-                        <span class="badge badge-primary badge-pill">65%</span>
-
-                    </li>
-                    <li class="list-group-item  d-flex justify-content-between align-items-center">
-                        Overall Compliance
-                        <span class="badge badge-primary badge-pill">30%</span>
-                    </li>
-                    <li class="list-group-item  d-flex justify-content-between align-items-center">
-                        Stewardship Scheme Positive Interventions
-                        <span class="badge badge-primary badge-pill">5%</span>
-
-                    </li>
-
-                </ul>
-            </div>
-
-            <br>
-
-            <div class="farm-carbon-div">
-                <h3 class="text-center">Land Use</h3>
-                <%= pie_chart [
-                    ["Cropland", 1000],
-                    ["Sprayed Cropland", 1500],
-                    ["Mature Woodland", 700],
-                    ["Juvenile Woodland", 250],
-                    ["Hedgerow", 200],
-                ] %>
-            </div>
-
-            <br>
-
-        </div>
+    <!-- farm display -->
+    <div class="row farm-display-div">
+        <%= render 'farm' %>
     </div>
+
 </div>
 
 

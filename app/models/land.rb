@@ -1,4 +1,4 @@
 class Land < ApplicationRecord
     belongs_to :farm
-    has_one :land_type
+    belongs_to :land_type
 end

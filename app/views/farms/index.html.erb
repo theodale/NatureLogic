@@ -10,8 +10,8 @@
         <tbody>
             <% @farms.each do |farm| %>
             <tr>
-                <td><%= farm.name %></td>
-                <td><%= farm.location %></td>
+                <th><%= farm.name %></th>
+                <th><%= farm.location %></th>
                 <td>
                     <%= link_to "View", farm, class: "btn btn-primary" %>
                 </td>

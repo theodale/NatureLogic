@@ -3,7 +3,8 @@ class CreateLands < ActiveRecord::Migration[6.0]
     create_table :lands do |t|
       t.decimal :area
       t.belongs_to :farm
-      t.references :land_type
+      t.belongs_to :land_type
+      t.boolean :sprayed
       t.timestamps
     end
   end

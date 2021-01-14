@@ -1,3 +1,50 @@
+<div class="col-6">
+            <br>
+        </div>
+        <div class="col-6">
+
+            <div class="card">
+                <div class="card-header bg-dark standards-card-header">
+                    Standards
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item  d-flex justify-content-between align-items-center">
+                        ROC Compliance
+                        <span class="badge badge-primary badge-pill">65%</span>
+
+                    </li>
+                    <li class="list-group-item  d-flex justify-content-between align-items-center">
+                        Overall Compliance
+                        <span class="badge badge-primary badge-pill">30%</span>
+                    </li>
+                    <li class="list-group-item  d-flex justify-content-between align-items-center">
+                        Stewardship Scheme Positive Interventions
+                        <span class="badge badge-primary badge-pill">5%</span>
+
+                    </li>
+
+                </ul>
+            </div>
+
+            <br>
+
+            <div class="farm-carbon-div">
+                <h3 class="text-center">Land Use</h3>
+                <%= pie_chart [
+                    ["Cropland", 1000],
+                    ["Sprayed Cropland", 1500],
+                    ["Mature Woodland", 700],
+                    ["Juvenile Woodland", 250],
+                    ["Hedgerow", 200],
+                ] %>
+            </div>
+
+            <br>
+
+        </div>
+
+
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -73,7 +120,6 @@ ActiveRecord::Schema.define(version: 2021_01_12_094744) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_lands_on_farm_id"
-    t.index ["land_type_id"], name: "index_lands_on_land_type_id"
   end
 
   create_table "targets", force: :cascade do |t|

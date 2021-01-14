@@ -4,6 +4,8 @@
     <div id="accordion">
 
         <%= bootstrap_form_with model: @farm do |f| %>
+
+        <!-- farm energy use form section -->
         <div class="card">
             <div class="card-header">
                 <a class="card-link" data-toggle="collapse" href="#collapseOne">
@@ -22,6 +24,7 @@
 
         <br>
 
+        <!-- farm energy use form section -->
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
@@ -39,6 +42,7 @@
 
         <br>
 
+        <!-- farm resource expenditure form section -->
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
@@ -59,6 +63,7 @@
 
         <br>
 
+        <!-- farm livestock form section -->
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
@@ -75,6 +80,7 @@
 
         <br>
 
+        <!-- farm targets form section -->
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
@@ -99,6 +105,7 @@
 
         <br>
 
+        <!-- farm land details form section -->
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
@@ -106,13 +113,23 @@
                 </a>
             </div>
             <div id="collapseSix" class="collapse" data-parent="#accordion">
-                <div class="card-body">
+                <div class="card-body container">
                     <%= f.fields_for :lands do |lands_form| %>
-                        <%= lands_form.number_field :area, label: "Area (ha)" %>
+                        <div class="row">
+                            <div class="col-6">
+                            <%= lands_form.collection_select :land_type_id, LandType.all, :id, :category, {}, {class: "land-collection-select"} %>
+                            </div>
+                            <div class="col-3">
+                            <%= lands_form.number_field :area, label: "Area (ha)" %>
+                            </div>
+                            <div class="col-3 sprayed-div">
+                                <%= lands_form.check_box :sprayed, label: "Sprayed?" %>
+                            </div>
+                        </div>
                     <% end %>
                     <div class="land-btn-div">
-                    <%= add_lands f %>
-                    <%= link_to "Remove Land", '#', class: "remove_land btn btn-danger" %>
+                        <%= add_lands f %>
+                        <%= link_to "Remove Land", '#', class: "remove_land btn btn-danger" %>
                     </div>
                 </div>
             </div>
@@ -120,6 +137,7 @@
 
         <br>
 
+        <!-- create farm button -->
         <div class="farm-submit-div">
             <%= f.submit "Create", class: "btn btn-default btn-primary" %>
             <% end %>
