@@ -11,6 +11,12 @@ $(function(){
     e.preventDefault();
   });
 
+  $("#emissions").on("click", function (e) {
+    e.preventDefault();
+    $("html,body").animate({scrollTop: $(this.hash).offset().top - 50}, 500);
+  });
+
+
 });
 
 // https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/

@@ -12,5 +12,13 @@ module FarmsHelper
         link_to("Add New Land", '#', class: "add_land btn btn-success", data: {id: id, fields: fields.gsub("\n", "")})
     end
 
+    def target_achieved(target, result)
+        if result > target
+            ('<i class="fas fa-check-circle fa-lg success"></i>').html_safe
+        else
+            ('<i class="fas fa-times-circle target-card-icon fa-lg fail">').html_safe
+        end
+    end
+
 end
 

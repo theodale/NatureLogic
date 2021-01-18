@@ -1,12 +1,11 @@
 .view-farms-div {
   padding-top: 50px;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 200px;
+  padding-right: 200px;
   padding-bottom: 200px;
 }
 
-.farm-content {
-  margin-top: 20px;
+.content {
   margin-left: 50px;
   margin-right: 50px;
 }
@@ -30,11 +29,6 @@
   color: white !important;
 }
 
-.farm-navbar {
-  background-color: steelblue;
-  color: white;
-}
-
 .navbar-link {
   color: white;
 }
@@ -51,13 +45,7 @@
   background-color: #6495ed;
 }
 
-.targets-table-head {
-  background-color: #00008b;
-  color: white;
-  border: none;
-}
-
-.table td {
+.centred-data {
   text-align: center;
 }
 
@@ -69,6 +57,38 @@
   padding-top: 35px;
 }
 
-.farm-display-div {
-  margin-top: 20px;
+.overview-display-div {
+  padding-top: 70px;
+}
+
+.emissions-display-div {
+  margin-top: 300px;
+  padding-top: 70px;
+}
+
+.nature-display-div {
+  margin-top: 650px;
+  padding-top: 70px;
+}
+
+#farm-navbar {
+  color: white;
+  background-color: steelblue;
+}
+
+.farm-form-div {
+  padding-top: 50px;
+  width: 70%;
+  margin: auto;
+}
+
+.farm-submit-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.farm-navbar-txt {
+  color: white;
 }

@@ -1,23 +1,22 @@
-<div class="farm-content">
+<%= render 'farm-navbar' %>
 
-    <!-- farm navbar -->
-    <div class="row">
-        <div class="col-12">
-            <nav class="navbar navbar-expand-lg navbar-light farm-navbar">
-                <a class="navbar-brand farm-name" href="#"><b><%= @farm.name %></b></a>
-                <div class="collapse navbar-collapse justify-content-end">
-                    <a class="nav-link navbar-link" href="#">Emissions</a>
-                    <a class="nav-link navbar-link" href="#">Nature</a>
-                    <a class="nav-link navbar-link" href="#">Interventions</a>
-                    <i class="fas fa-cog"></i>
-                </div>
-            </nav>
-        </div>
+<div class="content" data-spy="scroll" data-target="#farm-navbar" data-offset="0">
+
+    <!-- overview results -->
+    <div class="row overview-display-div" id="overview">
+        <%= render 'overview' %>
     </div>
 
-    <!-- farm display -->
-    <div class="row farm-display-div">
-        <%= render 'farm' %>
+    <!-- carbon results -->
+    <div class="row emissions-display-div" id="carbon">
+        <%= render 'carbon' %>
+    </div>
+
+    <!-- emissions results -->
+    <div class="row nature-display-div" id="nature">
+        <%= render 'nature' %>
+        <div style="height: 1000px;">
+        </div>
     </div>
 
 </div>

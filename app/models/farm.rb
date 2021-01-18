@@ -29,7 +29,7 @@ class Farm < ApplicationRecord
         scope_one + scope_two + scope_three
     end
 
-    def land_sequestration
+    def woodland_sequestration
         total_sequestration = 0
         self.lands.each do |land|
             s = land.land_type.sequestration_per_ha * land.area
@@ -38,7 +38,30 @@ class Farm < ApplicationRecord
         total_sequestration
     end
 
-    def
+    def net_emissions
+        #need to add farmland sequestration (b34 on excel MVP)
+        net = total_emissions - woodland_sequestration
+        net.round(0)
+    end
 
+    def defra_habitat_score
+        total_area = 0
+        total_defra_habitat_index = 0
+        self.lands.each do |land|
+            total_area += land.area
+            total_defra_habitat_index += land.land_type.defra_uniqueness_score * land.area
+        end
+        (total_defra_habitat_index / (total_area * 10)).round(1)
+    end
+
+    def space_for_nature_score
+        total_area = 0
+        total_space_for_nature_index = 0
+        self.lands.each do |land|
+            total_area += land.area
+            spray_factor = land.sprayed ? 0.2 : 1
+            total_space_for_nature_index += spray_factor * land.area * land.land_type.area_for_nature_rating
+        end
+        (total_space_for_nature_index / (total_area * 10)).round(1)
     end
 end

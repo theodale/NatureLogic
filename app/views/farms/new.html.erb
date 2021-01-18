@@ -1,120 +1,123 @@
 <%= javascript_pack_tag 'farm' %>
-
-<div class="farm-form-div">
-    <div id="accordion">
+<div class="sidebar">
+    <%= render 'layouts/sidebar' %>
+</div>
+<div class="content">
+    <div class="farm-form-div">
+        <div id="accordion">
 
         <%= bootstrap_form_with model: @farm do |f| %>
 
-        <!-- farm energy use form section -->
-        <div class="card">
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                    Farm Details
-                </a>
-            </div>
-            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                <div class="card-body">
-                    <%= f.text_field :name, label: "Name" %>
-                    <%= f.text_field :location,  label: "Location" %>
-                    <%= f.text_field :latitude,  label: "Latitude" %>
-                    <%= f.text_field :longitude, label: "Longitude" %>
+            <!-- farm energy use form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                        Farm Details
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                        <%= f.text_field :name, label: "Name" %>
+                        <%= f.text_field :location,  label: "Location" %>
+                        <%= f.text_field :latitude,  label: "Latitude" %>
+                        <%= f.text_field :longitude, label: "Longitude" %>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <br>
+            <br>
 
-        <!-- farm energy use form section -->
-        <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                    Energy Use
-                </a>
-            </div>
-            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    <%= f.text_field :total_diesel_use, label: "Diesel Use (l)" %>
-                    <%= f.number_field :total_gas_use, label: "Gas Use (kWh)" %>
-                    <%= f.number_field :total_electricity_use, label: "Electricity Use (kWh)" %>
+            <!-- farm energy use form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                        Energy Use
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <%= f.text_field :total_diesel_use, label: "Diesel Use (l)" %>
+                        <%= f.number_field :total_gas_use, label: "Gas Use (kWh)" %>
+                        <%= f.number_field :total_electricity_use, label: "Electricity Use (kWh)" %>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <br>
+            <br>
 
-        <!-- farm resource expenditure form section -->
-        <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-                    Resource Expenditure
-                </a>
-            </div>
-            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    <%= f.number_field :artificial_fertiliser_use, label: "Artificial Fertiliser Use (kg)" %>
-                    <%= f.number_field :agriculture_products_spend, label: "Agriculture Products Spend (£)" %>
-                    <%= f.number_field :wood_and_wood_products_spend, label: "Wood and Wood Products Spend (£)" %>
-                    <%= f.number_field :pesticides_spend, label: "Pesticides Spend (£)" %>
-                    <%= f.number_field :machinery_and_equipment_spend, label: "Machinery and Equipment Spend (£)" %>
-                    <%= f.number_field :other_spend, label: "Other Spend (£)" %>
+            <!-- farm resource expenditure form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                        Resource Expenditure
+                    </a>
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <%= f.number_field :artificial_fertiliser_use, label: "Artificial Fertiliser Use (kg)" %>
+                        <%= f.number_field :agriculture_products_spend, label: "Agriculture Products Spend (£)" %>
+                        <%= f.number_field :wood_and_wood_products_spend, label: "Wood and Wood Products Spend (£)" %>
+                        <%= f.number_field :pesticides_spend, label: "Pesticides Spend (£)" %>
+                        <%= f.number_field :machinery_and_equipment_spend, label: "Machinery and Equipment Spend (£)" %>
+                        <%= f.number_field :other_spend, label: "Other Spend (£)" %>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <br>
+            <br>
 
-        <!-- farm livestock form section -->
-        <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
-                    Livestock
-                </a>
-            </div>
-            <div id="collapseFour" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    <%= f.number_field :number_of_sheep, label: "" %>
-                    <%= f.number_field :number_of_cows, label: "Number of Cows" %>
+            <!-- farm livestock form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+                        Livestock
+                    </a>
+                </div>
+                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <%= f.number_field :number_of_sheep, label: "" %>
+                        <%= f.number_field :number_of_cows, label: "Number of Cows" %>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <br>
+            <br>
 
-        <!-- farm targets form section -->
-        <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
-                    Targets
-                </a>
-            </div>
-            <div id="collapseFive" class="collapse" data-parent="#accordion">
-                <div class="card-body">
-                    <%= f.fields_for :target do |lands_form| %>
-                    <%= lands_form.number_field :net_carbon_emission, label: "Net Carbon Emission (kg)" %>
-                    <%= lands_form.number_field :defra_habitat_score, label: "Defra Habitat Score" %>
-                    <%= lands_form.number_field :space_for_nature_score, label: "Space for Nature Score" %>
-                    <%= lands_form.number_field :countryside_stewardship_score, label: "Countryside Stewardship Score" %>
-                    <%= lands_form.number_field :biodiversity_score, label: "Biodiversity Score" %>
-                    <%= lands_form.number_field :field_based_soil_health_score, label: "Field-Based Soil Health Score" %>
-                    <%= lands_form.number_field :lab_based_soil_health_score, label: "Lab-Based Soil Health Score" %>
-                    <%= lands_form.number_field :mean_SOC, label: "Mean SOC" %>
-                    <% end %>
+            <!-- farm targets form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
+                        Targets
+                    </a>
+                </div>
+                <div id="collapseFive" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <%= f.fields_for :target do |lands_form| %>
+                        <%= lands_form.number_field :net_carbon_emission, label: "Net Carbon Emission (kg)" %>
+                        <%= lands_form.number_field :defra_habitat_score, label: "Defra Habitat Score" %>
+                        <%= lands_form.number_field :space_for_nature_score, label: "Space for Nature Score" %>
+                        <%= lands_form.number_field :countryside_stewardship_score, label: "Countryside Stewardship Score" %>
+                        <%= lands_form.number_field :biodiversity_score, label: "Biodiversity Score" %>
+                        <%= lands_form.number_field :field_based_soil_health_score, label: "Field-Based Soil Health Score" %>
+                        <%= lands_form.number_field :lab_based_soil_health_score, label: "Lab-Based Soil Health Score" %>
+                        <%= lands_form.number_field :mean_SOC, label: "Mean SOC" %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <br>
+            <br>
 
-        <!-- farm land details form section -->
-        <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
-                    Land Details
-                </a>
-            </div>
-            <div id="collapseSix" class="collapse" data-parent="#accordion">
-                <div class="card-body container">
-                    <%= f.fields_for :lands do |lands_form| %>
+            <!-- farm land details form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
+                        Land Details
+                    </a>
+                </div>
+                <div id="collapseSix" class="collapse" data-parent="#accordion">
+                    <div class="card-body container">
+                        <%= f.fields_for :lands do |lands_form| %>
                         <div class="row">
                             <div class="col-6">
                             <%= lands_form.collection_select :land_type_id, LandType.all, :id, :category, {}, {class: "land-collection-select"} %>
@@ -125,14 +128,16 @@
                             <div class="col-3 sprayed-div">
                                 <%= lands_form.check_box :sprayed, label: "Sprayed?" %>
                             </div>
+                            </div>
+                        <% end %>
+                        <div class="land-btn-div">
+                            <%= add_lands f %>
+                            <%= link_to "Remove Land", '#', class: "remove_land btn btn-danger" %>
                         </div>
-                    <% end %>
-                    <div class="land-btn-div">
-                        <%= add_lands f %>
-                        <%= link_to "Remove Land", '#', class: "remove_land btn btn-danger" %>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <br>
@@ -145,4 +150,3 @@
 
     </div>
 </div>
-
