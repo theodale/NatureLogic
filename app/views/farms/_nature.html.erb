@@ -1,1 +1,36 @@
-<h1>Nature Section</h1>
+<div class="nature-content row">
+    <div class="col-6">
+        <div class="graph-div">
+            <%= column_chart [
+                {
+                    name: "Target", data: {
+                        "Defra Habitat": @intervention_farm.target.defra_habitat_score ,
+                        "Space For Nature": @intervention_farm.target.space_for_nature_score,
+                    },
+                },
+                {
+                    name: "Current", data: {
+                        "Defra Habitat": @intervention_farm.defra_habitat_score,
+                        "Space For Nature": @intervention_farm.space_for_nature_score,
+                    }
+                }],
+            title: "Target Comparison" %>
+        </div>
+        <div style="height: 350px">
+        </div>
+    </div>
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Defra Habitat Score
+                <span class="badge badge-dark"><%= @intervention_farm.defra_habitat_score %>%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Space for Nature Score
+                <span class="badge badge-dark"><%= @intervention_farm.space_for_nature_score%>%</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

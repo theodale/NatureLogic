@@ -35,12 +35,12 @@ class Farm < ApplicationRecord
             s = land.land_type.sequestration_per_ha * land.area
             total_sequestration += s
         end
-        total_sequestration
+        -1*total_sequestration
     end
 
     def net_emissions
-        #need to add farmland sequestration (b34 on excel MVP)
-        net = total_emissions - woodland_sequestration
+        #farmland sequestration needed - requires lab-based soil input
+        net = total_emissions + woodland_sequestration
         net.round(0)
     end
 
@@ -64,4 +64,49 @@ class Farm < ApplicationRecord
         end
         (total_space_for_nature_index / (total_area * 10)).round(1)
     end
+
+    def above_ground_carbon
+        total_above_ground_carbon = 0
+        self.lands.each do |land|
+            total_above_ground_carbon += land.area * land.land_type.above_ground_carbon_per_ha
+        end
+        total_above_ground_carbon
+    end
+
+    def to_woodland(land_type)
+        woodland_id = LandType.find_by(category: "Juvenile Woodland - Mixed Deciduous").id
+        land_id = LandType.find_by(category: land_type).id
+        woodland = self.lands.find_by(land_type_id: woodland_id)
+        land = self.lands.find_by(land_type_id: land_id)
+        woodland.area += 10
+        land.area -= 10
+        woodland.save
+        land.save
+    end
+
+    def reduce_usage(substance)
+        if substance == "Diesel"
+            self.total_diesel_use = self.total_diesel_use * 0.8
+        elsif substance == "Fertiliser"
+            self.artificial_fertiliser_use = self.artificial_fertiliser_use * 0.8
+        end
+        self.save
+    end
+
+    def go_organic(direction)
+        if direction == "forward"
+            self.lands.each do |land|
+                land.sprayed = false
+                land.save
+            end
+        end
+    end
+
+    def fertiliser_to_manure(direction)
+        if direction == "forward"
+            self.artificial_fertiliser_use = 0
+            self.save
+        end
+    end
+
 end

@@ -61,16 +61,6 @@
   padding-top: 70px;
 }
 
-.emissions-display-div {
-  margin-top: 300px;
-  padding-top: 70px;
-}
-
-.nature-display-div {
-  margin-top: 650px;
-  padding-top: 70px;
-}
-
 #farm-navbar {
   color: white;
   background-color: steelblue;
@@ -91,4 +81,46 @@
 
 .farm-navbar-txt {
   color: white;
+}
+
+.carbon-display-div {
+  margin-top: 300px;
+  padding-top: 70px;
+}
+
+.carbon-content {
+  padding: 20px;
+  padding-bottom: 100px;
+  background-color: #87cefa;
+  border: 3px solid steelblue;
+  border-radius: 25px;
+}
+
+.nature-display-div {
+  margin-top: 100px;
+  padding-top: 70px;
+}
+
+.graph-div {
+  padding: 20px;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.nature-content {
+  padding: 20px;
+  padding-bottom: 100px;
+  background-color: #dda0dd;
+  border: 3px solid steelblue;
+  border-radius: 25px;
+}
+
+.intervention-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.intervention-title-div {
+  width: 100%;
+  text-align: center;
 }

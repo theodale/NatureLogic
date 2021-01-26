@@ -2,8 +2,11 @@
 <div class="sidebar">
     <%= render 'layouts/sidebar' %>
 </div>
+
 <div class="content">
+
     <div class="farm-form-div">
+
         <div id="accordion">
 
         <%= bootstrap_form_with model: @farm do |f| %>
@@ -21,6 +24,7 @@
                         <%= f.text_field :location,  label: "Location" %>
                         <%= f.text_field :latitude,  label: "Latitude" %>
                         <%= f.text_field :longitude, label: "Longitude" %>
+                        <%= f.hidden_field :intervention, value: false %>
                     </div>
                 </div>
             </div>
@@ -92,15 +96,15 @@
                 </div>
                 <div id="collapseFive" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        <%= f.fields_for :target do |lands_form| %>
-                        <%= lands_form.number_field :net_carbon_emission, label: "Net Carbon Emission (kg)" %>
-                        <%= lands_form.number_field :defra_habitat_score, label: "Defra Habitat Score" %>
-                        <%= lands_form.number_field :space_for_nature_score, label: "Space for Nature Score" %>
-                        <%= lands_form.number_field :countryside_stewardship_score, label: "Countryside Stewardship Score" %>
-                        <%= lands_form.number_field :biodiversity_score, label: "Biodiversity Score" %>
-                        <%= lands_form.number_field :field_based_soil_health_score, label: "Field-Based Soil Health Score" %>
-                        <%= lands_form.number_field :lab_based_soil_health_score, label: "Lab-Based Soil Health Score" %>
-                        <%= lands_form.number_field :mean_SOC, label: "Mean SOC" %>
+                        <%= f.fields_for :target do |target_form| %>
+                        <%= target_form.number_field :net_carbon_emission, label: "Net Carbon Emission (kg)" %>
+                        <%= target_form.number_field :defra_habitat_score, label: "Defra Habitat Score" %>
+                        <%= target_form.number_field :space_for_nature_score, label: "Space for Nature Score" %>
+                        <%= target_form.number_field :countryside_stewardship_score, label: "Countryside Stewardship Score" %>
+                        <%= target_form.number_field :biodiversity_score, label: "Biodiversity Score" %>
+                        <%= target_form.number_field :field_based_soil_health_score, label: "Field-Based Soil Health Score" %>
+                        <%= target_form.number_field :lab_based_soil_health_score, label: "Lab-Based Soil Health Score" %>
+                        <%= target_form.number_field :mean_SOC, label: "Mean SOC" %>
                         <% end %>
                     </div>
                 </div>
@@ -117,28 +121,22 @@
                 </div>
                 <div id="collapseSix" class="collapse" data-parent="#accordion">
                     <div class="card-body container">
-                        <%= f.fields_for :lands do |lands_form| %>
-                        <div class="row">
-                            <div class="col-6">
-                            <%= lands_form.collection_select :land_type_id, LandType.all, :id, :category, {}, {class: "land-collection-select"} %>
-                            </div>
-                            <div class="col-3">
-                            <%= lands_form.number_field :area, label: "Area (ha)" %>
-                            </div>
-                            <div class="col-3 sprayed-div">
-                                <%= lands_form.check_box :sprayed, label: "Sprayed?" %>
-                            </div>
-                            </div>
+                        <% @land_types.each do |land_type| %>
+                            <%= f.fields_for :lands do |land_form| %>
+                                <%= land_form.hidden_field :sprayed, value: true %>
+                                <%= land_form.hidden_field :land_type_id, value: land_type.id %>
+                                <%= land_form.number_field :area, value: 0, label: land_type.category + " - Sprayed" %>
+                            <% end %>
+                            <%= f.fields_for :lands do |land_form| %>
+                                <%= land_form.hidden_field :sprayed, value: false %>
+                                <%= land_form.hidden_field :land_type_id, value: land_type.id %>
+                                <%= land_form.number_field :area, value: 0, label: land_type.category + " - Not Sprayed" %>
+                            <% end %>
                         <% end %>
-                        <div class="land-btn-div">
-                            <%= add_lands f %>
-                            <%= link_to "Remove Land", '#', class: "remove_land btn btn-danger" %>
-                        </div>
+
                     </div>
                 </div>
             </div>
-
-        </div>
 
         <br>
 
@@ -149,4 +147,5 @@
         </div>
 
     </div>
+
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_144618) do
+ActiveRecord::Schema.define(version: 2021_01_22_100138) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_144618) do
     t.float "other_spend"
     t.integer "number_of_sheep"
     t.integer "number_of_cows"
+    t.boolean "intervention"
   end
 
   create_table "land_types", force: :cascade do |t|
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_144618) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "defra_uniqueness_score"
     t.integer "area_for_nature_rating"
+    t.integer "above_ground_carbon_per_ha"
   end
 
   create_table "lands", force: :cascade do |t|

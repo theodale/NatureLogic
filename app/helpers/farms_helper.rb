@@ -20,5 +20,33 @@ module FarmsHelper
         end
     end
 
+    def scope_three_hash
+        {
+            "Agriculture Products": (@intervention_farm.agriculture_products_spend*2.144).round(1),
+            "Wood and Wood Products": (@intervention_farm.wood_and_wood_products_spend*0.64).round(1),
+            "Pesticides": (@intervention_farm.pesticides_spend*0.776).round(1),
+            "Machinery and Equipment": (@intervention_farm.machinery_and_equipment_spend*0.56).round(1),
+            "Enteric Emissions": (@intervention_farm.number_of_sheep*1003.75 + @intervention_farm.number_of_cows*4015).round(1)
+        }
+    end
+
+    def offset_revenue
+        (60 * @intervention_farm.net_emissions / 1000).round(2)
+    end
+
+    def reset_params(request_params)
+        if request_params[:to_woodland]
+            request_params.delete(:to_woodland)
+        end
+        if request_params[:reduce_usage]
+            request_params.delete(:reduce_usage)
+        end
+        if request_params[:go_organic]
+            request_params.delete(:go_organic)
+        end
+        request_params[:id] = @intervention_farm.id
+        request_params
+    end
+
 end
 

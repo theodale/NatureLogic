@@ -1,1 +1,92 @@
-<h1>Carbon Section</h1>
+<div class="carbon-content row">
+    <div class="col-6">
+        <div class="graph-div">
+            <%= column_chart [
+                ["Total Sequestration", @intervention_farm.woodland_sequestration],
+                ["Scope 1", @intervention_farm.scope_one],
+                ["Scope 2", @intervention_farm.scope_two],
+                ["Scope 3", @intervention_farm.scope_three],
+                ["Net Emissions", @intervention_farm.net_emissions]],
+                ytitle: "Carbon Emission (kg)",
+                title: "Emissions" %>
+        </div>
+        <br>
+        <div class="graph-div">
+            <%= pie_chart scope_three_hash, title: "Scope Three Emissions"%>
+        </div>
+    </div>
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Above Ground Carbon
+                <span class="badge badge-dark"><%= @intervention_farm.above_ground_carbon %> kg</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Annual Woodland Sequestration
+                <span class="badge badge-dark"><%= @intervention_farm.woodland_sequestration %> kg</span>
+            </li>
+        </ul>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Scope One
+                <span class="badge badge-dark"><%= @intervention_farm.scope_one %> kg</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Scope Two
+                <span class="badge badge-dark"><%= @intervention_farm.scope_two %> kg</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Scope Three
+                <span class="badge badge-dark"><%= @intervention_farm.scope_three %> kg</span>
+            </li>
+        </ul>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Net Carbon Emissions
+                <span class="badge badge-dark"><%= @intervention_farm.net_emissions %> kg</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Potential Revenue From Offset
+                <span class="badge badge-dark">£<%= offset_revenue %></span>
+            </li>
+        </ul>
+        <br>
+            <div class="graph-div">
+                <div class="intervention-title-div">
+                    <h3>Interventions</h3>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <%= link_to "Cropland to Woodland (1ha)", reset_params(request.params).merge(to_woodland: "Cropland"), class: "btn btn-success intervention-btn" %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <%= link_to "Grassland to Woodland (1ha)", reset_params(request.params).merge(to_woodland: "Grassland"), class: "btn btn-success intervention-btn" %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <%= link_to "Reduce Diesel Usage (20%)", reset_params(request.params).merge(reduce_usage: "Diesel"), class: "btn btn-success intervention-btn" %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <%= link_to "Reduce Fertiliser Application (20%)", reset_params(request.params).merge(reduce_usage: "Fertiliser"), class: "btn btn-success intervention-btn" %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <%= link_to "Go Organic", reset_params(request.params).merge(go_organic: "forward"), class: "btn btn-success intervention-btn" %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <%= link_to "Swap Fertiliser for Manure", reset_params(request.params).merge(fertiliser_to_manure: "forward"), class: "btn btn-success intervention-btn" %>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
