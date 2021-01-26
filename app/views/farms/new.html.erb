@@ -121,31 +121,39 @@
                 </div>
                 <div id="collapseSix" class="collapse" data-parent="#accordion">
                     <div class="card-body container">
-                        <% @land_types.each do |land_type| %>
-                            <%= f.fields_for :lands do |land_form| %>
-                                <%= land_form.hidden_field :sprayed, value: true %>
-                                <%= land_form.hidden_field :land_type_id, value: land_type.id %>
-                                <%= land_form.number_field :area, value: 0, label: land_type.category + " - Sprayed" %>
-                            <% end %>
-                            <%= f.fields_for :lands do |land_form| %>
-                                <%= land_form.hidden_field :sprayed, value: false %>
-                                <%= land_form.hidden_field :land_type_id, value: land_type.id %>
-                                <%= land_form.number_field :area, value: 0, label: land_type.category + " - Not Sprayed" %>
-                            <% end %>
+                        <%= f.fields_for :lands do |lands_form| %>
+                            <%= render "land_fields", f: lands_form %>
                         <% end %>
-
+                        <%= link_to_add_lands f %>
                     </div>
                 </div>
             </div>
 
-        <br>
+            <br>
+
+            <!-- hedgerow details form section -->
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
+                        Hedgerow Details
+                    </a>
+                </div>
+                <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                    <div class="card-body container">
+                        <%= f.fields_for :hedgerows do |hedgerows_form| %>
+                            <%= render "hedgerow_fields", f: hedgerows_form %>
+                        <% end %>
+                        <%= link_to_add_hedgrerows f %>
+                    </div>
+                </div>
+            </div>
 
         <!-- create farm button -->
         <div class="farm-submit-div">
             <%= f.submit "Create", class: "btn btn-default btn-primary" %>
             <% end %>
         </div>
-
     </div>
-
 </div>
+
+

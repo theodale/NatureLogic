@@ -1,8 +1,10 @@
 class Farm < ApplicationRecord
     has_many :lands
+    has_many :hedgerows
     has_one :target
     accepts_nested_attributes_for :target
     accepts_nested_attributes_for :lands, allow_destroy: true
+    accepts_nested_attributes_for :hedgerows, allow_destroy: true
 
     def scope_one
         emissions = self.total_diesel_use*0.25278 + self.total_gas_use*0.18387

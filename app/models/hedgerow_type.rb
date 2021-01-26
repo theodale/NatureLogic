@@ -1,0 +1,2 @@
+class HedgerowType < ApplicationRecord
+end

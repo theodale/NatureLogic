@@ -1,4 +1,4 @@
-<div class="row">
+<div class="hedgerow-fields row">
     <%= f.hidden_field :_destroy %>
     <div class="col-6">
         <%= f.collection_select :land_type_id, LandType.all, :id, :category, {hide_label: true} %>

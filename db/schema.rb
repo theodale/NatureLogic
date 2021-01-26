@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_100138) do
+ActiveRecord::Schema.define(version: 2021_01_26_140517) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,6 +57,26 @@ ActiveRecord::Schema.define(version: 2021_01_22_100138) do
     t.integer "number_of_sheep"
     t.integer "number_of_cows"
     t.boolean "intervention"
+  end
+
+  create_table "hedgerow_types", force: :cascade do |t|
+    t.string "category"
+    t.decimal "sequestration_per_ha"
+    t.integer "above_ground_carbon_per_ha"
+    t.integer "defra_uniqueness_score"
+    t.integer "area_for_nature_rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hedgerows", force: :cascade do |t|
+    t.decimal "length"
+    t.integer "farm_id"
+    t.integer "hedgerow_type_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["farm_id"], name: "index_hedgerows_on_farm_id"
+    t.index ["hedgerow_type_id"], name: "index_hedgerows_on_hedgerow_type_id"
   end
 
   create_table "land_types", force: :cascade do |t|
