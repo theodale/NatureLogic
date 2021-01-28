@@ -1,13 +1,12 @@
 <div class="land-fields row">
-    <%= f.hidden_field :_destroy %>
     <div class="col-6">
         <%= f.collection_select :land_type_id, LandType.all, :id, :category, {hide_label: true} %>
     </div>
     <div class="col-3">
         <%= f.number_field :area, hide_label: true %>
     </div>
-    <div class="col-3">
-        <%= f.check_box :sprayed, label: "Sprayed?" %>
+    <div class="col-3 text-centre">
+        <%= f.check_box :sprayed, hide_label: true %>
     </div>
 </div>
 

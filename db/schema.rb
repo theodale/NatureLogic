@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
 
   create_table "hedgerow_types", force: :cascade do |t|
     t.string "category"
-    t.decimal "sequestration_per_ha"
-    t.integer "above_ground_carbon_per_ha"
+    t.decimal "sequestration_per_km"
+    t.integer "above_ground_carbon_per_km"
     t.integer "defra_uniqueness_score"
     t.integer "area_for_nature_rating"
     t.datetime "created_at", precision: 6, null: false

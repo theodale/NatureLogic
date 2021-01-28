@@ -4,14 +4,14 @@
             <%= column_chart [
                 {
                     name: "Target", data: {
-                        "Defra Habitat": @intervention_farm.target.defra_habitat_score ,
-                        "Space For Nature": @intervention_farm.target.space_for_nature_score,
+                        "Defra Habitat": @farm.target.defra_habitat_score ,
+                        "Space For Nature": @farm.target.space_for_nature_score,
                     },
                 },
                 {
                     name: "Current", data: {
-                        "Defra Habitat": @intervention_farm.defra_habitat_score,
-                        "Space For Nature": @intervention_farm.space_for_nature_score,
+                        "Defra Habitat": @farm.defra_habitat_score,
+                        "Space For Nature": @farm.space_for_nature_score,
                     }
                 }],
             title: "Target Comparison" %>
@@ -23,11 +23,11 @@
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Defra Habitat Score
-                <span class="badge badge-dark"><%= @intervention_farm.defra_habitat_score %>%</span>
+                <span class="badge badge-dark"><%= @farm.defra_habitat_score %>%</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Space for Nature Score
-                <span class="badge badge-dark"><%= @intervention_farm.space_for_nature_score%>%</span>
+                <span class="badge badge-dark"><%= @farm.space_for_nature_score%>%</span>
             </li>
         </ul>
     </div>

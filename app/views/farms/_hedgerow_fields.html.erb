@@ -1,13 +1,9 @@
 <div class="hedgerow-fields row">
-    <%= f.hidden_field :_destroy %>
-    <div class="col-6">
-        <%= f.collection_select :land_type_id, LandType.all, :id, :category, {hide_label: true} %>
+    <div class="col-9">
+        <%= f.collection_select :hedgerow_type_id, HedgerowType.all, :id, :category, {hide_label: true} %>
     </div>
     <div class="col-3">
-        <%= f.number_field :area, hide_label: true %>
-    </div>
-    <div class="col-3">
-        <%= f.check_box :sprayed, label: "Sprayed?" %>
+        <%= f.number_field :length, hide_label: true %>
     </div>
 </div>
 

@@ -31,18 +31,31 @@ class Farm < ApplicationRecord
         scope_one + scope_two + scope_three
     end
 
-    def woodland_sequestration
+    def sequestration
         total_sequestration = 0
         self.lands.each do |land|
-            s = land.land_type.sequestration_per_ha * land.area
-            total_sequestration += s
+            total_sequestration += land.land_type.sequestration_per_ha * land.area
         end
-        -1*total_sequestration
+        self.hedgerows.each do |hedgerow|
+            total_sequestration += hedgerow.hedgerow_type.sequestration_per_km * hedgerow.length
+        end
+        -1 * total_sequestration
+    end
+
+    def above_ground_carbon
+        total_above_ground_carbon = 0
+        self.lands.each do |land|
+            total_above_ground_carbon += land.area * land.land_type.above_ground_carbon_per_ha
+        end
+        self.hedgerows.each do |hedgerow|
+            total_above_ground_carbon+= hedgerow.hedgerow_type.above_ground_carbon_per_km * hedgerow.length
+        end
+        total_above_ground_carbon
     end
 
     def net_emissions
         #farmland sequestration needed - requires lab-based soil input
-        net = total_emissions + woodland_sequestration
+        net = total_emissions + sequestration
         net.round(0)
     end
 
@@ -53,7 +66,12 @@ class Farm < ApplicationRecord
             total_area += land.area
             total_defra_habitat_index += land.land_type.defra_uniqueness_score * land.area
         end
-        (total_defra_habitat_index / (total_area * 10)).round(1)
+        total_defra_habitat_index = total_defra_habitat_index / 10
+        # self.hedgerows.each do |hedgerow|
+        #     total_defra_habitat_index += hedgerow.hedgerow_type.defra_uniqueness_score * hedgerow.length
+        # end
+        overall_index = total_defra_habitat_index / total_area
+        overall_index.round(1)
     end
 
     def space_for_nature_score
@@ -67,12 +85,42 @@ class Farm < ApplicationRecord
         (total_space_for_nature_index / (total_area * 10)).round(1)
     end
 
-    def above_ground_carbon
-        total_above_ground_carbon = 0
-        self.lands.each do |land|
-            total_above_ground_carbon += land.area * land.land_type.above_ground_carbon_per_ha
+
+    #interventions
+
+
+    def perform_interventions(interventions)
+        interventions.each do |intervention, value|
+            perform_intervention(intervention, value)
         end
-        total_above_ground_carbon
+    end
+
+
+    def perform_intervention(intervention, value)
+        if intervention == "cropland_to_woodland"
+            self.number_of_sheep += value.to_i
+        elsif intervention == "green_electricity_tariff"
+            self.total_electricity_use = 0 if value == "true"
+        elsif intervention == "reduce_diesel_use"
+            self.total_diesel_use = self.total_diesel_use * value.to_f
+        elsif intervention == "reduce_fertiliser_use"
+            self.artificial_fertiliser_use = self.artificial_fertiliser_use * value.to_f
+        elsif intervention == "go_organic"
+            self.artificial_fertiliser_use = 0 if value == "true"
+            self.lands.each do |land|
+                land.sprayed = false if value == "true"
+            end
+        end
+    end
+
+    def land_info
+        l = []
+        self.lands.each do |land|
+            l << land.land_type.category
+            l << land.area
+            l << land.sprayed
+        end
+        l
     end
 
     def to_woodland(land_type)
@@ -112,3 +160,5 @@ class Farm < ApplicationRecord
     end
 
 end
+
+
