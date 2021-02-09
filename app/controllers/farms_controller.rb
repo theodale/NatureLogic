@@ -21,8 +21,19 @@ class FarmsController < ApplicationController
 
     def show
         @farm = Farm.find(params[:id])
+        @farm.lands.each do |land|
+            # create if doesn't exist
+            request.query_parameters[land.id.to_s] = 0 if !request.query_parameters[land.id.to_s]
+            # update request.query_parameters[land.id]
+            if request.query_parameters[:from_land_id] == land.id.to_s
+                logger.debug "True"
+                request.query_parameters[land.id.to_s] = request.query_parameters[land.id.to_s].to_i - 1
+            elsif request.query_parameters[:to_land_id] == land.id.to_s
+                logger.debug "Else"
+                request.query_parameters[land.id.to_s] = request.query_parameters[land.id.to_s].to_i + 1
+            end
+        end
         @farm.perform_interventions(request.query_parameters)
-        @farm
     end
 
     private

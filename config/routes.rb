@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
   resources :farms
   root 'farms#index'
+  post 'farms/:id', to: 'farms#show'
 end

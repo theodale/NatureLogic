@@ -10,3 +10,7 @@ ToDo
 - biodiversity survey with excel upload/active admin input
 - include hedgerows in space for nature and defra ratings
 - put intervention link_to logic in helpers - i.e. dont let go below 0% usage
+
+set so @farm.lands in the select only allows swaps from lands with more than 10ha
+
+- check that doesnt submit request if same lands selected

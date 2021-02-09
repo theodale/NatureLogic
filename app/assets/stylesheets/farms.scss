@@ -122,10 +122,33 @@
 }
 
 .intervention-title-div {
-  width: 100%;
-  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .text-centre {
   text-align: center;
+}
+
+.land-select-1 {
+  height: 30px;
+  width: 49%;
+}
+
+.land-select-2 {
+  height: 30px;
+  width: 50%;
+}
+
+.land-select-lable-div {
+  text-align: center;
+}
+
+.swap-land-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.land-select-lable-row {
+  margin-top: 10px;
 }

@@ -40,9 +40,9 @@
                 </div>
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        <%= f.text_field :total_diesel_use, label: "Diesel Use (l)" %>
-                        <%= f.number_field :total_gas_use, label: "Gas Use (kWh)" %>
-                        <%= f.number_field :total_electricity_use, label: "Electricity Use (kWh)" %>
+                        <%= f.text_field :total_diesel_use, step: :any, label: "Diesel Use (l)" %>
+                        <%= f.number_field :total_gas_use, step: :any, label: "Gas Use (kWh)" %>
+                        <%= f.number_field :total_electricity_use, step: :any, label: "Electricity Use (kWh)" %>
                     </div>
                 </div>
             </div>
@@ -58,12 +58,12 @@
                 </div>
                 <div id="collapseThree" class="collapse" data-parent="#accordion">
                     <div class="card-body">
-                        <%= f.number_field :artificial_fertiliser_use, label: "Artificial Fertiliser Use (kg)" %>
-                        <%= f.number_field :agriculture_products_spend, label: "Agriculture Products Spend (£)" %>
-                        <%= f.number_field :wood_and_wood_products_spend, label: "Wood and Wood Products Spend (£)" %>
-                        <%= f.number_field :pesticides_spend, label: "Pesticides Spend (£)" %>
-                        <%= f.number_field :machinery_and_equipment_spend, label: "Machinery and Equipment Spend (£)" %>
-                        <%= f.number_field :other_spend, label: "Other Spend (£)" %>
+                        <%= f.number_field :artificial_fertiliser_use, step: :any, label: "Artificial Fertiliser Use (kg)" %>
+                        <%= f.number_field :agriculture_products_spend, step: :any, label: "Agriculture Products Spend (£)" %>
+                        <%= f.number_field :wood_and_wood_products_spend, step: :any, label: "Wood and Wood Products Spend (£)" %>
+                        <%= f.number_field :pesticides_spend, step: :any, label: "Pesticides Spend (£)" %>
+                        <%= f.number_field :machinery_and_equipment_spend, step: :any, label: "Machinery and Equipment Spend (£)" %>
+                        <%= f.number_field :other_spend, step: :any, label: "Other Spend (£)" %>
                     </div>
                 </div>
             </div>
@@ -97,14 +97,14 @@
                 <div id="collapseFive" class="collapse" data-parent="#accordion">
                     <div class="card-body">
                         <%= f.fields_for :target do |target_form| %>
-                        <%= target_form.number_field :net_carbon_emission, label: "Net Carbon Emission (kg)" %>
-                        <%= target_form.number_field :defra_habitat_score, label: "Defra Habitat Score" %>
-                        <%= target_form.number_field :space_for_nature_score, label: "Space for Nature Score" %>
-                        <%= target_form.number_field :countryside_stewardship_score, label: "Countryside Stewardship Score" %>
-                        <%= target_form.number_field :biodiversity_score, label: "Biodiversity Score" %>
-                        <%= target_form.number_field :field_based_soil_health_score, label: "Field-Based Soil Health Score" %>
-                        <%= target_form.number_field :lab_based_soil_health_score, label: "Lab-Based Soil Health Score" %>
-                        <%= target_form.number_field :mean_SOC, label: "Mean SOC" %>
+                        <%= target_form.number_field :net_carbon_emission, step: :any, label: "Net Carbon Emission (kg)" %>
+                        <%= target_form.number_field :defra_habitat_score, step: :any, label: "Defra Habitat Score" %>
+                        <%= target_form.number_field :space_for_nature_score, step: :any, label: "Space for Nature Score" %>
+                        <%= target_form.number_field :countryside_stewardship_score, step: :any, label: "Countryside Stewardship Score" %>
+                        <%= target_form.number_field :biodiversity_score, step: :any, label: "Biodiversity Score" %>
+                        <%= target_form.number_field :field_based_soil_health_score, step: :any, label: "Field-Based Soil Health Score" %>
+                        <%= target_form.number_field :lab_based_soil_health_score, step: :any, label: "Lab-Based Soil Health Score" %>
+                        <%= target_form.number_field :mean_SOC, step: :any, label: "Mean SOC" %>
                         <% end %>
                     </div>
                 </div>

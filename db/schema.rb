@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2021_01_26_140517) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -70,9 +73,9 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
   end
 
   create_table "hedgerows", force: :cascade do |t|
-    t.decimal "length"
-    t.integer "farm_id"
-    t.integer "hedgerow_type_id"
+    t.float "length"
+    t.bigint "farm_id"
+    t.bigint "hedgerow_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_hedgerows_on_farm_id"
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
 
   create_table "land_types", force: :cascade do |t|
     t.string "category"
-    t.decimal "sequestration_per_ha"
+    t.float "sequestration_per_ha"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "defra_uniqueness_score"
@@ -90,9 +93,9 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
   end
 
   create_table "lands", force: :cascade do |t|
-    t.decimal "area"
-    t.integer "farm_id"
-    t.integer "land_type_id"
+    t.float "area"
+    t.bigint "farm_id"
+    t.bigint "land_type_id"
     t.boolean "sprayed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -101,15 +104,15 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
   end
 
   create_table "targets", force: :cascade do |t|
-    t.integer "farm_id"
-    t.decimal "net_carbon_emission"
-    t.decimal "defra_habitat_score"
-    t.decimal "space_for_nature_score"
-    t.decimal "countryside_stewardship_score"
-    t.decimal "biodiversity_score"
-    t.decimal "field_based_soil_health_score"
-    t.decimal "lab_based_soil_health_score"
-    t.decimal "mean_SOC"
+    t.bigint "farm_id"
+    t.float "net_carbon_emission"
+    t.float "defra_habitat_score"
+    t.float "space_for_nature_score"
+    t.float "countryside_stewardship_score"
+    t.float "biodiversity_score"
+    t.float "field_based_soil_health_score"
+    t.float "lab_based_soil_health_score"
+    t.float "mean_SOC"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_targets_on_farm_id"

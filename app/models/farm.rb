@@ -67,9 +67,9 @@ class Farm < ApplicationRecord
             total_defra_habitat_index += land.land_type.defra_uniqueness_score * land.area
         end
         total_defra_habitat_index = total_defra_habitat_index / 10
-        # self.hedgerows.each do |hedgerow|
-        #     total_defra_habitat_index += hedgerow.hedgerow_type.defra_uniqueness_score * hedgerow.length
-        # end
+        self.hedgerows.each do |hedgerow|
+            total_defra_habitat_index += hedgerow.hedgerow_type.defra_uniqueness_score * hedgerow.length
+        end
         overall_index = total_defra_habitat_index / total_area
         overall_index.round(1)
     end
@@ -85,18 +85,17 @@ class Farm < ApplicationRecord
         (total_space_for_nature_index / (total_area * 10)).round(1)
     end
 
-
-    #interventions
-
-
     def perform_interventions(interventions)
         interventions.each do |intervention, value|
             perform_intervention(intervention, value)
         end
     end
 
-
     def perform_intervention(intervention, value)
+        land_ids = []
+        self.lands.each do |land|
+            land_ids << land.id.to_s
+        end
         if intervention == "cropland_to_woodland"
             self.number_of_sheep += value.to_i
         elsif intervention == "green_electricity_tariff"
@@ -110,52 +109,12 @@ class Farm < ApplicationRecord
             self.lands.each do |land|
                 land.sprayed = false if value == "true"
             end
-        end
-    end
-
-    def land_info
-        l = []
-        self.lands.each do |land|
-            l << land.land_type.category
-            l << land.area
-            l << land.sprayed
-        end
-        l
-    end
-
-    def to_woodland(land_type)
-        woodland_id = LandType.find_by(category: "Juvenile Woodland - Mixed Deciduous").id
-        land_id = LandType.find_by(category: land_type).id
-        woodland = self.lands.find_by(land_type_id: woodland_id)
-        land = self.lands.find_by(land_type_id: land_id)
-        woodland.area += 10
-        land.area -= 10
-        woodland.save
-        land.save
-    end
-
-    def reduce_usage(substance)
-        if substance == "Diesel"
-            self.total_diesel_use = self.total_diesel_use * 0.8
-        elsif substance == "Fertiliser"
-            self.artificial_fertiliser_use = self.artificial_fertiliser_use * 0.8
-        end
-        self.save
-    end
-
-    def go_organic(direction)
-        if direction == "forward"
+        elsif land_ids.include? intervention
             self.lands.each do |land|
-                land.sprayed = false
-                land.save
+                if land.id == intervention.to_i
+                    land.area = land.area + (value.to_i * 10)
+                end
             end
-        end
-    end
-
-    def fertiliser_to_manure(direction)
-        if direction == "forward"
-            self.artificial_fertiliser_use = 0
-            self.save
         end
     end
 
