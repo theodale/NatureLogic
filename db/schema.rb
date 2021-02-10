@@ -48,32 +48,31 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
     t.string "location"
     t.string "latitude"
     t.string "longitude"
-    t.float "total_diesel_use"
-    t.float "total_gas_use"
-    t.float "total_electricity_use"
-    t.float "artificial_fertiliser_use"
-    t.float "agriculture_products_spend"
-    t.float "wood_and_wood_products_spend"
-    t.float "pesticides_spend"
-    t.float "machinery_and_equipment_spend"
-    t.float "other_spend"
-    t.integer "number_of_sheep"
-    t.integer "number_of_cows"
-    t.boolean "intervention"
+    t.float "total_diesel_use", default: 0.0
+    t.float "total_gas_use", default: 0.0
+    t.float "total_electricity_use", default: 0.0
+    t.float "artificial_fertiliser_use", default: 0.0
+    t.float "agriculture_products_spend", default: 0.0
+    t.float "wood_and_wood_products_spend", default: 0.0
+    t.float "pesticides_spend", default: 0.0
+    t.float "machinery_and_equipment_spend", default: 0.0
+    t.float "other_spend", default: 0.0
+    t.integer "number_of_sheep", default: 0
+    t.integer "number_of_cows", default: 0
   end
 
   create_table "hedgerow_types", force: :cascade do |t|
     t.string "category"
-    t.decimal "sequestration_per_km"
-    t.integer "above_ground_carbon_per_km"
-    t.integer "defra_uniqueness_score"
-    t.integer "area_for_nature_rating"
+    t.decimal "sequestration_per_km", default: "0.0"
+    t.integer "above_ground_carbon_per_km", default: 0
+    t.integer "defra_uniqueness_score", default: 0
+    t.integer "area_for_nature_rating", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "hedgerows", force: :cascade do |t|
-    t.float "length"
+    t.float "length", default: 0.0
     t.bigint "farm_id"
     t.bigint "hedgerow_type_id"
     t.datetime "created_at", precision: 6, null: false
@@ -84,19 +83,19 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
 
   create_table "land_types", force: :cascade do |t|
     t.string "category"
-    t.float "sequestration_per_ha"
+    t.float "sequestration_per_ha", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "defra_uniqueness_score"
-    t.integer "area_for_nature_rating"
-    t.integer "above_ground_carbon_per_ha"
+    t.integer "defra_uniqueness_score", default: 0
+    t.integer "area_for_nature_rating", default: 0
+    t.integer "above_ground_carbon_per_ha", default: 0
   end
 
   create_table "lands", force: :cascade do |t|
-    t.float "area"
+    t.float "area", default: 0.0
     t.bigint "farm_id"
     t.bigint "land_type_id"
-    t.boolean "sprayed"
+    t.boolean "sprayed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_lands_on_farm_id"
@@ -105,14 +104,14 @@ ActiveRecord::Schema.define(version: 2021_01_26_140517) do
 
   create_table "targets", force: :cascade do |t|
     t.bigint "farm_id"
-    t.float "net_carbon_emission"
-    t.float "defra_habitat_score"
-    t.float "space_for_nature_score"
-    t.float "countryside_stewardship_score"
-    t.float "biodiversity_score"
-    t.float "field_based_soil_health_score"
-    t.float "lab_based_soil_health_score"
-    t.float "mean_SOC"
+    t.float "net_carbon_emission", default: 0.0
+    t.float "defra_habitat_score", default: 0.0
+    t.float "space_for_nature_score", default: 0.0
+    t.float "countryside_stewardship_score", default: 0.0
+    t.float "biodiversity_score", default: 0.0
+    t.float "field_based_soil_health_score", default: 0.0
+    t.float "lab_based_soil_health_score", default: 0.0
+    t.float "mean_SOC", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_targets_on_farm_id"
