@@ -57,4 +57,4 @@ gem "bootstrap_form", "~> 4.0"
 gem "chartkick"
 gem 'devise'
 gem 'activeadmin'
-gem 'deep_cloneable', '~> 3.0.0'
+gem 'wicked'
