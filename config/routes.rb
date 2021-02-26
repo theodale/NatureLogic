@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   resources :farms
+  resources :farm_creation
   root 'farms#index'
   post 'farms/:id', to: 'farms#show'
 end

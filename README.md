@@ -14,3 +14,4 @@ ToDo
 set so @farm.lands in the select only allows swaps from lands with more than 10ha
 
 - check that doesnt submit request if same lands selected
+- make navbar its own partial

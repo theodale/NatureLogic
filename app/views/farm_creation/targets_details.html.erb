@@ -1,0 +1,51 @@
+<div class="sidebar">
+    <%= render 'layouts/sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light farm-navbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="navbar-text mr-2">
+                Guest User
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-cog navbar-icon"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="card shadow form-card">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold card-header-text">Your Targets</h6>
+            </div>
+            <div class="card-body form-card-body">
+                <div class="container-fluid">
+                    <%= bootstrap_form_with model: @target, url: wizard_path, method: :put do |f| %>
+                    <%= f.hidden_field :farm_id, value: @farm.id %>
+                    <div class="row">
+                        <div class="col">
+                            <%= f.number_field :net_carbon_emission, step: :any, label: "Net Carbon Emission (kg)" %>
+                            <%= f.number_field :defra_habitat_score, step: :any, label: "Defra Habitat Score" %>
+                            <%= f.number_field :space_for_nature_score, step: :any, label: "Space for Nature Score" %>
+                            <%= f.number_field :countryside_stewardship_score, step: :any, label: "Countryside Stewardship Score" %>
+                            <%= f.submit "Complete", class: "btn btn-default btn-primary" %>
+                        </div>
+                        <div class="col">
+                            <%= f.number_field :biodiversity_score, step: :any, label: "Biodiversity Score" %>
+                            <%= f.number_field :field_based_soil_health_score, step: :any, label: "Field-Based Soil Health Score" %>
+                            <%= f.number_field :lab_based_soil_health_score, step: :any, label: "Lab-Based Soil Health Score" %>
+                            <%= f.number_field :mean_SOC, step: :any, label: "Mean SOC" %>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+

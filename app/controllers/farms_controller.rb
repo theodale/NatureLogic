@@ -6,7 +6,7 @@ class FarmsController < ApplicationController
     def create
         @farm = Farm.new(farm_params)
         if @farm.save
-            redirect_to @farm
+            redirect_to farm_creation_path(:energy_details, farm_id: @farm.id)
         else
           render :new
         end
@@ -34,6 +34,12 @@ class FarmsController < ApplicationController
             end
         end
         @farm.perform_interventions(request.query_parameters)
+    end
+
+    def destroy
+        @farm = Farm.find(params[:id])
+        @farm.destroy
+        redirect_to farms_path
     end
 
     private

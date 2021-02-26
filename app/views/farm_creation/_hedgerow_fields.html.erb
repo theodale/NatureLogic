@@ -1,0 +1,10 @@
+<div class="hedgerow-fields row">
+    <div class="col-9">
+        <%= f.collection_select :hedgerow_type_id, HedgerowType.all, :id, :category, {hide_label: true} %>
+    </div>
+    <div class="col-3">
+        <%= f.number_field :length, hide_label: true %>
+    </div>
+</div>
+
+

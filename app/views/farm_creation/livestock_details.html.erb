@@ -22,14 +22,13 @@
 
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Farm Details</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">Livestock Information</h6>
             </div>
             <div class="card-body form-card-body">
-                <%= bootstrap_form_with model: @farm do |f| %>
-                    <%= f.text_field :name, label: "Name" %>
-                    <%= f.text_field :location,  label: "Location" %>
-                    <%= f.text_field :latitude,  label: "Latitude" %>
-                    <%= f.text_field :longitude, label: "Longitude" %>
+                <%= bootstrap_form_with model: @farm, url: wizard_path, method: :put do |f| %>
+                    <%= f.number_field :number_of_sheep, label: "Number of Sheep" %>
+                    <%= f.number_field :number_of_cows, label: "Number of Cows" %>
+                    <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>

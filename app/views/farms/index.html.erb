@@ -18,17 +18,18 @@
     </nav>
 
     <div class="container-fluid">
-        <div class="card shadow">
+        <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold card-header-text">Your Farms</h6>
             </div>
         <div class="card-body">
+            <% if @farms.length != 0 %>
             <table class="table table-bordered farms-table">
                 <thead class="thead-light">
                     <tr>
                         <th>Farm Name</th>
                         <th>Location</th>
-                        <th class="test"></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,14 +38,19 @@
                         <td class="table-body-text name-data"><%= farm.name %></td>
                         <td class="table-body-text location-data"><%= farm.location %></td>
                         <td class="view-action-data">
-                            <%= link_to "View ", farm, class: "view-farm-link" %>
+                            <%= link_to "View", farm, class: "view-farm-link" %>
+                            <%= link_to "Delete", farm, method: :delete, class: "view-farm-link" %>
                         </td>
                     </tr>
                     <% end %>
                 </tbody>
             </table>
+            <% else %>
+            <div class="alert alert-primary" role="alert">
+                    You have no farms - create via New Farm on the sidebar
+            </div>
+            <% end %>
             <div style="height:350px;"></div>
-
         </div>
     </div>
 <div>
