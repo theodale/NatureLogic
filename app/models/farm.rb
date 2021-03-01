@@ -2,6 +2,7 @@ class Farm < ApplicationRecord
     has_many :lands
     has_many :hedgerows
     has_one :target
+    has_one :biodiversity_survey
     accepts_nested_attributes_for :target
     accepts_nested_attributes_for :lands, allow_destroy: true
     accepts_nested_attributes_for :hedgerows, allow_destroy: true

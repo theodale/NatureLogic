@@ -1,0 +1,30 @@
+.snapshot-card {
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  border-width: medium !important;
+}
+
+.snapshot-card-label {
+  color: fade-out(#4e73df, 0.1);
+}
+
+.snapshot-card-value {
+  color: fade-out(black, 0.4);
+}
+
+.snapshot-card:hover {
+  background-color: fade-out(grey, 0.9);
+}
+
+.carbon-chart-card-body {
+  height: 550px;
+}
+
+.carbon-chart-card-link {
+  color: fade-out(black, 0.4);
+}
+
+.carbon-chart-card-link:hover {
+  color: fade-out(black, 0.4);
+}

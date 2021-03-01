@@ -1,0 +1,100 @@
+<%= javascript_pack_tag 'farm' %>
+<div class="sidebar">
+    <%= render 'sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <%= render 'snapshot_navbar' %>
+            </div>
+        </div>
+
+        <div class="row px-3">
+
+            <div class="col-4">
+
+                <div class="card shadow border-primary snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Scope 1 and 2 Emissions</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.net_emissions %> kWh</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <% if params[:scopes] %>
+                            <li class="nav-item">
+                            <%= link_to "Carbon Balance",
+                                farm_carbon_snapshot_path(@farm),
+                                class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Scope Three",
+                                    farm_carbon_snapshot_path(@farm, scopes: true),
+                                    class: "nav-link active nunito-font" %>
+                            </li>
+                            <% else %>
+                            <li class="nav-item">
+                                <%= link_to "Carbon Balance",
+                                    farm_carbon_snapshot_path(@farm),
+                                    class: "nav-link active nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Scope Three",
+                                    farm_carbon_snapshot_path(@farm, scopes: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                    <div class="card-body carbon-chart-card-body pt-5">
+                        <% if params[:scopes] %>
+                            <%= pie_chart scope_three_hash%>
+
+                            <hr class="my-4">
+
+                            <p class="nunito-font px-2">
+                                The various components of your scope three emissions. Values shown are in kg CO<sub>2</sub>.
+                                Please hover over slices to get exact values.
+                            </p>
+                        <% else %>
+                            <%= column_chart [
+                                ["Total Sequestration", @farm.sequestration],
+                                ["Scope 1", @farm.scope_one],
+                                ["Scope 2", @farm.scope_two],
+                                ["Scope 3", @farm.scope_three],
+                                ["Net Emissions", @farm.net_emissions]] %>
+
+                            <hr class="my-4">
+
+                            <p class="nunito-font px-2">
+                                An overview of the contributions to your net carbon emissions. Values shown are in kg CO<sub>2</sub>.
+                                Please hover over the bars to get exact values.
+                            </p>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

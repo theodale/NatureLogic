@@ -1,3 +1,9 @@
 @import "farms";
 @import "layouts";
 @import "rails_bootstrap_forms";
+@import "farm_display";
+@import "farm_creation";
+
+* {
+  font-family: "Nunito", sans-serif;
+}

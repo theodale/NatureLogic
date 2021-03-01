@@ -38,8 +38,10 @@
                         <td class="table-body-text name-data"><%= farm.name %></td>
                         <td class="table-body-text location-data"><%= farm.location %></td>
                         <td class="view-action-data">
-                            <%= link_to "View", farm, class: "view-farm-link" %>
+                            <%= link_to "View", farm_carbon_snapshot_path(farm_id: farm.id), class: "view-farm-link" %>
+                            <% if false %>
                             <%= link_to "Delete", farm, method: :delete, class: "view-farm-link" %>
+                            <% end %>
                         </td>
                     </tr>
                     <% end %>
@@ -47,7 +49,7 @@
             </table>
             <% else %>
             <div class="alert alert-primary" role="alert">
-                    You have no farms - create via New Farm on the sidebar
+                    You have no farms - create via the New Farm icon on the sidebar
             </div>
             <% end %>
             <div style="height:350px;"></div>
