@@ -113,12 +113,13 @@
                                 Please hover over slices to get exact values.
                             </p>
                         <% else %>
-                            <%= column_chart [
+                            <%= line_chart [
                                 ["Total Sequestration", @farm.sequestration],
                                 ["Scope 1", @farm.scope_one],
                                 ["Scope 2", @farm.scope_two],
                                 ["Scope 3", @farm.scope_three],
-                                ["Net Emissions", @farm.net_emissions]] %>
+                                ["Net Emissions", @farm.net_emissions]],
+                                library: {backgroundColor: "#eee"} %>
 
                             <hr class="my-4">
 

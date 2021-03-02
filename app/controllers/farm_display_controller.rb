@@ -10,4 +10,8 @@ class FarmDisplayController < ApplicationController
     def nature_snapshot
         @farm = Farm.find(params[:farm_id])
     end
+
+    def snapshot
+        @farm = Farm.find(params[:farm_id])
+    end
 end

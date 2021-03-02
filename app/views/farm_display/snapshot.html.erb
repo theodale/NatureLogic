@@ -1,0 +1,153 @@
+<%= javascript_pack_tag 'farm' %>
+<div class="sidebar">
+    <%= render 'sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                     <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row mb-4 px-3">
+
+            <div class="col-4">
+
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Carbon
+                                <i class="fas fa-bolt ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-3 px-4 snapshot-value-div">
+                                Carbon Balance: <b> <%= @farm.net_emissions %> kg </b>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-2">
+                            <%= column_chart [
+                                ["Emissions", @farm.total_emissions],
+                                ["Sequestration", @farm.sequestration],
+                                ["Net", @farm.net_emissions]],
+                                min: @farm.sequestration,
+                                max: @farm.total_emissions + 10000,
+                                height: "200px",
+                                library: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                display: false
+                                            },
+                                            gridLines: {
+                                                display: false
+                                            }
+                                        }],
+                                    },
+                                }
+                            %>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-4">
+
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Carbon
+                                <i class="fas fa-bolt ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-3 px-4 snapshot-value-div">
+                                Carbon Balance: <b> <%= @farm.net_emissions %> kg </b>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-2">
+                            <%= column_chart [
+                                ["Emissions", @farm.total_emissions],
+                                ["Sequestration", @farm.sequestration],
+                                ["Net", @farm.net_emissions]],
+                                min: @farm.sequestration,
+                                max: @farm.total_emissions + 10000,
+                                height: "200px",
+                                library: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                display: false
+                                            },
+                                            gridLines: {
+                                                display: false
+                                            }
+                                        }],
+                                    },
+                                }
+                            %>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-4">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex justify-content-center">
+                        <h6 class="m-0 font-weight-bold text-primary uppercase">Nature</h6>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row mb-4 px-3">
+            <div class="col-4">
+
+                <div class="card shadow">
+                    <div class="card-header">
+                        testing
+                    </div>
+                    <div class="card-body">
+                            chodeys
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+
+                <div class="card shadow">
+                    <div class="card-header">
+                        testing
+                    </div>
+                    <div class="card-body">
+                            chodeys
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

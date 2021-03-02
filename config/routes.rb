@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'carbon-snapshot', to: 'farm_display#carbon_snapshot', as: 'carbon_snapshot'
     get 'energy-snapshot', to: 'farm_display#energy_snapshot', as: 'energy_snapshot'
     get 'nature-snapshot', to: 'farm_display#nature_snapshot', as: 'nature_snapshot'
+    get 'snapshot', to: 'farm_display#snapshot', as: 'snapshot'
   end
   resources :farm_creation
   root 'farms#index'
