@@ -17,22 +17,22 @@
 
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Habitat Information</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">Use Of Organic Matter</h6>
             </div>
             <div class="card-body form-card-body">
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
-                    <%= f.number_field :area_designated_for_natural_conservation, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
-                    <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any, label: "Area In Existing Agri-Environmental Schemes (ha)" %>
-                    <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any, label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)" %>
-                    <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions, :last, :first %>
+                    <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
+                    <%= f.check_box :solid_manure, label: "Do you use solid manure?" %>
+                    <%= f.check_box :compost, label: "Do you use compost?" %>
+                    <%= f.check_box :residues_not_removed, label: "Do you not remove straw or crop residues from your fields?" %>
+                    <%= f.check_box :grass_mix_incorporated, label: "Do you incorporate cut grass/grass-clover into the soil?" %>
+                    <%= f.check_box :organic_fertilizers_in_response, label: "Do you only add organic fertilizers in response to demand for nutrients such as nitrogen or phosphorus, as part of a nutrient management plan?" %>
+                    <%= f.check_box :no_organic_matter, label: "Do you not use any organic matter?" %>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
-
-
-
 

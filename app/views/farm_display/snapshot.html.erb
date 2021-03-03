@@ -24,11 +24,11 @@
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Carbon
-                                <i class="fas fa-bolt ml-1"></i>
+                                <i class="fas fa-industry ml-1"></i>
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-3 px-4 snapshot-value-div">
+                            <div class="py-2 px-4 snapshot-value-div mb-4">
                                 Carbon Balance: <b> <%= @farm.net_emissions %> kg </b>
                             </div>
                         </div>
@@ -65,36 +65,29 @@
                     <div class="card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
-                                Carbon
+                                Energy
                                 <i class="fas fa-bolt ml-1"></i>
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-3 px-4 snapshot-value-div">
-                                Carbon Balance: <b> <%= @farm.net_emissions %> kg </b>
+                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                                Usage: <b> <%= (@farm.total_electricity_use * 0.23314 +
+                                               @farm.total_diesel_use * 2.6870514 +
+                                               @farm.total_gas_use * 0.18387).round(0) %> kWh </b>
                             </div>
                         </div>
                         <div class="row px-3 mb-2">
-                            <%= column_chart [
-                                ["Emissions", @farm.total_emissions],
-                                ["Sequestration", @farm.sequestration],
-                                ["Net", @farm.net_emissions]],
-                                min: @farm.sequestration,
-                                max: @farm.total_emissions + 10000,
+                            <%= pie_chart [
+                                ["Electricity", @farm.total_electricity_use * 0.23314],
+                                ["Diesel", @farm.total_diesel_use * 2.6870514],
+                                ["Gas", @farm.total_gas_use * 0.18387]],
                                 height: "200px",
                                 library: {
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                display: false
-                                            },
-                                            gridLines: {
-                                                display: false
-                                            }
-                                        }],
-                                    },
+                                    legend: {
+                                        position: "bottom"
+                                    }
                                 }
-                            %>
+                                 %>
                         </div>
                     </div>
                 </div>
@@ -103,45 +96,41 @@
 
             <div class="col-4">
 
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3 d-flex justify-content-center">
-                        <h6 class="m-0 font-weight-bold text-primary uppercase">Nature</h6>
-                    </div>
+                <div class="card shadow mb-4 snapshot-overview-card">
                     <div class="card-body">
-
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Nature
+                                <i class="fas fa-leaf ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                                Usage: <b> <%= (@farm.total_electricity_use * 0.23314 +
+                                            @farm.total_diesel_use * 2.6870514 +
+                                            @farm.total_gas_use * 0.18387).round(0) %> kWh </b>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-2">
+                            <%= pie_chart [
+                                ["Electricity", @farm.total_electricity_use * 0.23314],
+                                ["Diesel", @farm.total_diesel_use * 2.6870514],
+                                ["Gas", @farm.total_gas_use * 0.18387]],
+                                height: "200px",
+                                library: {
+                                    legend: {
+                                        position: "bottom"
+                                    }
+                                }
+                                %>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
 
         <div class="row mb-4 px-3">
-            <div class="col-4">
 
-                <div class="card shadow">
-                    <div class="card-header">
-                        testing
-                    </div>
-                    <div class="card-body">
-                            chodeys
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-4">
-
-                <div class="card shadow">
-                    <div class="card-header">
-                        testing
-                    </div>
-                    <div class="card-body">
-                            chodeys
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 </div>

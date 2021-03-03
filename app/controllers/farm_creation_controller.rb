@@ -1,7 +1,9 @@
 class FarmCreationController < ApplicationController
     include Wicked::Wizard
 
-    steps :energy_details, :resource_details, :livestock_details, :land_details, :hedgerow_details, :habitat_details, :targets_details
+    steps :energy_details, :resource_details, :livestock_details, :land_details, :hedgerow_details, :habitat_details, :genetic_diversity_details,
+    :crop_protection_use_details, :soil_health_details, :organic_matter_details, :grassland_measures_details, :hedgerow_practices_details,
+    :rivers_and_streams_details, :pools_and_ponds_details, :species_details, :targets_details
 
     def show
         @farm = Farm.find(params[:farm_id])
@@ -13,6 +15,8 @@ class FarmCreationController < ApplicationController
             @target = Target.new
         elsif params[:id] == "habitat_details"
             @biodiversity_survey = BiodiversitySurvey.new
+        elsif update_biodiversity_survey?
+            @biodiversity_survey = BiodiversitySurvey.find(params[:biodiversity_survey_id])
         end
         render_wizard
     end
@@ -27,7 +31,12 @@ class FarmCreationController < ApplicationController
             @biodiversity_survey = BiodiversitySurvey.new(biodiversity_survey_params)
             @biodiversity_survey.save
             @farm = Farm.find(biodiversity_survey_params[:farm_id])
-            redirect_to wizard_path(next_step, farm_id: @farm.id)
+            redirect_to wizard_path(next_step, farm_id: @farm.id, biodiversity_survey_id: @biodiversity_survey.id)
+        elsif update_biodiversity_survey?
+            @farm = Farm.find(params[:biodiversity_survey][:farm_id])
+            @biodiversity_survey = BiodiversitySurvey.find(params[:biodiversity_survey][:biodiversity_survey_id])
+            @biodiversity_survey.update(biodiversity_survey_params.except(:farm_id, :biodiversity_survey_id))
+            redirect_to wizard_path(next_step, farm_id: @farm.id, biodiversity_survey_id: @biodiversity_survey.id)
         else
             @farm = Farm.find(params[:farm][:farm_id])
             if params[:id] == "land_details"
@@ -61,12 +70,20 @@ class FarmCreationController < ApplicationController
         params.require(:biodiversity_survey).permit!
     end
 
+    def update_biodiversity_survey?
+        if  params[:id] == "genetic_diversity_details" ||
+            params[:id] == "crop_protection_use_details" ||
+            params[:id] == "soil_health_details" ||
+            params[:id] == "organic_matter_details" ||
+            params[:id] == "grassland_measures_details" ||
+            params[:id] == "hedgerow_practices_details" ||
+            params[:id] == "rivers_and_streams_details" ||
+            params[:id] == "pools_and_ponds_details" ||
+            params[:id] == "species_details"
+            true
+        else
+            false
+        end
+    end
+
 end
-
-
-
-
-# <%= f.number_field :number_of_crop_types, step: :any, label: "Number of Crop Types" %>
-# <%= f.number_field :number_of_heritage_crops, step: :any, label: "Number of Heritage Crops" %>
-# <%= f.number_field :number_of_livestock_breeds, step: :any, label: "Number of Livestock Breeds" %>
-# <%= f.number_field :number_of_rare_breeds, step: :any, label: "Number of Rare Breeds" %>

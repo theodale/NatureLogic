@@ -17,22 +17,25 @@
 
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Habitat Information</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">Soil Health Practices</h6>
             </div>
             <div class="card-body form-card-body">
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
-                    <%= f.number_field :area_designated_for_natural_conservation, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
-                    <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any, label: "Area In Existing Agri-Environmental Schemes (ha)" %>
-                    <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any, label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)" %>
-                    <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions, :last, :first %>
+                    <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
+                    <%= f.check_box :legumes_or_grass_cover_in_crop_rotation, label: "Do you have legumes or grass-clover included in crop rotation?" %>
+                    <%= f.check_box :grow_cover_crops, label: "Do you grow cover crops?" %>
+                    <%= f.check_box :grow_three_cover_crops, label: "Do you grow mixtures of at least 3 species of cover crop?" %>
+                    <%= f.check_box :soil_covered_cereal_grass_or_cover_crops, label: "Is your soil covered between the main crops by growing cereal, grass or cover crops?" %>
+                    <%= f.check_box :conventional_tillage, label: "Do you use conventional tillage?" %>
+                    <%= f.check_box :shallow_tillage, label: "Do you use shallow tillage?" %>
+                    <%= f.check_box :no_tillage, label: "Do you have no tillage?" %>
+                    <%= f.check_box :no_soil_health_measures, label: "Do you have no soil health measures?" %>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
-
-
 
 
