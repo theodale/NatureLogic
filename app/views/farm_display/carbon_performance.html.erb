@@ -1,0 +1,264 @@
+<%= javascript_pack_tag 'farm' %>
+<div class="sidebar">
+    <%= render 'sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <ul class="navbar-nav mr-auto justify-content-between w-100">
+                        <li class="nav-item">
+                            <%= link_to "Carbon",
+                                farm_carbon_performance_path(@farm),
+                                class: "nav-link active"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Energy",
+                                farm_energy_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Soil",
+                                farm_soil_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Nature",
+                                farm_nature_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Schemes",
+                                farm_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row mb-4 px-3">
+
+            <div class="col-4">
+                <div class="card shadow border-primary snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Carbon Balance</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.net_emissions %> kg</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <% if @farm.target.net_carbon_emission > @farm.net_emissions %>
+
+                <div class="card shadow border-success snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Target</div>
+                                <div class="mb-0 font-weight-bold snapshot-card-value">
+                                    You have achieved your carbon balance target of <%= @farm.target.net_carbon_emission %> kg
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% else %>
+
+                <div class="card shadow border-danger snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-danger text-uppercase mb-1">Target</div>
+                                <div class="mb-0 font-weight-bold snapshot-card-value">
+                                    You have not achieved your carbon balance target of <%= @farm.target.net_carbon_emission %>  kg
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% end %>
+
+                <div class="card shadow mb-4" >
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-5 carbon-contributions-header-div justify-content-center d-flex mb-2">
+                                <b>Contributions</b>
+                            </div>
+                        </div>
+
+                        <table class="table table-hover">
+                            <tr>
+                                <td class="carbon-contributions-first-row">Scope One</th>
+                                <td class="carbon-contributions-first-row text-align-center"><%= @farm.scope_one %> kg</td>
+                            </tr>
+                            <tr>
+                                <td>Scope Two</th>
+                                <td class="text-align-center"><%= @farm.scope_two %> kg</td>
+                            </tr>
+                            <tr>
+                                <td>Scope Three</th>
+                                <td class="text-align-center"><%= @farm.scope_three %> kg</td>
+                            </tr>
+                            <tr>
+                                <td>Woodland Sequestration</th>
+                                <td class="text-align-center"><%= 1500 %> kg</td>
+                            </tr>
+                            <tr>
+                                <td>Farmland Sequestration</th>
+                                <td class="text-align-center"><%= 2000 %> kg</td>
+                            </tr>
+                            <tr>
+                                <td>Above Ground Carbon</th>
+                                <td class="text-align-center"><%= @farm.above_ground_carbon %> kg</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <% if params[:scope_three] %>
+                            <li class="nav-item">
+                            <%= link_to "Carbon Balance",
+                                farm_carbon_performance_path(@farm),
+                                class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Scope Three",
+                                    farm_carbon_performance_path(@farm, scope_three: true),
+                                    class: "nav-link carbon-chart-card-link active nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Sequestration Contributions",
+                                    farm_carbon_performance_path(@farm, sequestration_contributions: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <% elsif params[:sequestration_contributions] %>
+                            <li class="nav-item">
+                            <%= link_to "Carbon Balance",
+                                farm_carbon_performance_path(@farm),
+                                class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Scope Three",
+                                    farm_carbon_performance_path(@farm, scope_three: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Sequestration Contributions",
+                                    farm_carbon_performance_path(@farm, sequestration_contributions: true),
+                                    class: "nav-link carbon-chart-card-link active nunito-font" %>
+                            </li>
+                            <% else %>
+                            <li class="nav-item">
+                                <%= link_to "Carbon Balance",
+                                    farm_carbon_performance_path(@farm),
+                                    class: "nav-link carbon-chart-card-link active nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Scope Three",
+                                    farm_carbon_performance_path(@farm, scope_three: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Sequestration Contributions",
+                                    farm_carbon_performance_path(@farm, sequestration_contributions: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                    <% if params[:scope_three] %>
+                    <div class="card-body carbon-chart-card-body pt-3">
+                        <%= pie_chart scope_three_hash %>
+
+                        <hr class="my-4">
+
+                        <p class="nunito-font px-2">
+                            The various components of your scope three emissions. Values shown are in kg CO<sub>2</sub>.
+                            Please hover over slices to get exact values.
+                        </p>
+                    </div>
+                    <% elsif params[:sequestration_contributions] %>
+                    <div class="card-body carbon-chart-card-body pt-3">
+                        <%= pie_chart @farm.sequestration_contributions %>
+
+                        <hr class="my-4">
+
+                        <p class="nunito-font px-2">
+                            The contributions to your total carbon sequestration made by your different types of land.
+                            Values shown are in kg CO<sub>2</sub>.
+                            Please hover over slices to get exact values.
+                        </p>
+                    </div>
+                    <% else %>
+                    <div class="card-body carbon-chart-card-body pt-5">
+                        <%= column_chart [
+                            {
+                                name: "Woodland Sequestration",
+                                data: [["Sequestration", -50000]]
+                            },
+                            {
+                                name: "Farmland Sequestration",
+                                data: [["Sequestration", -40000]]
+                            },
+                            {
+                                name: "Scope One",
+                                data: [["Emissions", @farm.scope_one]]
+                            },
+                            {
+                                name: "Scope Two",
+                                data: [["Emissions", @farm.scope_two]]
+                            },
+                            {
+                                name: "Scope Three",
+                                data: [["Emissions", @farm.scope_three]]
+                            },
+                            {
+                                name: "Above Ground Carbon",
+                                data: [["Above Ground Carbon", @farm.above_ground_carbon]]
+                            },
+                            {
+                                name: "Net",
+                                data: [["Balance", @farm.net_emissions - 90000]]
+                            }],
+                            stacked: true,
+                            legend: false %>
+
+                        <hr class="my-4">
+
+                        <p class="nunito-font px-2">
+                            An overview of the contributions to your net carbon emissions. Values shown are in kg CO<sub>2</sub>.
+                            Please hover over the bars to get exact values.
+                        </p>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

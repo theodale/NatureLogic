@@ -15,3 +15,5 @@ set so @farm.lands in the select only allows swaps from lands with more than 10h
 
 - check that doesnt submit request if same lands selected
 - make navbar its own partial
+
+1. Give each land a type, i.e. woodland/farmland.. so can be used in carbon graphs

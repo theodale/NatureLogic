@@ -23,9 +23,12 @@
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
-                    <%= f.check_box :hedgerows_pruned_three_years, label: "Are your hedgerows pruned no more than once every 3 years (or every 2 years during dormancy), with gaps filled by re-planting or laying?" %>
-                    <%= f.check_box :hedgerow_grass_margin, label: "Do your hedgerows have grass margins at least 2m wide?" %>
-                    <%= f.check_box :no_hedgerows, label: "Do you not have any hedgerows?" %>
+                    <p>Please tick appropriate boxes if true.</p>
+                    <div class="ml-1 my-5">
+                        <%= f.check_box :hedgerows_pruned_three_years, label: "Are your hedgerows pruned no more than once every 3 years (or every 2 years during dormancy), with gaps filled by re-planting or laying?" %>
+                        <%= f.check_box :hedgerow_grass_margin, label: "Do your hedgerows have grass margins at least 2m wide?" %>
+                        <%= f.check_box :no_hedgerows, label: "Do you not have any hedgerows?" %>
+                    </div>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>

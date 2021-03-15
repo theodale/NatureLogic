@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   resources :farms do
-    get 'carbon-snapshot', to: 'farm_display#carbon_snapshot', as: 'carbon_snapshot'
-    get 'energy-snapshot', to: 'farm_display#energy_snapshot', as: 'energy_snapshot'
-    get 'nature-snapshot', to: 'farm_display#nature_snapshot', as: 'nature_snapshot'
     get 'snapshot', to: 'farm_display#snapshot', as: 'snapshot'
+    get 'carbon-performance', to: 'farm_display#carbon_performance', as: 'carbon_performance'
+    get 'energy-performance', to: 'farm_display#energy_performance', as: 'energy_performance'
+    get 'nature-performance', to: 'farm_display#nature_performance', as: 'nature_performance'
+    get 'soil-performance', to: 'farm_display#soil_performance', as: 'soil_performance'
+    resource :lab_based_soil_test do
+      resources :soil_parcels
+    end
   end
   resources :farm_creation
   root 'farms#index'

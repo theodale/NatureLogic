@@ -17,18 +17,25 @@
 
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Habitat Information</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">Species</h6>
             </div>
             <div class="card-body form-card-body">
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
-
-
-
+                    <div class="ml-1 mt-3 mb-4">
+                        <%= f.check_box :threatened_species, label: "Are there any IUCN Red List Threatened and endemic species known to occur on your farm?" %>
+                    </div>
+                    <%= f.number_field :number_of_vascular_plant_species, label: "Number of vascular plant species" %>
+                    <%= f.number_field :number_of_wild_bee_species, label: "Number of wild bee and bumblebee species" %>
+                    <%= f.number_field :number_of_farmland_bird_species, label: "Number of farmland bird species" %>
+                    <%= f.number_field :number_of_butterfly_species, label: "Number of butterfly species" %>
+                    <%= f.number_field :number_of_mammal_species, label: "Number of mammal species" %>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>
         </div>
     </div>
 </div>
+
+

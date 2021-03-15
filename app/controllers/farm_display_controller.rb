@@ -1,13 +1,17 @@
 class FarmDisplayController < ApplicationController
-    def carbon_snapshot
+    def carbon_performance
         @farm = Farm.find(params[:farm_id])
     end
 
-    def energy_snapshot
+    def energy_performance
         @farm = Farm.find(params[:farm_id])
     end
 
-    def nature_snapshot
+    def nature_performance
+        @farm = Farm.find(params[:farm_id])
+    end
+
+    def soil_performance
         @farm = Farm.find(params[:farm_id])
     end
 

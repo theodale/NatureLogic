@@ -43,5 +43,19 @@
 
 .snapshot-value-div {
   border-radius: 25px !important;
-  background-color: brown;
+  background-color: fade-out(#23a776, 0.9);
+}
+
+.carbon-contributions-header-div {
+  width: 90%;
+  border-radius: 25px !important;
+  background-color: fade-out(#23a776, 0.9);
+}
+
+.carbon-contributions-first-row {
+  border-top: none !important;
+}
+
+.text-align-center {
+  text-align: center;
 }

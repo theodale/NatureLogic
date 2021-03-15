@@ -1,0 +1,16 @@
+<%= bootstrap_form_with model: @soil_parcel, url: farm_lab_based_soil_test_soil_parcels_path(@farm), method: :post do |f| %>
+    <%= f.number_field :pH, step: :any, label: "pH" %>
+    <%= f.number_field :SOC, step: :any, label: "SOC" %>
+    <%= f.number_field :bulk_density, step: :any, label: "Bulk Density" %>
+    <%= f.number_field :soil_texture, step: :any, label: "Soil Texture" %>
+    <%= f.number_field :total_soil_nitrogen, step: :any, label: "Total Soil Nitrogen" %>
+    <%= f.number_field :extractable_phosphorus, step: :any, label: "Extractable Phosphorous" %>
+    <%= f.number_field :extractable_potassium, step: :any, label: "Extractable Potassium" %>
+    <%= f.number_field :cation_exchange_capacity, step: :any, label: "Cation Exchange Capacity" %>
+    <%= f.number_field :extractable_micronutrients, step: :any, label: "Extractable Micronutrients" %>
+    <%= f.number_field :active_carbon_PoXC, step: :any, label: "Active Carbon PoXC" %>
+    <%= f.number_field :water_holding_capacity, step: :any, label: "Water Holding Capacity" %>
+    <%= f.submit %>
+<% end %>
+
+

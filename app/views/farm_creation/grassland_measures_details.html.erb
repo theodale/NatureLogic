@@ -17,18 +17,21 @@
 
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Habitat Information</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">Grassland Practices</h6>
             </div>
             <div class="card-body form-card-body">
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
-                    <%= f.check_box :slurry_mineral_fertilizer_not_used, label: "Do you not use slurry or mineral fertiliser?" %>
-                    <%= f.check_box :bird_nests_marked, label: "Do mark/protect your bird nests to prevent damage or trampling by livestock" %>
-                    <%= f.check_box :extensive_grazing_only, label: "Do you employ extensive grazing?" %>
-                    <%= f.check_box :mowing_grazing_delayed, label: "Do you delay mowing and grazing until the 1st of June in at least 1 ha?" %>
-                    <%= f.check_box :refuge_areas, label: "Do you have unmown refuge areas of at least 6m?" %>
-                    <%= f.check_box :no_grassland_measures, label: "Do you have no grassland-based wildlife measures?" %>
+                    <p>Please tick appropriate boxes if true.</p>
+                    <div class="ml-1 my-5">
+                        <%= f.check_box :slurry_mineral_fertilizer_not_used, label: "Do you not use slurry or mineral fertiliser?" %>
+                        <%= f.check_box :bird_nests_marked, label: "Do mark/protect your bird nests to prevent damage or trampling by livestock" %>
+                        <%= f.check_box :extensive_grazing_only, label: "Do you employ extensive grazing?" %>
+                        <%= f.check_box :mowing_grazing_delayed, label: "Do you delay mowing and grazing until the 1st of June in at least 1 ha?" %>
+                        <%= f.check_box :refuge_areas, label: "Do you have unmown refuge areas of at least 6m?" %>
+                        <%= f.check_box :no_grassland_measures, label: "Do you have no grassland-based wildlife measures?" %>
+                    </div>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>

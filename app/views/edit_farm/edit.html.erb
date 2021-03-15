@@ -1,6 +1,6 @@
 <%= javascript_pack_tag 'farm' %>
 <div class="sidebar">
-    <%= render 'sidebar' %>
+    <%= render 'shared/display_sidebar' %>
 </div>
 
 <div class="page-content">
@@ -13,7 +13,7 @@
                     <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
                     <ul class="navbar-nav ml-auto">
                         <li class="navbar-text">
-                            Snapshot Overview
+                            Upload and Edit Farm Information
                         </li>
                     </ul>
                 </nav>
@@ -37,28 +37,7 @@
                                 Carbon Balance: <b> <%= @farm.net_emissions %> kg </b>
                             </div>
                         </div>
-                        <div class="row px-3 mb-2">
-                            <%= column_chart [
-                                ["Emissions", @farm.total_emissions],
-                                ["Sequestration", @farm.sequestration],
-                                ["Net", @farm.net_emissions]],
-                                min: @farm.sequestration,
-                                max: @farm.total_emissions + 10000,
-                                height: "200px",
-                                library: {
-                                    scales: {
-                                        yAxes: [{
-                                            ticks: {
-                                                display: false
-                                            },
-                                            gridLines: {
-                                                display: false
-                                            }
-                                        }],
-                                    },
-                                }
-                            %>
-                        </div>
+
                     </div>
                 </div>
 
@@ -81,19 +60,7 @@
                                                @farm.total_gas_use * 0.18387).round(0) %> kWh </b>
                             </div>
                         </div>
-                        <div class="row px-3 mb-2">
-                            <%= pie_chart [
-                                ["Electricity", @farm.total_electricity_use * 0.23314],
-                                ["Diesel", @farm.total_diesel_use * 2.6870514],
-                                ["Gas", @farm.total_gas_use * 0.18387]],
-                                height: "200px",
-                                library: {
-                                    legend: {
-                                        position: "bottom"
-                                    }
-                                }
-                                 %>
-                        </div>
+
                     </div>
                 </div>
 
@@ -114,33 +81,32 @@
                                 Biodiversity Score: <b> <%= @farm.biodiversity_survey.biodiversity_score.round(2)  %> % </b>
                             </div>
                         </div>
-                        <div class="row px-3 mb-2">
-                            <%= pie_chart [
-                                ["Habitats", @farm.biodiversity_survey.habitat_score],
-                                ["Genetic Diversity", @farm.biodiversity_survey.genetic_diversity_score],
-                                ["Management Practices", @farm.biodiversity_survey.management_practices_score],
-                                ["Species", @farm.biodiversity_survey.species_score]],
-                                height: "200px",
-                                library: {
-                                    legend: {
-                                        position: "bottom"
-                                    }
-                                }
-                                %>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row mb-4 px-3">
-
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Soil
+                                <i class="fas fa-tree ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to farm_edit_lab_based_soil_test_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-4 edit-link-div">
+                                    Lab-Based Soil Test
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-
-
-
-
 

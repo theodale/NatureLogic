@@ -23,7 +23,10 @@
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
-                    <%= f.check_box :crop_protection_use, label: "Do you use any crop protection methods, including those approved for organic farming?" %>
+                    <p>Please tick appropriate boxes if true.</p>
+                    <div class="ml-1 my-5">
+                        <%= f.check_box :crop_protection_use, label: "Do you use any crop protection methods, including those approved for organic farming?"%>
+                    </div>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>

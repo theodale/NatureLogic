@@ -1,0 +1,163 @@
+<%= javascript_pack_tag 'farm' %>
+<div class="sidebar">
+    <%= render 'sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <ul class="navbar-nav mr-auto justify-content-between w-100">
+                        <li class="nav-item">
+                            <%= link_to "Carbon",
+                                farm_carbon_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Energy",
+                                farm_energy_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Soil",
+                                farm_soil_performance_path(@farm),
+                                class: "nav-link active"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Nature",
+                                farm_nature_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Schemes",
+                                farm_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row px-3">
+
+            <div class="col-4">
+
+                <div class="card shadow border-success snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Biodiversity Score</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.biodiversity_survey.biodiversity_score %> %</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow border-primary snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Space For Nature Score</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.space_for_nature_score %> %</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow border-warning snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Habitat Score</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.defra_habitat_score %> %</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow border-info snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-info text-uppercase mb-1">Targets</div>
+                                <% if @farm.biodiversity_survey.biodiversity_score > @farm.target.biodiversity_score %>
+                                    <div class="mb-0 font-weight-bold snapshot-card-value">
+                                        You have achieved your biodiversity score target of <%= @farm.target.biodiversity_score %> %
+                                    </div>
+                                <% else %>
+                                    <div class="mb-0 font-weight-bold snapshot-card-value">
+                                        You have not achieved your biodiversity score target of <%= @farm.target.biodiversity_score %> %
+                                    </div>
+                                <% end %>
+                                <% if @farm.defra_habitat_score > @farm.target.defra_habitat_score %>
+                                    <div class="mb-0 font-weight-bold snapshot-card-value">
+                                        You have achieved your habitat score target of <%= @farm.target.defra_habitat_score %> %
+                                    </div>
+                                <% else %>
+                                    <div class="mb-0 font-weight-bold snapshot-card-value">
+                                        You have not achieved your habitat score target of <%= @farm.target.defra_habitat_score %> %
+                                    </div>
+                                <% end %>
+                                <% if @farm.space_for_nature_score > @farm.target.space_for_nature_score %>
+                                    <div class="mb-0 font-weight-bold snapshot-card-value">
+                                        You have achieved your space for nature score target of <%= @farm.target.space_for_nature_score %> %
+                                    </div>
+                                <% else %>
+                                    <div class="mb-0 font-weight-bold snapshot-card-value">
+                                        You have not achieved your space for nature score target of <%= @farm.target.space_for_nature_score %> %
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                            <%= link_to "Biodiversity Factors",
+                                farm_nature_performance_path(@farm),
+                                class: "nav-link carbon-chart-card-link nunito-font active" %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body carbon-chart-card-body pt-5">
+                        <%= column_chart [
+                            ["Habitats", @farm.biodiversity_survey.habitat_score],
+                            ["Genetic Diversity", @farm.biodiversity_survey.genetic_diversity_score],
+                            ["Management Practices", @farm.biodiversity_survey.management_practices_score],
+                            ["Species", @farm.biodiversity_survey.species_score]] %>
+
+                        <hr class="my-4">
+
+                        <p class="nunito-font px-2">
+                            An overview of your biodiversity factors. Please hover over the bars to get exact values.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_094045) do
+ActiveRecord::Schema.define(version: 2021_03_08_090543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,29 +68,29 @@ ActiveRecord::Schema.define(version: 2021_03_03_094045) do
     t.boolean "shallow_tillage", default: false
     t.boolean "no_tillage", default: false
     t.boolean "conventional_tillage", default: false
-    t.boolean "no_soil_health_measures", default: true
+    t.boolean "no_soil_health_measures", default: false
     t.boolean "solid_manure", default: false
     t.boolean "compost", default: false
     t.boolean "residues_not_removed", default: false
     t.boolean "grass_mix_incorporated", default: false
     t.boolean "organic_fertilizers_in_response", default: false
-    t.boolean "no_organic_matter", default: true
+    t.boolean "no_organic_matter", default: false
     t.boolean "slurry_mineral_fertilizer_not_used", default: false
     t.boolean "bird_nests_marked", default: false
     t.boolean "extensive_grazing_only", default: false
     t.boolean "mowing_grazing_delayed", default: false
     t.boolean "refuge_areas", default: false
-    t.boolean "no_grassland_measures", default: true
+    t.boolean "no_grassland_measures", default: false
     t.boolean "hedgerows_pruned_three_years", default: false
     t.boolean "hedgerow_grass_margin", default: false
-    t.boolean "no_hedgerows", default: true
+    t.boolean "no_hedgerows", default: false
     t.boolean "water_courses", default: false
     t.boolean "river_bank_vegetation_mowed_two_years", default: false
     t.boolean "river_bank_vegetation_left_standing", default: false
     t.boolean "water_course_buffered_twelve_metres", default: false
     t.boolean "water_course_cleared_regularly", default: false
     t.boolean "dredge_cuttings_removed_promptly", default: false
-    t.boolean "no_water_courses", default: true
+    t.boolean "no_water_courses", default: false
     t.boolean "pools_and_ponds", default: false
     t.boolean "pond_ditches_buffered", default: false
     t.boolean "pond_bank_vegetation_mowed_two_years", default: false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_03_03_094045) do
     t.boolean "pond_cuttings_removed_promptly", default: false
     t.boolean "pond_dredged_five_years", default: false
     t.boolean "pond_shading_prevented", default: false
-    t.boolean "no_pools_and_ponds", default: true
+    t.boolean "no_pools_and_ponds", default: false
     t.integer "number_of_merino", default: 0
     t.integer "number_of_rambouillet", default: 0
     t.integer "number_of_blue_faced_leicester", default: 0
@@ -152,6 +152,13 @@ ActiveRecord::Schema.define(version: 2021_03_03_094045) do
     t.index ["hedgerow_type_id"], name: "index_hedgerows_on_hedgerow_type_id"
   end
 
+  create_table "lab_based_soil_tests", force: :cascade do |t|
+    t.bigint "farm_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["farm_id"], name: "index_lab_based_soil_tests_on_farm_id"
+  end
+
   create_table "land_types", force: :cascade do |t|
     t.string "category"
     t.float "sequestration_per_ha", default: 0.0
@@ -160,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_03_03_094045) do
     t.integer "defra_uniqueness_score", default: 0
     t.integer "area_for_nature_rating", default: 0
     t.integer "above_ground_carbon_per_ha", default: 0
+    t.string "farmland_or_woodland", default: "Farmland"
   end
 
   create_table "lands", force: :cascade do |t|
@@ -171,6 +179,24 @@ ActiveRecord::Schema.define(version: 2021_03_03_094045) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_lands_on_farm_id"
     t.index ["land_type_id"], name: "index_lands_on_land_type_id"
+  end
+
+  create_table "soil_parcels", force: :cascade do |t|
+    t.float "pH", default: 7.0
+    t.float "SOC", default: 0.0
+    t.float "bulk_density", default: 0.0
+    t.float "soil_texture", default: 0.0
+    t.float "total_soil_nitrogen", default: 0.0
+    t.float "extractable_phosphorus", default: 0.0
+    t.float "extractable_potassium", default: 0.0
+    t.float "cation_exchange_capacity", default: 0.0
+    t.float "extractable_micronutrients", default: 0.0
+    t.float "active_carbon_PoXC", default: 0.0
+    t.float "water_holding_capacity", default: 0.0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "lab_based_soil_test_id"
+    t.index ["lab_based_soil_test_id"], name: "index_soil_parcels_on_lab_based_soil_test_id"
   end
 
   create_table "targets", force: :cascade do |t|

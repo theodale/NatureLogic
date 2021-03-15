@@ -17,16 +17,16 @@
 
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Habitat Information</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">Genetic Diversity</h6>
             </div>
             <div class="card-body form-card-body">
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
-                    <%= f.number_field :number_of_crop_types, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
-                    <%= f.number_field :number_of_heritage_crops, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
-                    <%= f.number_field :number_of_livestock_breeds, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
-                    <%= f.number_field :number_of_rare_breeds, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
+                    <%= f.number_field :number_of_crop_types, step: :any, label: "Number of Crop Types" %>
+                    <%= f.number_field :number_of_heritage_crops, step: :any, label: "Number of Heritage Crops" %>
+                    <%= f.number_field :number_of_livestock_breeds, step: :any, label: "Number of Livestock Breeds" %>
+                    <%= f.number_field :number_of_rare_breeds, step: :any, label: "Number of Rare Breeds" %>
                     <%= f.submit "Next", class: "btn btn-default btn-primary" %>
                 <% end %>
             </div>

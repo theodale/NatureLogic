@@ -1,8 +1,9 @@
 class Farm < ApplicationRecord
-    has_many :lands
-    has_many :hedgerows
-    has_one :target
-    has_one :biodiversity_survey
+    has_many :lands, dependent: :destroy
+    has_many :hedgerows, dependent: :destroy
+    has_one :target, dependent: :destroy
+    has_one :biodiversity_survey, dependent: :destroy
+    has_one :lab_based_soil_test, dependent: :destroy
     accepts_nested_attributes_for :target
     accepts_nested_attributes_for :lands, allow_destroy: true
     accepts_nested_attributes_for :hedgerows, allow_destroy: true
@@ -41,6 +42,20 @@ class Farm < ApplicationRecord
             total_sequestration += hedgerow.hedgerow_type.sequestration_per_km * hedgerow.length
         end
         -1 * total_sequestration
+    end
+
+    def sequestration_contributions
+        contributions = {}
+        self.lands.each do |land|
+            category = land.land_type.category
+            contributions[category] = land.sequestration
+            logger.debug land.sequestration
+        end
+        self.hedgerows.each do |hedgerow|
+            category = hedgerow.hedgerow_type.category
+            contributions[category] = hedgerow.sequestration
+        end
+        contributions
     end
 
     def above_ground_carbon
@@ -117,6 +132,14 @@ class Farm < ApplicationRecord
                 end
             end
         end
+    end
+
+    def length_of_hedgerows
+        length = 0
+        self.hedgerows.each do |hedgerow|
+            length += hedgerow.length
+        end
+        length
     end
 
 end
