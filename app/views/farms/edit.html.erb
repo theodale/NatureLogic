@@ -98,8 +98,13 @@
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to farm_lab_based_soil_test_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-4 edit-link-div">
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     Lab-Based Soil Test
+                                </div>
+                            <% end %>
+                            <%= link_to farm_in_field_soil_test_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    In-Field Soil Test
                                 </div>
                             <% end %>
                         </div>

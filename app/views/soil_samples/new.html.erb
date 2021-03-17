@@ -1,0 +1,14 @@
+<%= bootstrap_form_with model: @soil_sample, url: farm_in_field_soil_test_soil_samples_path(@farm), method: :post do |f| %>
+    <%= f.number_field :compaction, label: "Compaction" %>
+    <%= f.number_field :diversity_of_macro_life, label: "Diversity Of Macro-Life" %>
+    <%= f.number_field :crusting, label: "Crusting" %>
+    <%= f.number_field :ground_cover, label: "Ground Cover" %>
+    <%= f.number_field :ponding, label: "Ponding" %>
+    <%= f.number_field :plant_health, label: "Plant Health" %>
+    <%= f.number_field :root_growth, label: "Root Growth" %>
+    <%= f.number_field :aggregate_stability, label: "Aggregate Stability" %>
+    <%= f.number_field :soil_colour, label: "Soil Colour" %>
+    <%= f.number_field :soil_smell, label: "Soil Smell" %>
+    <%= f.submit %>
+<% end %>
+

@@ -1,6 +1,5 @@
-<%= javascript_pack_tag 'farm' %>
 <div class="sidebar">
-    <%= render 'sidebar' %>
+    <%= render 'shared/display_sidebar' %>
 </div>
 
 <div class="page-content">
@@ -50,26 +49,12 @@
 
             <div class="col-4">
 
-                <div class="card shadow border-success snapshot-card mb-4" >
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Biodiversity Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.biodiversity_survey.biodiversity_score %> %</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card shadow border-primary snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Space For Nature Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.space_for_nature_score %> %</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Soil Health Score</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.in_field_soil_test.soil_health_score %> %</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-industry fa-2x snapshot-card-value"></i>
@@ -78,12 +63,26 @@
                     </div>
                 </div>
 
-                <div class="card shadow border-warning snapshot-card mb-4" >
+                <div class="card shadow border-success snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Habitat Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.defra_habitat_score %> %</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Mean SOC</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.lab_based_soil_test.mean_SOC%> %</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow border-success snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Total C</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.lab_based_soil_test.total_c %> kg</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-industry fa-2x snapshot-card-value"></i>
@@ -97,31 +96,22 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-12">
                                 <div class="text-xs font-weight-bold snapshot-card-label text-info text-uppercase mb-1">Targets</div>
-                                <% if @farm.biodiversity_survey.biodiversity_score > @farm.target.biodiversity_score %>
+                                <% if @farm.in_field_soil_test.soil_health_score > @farm.target.field_based_soil_health_score %>
                                     <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your biodiversity score target of <%= @farm.target.biodiversity_score %> %
+                                        You have achieved your soil health score target of <%= @farm.target.field_based_soil_health_score %> %
                                     </div>
                                 <% else %>
                                     <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your biodiversity score target of <%= @farm.target.biodiversity_score %> %
+                                        You have not achieved your soil health score target of <%= @farm.target.field_based_soil_health_score %> %
                                     </div>
                                 <% end %>
-                                <% if @farm.defra_habitat_score > @farm.target.defra_habitat_score %>
+                                <% if @farm.lab_based_soil_test.mean_SOC > @farm.target.mean_SOC%>
                                     <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your habitat score target of <%= @farm.target.defra_habitat_score %> %
+                                        You have achieved your mean SOC target of <%= @farm.target.mean_SOC %> %
                                     </div>
                                 <% else %>
                                     <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your habitat score target of <%= @farm.target.defra_habitat_score %> %
-                                    </div>
-                                <% end %>
-                                <% if @farm.space_for_nature_score > @farm.target.space_for_nature_score %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your space for nature score target of <%= @farm.target.space_for_nature_score %> %
-                                    </div>
-                                <% else %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your space for nature score target of <%= @farm.target.space_for_nature_score %> %
+                                        You have not achieved your mean SOC target of <%= @farm.target.mean_SOC %> %
                                     </div>
                                 <% end %>
                             </div>

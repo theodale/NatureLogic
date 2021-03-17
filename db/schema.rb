@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_090543) do
+ActiveRecord::Schema.define(version: 2021_03_15_154518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,13 @@ ActiveRecord::Schema.define(version: 2021_03_08_090543) do
     t.index ["hedgerow_type_id"], name: "index_hedgerows_on_hedgerow_type_id"
   end
 
+  create_table "in_field_soil_tests", force: :cascade do |t|
+    t.bigint "farm_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["farm_id"], name: "index_in_field_soil_tests_on_farm_id"
+  end
+
   create_table "lab_based_soil_tests", force: :cascade do |t|
     t.bigint "farm_id"
     t.datetime "created_at", precision: 6, null: false
@@ -177,6 +184,8 @@ ActiveRecord::Schema.define(version: 2021_03_08_090543) do
     t.boolean "sprayed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "tillage_score", default: 1.0
+    t.float "rotation_score", default: 1.0
     t.index ["farm_id"], name: "index_lands_on_farm_id"
     t.index ["land_type_id"], name: "index_lands_on_land_type_id"
   end
@@ -197,6 +206,23 @@ ActiveRecord::Schema.define(version: 2021_03_08_090543) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "lab_based_soil_test_id"
     t.index ["lab_based_soil_test_id"], name: "index_soil_parcels_on_lab_based_soil_test_id"
+  end
+
+  create_table "soil_samples", force: :cascade do |t|
+    t.bigint "in_field_soil_test_id"
+    t.integer "compaction", default: 0
+    t.integer "diversity_of_macro_life", default: 0
+    t.integer "crusting", default: 0
+    t.integer "ground_cover", default: 0
+    t.integer "ponding", default: 0
+    t.integer "plant_health", default: 0
+    t.integer "root_growth", default: 0
+    t.integer "aggregate_stability", default: 0
+    t.integer "soil_colour", default: 0
+    t.integer "soil_smell", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["in_field_soil_test_id"], name: "index_soil_samples_on_in_field_soil_test_id"
   end
 
   create_table "targets", force: :cascade do |t|

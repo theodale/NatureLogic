@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resource :lab_based_soil_test do
       resources :soil_parcels
     end
+    resource :in_field_soil_test do
+      resources :soil_samples
+    end
   end
   resources :farm_creation
   root 'farms#index'

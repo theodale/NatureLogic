@@ -4,6 +4,7 @@ class Farm < ApplicationRecord
     has_one :target, dependent: :destroy
     has_one :biodiversity_survey, dependent: :destroy
     has_one :lab_based_soil_test, dependent: :destroy
+    has_one :in_field_soil_test, dependent: :destroy
     accepts_nested_attributes_for :target
     accepts_nested_attributes_for :lands, allow_destroy: true
     accepts_nested_attributes_for :hedgerows, allow_destroy: true
@@ -140,6 +141,14 @@ class Farm < ApplicationRecord
             length += hedgerow.length
         end
         length
+    end
+
+    def total_area
+        area = 0
+        self.lands.each do |land|
+            area += land.area
+        end
+        area
     end
 
 end
