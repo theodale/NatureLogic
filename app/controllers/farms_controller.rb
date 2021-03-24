@@ -1,5 +1,10 @@
 class FarmsController < ApplicationController
     def index
+        if params[:destroy]
+            farm = Farm.find(params[:farm_id])
+            farm.destroy
+            redirect_to farms_path
+        end
         @farms = Farm.all
     end
 
@@ -14,9 +19,6 @@ class FarmsController < ApplicationController
 
     def new
         @farm = Farm.new
-        @farm.build_target
-        @farm.lands.build
-        @farm.hedgerows.build
     end
 
     def show
@@ -41,17 +43,61 @@ class FarmsController < ApplicationController
         @farm = Farm.find(params[:id])
     end
 
+    def edit_details
+        @creation = params[:creation]
+        @farm = Farm.find(params[:farm_id])
+    end
+
+    def edit_energy
+        @farm = Farm.find(params[:farm_id])
+    end
+
+    def edit_resources
+        @farm = Farm.find(params[:farm_id])
+    end
+
+    def edit_livestock
+        @farm = Farm.find(params[:farm_id])
+    end
+
     def destroy
         @farm = Farm.find(params[:id])
         @farm.destroy
         redirect_to farms_path
     end
 
+    def update
+        @farm = Farm.find(params[:id])
+        @farm.update(farm_params)
+        redirect_to edit_farm_path
+    end
+
     private
 
     def farm_params
-        params.require(:farm).permit!
+        params.require(:farm).permit(
+            :name,
+            :location,
+            :latitude,
+            :longitude,
+            :total_diesel_use,
+            :total_gas_use,
+            :total_electricity_use,
+            :artificial_fertiliser_use,
+            :agriculture_products_spend,
+            :wood_and_wood_products_spend,
+            :pesticides_spend,
+            :machinery_and_equipment_spend,
+            :other_spend,
+            :number_of_sheep,
+            :number_of_cows
+        )
     end
 
 end
 
+
+
+# steps :farm_details, :energy_details, :resource_details, :livestock_details, :land_details, :hedgerow_details, :habitat_details, :genetic_diversity_details,
+# :crop_protection_use_details, :soil_health_details, :organic_matter_details, :grassland_measures_details, :hedgerow_practices_details,
+# :rivers_and_streams_details, :pools_and_ponds_details, :species_details, :targets_details

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_154518) do
+ActiveRecord::Schema.define(version: 2021_03_24_110958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,52 @@ ActiveRecord::Schema.define(version: 2021_03_15_154518) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["in_field_soil_test_id"], name: "index_soil_samples_on_in_field_soil_test_id"
+  end
+
+  create_table "sustainability_surveys", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "farm_id"
+    t.boolean "crop_protection_use", default: false
+    t.boolean "legumes_or_grass_cover_in_crop_rotation", default: false
+    t.boolean "grow_cover_crops", default: false
+    t.boolean "grow_three_cover_crops", default: false
+    t.boolean "soil_covered_cereal_grass_or_cover_crops", default: false
+    t.boolean "shallow_tillage", default: false
+    t.boolean "no_tillage", default: false
+    t.boolean "conventional_tillage", default: false
+    t.boolean "no_soil_health_measures", default: false
+    t.boolean "solid_manure", default: false
+    t.boolean "compost", default: false
+    t.boolean "residues_not_removed", default: false
+    t.boolean "grass_mix_incorporated", default: false
+    t.boolean "organic_fertilizers_in_response", default: false
+    t.boolean "no_organic_matter", default: false
+    t.boolean "slurry_mineral_fertilizer_not_used", default: false
+    t.boolean "bird_nests_marked", default: false
+    t.boolean "extensive_grazing_only", default: false
+    t.boolean "mowing_grazing_delayed", default: false
+    t.boolean "refuge_areas", default: false
+    t.boolean "no_grassland_measures", default: false
+    t.boolean "hedgerows_pruned_three_years", default: false
+    t.boolean "hedgerow_grass_margin", default: false
+    t.boolean "no_hedgerows", default: false
+    t.boolean "water_courses", default: false
+    t.boolean "river_bank_vegetation_mowed_two_years", default: false
+    t.boolean "water_course_buffered_twelve_metres", default: false
+    t.boolean "water_course_cleared_regularly", default: false
+    t.boolean "dredge_cuttings_removed_promptly", default: false
+    t.boolean "no_water_courses", default: false
+    t.boolean "pools_and_ponds", default: false
+    t.boolean "pond_ditches_buffered", default: false
+    t.boolean "pond_bank_vegetation_mowed_two_years", default: false
+    t.boolean "pond_bank_vegetation_left_standing", default: false
+    t.boolean "pond_plants_cleared_three_years", default: false
+    t.boolean "pond_cuttings_removed_promptly", default: false
+    t.boolean "pond_dredged_five_years", default: false
+    t.boolean "pond_shading_prevented", default: false
+    t.boolean "no_pools_and_ponds", default: false
+    t.index ["farm_id"], name: "index_sustainability_surveys_on_farm_id"
   end
 
   create_table "targets", force: :cascade do |t|

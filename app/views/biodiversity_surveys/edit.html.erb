@@ -1,0 +1,92 @@
+<%
+wider_countryside_descriptions = [
+    ["A landscape dedicated to food production, with large, agricultural fields and little natural habitat", 0],
+    ["An intermediate landscape, with a mix of traditional and modern farming practices and some patches of natural habitat", 6],
+    ["A diverse landscape, with small fields, traditional farming practices and frequent patches of natural habitat", 12]
+]
+%>
+
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+<div class="page-content">
+    <% if @creation %>
+    <%= render 'shared/navbar' %>
+    <% end %>
+    <div class="container-fluid">
+        <% if !@creation %>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Edit Biodiversity Survey
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+        <% end %>
+                <div class="card shadow form-card">
+                    <% if @creation %>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Biodiversity Survey</h6>
+                        <h6 class="m-0 font-weight-bold card-header-text">5</h6>
+                    </div>
+                    <% end %>
+                    <div class="card-body form-card-body">
+                    <%= bootstrap_form_with model: @biodiversity_survey, url: farm_biodiversity_survey_path(creation: @creation), method: :put, class: "w-100 h-100" do |f| %>
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="overflow-auto mb-2">
+                                <%= f.number_field :area_designated_for_natural_conservation, step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
+                                <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any, label: "Area In Existing Agri-Environmental Schemes (ha)" %>
+                                <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any, label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)" %>
+                                <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions, :last, :first %>
+                                <%= f.number_field :number_of_crop_types, step: :any, label: "Number of Crop Types" %>
+                                <%= f.number_field :number_of_heritage_crops, step: :any, label: "Number of Heritage Crops" %>
+                                <%= f.number_field :number_of_livestock_breeds, step: :any, label: "Number of Livestock Breeds" %>
+                                <%= f.number_field :number_of_rare_breeds, step: :any, label: "Number of Rare Breeds" %>
+                                <br>
+                                <div class="ml-1">
+                                    <%= f.check_box :threatened_species, label: "Are there any IUCN Red List Threatened and endemic species known to occur on your farm?" %>
+                                </div>
+                                <br>
+                                <%= f.number_field :number_of_vascular_plant_species, label: "Number of vascular plant species" %>
+                                <%= f.number_field :number_of_wild_bee_species, label: "Number of wild bee and bumblebee species" %>
+                                <%= f.number_field :number_of_farmland_bird_species, label: "Number of farmland bird species" %>
+                                <%= f.number_field :number_of_butterfly_species, label: "Number of butterfly species" %>
+                                <%= f.number_field :number_of_mammal_species, label: "Number of mammal species" %>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <% if @creation %>
+                                    <div>
+                                        <%= link_to "Back", farm_creation_path(:hedgerow_details, farm_id: @farm.id), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <div>
+                                        <%= f.submit "Next", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                    </div>
+                                    <% else %>
+                                    <div>
+                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <div>
+                                        <%= f.submit "Save Changes", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+        <% if !@creation %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+

@@ -18,8 +18,10 @@
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold card-header-text">Use Of Organic Matter</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">12</h6>
             </div>
-            <div class="card-body form-card-body">
+            <div class="card-body form-card-body d-flex flex-column justify-content-between">
+                <div>
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
@@ -32,8 +34,11 @@
                         <%= f.check_box :organic_fertilizers_in_response, label: "Do you only add organic fertilizers in response to demand for nutrients such as nitrogen or phosphorus, as part of a nutrient management plan?" %>
                         <%= f.check_box :no_organic_matter, label: "Do you not use any organic matter?" %>
                     </div>
-                    <%= f.submit "Next", class: "btn btn-default btn-primary" %>
+                </div>
+                <div>
+                    <%= f.submit "Next", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
                 <% end %>
+                </div>
             </div>
         </div>
     </div>

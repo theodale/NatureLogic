@@ -1,4 +1,3 @@
-<%= javascript_pack_tag 'farm' %>
 <div class="sidebar">
     <%= render 'shared/sidebar' %>
 </div>
@@ -9,33 +8,32 @@
 
     <div class="container-fluid">
 
-        <% wider_countryside_descriptions = [
-            ["A landscape dedicated to food production, with large, agricultural fields and little natural habitat", 0],
-            ["An intermediate landscape, with a mix of traditional and modern farming practices and some patches of natural habitat", 6],
-            ["A diverse landscape, with small fields, traditional farming practices and frequent patches of natural habitat", 12]
-        ] %>
-
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold card-header-text">Soil Health Practices</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">11</h6>
             </div>
-            <div class="card-body form-card-body">
-                <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
-                    <%= f.hidden_field :farm_id, value: @farm.id %>
-                    <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
-                    <p>Please tick appropriate boxes if true.</p>
-                    <div class="ml-1 my-5">
-                        <%= f.check_box :legumes_or_grass_cover_in_crop_rotation, label: "Do you have legumes or grass-clover included in crop rotation?" %>
-                        <%= f.check_box :grow_cover_crops, label: "Do you grow cover crops?" %>
-                        <%= f.check_box :grow_three_cover_crops, label: "Do you grow mixtures of at least 3 species of cover crop?" %>
-                        <%= f.check_box :soil_covered_cereal_grass_or_cover_crops, label: "Is your soil covered between the main crops by growing cereal, grass or cover crops?" %>
-                        <%= f.check_box :conventional_tillage, label: "Do you use conventional tillage?" %>
-                        <%= f.check_box :shallow_tillage, label: "Do you use shallow tillage?" %>
-                        <%= f.check_box :no_tillage, label: "Do you have no tillage?" %>
-                        <%= f.check_box :no_soil_health_measures, { checked: false }, label: "Do you have no soil health measures?" %>
-                    </div>
-                    <%= f.submit "Next", class: "btn btn-default btn-primary" %>
+            <div class="card-body form-card-body d-flex flex-column justify-content-between">
+                <div>
+                    <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
+                        <%= f.hidden_field :farm_id, value: @farm.id %>
+                        <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
+                        <p>Please tick appropriate boxes if true.</p>
+                        <div class="ml-1 my-5">
+                            <%= f.check_box :legumes_or_grass_cover_in_crop_rotation, label: "Do you have legumes or grass-clover included in crop rotation?" %>
+                            <%= f.check_box :grow_cover_crops, label: "Do you grow cover crops?" %>
+                            <%= f.check_box :grow_three_cover_crops, label: "Do you grow mixtures of at least 3 species of cover crop?" %>
+                            <%= f.check_box :soil_covered_cereal_grass_or_cover_crops, label: "Is your soil covered between the main crops by growing cereal, grass or cover crops?" %>
+                            <%= f.check_box :conventional_tillage, label: "Do you use conventional tillage?" %>
+                            <%= f.check_box :shallow_tillage, label: "Do you use shallow tillage?" %>
+                            <%= f.check_box :no_tillage, label: "Do you have no tillage?" %>
+                            <%= f.check_box :no_soil_health_measures, { checked: false }, label: "Do you have no soil health measures?" %>
+                        </div>
+                </div>
+                <div>
+                    <%= f.submit "Next", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
                 <% end %>
+                </div>
             </div>
         </div>
     </div>

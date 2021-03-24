@@ -17,3 +17,7 @@ set so @farm.lands in the select only allows swaps from lands with more than 10h
 - make navbar its own partial
 
 1. Give each land a type, i.e. woodland/farmland.. so can be used in carbon graphs
+
+
+
+- navbar partial for farms and farm creation

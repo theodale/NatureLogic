@@ -2,11 +2,8 @@
 <div class="sidebar">
     <%= render 'shared/display_sidebar' %>
 </div>
-
 <div class="page-content">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
@@ -19,32 +16,48 @@
                 </nav>
             </div>
         </div>
-
         <div class="row mb-4 px-3">
-
             <div class="col-4">
-
                 <div class="card shadow mb-4 snapshot-overview-card">
                     <div class="card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
-                                Carbon
-                                <i class="fas fa-industry ml-1"></i>
+                                Farm
+                                <i class="fas fa-tractor ml-1"></i>
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
-                                Carbon Balance: <b> <%= @farm.net_emissions %> kg </b>
-                            </div>
+                            <%= link_to farm_edit_details_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Details
+                                </div>
+                            <% end %>
                         </div>
-
+                        <div class="row justify-content-center">
+                            <%= link_to farm_edit_livestock_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Livestock
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to farm_lands_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Lands
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to farm_hedgerows_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Hedgerows
+                                </div>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-4">
-
                 <div class="card shadow mb-4 snapshot-overview-card">
                     <div class="card-body">
                         <div class="row justify-content-center mb-3">
@@ -54,20 +67,23 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
-                                Usage: <b> <%= (@farm.total_electricity_use * 0.23314 +
-                                               @farm.total_diesel_use * 2.6870514 +
-                                               @farm.total_gas_use * 0.18387).round(0) %> kWh </b>
-                            </div>
+                            <%= link_to farm_edit_energy_usage_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Energy Usage
+                                </div>
+                            <% end %>
                         </div>
-
+                        <div class="row justify-content-center">
+                            <%= link_to farm_edit_resources_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Resource Use
+                                </div>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-4">
-
                 <div class="card shadow mb-4 snapshot-overview-card">
                     <div class="card-body">
                         <div class="row justify-content-center mb-3">
@@ -85,7 +101,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row mb-4 px-3">
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">

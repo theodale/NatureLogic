@@ -1,0 +1,107 @@
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+<div class="page-content">
+    <% if @creation %>
+    <%= render 'shared/navbar' %>
+    <% end %>
+    <div class="container-fluid">
+        <% if !@creation %>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Edit Lands
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+        <% end %>
+                <div class="card shadow form-card">
+                    <% if @creation %>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Lands</h6>
+                        <h6 class="m-0 font-weight-bold card-header-text">5</h6>
+                    </div>
+                    <% end %>
+                    <div class="card-body form-card-body d-flex flex-column justify-content-between">
+                        <div class="overflow-auto">
+                            <div class="row">
+                                <div class="col-12">
+                                    <% if @lands.size > 0 %>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Land ID</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Area (ha)</th>
+                                                <th scope="col">Sprayed</th>
+                                                <th scope="col">Tillage Score</th>
+                                                <th scope="col">Rotation Score</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @lands.each do |land| %>
+                                            <tr>
+                                                <td><%= land.id %></td>
+                                                <td><%= land.land_type.category %></td>
+                                                <td><%= land.area %></td>
+                                                <td><%= land.sprayed %></td>
+                                                <td><%= land.tillage_score %></td>
+                                                <td><%= land.rotation_score %></td>
+                                                <td>
+                                                    <%= link_to farm_land_path(@farm, land, creation: @creation), method: :delete do %>
+                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                    <% end %>
+                                                </td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                    <% else %>
+                                    <div class="alert alert-primary" role="alert">
+                                        You have no lands.
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <%= link_to new_farm_land_path(@farm, creation: @creation) do %>
+                                        <button type="button" class="btn btn-success">Add New Land</button>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <% if @creation %>
+                                    <div>
+                                        <%= link_to "Back", farm_creation_path(:livestock_details, farm_id: @farm.id), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <div>
+                                        <%= link_to "Next", farm_creation_path(:hedgerow_details, farm_id: @farm.id), class: "btn btn-default btn-primary" %>
+                                    </div>
+                                    <% else %>
+                                    <div>
+                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <% if !@creation %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

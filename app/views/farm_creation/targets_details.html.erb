@@ -11,26 +11,31 @@
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold card-header-text">Your Targets</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">18</h6>
             </div>
-            <div class="card-body form-card-body">
-                <div class="container-fluid">
-                    <%= bootstrap_form_with model: @target, url: wizard_path, method: :put do |f| %>
-                    <%= f.hidden_field :farm_id, value: @farm.id %>
-                    <div class="row">
-                        <div class="col">
-                            <%= f.number_field :net_carbon_emission, step: :any, label: "Net Carbon Emission (kg)" %>
-                            <%= f.number_field :defra_habitat_score, step: :any, label: "Defra Habitat Score" %>
-                            <%= f.number_field :space_for_nature_score, step: :any, label: "Space for Nature Score" %>
-                            <%= f.number_field :countryside_stewardship_score, step: :any, label: "Countryside Stewardship Score" %>
-                            <%= f.submit "Complete", class: "btn btn-default btn-primary" %>
-                        </div>
-                        <div class="col">
-                            <%= f.number_field :biodiversity_score, step: :any, label: "Biodiversity Score" %>
-                            <%= f.number_field :field_based_soil_health_score, step: :any, label: "Field-Based Soil Health Score" %>
-                            <%= f.number_field :lab_based_soil_health_score, step: :any, label: "Lab-Based Soil Health Score" %>
-                            <%= f.number_field :mean_SOC, step: :any, label: "Mean SOC" %>
+            <div class="card-body form-card-body d-flex flex-column justify-content-between">
+                <div>
+                    <div class="container-fluid">
+                        <%= bootstrap_form_with model: @target, url: wizard_path, method: :put do |f| %>
+                        <%= f.hidden_field :farm_id, value: @farm.id %>
+                        <div class="row">
+                            <div class="col">
+                                <%= f.number_field :net_carbon_emission, step: :any, label: "Net Carbon Emission (kg)" %>
+                                <%= f.number_field :defra_habitat_score, step: :any, label: "Defra Habitat Score" %>
+                                <%= f.number_field :space_for_nature_score, step: :any, label: "Space for Nature Score" %>
+                                <%= f.number_field :countryside_stewardship_score, step: :any, label: "Countryside Stewardship Score" %>
+                            </div>
+                            <div class="col">
+                                <%= f.number_field :biodiversity_score, step: :any, label: "Biodiversity Score" %>
+                                <%= f.number_field :field_based_soil_health_score, step: :any, label: "Field-Based Soil Health Score" %>
+                                <%= f.number_field :lab_based_soil_health_score, step: :any, label: "Lab-Based Soil Health Score" %>
+                                <%= f.number_field :mean_SOC, step: :any, label: "Mean SOC" %>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <%= f.submit "Complete", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
                 </div>
                 <% end %>
             </div>

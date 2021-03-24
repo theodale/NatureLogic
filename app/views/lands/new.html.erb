@@ -1,0 +1,43 @@
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <%= render 'shared/navbar' %>
+
+    <div class="container-fluid">
+
+        <div class="card shadow form-card">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold card-header-text">Create New Land</h6>
+            </div>
+            <div class="card-body form-card-body">
+                <%
+                    tillage_options = [
+                        ["No Tillage", 1],
+                        ["Reduced Tillage", 0.3],
+                        ["Coventional Tillage", 0.01],
+                        ["Does Not Apply", 1]
+                    ]
+                    rotation_options = [
+                        ["No Crop Rotation", 0.01],
+                        ["Intercropping", 1],
+                        ["Crop Rotation (less than 2 year cycles)", 1],
+                        ["Does Not Apply", 1]
+                    ]
+                %>
+                <%= bootstrap_form_with model: @land, url: farm_lands_path(@farm, creation: @creation), method: :post do |f| %>
+                    <%= f.collection_select :land_type_id, LandType.all, :id, :category, {label: "Land Type"} %>
+                    <%= f.number_field :area, label: "Area (ha)"%>
+                    <%= f.collection_select :tillage_score, tillage_options, :last, :first %>
+                    <%= f.collection_select :rotation_score, rotation_options, :last, :first %>
+                    <div class="mb-4 mt-4 pl-1">
+                        <%= f.check_box :sprayed, label: "Sprayed?" %>
+                    </div>
+                    <%= f.submit "Create Land" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

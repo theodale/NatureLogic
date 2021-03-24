@@ -18,8 +18,10 @@
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold card-header-text">Pools and Ponds Management</h6>
+                <h6 class="m-0 font-weight-bold card-header-text">16</h6>
             </div>
-            <div class="card-body form-card-body">
+            <div class="card-body form-card-body d-flex flex-column justify-content-between">
+                <div>
                 <%= bootstrap_form_with model: @biodiversity_survey, url: wizard_path, method: :put do |f| %>
                     <%= f.hidden_field :farm_id, value: @farm.id %>
                     <%= f.hidden_field :biodiversity_survey_id, value: @biodiversity_survey.id %>
@@ -35,8 +37,11 @@
                         <%= f.check_box :pond_shading_prevented, label: "Do you pollard the trees on the banksides of your pools/ponds, preventing shading?" %>
                         <%= f.check_box :no_pools_and_ponds, label: "Do you have no pools or ponds?" %>
                     </div>
-                    <%= f.submit "Next", class: "btn btn-default btn-primary" %>
+                </div>
+                <div>
+                    <%= f.submit "Next", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
                 <% end %>
+                </div>
             </div>
         </div>
     </div>

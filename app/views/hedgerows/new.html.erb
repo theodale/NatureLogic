@@ -1,0 +1,24 @@
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+
+<div class="page-content">
+
+    <%= render 'shared/navbar' %>
+
+    <div class="container-fluid">
+
+        <div class="card shadow form-card">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold card-header-text">Create New Hedgerow</h6>
+            </div>
+            <div class="card-body form-card-body">
+                <%= bootstrap_form_with model: @hedgerow, url: farm_hedgerows_path(@farm, creation: @creation), method: :post do |f| %>
+                    <%= f.collection_select :hedgerow_type_id, HedgerowType.all, :id, :category, {label: "Hedgerow Type"} %>
+                    <%= f.number_field :length, label: "Length (km)"%>
+                    <%= f.submit "Create Hedgerow" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
