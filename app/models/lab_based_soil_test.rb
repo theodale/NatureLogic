@@ -9,7 +9,7 @@ class LabBasedSoilTest < ApplicationRecord
             parcels_soc << soil_parcel.SOC
         end
         if parcels_soc.size != 0
-            return parcels_soc.sum(0.0) / parcels_soc.size
+            return (parcels_soc.sum(0.0) / parcels_soc.size).round(2)
         else
             return 0
         end
@@ -28,6 +28,22 @@ class LabBasedSoilTest < ApplicationRecord
         else
             return 0
         end
+    end
+
+    def soil_carbon_bulk_density_data
+        data = []
+        self.soil_parcels.each do |soil_parcel|
+            data << [soil_parcel.name, (soil_parcel.SOC * soil_parcel.bulk_density)]
+        end
+        return data
+    end
+
+    def carbon_capture_data
+        data = []
+        self.soil_parcels.each do |soil_parcel|
+            data << [soil_parcel.name, (soil_parcel.SOC * soil_parcel.bulk_density * 3.667)]
+        end
+        return data
     end
 
 end

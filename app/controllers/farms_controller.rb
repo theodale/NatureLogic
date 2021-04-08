@@ -19,6 +19,7 @@ class FarmsController < ApplicationController
 
     def new
         @farm = Farm.new
+        @creation = true
     end
 
     def show

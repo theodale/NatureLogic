@@ -1,0 +1,124 @@
+<% if @creation %>
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+<% else %>
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<% end %>
+<div class="page-content">
+    <% if @creation %>
+    <%= render 'shared/navbar' %>
+    <% end %>
+    <div class="container-fluid">
+        <% if !@creation %>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Edit Lab-Based Soil Test
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+        <% end %>
+                <div class="card shadow form-card">
+                    <% if @creation %>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Lab-Based Soil Test</h6>
+                        <h6 class="m-0 font-weight-bold card-header-text">6</h6>
+                    </div>
+                    <% end %>
+                    <div class="card-body form-card-body d-flex flex-column justify-content-between">
+                        <div class="overflow-auto">
+                            <div class="row">
+                                <div class="col-12">
+                                <% if @soil_parcels.size > 0 %>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Parcel Name</th>
+                                                <th scope="col">pH</th>
+                                                <th scope="col">SOC</th>
+                                                <th scope="col">Bulk Density</th>
+                                                <th scope="col">Soil Texture</th>
+                                                <th scope="col">Total Soil Nitrogen</th>
+                                                <th scope="col">Extractable Phosphorous</th>
+                                                <th scope="col">Extractable Potassium</th>
+                                                <th scope="col">Cation Exchange Capacity</th>
+                                                <th scope="col">Extractable Micronutrients</th>
+                                                <th scope="col">Active Carbon PoXC</th>
+                                                <th scope="col">Water Holding Capacity</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @soil_parcels.each do |soil_parcel| %>
+                                            <tr>
+                                                <td><%= soil_parcel.name %></td>
+                                                <td><%= soil_parcel.pH %></td>
+                                                <td><%= soil_parcel.SOC %></td>
+                                                <td><%= soil_parcel.bulk_density %></td>
+                                                <td><%= soil_parcel.soil_texture %></td>
+                                                <td><%= soil_parcel.total_soil_nitrogen %></td>
+                                                <td><%= soil_parcel.extractable_phosphorus %></td>
+                                                <td><%= soil_parcel.extractable_potassium %></td>
+                                                <td><%= soil_parcel.cation_exchange_capacity %></td>
+                                                <td><%= soil_parcel.extractable_micronutrients %></td>
+                                                <td><%= soil_parcel.active_carbon_PoXC %></td>
+                                                <td><%= soil_parcel.water_holding_capacity %></td>
+                                                <td>
+                                                    <%= link_to farm_lab_based_soil_test_soil_parcel_path(@farm, soil_parcel), method: :delete do %>
+                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                    <% end %>
+                                                </td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                <% else %>
+                                    <div class="alert alert-primary" role="alert">
+                                        You have no soil parcels.
+                                    </div>
+                                <% end %>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <%= link_to new_farm_lab_based_soil_test_soil_parcel_path(@farm, creation: @creation) do %>
+                                        <button type="button" class="btn btn-success">Add Soil Parcel</button>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <% if @creation %>
+                                    <div>
+                                        <%= link_to "Back", farm_creation_path(:in_field_soil_test_details, farm_id: @farm.id), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <div>
+                                        <%= link_to "Next", farm_creation_path(:targets_details, farm_id: @farm.id), class: "btn btn-default btn-primary" %>
+                                    </div>
+                                    <% else %>
+                                    <div>
+                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <% if !@creation %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+

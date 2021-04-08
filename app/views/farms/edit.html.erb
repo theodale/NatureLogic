@@ -16,10 +16,10 @@
                 </nav>
             </div>
         </div>
-        <div class="row mb-4 px-3">
+        <div class="row mb-2 px-3">
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Farm
@@ -41,16 +41,9 @@
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to farm_lands_path(@farm), class: "edit-link" do %>
+                            <%= link_to edit_farm_target_path(@farm), class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
-                                    Lands
-                                </div>
-                            <% end %>
-                        </div>
-                        <div class="row justify-content-center">
-                            <%= link_to farm_hedgerows_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
-                                    Hedgerows
+                                    Targets
                                 </div>
                             <% end %>
                         </div>
@@ -59,7 +52,7 @@
             </div>
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Energy
@@ -85,7 +78,7 @@
             </div>
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Nature
@@ -93,9 +86,25 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
-                                Biodiversity Score: <b> <%= @farm.biodiversity_survey.biodiversity_score.round(2)  %> % </b>
-                            </div>
+                            <%= link_to edit_farm_biodiversity_survey_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Biodiversity Survey
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to farm_lands_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Lands
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to farm_hedgerows_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Hedgerows
+                                </div>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -104,7 +113,7 @@
         <div class="row mb-4 px-3">
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Soil
@@ -112,17 +121,52 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to farm_lab_based_soil_test_path(@farm), class: "edit-link" do %>
+                            <%= link_to edit_farm_lab_based_soil_test_path(@farm), class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     Lab-Based Soil Test
                                 </div>
                             <% end %>
-                            <%= link_to farm_in_field_soil_test_path(@farm), class: "edit-link" do %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to edit_farm_in_field_soil_test_path(@farm), class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     In-Field Soil Test
                                 </div>
                             <% end %>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body data-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Sustainability
+                                <i class="fas fa-sun ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to edit_farm_schemes_survey_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Schemes Survey
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to edit_farm_sustainability_survey_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                    Sustainable Practices
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                        <%= link_to edit_farm_countryside_stewardship_survey_path(@farm), class: "edit-link" do %>
+                            <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                CSS Details
+                            </div>
+                        <% end %>
+                    </div>
                     </div>
                 </div>
             </div>

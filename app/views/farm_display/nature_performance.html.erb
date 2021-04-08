@@ -91,42 +91,6 @@
                     </div>
                 </div>
 
-                <div class="card shadow border-info snapshot-card mb-4" >
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-12">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-info text-uppercase mb-1">Targets</div>
-                                <% if @farm.biodiversity_survey.biodiversity_score > @farm.target.biodiversity_score %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your biodiversity score target of <%= @farm.target.biodiversity_score %> %
-                                    </div>
-                                <% else %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your biodiversity score target of <%= @farm.target.biodiversity_score %> %
-                                    </div>
-                                <% end %>
-                                <% if @farm.defra_habitat_score > @farm.target.defra_habitat_score %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your habitat score target of <%= @farm.target.defra_habitat_score %> %
-                                    </div>
-                                <% else %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your habitat score target of <%= @farm.target.defra_habitat_score %> %
-                                    </div>
-                                <% end %>
-                                <% if @farm.space_for_nature_score > @farm.target.space_for_nature_score %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your space for nature score target of <%= @farm.target.space_for_nature_score %> %
-                                    </div>
-                                <% else %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your space for nature score target of <%= @farm.target.space_for_nature_score %> %
-                                    </div>
-                                <% end %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="col-8">

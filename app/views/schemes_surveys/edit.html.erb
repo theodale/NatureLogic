@@ -1,0 +1,102 @@
+<% if @creation %>
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+<% else %>
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<% end %>
+<div class="page-content">
+    <% if @creation %>
+    <%= render 'shared/navbar' %>
+    <% end %>
+    <div class="container-fluid">
+        <% if !@creation %>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Edit Schemes
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+        <% end %>
+                <div class="card shadow form-card">
+                    <% if @creation %>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Schemes Survey</h6>
+                        <h6 class="m-0 font-weight-bold card-header-text">6</h6>
+                    </div>
+                    <% end %>
+                    <div class="card-body form-card-body">
+                    <%= bootstrap_form_with model: @schemes_survey, url: farm_schemes_survey_path(creation: @creation), method: :put, class: "w-100 h-100" do |f| %>
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="overflow-auto mb-2">
+                                <h6><b>Sustainable Farming Schemes</b></h6>
+                                <hr>
+                                <div class="ml-1 mt-2 mb-4">
+                                    <%= f.check_box :sustainable_farming_incentive %>
+                                    <%= f.check_box :local_nature_recovery %>
+                                    <%= f.check_box :landscape_recovery %>
+                                    <%= f.check_box :environmental_land_management %>
+                                    <%= f.check_box :countryside_stewardship %>
+                                    <%= f.check_box :environmental_stewardship %>
+                                    <%= f.check_box :woodland_grant %>
+                                    <%= f.check_box :organic_association %>
+                                    <%= f.check_box :soil_association %>
+                                    <%= f.check_box :pasture_fed_livestock_association %>
+                                    <%= f.check_box :regenerative_organic_certification %>
+                                </div>
+                                <h6 ><b>Conservation</b></h6>
+                                <hr>
+                                <div class="ml-1 mb-4">
+                                    <%= f.check_box :conservation_projects, label: "Are conservation projects with the RSPB, Wildlife Trust or other conservation body in place on the farm?" %>
+                                    <%= f.number_field :conservation_projects_number, label: "If so, how many?" %>
+                                    <%= f.check_box :landscape_networks, label: "Are you involved in a farm network or landscape-level to promote the environment, enhance biodiversity or tackle climate change?" %>
+                                    <%= f.number_field :landscape_networks_number, label: "If so, how many?" %>
+                                </div>
+                                <h6 ><b>Landscape Networks</b></h6>
+                                <hr>
+                                <div class="ml-1 mb-4">
+                                    <%= f.check_box :landscape_networks, label: "Are you involved in a farm network or landscape-level to promote the environment, enhance biodiversity or tackle climate change?" %>
+                                    <%= f.number_field :landscape_networks_number, label: "If so, how many?" %>
+                                </div>
+                                <%= f.hidden_field :farm_id, value: @farm.id %>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <% if @creation %>
+                                    <div>
+                                        <%= link_to "Back", farm_creation_path(:sustainability_survey_details, farm_id: @farm.id), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <div>
+                                        <%= f.submit "Next", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                    </div>
+                                    <% else %>
+                                    <div>
+                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                    </div>
+                                    <div>
+                                        <%= f.submit "Save Changes", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+        <% if !@creation %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+

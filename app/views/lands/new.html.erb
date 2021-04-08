@@ -1,43 +1,84 @@
+<%
+tillage_options = [
+    ["No Tillage", 1],
+    ["Reduced Tillage", 0.3],
+    ["Coventional Tillage", 0.01],
+    ["Does Not Apply", 1]
+]
+rotation_options = [
+    ["No Crop Rotation", 0.01],
+    ["Intercropping", 1],
+    ["Crop Rotation (less than 2 year cycles)", 1],
+    ["Does Not Apply", 1]
+]
+%>
+<% if @creation %>
 <div class="sidebar">
     <%= render 'shared/sidebar' %>
 </div>
-
+<% else %>
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<% end %>
 <div class="page-content">
-
+    <% if @creation %>
     <%= render 'shared/navbar' %>
-
+    <% end %>
     <div class="container-fluid">
-
-        <div class="card shadow form-card">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Create New Land</h6>
-            </div>
-            <div class="card-body form-card-body">
-                <%
-                    tillage_options = [
-                        ["No Tillage", 1],
-                        ["Reduced Tillage", 0.3],
-                        ["Coventional Tillage", 0.01],
-                        ["Does Not Apply", 1]
-                    ]
-                    rotation_options = [
-                        ["No Crop Rotation", 0.01],
-                        ["Intercropping", 1],
-                        ["Crop Rotation (less than 2 year cycles)", 1],
-                        ["Does Not Apply", 1]
-                    ]
-                %>
-                <%= bootstrap_form_with model: @land, url: farm_lands_path(@farm, creation: @creation), method: :post do |f| %>
-                    <%= f.collection_select :land_type_id, LandType.all, :id, :category, {label: "Land Type"} %>
-                    <%= f.number_field :area, label: "Area (ha)"%>
-                    <%= f.collection_select :tillage_score, tillage_options, :last, :first %>
-                    <%= f.collection_select :rotation_score, rotation_options, :last, :first %>
-                    <div class="mb-4 mt-4 pl-1">
-                        <%= f.check_box :sprayed, label: "Sprayed?" %>
-                    </div>
-                    <%= f.submit "Create Land" %>
-                <% end %>
+        <% if !@creation %>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Add New Land
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+        <% end %>
+                <div class="card shadow form-card">
+                    <% if @creation %>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Create New Land</h6>
+                    </div>
+                    <% end %>
+                    <div class="card-body form-card-body">
+                        <%= bootstrap_form_with model: @land, url: farm_lands_path(@farm, creation: @creation), method: :post, class: "w-100 h-100" do |f| %>
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <%= f.collection_select :land_type_id, LandType.all, :id, :category, {label: "Land Type"} %>
+                                <%= f.number_field :area, label: "Area (ha)"%>
+                                <%= f.collection_select :tillage_score, tillage_options, :last, :first %>
+                                <%= f.collection_select :rotation_score, rotation_options, :last, :first %>
+                                <div class="mb-4 mt-4 pl-1">
+                                    <%= f.check_box :sprayed, label: "Sprayed?" %>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <div>
+                                            <%= link_to "Back", farm_lands_path(@farm, creation: @creation), class: "btn btn-default btn-danger" %>
+                                        </div>
+                                        <div>
+                                            <%= f.submit "Create Land", class: "btn btn-default btn-primary" %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+        <% if !@creation %>
+            </div>
+        </div>
+        <% end %>
     </div>
 </div>

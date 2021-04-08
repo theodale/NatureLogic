@@ -1,16 +1,84 @@
-<%= bootstrap_form_with model: @soil_parcel, url: farm_lab_based_soil_test_soil_parcels_path(@farm), method: :post do |f| %>
-    <%= f.number_field :pH, step: :any, label: "pH" %>
-    <%= f.number_field :SOC, step: :any, label: "SOC" %>
-    <%= f.number_field :bulk_density, step: :any, label: "Bulk Density" %>
-    <%= f.number_field :soil_texture, step: :any, label: "Soil Texture" %>
-    <%= f.number_field :total_soil_nitrogen, step: :any, label: "Total Soil Nitrogen" %>
-    <%= f.number_field :extractable_phosphorus, step: :any, label: "Extractable Phosphorous" %>
-    <%= f.number_field :extractable_potassium, step: :any, label: "Extractable Potassium" %>
-    <%= f.number_field :cation_exchange_capacity, step: :any, label: "Cation Exchange Capacity" %>
-    <%= f.number_field :extractable_micronutrients, step: :any, label: "Extractable Micronutrients" %>
-    <%= f.number_field :active_carbon_PoXC, step: :any, label: "Active Carbon PoXC" %>
-    <%= f.number_field :water_holding_capacity, step: :any, label: "Water Holding Capacity" %>
-    <%= f.submit %>
+<% if @creation %>
+<div class="sidebar">
+    <%= render 'shared/sidebar' %>
+</div>
+<% else %>
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
 <% end %>
+<div class="page-content">
+    <% if @creation %>
+    <%= render 'shared/navbar' %>
+    <% end %>
+    <div class="container-fluid">
+        <% if !@creation %>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Create Soil Parcel
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+        <% end %>
+                <div class="card shadow form-card">
+                    <% if @creation %>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Create Soil Parcel</h6>
+                    </div>
+                    <% end %>
+                    <div class="card-body form-card-body">
+                        <%= bootstrap_form_with model: @soil_parcel, url: farm_lab_based_soil_test_soil_parcels_path(@farm, creation: @creation),
+                            method: :post, class: "w-100 h-100" do |f| %>
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <%= f.text_field :name, value: "", label: "Parcel Name" %>
+                                        <%= f.number_field :pH, step: :any, label: "pH" %>
+                                        <%= f.number_field :SOC, step: :any, label: "SOC" %>
+                                        <%= f.number_field :bulk_density, step: :any, label: "Bulk Density" %>
+                                        <%= f.number_field :soil_texture, step: :any, label: "Soil Texture" %>
+                                        <%= f.number_field :total_soil_nitrogen, step: :any, label: "Total Soil Nitrogen" %>
+                                    </div>
+                                    <div class="col-6">
+                                        <%= f.number_field :extractable_phosphorus, step: :any, label: "Extractable Phosphorous" %>
+                                        <%= f.number_field :extractable_potassium, step: :any, label: "Extractable Potassium" %>
+                                        <%= f.number_field :cation_exchange_capacity, step: :any, label: "Cation Exchange Capacity" %>
+                                        <%= f.number_field :extractable_micronutrients, step: :any, label: "Extractable Micronutrients" %>
+                                        <%= f.number_field :active_carbon_PoXC, step: :any, label: "Active Carbon PoXC" %>
+                                        <%= f.number_field :water_holding_capacity, step: :any, label: "Water Holding Capacity" %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <div>
+                                            <%= link_to "Back", edit_farm_lab_based_soil_test_path(@farm, creation: @creation), class: "btn btn-default btn-danger" %>
+                                        </div>
+                                        <div>
+                                            <%= f.submit "Create Parcel", class: "btn btn-default btn-primary" %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+        <% if !@creation %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
 
 

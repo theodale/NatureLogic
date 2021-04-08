@@ -4,6 +4,8 @@ class Farm < ApplicationRecord
     has_one :target, dependent: :destroy
     has_one :biodiversity_survey, dependent: :destroy
     has_one :sustainability_survey, dependent: :destroy
+    has_one :schemes_survey, dependent: :destroy
+    has_one :countryside_stewardship_survey, dependent: :destroy
     has_one :lab_based_soil_test, dependent: :destroy
     has_one :in_field_soil_test, dependent: :destroy
     accepts_nested_attributes_for :target

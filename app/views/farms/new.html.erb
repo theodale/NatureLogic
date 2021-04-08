@@ -1,7 +1,12 @@
-<%= javascript_pack_tag 'farm' %>
+<% if @creation %>
 <div class="sidebar">
     <%= render 'shared/sidebar' %>
 </div>
+<% else %>
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<% end %>
 <div class="page-content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light farm-navbar">
         <ul class="navbar-nav ml-auto">

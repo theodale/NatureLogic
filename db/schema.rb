@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_110958) do
+ActiveRecord::Schema.define(version: 2021_04_08_094204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,37 @@ ActiveRecord::Schema.define(version: 2021_03_24_110958) do
     t.index ["farm_id"], name: "index_biodiversity_surveys_on_farm_id"
   end
 
+  create_table "countryside_stewardship_surveys", force: :cascade do |t|
+    t.bigint "farm_id"
+    t.boolean "nectar_flower_mix", default: false
+    t.boolean "flower_rich_margins_and_plots", default: false
+    t.boolean "skylark_plots", default: false
+    t.boolean "nesting_plots_for_lapwing_and_stone_curlew", default: false
+    t.boolean "enhanced_overwinter_stubble", default: false
+    t.boolean "supplementary_winter_feeding_for_farmland_birds", default: false
+    t.boolean "autumn_sown_bumblebird_mix", default: false
+    t.boolean "brassica_fodder_crop", default: false
+    t.boolean "winter_cover_crops", default: false
+    t.boolean "arable_reversion_to_grassland_with_low_fertilizer_input", default: false
+    t.boolean "small_buffer_strip_on_cultivated_land", default: false
+    t.boolean "large_buffer_strip_on_cultivated_land", default: false
+    t.boolean "in_field_grass_strips", default: false
+    t.boolean "field_corners_out_of_production", default: false
+    t.boolean "lenient_grazing_supplement", default: false
+    t.boolean "buffer_strip_on_intensive_grassland", default: false
+    t.boolean "management_of_intensive_grassland_adjacent_to_watercourse", default: false
+    t.boolean "seasonal_livestock_removal_on_intensive_grassland", default: false
+    t.boolean "management_of_hedgerows", default: false
+    t.boolean "hedgerow_gapping_up", default: false
+    t.boolean "planting_new_hedges", default: false
+    t.boolean "pond_management", default: false
+    t.boolean "buffering_in_field_ponds_and_ditches_on_arable_land", default: false
+    t.boolean "tree_planting", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["farm_id"], name: "index_countryside_stewardship_surveys_on_farm_id"
+  end
+
   create_table "farms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -174,7 +205,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_110958) do
     t.integer "defra_uniqueness_score", default: 0
     t.integer "area_for_nature_rating", default: 0
     t.integer "above_ground_carbon_per_ha", default: 0
-    t.string "farmland_or_woodland", default: "Farmland"
+    t.string "meta_category", default: "Other"
   end
 
   create_table "lands", force: :cascade do |t|
@@ -188,6 +219,29 @@ ActiveRecord::Schema.define(version: 2021_03_24_110958) do
     t.float "rotation_score", default: 1.0
     t.index ["farm_id"], name: "index_lands_on_farm_id"
     t.index ["land_type_id"], name: "index_lands_on_land_type_id"
+  end
+
+  create_table "schemes_surveys", force: :cascade do |t|
+    t.bigint "farm_id"
+    t.boolean "sustainable_farming_incentive", default: false
+    t.boolean "local_nature_recovery", default: false
+    t.boolean "landscape_recovery", default: false
+    t.boolean "environmental_land_management", default: false
+    t.boolean "countryside_stewardship", default: false
+    t.boolean "environmental_stewardship", default: false
+    t.boolean "woodland_grant", default: false
+    t.boolean "organic_association", default: false
+    t.boolean "soil_association", default: false
+    t.boolean "pasture_fed_livestock_association", default: false
+    t.boolean "sustainable_wool_standard", default: false
+    t.boolean "regenerative_organic_certification", default: false
+    t.boolean "conservation_projects", default: false
+    t.integer "conservation_projects_number", default: 0
+    t.boolean "landscape_networks", default: false
+    t.integer "landscape_networks_number", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["farm_id"], name: "index_schemes_surveys_on_farm_id"
   end
 
   create_table "soil_parcels", force: :cascade do |t|
@@ -205,6 +259,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_110958) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "lab_based_soil_test_id"
+    t.string "name", default: "Unnamed Parcel"
     t.index ["lab_based_soil_test_id"], name: "index_soil_parcels_on_lab_based_soil_test_id"
   end
 
@@ -222,6 +277,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_110958) do
     t.integer "soil_smell", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name", default: "Unnamed Sample"
     t.index ["in_field_soil_test_id"], name: "index_soil_samples_on_in_field_soil_test_id"
   end
 
@@ -255,6 +311,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_110958) do
     t.boolean "no_hedgerows", default: false
     t.boolean "water_courses", default: false
     t.boolean "river_bank_vegetation_mowed_two_years", default: false
+    t.boolean "river_bank_vegetation_left_standing", default: false
     t.boolean "water_course_buffered_twelve_metres", default: false
     t.boolean "water_course_cleared_regularly", default: false
     t.boolean "dredge_cuttings_removed_promptly", default: false

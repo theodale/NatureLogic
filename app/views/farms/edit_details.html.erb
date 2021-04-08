@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <%= render 'shared/sidebar' %>
+    <%= render 'shared/display_sidebar' %>
 </div>
 <div class="page-content">
     <% if @creation %>
@@ -38,7 +38,6 @@
                                 <%= f.text_field :location, label: "Location" %>
                                 <%= f.text_field :latitude, label: "Latitude" %>
                                 <%= f.text_field :longitude, label: "Longitude" %>
-                                <%= f.hidden_field :farm_id, value: @farm.id %>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div>

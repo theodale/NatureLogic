@@ -2,7 +2,6 @@ class AddManagementPracticesToBiodiversitySurveys < ActiveRecord::Migration[6.0]
   def change
 
     add_column :biodiversity_surveys, :crop_protection_use, :boolean, default: false
-
     add_column :biodiversity_surveys, :legumes_or_grass_cover_in_crop_rotation, :boolean, default: false
     add_column :biodiversity_surveys, :grow_cover_crops, :boolean, default: false
     add_column :biodiversity_surveys, :grow_three_cover_crops, :boolean, default: false

@@ -25,8 +25,7 @@ class LandsController < ApplicationController
 
     def destroy
         @farm = Farm.find(params[:farm_id])
-        @land = Land.find(params[:id])
-        @land.destroy
+        Land.find(params[:id]).destroy
         redirect_to farm_lands_path(@farm, creation: params[:creation])
     end
 

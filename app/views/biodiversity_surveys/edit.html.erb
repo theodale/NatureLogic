@@ -5,10 +5,15 @@ wider_countryside_descriptions = [
     ["A diverse landscape, with small fields, traditional farming practices and frequent patches of natural habitat", 12]
 ]
 %>
-
+<% if @creation %>
 <div class="sidebar">
     <%= render 'shared/sidebar' %>
 </div>
+<% else %>
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<% end %>
 <div class="page-content">
     <% if @creation %>
     <%= render 'shared/navbar' %>

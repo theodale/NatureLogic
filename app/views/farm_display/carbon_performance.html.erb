@@ -62,40 +62,6 @@
                     </div>
                 </div>
 
-                <% if @farm.target.net_carbon_emission > @farm.net_emissions %>
-
-                <div class="card shadow border-success snapshot-card mb-4" >
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-12">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Target</div>
-                                <div class="mb-0 font-weight-bold snapshot-card-value">
-                                    You have achieved your carbon balance target of <%= @farm.target.net_carbon_emission %> kg
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <% else %>
-
-                <div class="card shadow border-danger snapshot-card mb-4" >
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-12">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-danger text-uppercase mb-1">Target</div>
-                                <div class="mb-0 font-weight-bold snapshot-card-value">
-                                    You have not achieved your carbon balance target of <%= @farm.target.net_carbon_emission %>  kg
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <% end %>
-
                 <div class="card shadow mb-4" >
                     <div class="card-body">
                         <div class="row justify-content-center">

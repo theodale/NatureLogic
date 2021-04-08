@@ -3,19 +3,22 @@ class SustainabilitySurveysController < ApplicationController
     def edit
         @farm = Farm.find(params[:farm_id])
         @creation = params[:creation]
-        if @farm.biodiversity_survey
-            @biodiversity_survey = @farm.biodiversity_survey
+        if @farm.sustainability_survey
+            @sustainability_survey = @farm.sustainability_survey
         else
-            @biodiversity_survey = @farm.build_biodiversity_survey
+            @sustainability_survey = @farm.build_sustainability_survey
         end
-        logger.debug @biodiversity_survey.id
     end
 
     def update
         @farm = Farm.find(params[:farm_id])
-        @farm.biodiversity_survey.update(biodiversity_survey_params)
+        if @farm.sustainability_survey
+            @farm.sustainability_survey.update(sustainability_survey_params)
+        else
+            @farm.create_sustainability_survey(sustainability_survey_params)
+        end
         if params[:creation]
-            redirect_to farm_creation_path(:targets_details, farm_id: @farm.id)
+            redirect_to farm_creation_path(:schemes_survey_details, farm_id: @farm.id)
         else
             redirect_to edit_farm_path(@farm)
         end

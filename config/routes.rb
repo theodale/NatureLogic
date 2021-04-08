@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     get 'edit-livestock', to: 'farms#edit_livestock', as: 'edit_livestock'
     resource :biodiversity_survey
     resource :sustainability_survey
+    resource :countryside_stewardship_survey
+    resource :schemes_survey
+    resource :target
     resources :hedgerows
     resources :lands
     resource :lab_based_soil_test do

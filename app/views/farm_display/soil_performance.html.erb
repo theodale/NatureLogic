@@ -24,7 +24,7 @@
                         </li>
                         <li class="nav-item">
                             <%= link_to "Soil",
-                                farm_soil_performance_path(@farm),
+                            farm_soil_performance_path(@farm),
                                 class: "nav-link active"
                             %>
                         </li>
@@ -77,77 +77,113 @@
                     </div>
                 </div>
 
-                <div class="card shadow border-success snapshot-card mb-4" >
+                <div class="card shadow mb-4" >
                     <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Total C</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.lab_based_soil_test.total_c %> kg</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-5 carbon-contributions-header-div justify-content-center d-flex mb-2">
+                                <b>In-Field Scores</b>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="card shadow border-info snapshot-card mb-4" >
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-12">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-info text-uppercase mb-1">Targets</div>
-                                <% if @farm.in_field_soil_test.soil_health_score > @farm.target.field_based_soil_health_score %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your soil health score target of <%= @farm.target.field_based_soil_health_score %> %
-                                    </div>
-                                <% else %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your soil health score target of <%= @farm.target.field_based_soil_health_score %> %
-                                    </div>
-                                <% end %>
-                                <% if @farm.lab_based_soil_test.mean_SOC > @farm.target.mean_SOC%>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have achieved your mean SOC target of <%= @farm.target.mean_SOC %> %
-                                    </div>
-                                <% else %>
-                                    <div class="mb-0 font-weight-bold snapshot-card-value">
-                                        You have not achieved your mean SOC target of <%= @farm.target.mean_SOC %> %
-                                    </div>
-                                <% end %>
-                            </div>
-                        </div>
+                        <table class="table table-hover">
+                            <tr>
+                                <td class="carbon-contributions-first-row">Compaction</th>
+                                <td class="carbon-contributions-first-row text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_compaction %> </td>
+                            </tr>
+                            <tr>
+                                <td>Crusting</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_crusting %></td>
+                            </tr>
+                            <tr>
+                                <td>Diversity of Macro-Life</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_diversity_of_macro_life %></td>
+                            </tr>
+                            <tr>
+                                <td>Ponding</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_ponding %></td>
+                            </tr>
+                            <tr>
+                                <td>Plant Health</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_plant_health %></td>
+                            </tr>
+                            <tr>
+                                <td>Root Growth</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_root_growth %></td>
+                            </tr>
+                            <tr>
+                                <td>Aggregate Stability</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_aggregate_stability %></td>
+                            </tr>
+                            <tr>
+                                <td>Soil Colour</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_soil_colour %></td>
+                            </tr>
+                            <tr>
+                                <td>Soil Smell</th>
+                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_soil_smell %></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
 
             <div class="col-8">
+                <% if params[:carbon_captured] %>
                 <div class="card shadow">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                            <%= link_to "Biodiversity Factors",
-                                farm_nature_performance_path(@farm),
-                                class: "nav-link carbon-chart-card-link nunito-font active" %>
+                                <%= link_to "Raw Soil Carbon",
+                                    farm_soil_performance_path(@farm),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Carbon Capture",
+                                    farm_soil_performance_path(@farm, carbon_captured: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body carbon-chart-card-body pt-5">
-                        <%= column_chart [
-                            ["Habitats", @farm.biodiversity_survey.habitat_score],
-                            ["Genetic Diversity", @farm.biodiversity_survey.genetic_diversity_score],
-                            ["Management Practices", @farm.biodiversity_survey.management_practices_score],
-                            ["Species", @farm.biodiversity_survey.species_score]] %>
-
+                        <%= column_chart @farm.lab_based_soil_test.carbon_capture_data,
+                            suffix: " g/l" %>
                         <hr class="my-4">
-
                         <p class="nunito-font px-2">
-                            An overview of your biodiversity factors. Please hover over the bars to get exact values.
+                            The soil carbon contained in each of your soil parcels.
                         </p>
                     </div>
                 </div>
+                <% else %>
+                <div class="card shadow">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <%= link_to "Raw Soil Carbon",
+                                    farm_soil_performance_path(@farm),
+                                    class: "nav-link carbon-chart-card-link nunito-font active" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Carbon Capture",
+                                    farm_soil_performance_path(@farm, carbon_captured: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body carbon-chart-card-body pt-5">
+                        <%= column_chart @farm.lab_based_soil_test.soil_carbon_bulk_density_data,
+                            suffix: " g/l" %>
+                        <hr class="my-4">
+                        <p class="nunito-font px-2">
+                            The soil carbon contained in each of your soil parcels.
+                        </p>
+                    </div>
+                </div>
+                <% end %>
             </div>
         </div>
     </div>
 </div>
+
+
 
 

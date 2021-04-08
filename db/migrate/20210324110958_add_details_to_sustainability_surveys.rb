@@ -27,6 +27,7 @@ class AddDetailsToSustainabilitySurveys < ActiveRecord::Migration[6.0]
     add_column :sustainability_surveys, :no_hedgerows, :boolean, default: false
     add_column :sustainability_surveys, :water_courses, :boolean, default: false
     add_column :sustainability_surveys, :river_bank_vegetation_mowed_two_years, :boolean, default: false
+    add_column :sustainability_surveys, :river_bank_vegetation_left_standing, :boolean, default: false
     add_column :sustainability_surveys, :water_course_buffered_twelve_metres, :boolean, default: false
     add_column :sustainability_surveys, :water_course_cleared_regularly, :boolean, default: false
     add_column :sustainability_surveys, :dredge_cuttings_removed_promptly, :boolean, default: false

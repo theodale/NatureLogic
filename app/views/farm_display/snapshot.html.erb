@@ -1,11 +1,8 @@
 <div class="sidebar">
     <%= render 'shared/display_sidebar' %>
 </div>
-
 <div class="page-content">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
@@ -18,13 +15,10 @@
                 </nav>
             </div>
         </div>
-
-        <div class="row mb-4 px-3">
-
+        <div class="row mb-2 px-3 snapshot-row">
             <div class="col-4">
-
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Carbon
@@ -48,7 +42,18 @@
                                     scales: {
                                         yAxes: [{
                                             ticks: {
-                                                display: false
+                                                display: false,
+                                            },
+                                            gridLines: {
+                                                lineWidth: 0,
+                                                zeroLineWidth: 3,
+                                                zeroLineColor: 'grey',
+                                                z: 10
+                                            }
+                                        }],
+                                        xAxes: [{
+                                            ticks: {
+
                                             },
                                             gridLines: {
                                                 display: false
@@ -60,13 +65,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-4">
-
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Energy
@@ -95,13 +97,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-4">
-
                 <div class="card shadow mb-4 snapshot-overview-card">
-                    <div class="card-body">
+                    <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
                                 Nature
@@ -131,15 +130,63 @@
                 </div>
             </div>
         </div>
-
         <div class="row mb-4 px-3">
-
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body snapshot-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Soil
+                                <i class="fas fa-tree ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Soil Health Score: <b> <%= @farm.in_field_soil_test.soil_health_score.round(2)  %> % </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Mean SOC: <b> <%= @farm.lab_based_soil_test.mean_SOC  %> % </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body snapshot-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Sustainability
+                                <i class="fas fa-sun ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Number of Schemes: <b>4 </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Countryside Stewardship: <b> 11.6 % </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                CSS Payments: <b> £ 1726</b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Sustainable Practices Score: <b> <%= @farm.sustainability_survey.sustainable_practice_score %> % </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-
-
-
 
 
