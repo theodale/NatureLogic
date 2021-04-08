@@ -1,0 +1,12 @@
+<h3>Upload Land Types CSV</h3>
+<p>Please enter your land type details into the template provided below.</p>
+<div>
+    <%= link_to 'Download CSV Template', '/LandTypes.csv', download: '' %>
+</div>
+<br>
+<div>
+    <%= form_with url: "/admin/land_types/import_csv", method: :post do |f| %>
+    <%= f.file_field :land_types_csv, label: false %>
+    <%= f.submit "Submit" %>
+    <% end %>
+</div>

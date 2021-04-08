@@ -1,0 +1,12 @@
+<h3>Upload Hedgerow Types CSV</h3>
+<p>Please enter your hedgerow type details into the template provided below.</p>
+<div>
+    <%= link_to 'Download CSV Template', '/HedgerowTypes.csv', download: '' %>
+</div>
+<br>
+<div>
+    <%= form_with url: "/admin/hedgerow_types/import_csv", method: :post do |f| %>
+    <%= f.file_field :hedgerow_types_csv, label: false %>
+    <%= f.submit "Submit" %>
+    <% end %>
+</div>
