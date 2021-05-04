@@ -1,40 +1,47 @@
 class FarmCreationController < ApplicationController
     include Wicked::Wizard
 
-    steps :farm_details, :energy_details, :resource_details, :livestock_details, :land_details, :hedgerow_details,
-    :biodiversity_survey_details, :sustainability_survey_details, :schemes_survey_details,
-    :countryside_stewardship_survey_details, :in_field_soil_test_details, :lab_based_soil_test_details,
-    :targets_details
+    steps :start, :details, :energy, :resources, :livestock, :lands, :hedgerows,
+    :biodiversity_surveys, :sustainability_surveys, :schemes_surveys,
+    :countryside_stewardship_surveys, :in_field_soil_tests, :lab_based_soil_tests,
+    :targets
 
     def show
-        @farm = Farm.find(params[:farm_id])
-        if params[:id] == "land_details"
+        if (params[:id] == "start") and params[:new_farm]
+            @farm = Farm.create(farm_user_id: current_farm_user.id)
+        else
+            @farm = Farm.find(params[:farm_id])
+        end
+        if params[:id] == "lands"
             redirect_to farm_lands_path(@farm, creation: true)
-        elsif params[:id] == "hedgerow_details"
+        elsif params[:id] == "hedgerows"
             redirect_to farm_hedgerows_path(@farm, creation: true)
-        elsif params[:id] == "biodiversity_survey_details"
+        elsif params[:id] == "biodiversity_surveys"
             redirect_to edit_farm_biodiversity_survey_path(@farm, creation: true)
-        elsif params[:id] == "sustainability_survey_details"
+        elsif params[:id] == "sustainability_surveys"
             redirect_to edit_farm_sustainability_survey_path(@farm, creation: true)
-        elsif params[:id] == "in_field_soil_test_details"
-            redirect_to edit_farm_in_field_soil_test_path(@farm, creation: true)
-        elsif params[:id] == "lab_based_soil_test_details"
-            redirect_to edit_farm_lab_based_soil_test_path(@farm, creation: true)
-        elsif params[:id] == "targets_details"
-            redirect_to edit_farm_target_path(@farm, creation: true)
-        elsif params[:id] == "schemes_survey_details"
+        elsif params[:id] == "schemes_surveys"
             redirect_to edit_farm_schemes_survey_path(@farm, creation: true)
-        elsif params[:id] == "countryside_stewardship_survey_details"
+        elsif params[:id] == "countryside_stewardship_surveys"
             redirect_to edit_farm_countryside_stewardship_survey_path(@farm, creation: true)
+        elsif params[:id] == "in_field_soil_tests"
+            redirect_to edit_farm_in_field_soil_test_path(@farm, creation: true)
+        elsif params[:id] == "lab_based_soil_tests"
+            redirect_to edit_farm_lab_based_soil_test_path(@farm, creation: true)
+        elsif params[:id] == "targets"
+            redirect_to edit_farm_target_path(@farm, creation: true)
         else
             render_wizard
         end
     end
 
     def update
-        @farm = Farm.find(params[:farm][:farm_id])
-        @farm.update(farm_params)
-        redirect_to wizard_path(next_step, farm_id: @farm.id)
+        farm = Farm.find(params[:farm_id])
+        farm.update(farm_params)
+        redirect_to wizard_path(
+            next_step,
+            farm_id: farm.id
+        )
     end
 
     private

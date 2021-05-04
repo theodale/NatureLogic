@@ -18,7 +18,7 @@ class CountrysideStewardshipSurveysController < ApplicationController
             @farm.create_countryside_stewardship_survey(countryside_stewardship_survey_params)
         end
         if params[:creation]
-            redirect_to farm_creation_path(:in_field_soil_test_details, farm_id: @farm.id)
+            redirect_to farm_creation_path(:in_field_soil_tests, farm_id: @farm.id)
         else
             redirect_to edit_farm_path(@farm)
         end

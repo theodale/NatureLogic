@@ -1,11 +1,8 @@
 <div class="sidebar">
     <%= render 'shared/display_sidebar' %>
 </div>
-
 <div class="page-content">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
@@ -35,8 +32,8 @@
                             %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to "Schemes",
-                                farm_path(@farm),
+                            <%= link_to "Sustainability",
+                                farm_sustainability_performance_path(@farm),
                                 class: "nav-link"
                             %>
                         </li>
@@ -44,11 +41,8 @@
                 </nav>
             </div>
         </div>
-
         <div class="row px-3">
-
             <div class="col-5">
-
                 <div class="card shadow border-warning snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -62,7 +56,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card shadow mb-4" >
                     <div class="card-body">
                         <div class="row justify-content-center">
@@ -70,7 +63,6 @@
                                 <b>Contributions</b>
                             </div>
                         </div>
-
                         <table class="table table-hover">
                             <tr>
                                 <td class="carbon-contributions-first-row">Diesel</th>
@@ -88,7 +80,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-7">
                 <div class="card shadow">
                     <div class="card-header">
@@ -105,9 +96,7 @@
                             ["Electricity", @farm.total_electricity_use*0.23314],
                             ["Gas", @farm.total_gas_use*0.18387],
                             ["Diesel", @farm.total_diesel_use*0.25278]] %>
-
                         <hr class="my-4">
-
                         <p class="nunito-font px-2">
                             A composition of your energy sources. Values are displayed in kg CO<sub>2</sub>.
                             Please hover over the bars to get exact values.

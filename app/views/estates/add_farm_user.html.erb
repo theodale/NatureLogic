@@ -1,0 +1,46 @@
+<%= render 'shared/estates_sidebar' %>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @estate.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            <%= @current_estate_user.email %>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="card farms-card shadow">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Add Farm Account to <%= @farm.name %></h6>
+                    </div>
+                    <div class="card-body">
+                        <%= bootstrap_form_with class: "w-100 h-100" do |f| %>
+                            <div class="d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <%= f.text_field :email %>
+                                    <%= f.text_field :password %>
+                                    <%= f.hidden_field :farm_id, value: @farm.id %>
+                                </div>
+                                <div>
+                                    <%= f.submit "Add", class: "btn btn-info" %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>
+
+
+
+

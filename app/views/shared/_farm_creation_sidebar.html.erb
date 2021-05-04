@@ -1,0 +1,10 @@
+<% if @estate_user %>
+    <%= render 'shared/estates_sidebar' %>
+<% elsif @farm_user %>
+<div class="sidebar">
+    <div class="sidebar-heading">
+        NatureLogic
+    </div>
+    <hr class="sidebar-divider"/>
+</div>
+<% end %>

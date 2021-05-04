@@ -18,7 +18,7 @@ class SchemesSurveysController < ApplicationController
             @farm.create_schemes_survey(schemes_survey_params)
         end
         if params[:creation]
-            redirect_to farm_creation_path(:countryside_stewardship_survey_details, farm_id: @farm.id)
+            redirect_to farm_creation_path(:countryside_stewardship_surveys, farm_id: @farm.id)
         else
             redirect_to edit_farm_path(@farm)
         end

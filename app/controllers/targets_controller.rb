@@ -18,6 +18,7 @@ class TargetsController < ApplicationController
             @farm.create_target(targets_params)
         end
         if params[:creation]
+            @farm.update({created: true})
             redirect_to farm_snapshot_path(@farm)
         else
             redirect_to edit_farm_path(@farm)
@@ -28,6 +29,7 @@ class TargetsController < ApplicationController
 
     def targets_params
         params.require(:target).permit(
+            :net_carbon_emission,
             :defra_habitat_score,
             :space_for_nature_score,
             :countryside_stewardship_score,

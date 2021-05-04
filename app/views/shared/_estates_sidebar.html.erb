@@ -1,0 +1,46 @@
+<div class="sidebar">
+    <div class="d-flex flex-column h-100 justify-content-between pb-4">
+        <div>
+            <div class="sidebar-heading">
+                NatureLogic
+            </div>
+            <hr class="sidebar-divider"/>
+            <div class="sidebar-item">
+                <%= link_to new_farm_path, class: "sidebar-link" do %>
+                    <div class="sidebar-item-content">
+                        <span>Management</span>
+                        <i class="far fa-handshake sidebar-icon"></i>
+                    </div>
+                <% end %>
+            </div>
+            <div class="sidebar-item">
+                <%= link_to new_farm_path, class: "sidebar-link" do %>
+                    <div class="sidebar-item-content">
+                        <span>Overview</span>
+                        <i class="fas fa-glasses sidebar-icon"></i>
+                    </div>
+                <% end %>
+            </div>
+            <div class="sidebar-item">
+                <%= link_to farms_path, class: "sidebar-link" do %>
+                    <div class="sidebar-item-content">
+                        <span>Performance</span>
+                        <i class="fas fa-tachometer-alt sidebar-icon"></i>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div>
+            <div class="sidebar-item">
+                <%= link_to destroy_estate_user_session_path,
+                    method: :delete,
+                    class: "sidebar-link" do %>
+                    <div class="sidebar-item-content">
+                        <span>Sign Out</span>
+                        <i class="fas fa-sign-out-alt sidebar-icon"></i>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

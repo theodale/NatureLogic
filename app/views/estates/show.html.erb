@@ -1,0 +1,92 @@
+<%= render 'shared/estates_sidebar' %>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @estate.name %></b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            <%= @current_estate_user.email %>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="card farms-card shadow">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold card-header-text">Your Farms</h6>
+                    </div>
+                    <div class="card-body">
+                        <% if @estate.farms.length != 0 %>
+                        <table class="table table-bordered farms-table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Farm Name</th>
+                                    <th>Location</th>
+                                    <th>Account</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @estate.farms.each do |farm| %>
+                                <tr>
+                                    <td class="table-body-text name-data"><%= farm.name %></td>
+                                    <td class="table-body-text location-data"><%= farm.location %></td>
+                                    <td class="table-body-text location-data">
+                                        <% if farm.farm_user %>
+                                            <%= farm.farm_user.email %>
+                                        <% else %>
+                                            <%= link_to "Add Farm Account",
+                                                estate_add_farm_user_path(@estate, farm_id: farm.id),
+                                                class: "view-farm-link" %>
+                                        <% end %>
+                                    </td>
+                                    <td class="view-action-data">
+                                        <%= link_to "View",
+                                            farm_path(farm),
+                                            class: "view-farm-link" %>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                        <% else %>
+                        <div class="alert alert-primary" role="alert">
+                                You have no farms!
+                        </div>
+                        <% end %>
+                        <%= link_to "Add New Farm To Estate",
+                            estate_add_farm_path(@estate),
+                            class: "btn btn-default btn-success" %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card shadow border-success snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Number of Farms</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @estate.farms.size %></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-tractor fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card short-farms-card shadow">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

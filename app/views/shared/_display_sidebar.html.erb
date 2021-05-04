@@ -1,13 +1,9 @@
 <div class="sidebar d-flex flex-column justify-content-between">
-
     <div>
-
         <div class="sidebar-heading">
             NatureLogic
         </div>
-
         <hr class="sidebar-divider"/>
-
         <div class="sidebar-item">
             <%= link_to farm_snapshot_path(@farm), class: "sidebar-link" do %>
                 <div class="sidebar-item-content">
@@ -16,7 +12,6 @@
                 </div>
             <% end %>
         </div>
-
         <div class="sidebar-item">
             <%= link_to farm_carbon_performance_path(@farm), class: "sidebar-link" do %>
                 <div class="sidebar-item-content">
@@ -25,7 +20,6 @@
                 </div>
             <% end %>
         </div>
-
         <div class="sidebar-item">
             <%= link_to farms_path, class: "sidebar-link" do %>
                 <div class="sidebar-item-content">
@@ -34,7 +28,6 @@
                 </div>
             <% end %>
         </div>
-
         <div class="sidebar-item">
             <%= link_to edit_farm_path(@farm), class: "sidebar-link" do %>
                 <div class="sidebar-item-content">
@@ -43,9 +36,8 @@
                 </div>
             <% end %>
         </div>
-
         <div class="sidebar-item">
-            <%= link_to farms_path, class: "sidebar-link" do %>
+            <%= link_to farm_profile_path(@farm), class: "sidebar-link" do %>
                 <div class="sidebar-item-content">
                     <span>Profile</span>
                     <i class="fas fa-user sidebar-icon"></i>
@@ -53,16 +45,26 @@
             <% end %>
         </div>
     </div>
-
     <div class="mb-4">
         <div class="sidebar-item">
-        <%= link_to farms_path, class: "sidebar-link" do %>
-            <div class="sidebar-item-content">
-                <span>Home</span>
-                <i class="fas fa-house-user sidebar-icon"></i>
-            </div>
+        <% if @estate_user %>
+            <%= link_to estate_path(@estate_user.estate),
+                class: "sidebar-link" do %>
+                <div class="sidebar-item-content">
+                    <span>Back to Estate</span>
+                    <i class="fas fa-arrow-circle-right sidebar-icon"></i>
+                </div>
+            <% end %>
+        <% elsif @farm_user %>
+            <%= link_to destroy_farm_user_session_path,
+                    method: :delete,
+                    class: "sidebar-link" do %>
+                <div class="sidebar-item-content">
+                    <span>Logout</span>
+                    <i class="fas fa-sign-out-alt sidebar-icon"></i>
+                </div>
+            <% end %>
         <% end %>
         </div>
     </div>
-
 </div>

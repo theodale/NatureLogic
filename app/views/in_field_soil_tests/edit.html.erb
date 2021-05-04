@@ -1,6 +1,6 @@
 <% if @creation %>
 <div class="sidebar">
-    <%= render 'shared/sidebar' %>
+    <%= render 'shared/farm_creation_sidebar' %>
 </div>
 <% else %>
 <div class="sidebar">
@@ -8,10 +8,10 @@
 </div>
 <% end %>
 <div class="page-content">
-    <% if @creation %>
-    <%= render 'shared/navbar' %>
-    <% end %>
     <div class="container-fluid">
+        <% if @creation %>
+        <%= render 'shared/navbar' %>
+        <% end %>
         <% if !@creation %>
         <div class="row">
             <div class="col-12">
@@ -32,14 +32,14 @@
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold card-header-text">In-Field Soil Test</h6>
-                        <h6 class="m-0 font-weight-bold card-header-text">6</h6>
+                        <h6 class="m-0 font-weight-bold card-header-text">11 / 13</h6>
                     </div>
                     <% end %>
                     <div class="card-body form-card-body d-flex flex-column justify-content-between">
                         <div class="overflow-auto">
                             <div class="row">
                                 <div class="col-12">
-                                    <% if @soil_samples.size > 0 %>
+                                    <% if @in_field_soil_test.soil_samples.size > 0 %>
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -58,7 +58,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% @soil_samples.each do |soil_sample| %>
+                                            <% @in_field_soil_test.soil_samples.each do |soil_sample| %>
                                             <tr>
                                                 <td><%= soil_sample.name %></td>
                                                 <td><%= soil_sample.compaction %></td>
@@ -72,7 +72,8 @@
                                                 <td><%= soil_sample.soil_colour %></td>
                                                 <td><%= soil_sample.soil_smell %></td>
                                                 <td>
-                                                    <%= link_to farm_in_field_soil_test_soil_sample_path(@farm, soil_sample, creation: @creation), method: :delete do %>
+                                                    <%= link_to farm_in_field_soil_test_soil_sample_path(@farm, soil_sample, creation: @creation),
+                                                        method: :delete do %>
                                                         <button type="button" class="btn btn-danger">Delete</button>
                                                     <% end %>
                                                 </td>
@@ -98,14 +99,20 @@
                                 <div class="col-12 d-flex justify-content-between">
                                     <% if @creation %>
                                     <div>
-                                        <%= link_to "Back", farm_creation_path(:sustainability_survey_details, farm_id: @farm.id), class: "btn btn-default btn-danger" %>
+                                        <%= link_to "Back",
+                                            farm_creation_path(:countryside_stewardship_surveys, farm_id: @farm.id),
+                                            class: "btn btn-default btn-danger" %>
                                     </div>
                                     <div>
-                                        <%= link_to "Next", farm_creation_path(:lab_based_soil_test_details, farm_id: @farm.id), class: "btn btn-default btn-primary" %>
+                                        <%= link_to "Next",
+                                            farm_creation_path(:lab_based_soil_tests, farm_id: @farm.id),
+                                            class: "btn btn-default btn-primary" %>
                                     </div>
                                     <% else %>
                                     <div>
-                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                        <%= link_to "Back",
+                                            edit_farm_path(@farm),
+                                            class: "btn btn-default btn-danger" %>
                                     </div>
                                     <% end %>
                                 </div>

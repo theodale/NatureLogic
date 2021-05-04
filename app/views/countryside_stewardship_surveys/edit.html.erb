@@ -1,6 +1,6 @@
 <% if @creation %>
 <div class="sidebar">
-    <%= render 'shared/sidebar' %>
+    <%= render 'shared/farm_creation_sidebar' %>
 </div>
 <% else %>
 <div class="sidebar">
@@ -8,10 +8,10 @@
 </div>
 <% end %>
 <div class="page-content">
-    <% if @creation %>
-    <%= render 'shared/navbar' %>
-    <% end %>
     <div class="container-fluid">
+        <% if @creation %>
+        <%= render 'shared/navbar' %>
+        <% end %>
         <% if !@creation %>
         <div class="row">
             <div class="col-12">
@@ -32,59 +32,91 @@
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold card-header-text">Countryside Stewardship</h6>
-                        <h6 class="m-0 font-weight-bold card-header-text">6</h6>
+                        <h6 class="m-0 font-weight-bold card-header-text">10 / 13</h6>
                     </div>
                     <% end %>
                     <div class="card-body form-card-body">
-                    <%= bootstrap_form_with model: @countryside_stewardship_survey, url: farm_countryside_stewardship_survey_path(creation: @creation), method: :put, class: "w-100 h-100" do |f| %>
+                    <%= bootstrap_form_with model: @countryside_stewardship_survey,
+                        url: farm_countryside_stewardship_survey_path(creation: @creation),
+                        method: :put,
+                        class: "w-100 h-100" do |f| %>
                         <div class="d-flex flex-column justify-content-between h-100">
                             <div class="overflow-auto mb-2">
                                 <h6><b>Categories</b></h6>
                                 <p>Please select which practices you carry out.</p>
                                 <hr>
                                 <div class="ml-1 mb-4">
-                                    <%= f.check_box :nectar_flower_mix, label: "Nectar flower mix" %>
-                                    <%= f.check_box :flower_rich_margins_and_plots, label: "Flower rich margins and plots" %>
-                                    <%= f.check_box :skylark_plots, label: "Skylark plots" %>
-                                    <%= f.check_box :nesting_plots_for_lapwing_and_stone_curlew, label: "Nesting for lapwing and stone curlew" %>
-                                    <%= f.check_box :enhanced_overwinter_stubble, label: "Enhanced overwinter stubble" %>
-                                    <%= f.check_box :supplementary_winter_feeding_for_farmland_birds, label: "Supplementary winter feeding for farmland birds" %>
-                                    <%= f.check_box :autumn_sown_bumblebird_mix, label: "Autumn sown bumblebird mix" %>
-                                    <%= f.check_box :brassica_fodder_crop, label: "Brassica fodder crop" %>
-                                    <%= f.check_box :winter_cover_crops, label: "Winter cover crops" %>
-                                    <%= f.check_box :arable_reversion_to_grassland_with_low_fertilizer_input, label: "Arable reversion to grassland with low fertilizer input" %>
-                                    <%= f.check_box :small_buffer_strip_on_cultivated_land, label: "Small buffer strip on cultivated land" %>
-                                    <%= f.check_box :large_buffer_strip_on_cultivated_land, label: "Large buffer strip on cultivated land" %>
-                                    <%= f.check_box :in_field_grass_strips, label: "In field grass strips" %>
-                                    <%= f.check_box :field_corners_out_of_production, label: "Field corners out of production" %>
-                                    <%= f.check_box :lenient_grazing_supplement, label: "Lenient grazing supplement" %>
-                                    <%= f.check_box :buffer_strip_on_intensive_grassland, label: "Buffer strip on intensive grassland" %>
-                                    <%= f.check_box :management_of_intensive_grassland_adjacent_to_watercourse, label: "Management of intensive grassland adjacent to watercourse" %>
-                                    <%= f.check_box :seasonal_livestock_removal_on_intensive_grassland, label: "Seasonal livestock removal on intensive grassland" %>
-                                    <%= f.check_box :management_of_hedgerows, label: "Management of hedgerows" %>
-                                    <%= f.check_box :hedgerow_gapping_up, label: "Hedgerow gapping-up" %>
-                                    <%= f.check_box :planting_new_hedges, label: "Planting new hedges" %>
-                                    <%= f.check_box :pond_management, label: "Pond management" %>
-                                    <%= f.check_box :buffering_in_field_ponds_and_ditches_on_arable_land, label: "Buffering in field ponds and ditches on arable land" %>
-                                    <%= f.check_box :tree_planting, label: "Tree planting" %>
+                                    <%= f.check_box :nectar_flower_mix,
+                                        label: "Nectar flower mix" %>
+                                    <%= f.check_box :flower_rich_margins_and_plots,
+                                        label: "Flower rich margins and plots" %>
+                                    <%= f.check_box :skylark_plots,
+                                        label: "Skylark plots" %>
+                                    <%= f.check_box :nesting_plots_for_lapwing_and_stone_curlew,
+                                        label: "Nesting for lapwing and stone curlew" %>
+                                    <%= f.check_box :enhanced_overwinter_stubble,
+                                        label: "Enhanced overwinter stubble" %>
+                                    <%= f.check_box :supplementary_winter_feeding_for_farmland_birds,
+                                        label: "Supplementary winter feeding for farmland birds" %>
+                                    <%= f.check_box :autumn_sown_bumblebird_mix,
+                                        label: "Autumn sown bumblebird mix" %>
+                                    <%= f.check_box :brassica_fodder_crop,
+                                        label: "Brassica fodder crop" %>
+                                    <%= f.check_box :winter_cover_crops,
+                                        label: "Winter cover crops" %>
+                                    <%= f.check_box :arable_reversion_to_grassland_with_low_fertilizer_input,
+                                        label: "Arable reversion to grassland with low fertilizer input" %>
+                                    <%= f.check_box :small_buffer_strip_on_cultivated_land,
+                                        label: "Small buffer strip on cultivated land" %>
+                                    <%= f.check_box :large_buffer_strip_on_cultivated_land,
+                                        label: "Large buffer strip on cultivated land" %>
+                                    <%= f.check_box :in_field_grass_strips,
+                                        label: "In field grass strips" %>
+                                    <%= f.check_box :field_corners_out_of_production,
+                                        label: "Field corners out of production" %>
+                                    <%= f.check_box :lenient_grazing_supplement,
+                                        label: "Lenient grazing supplement" %>
+                                    <%= f.check_box :buffer_strip_on_intensive_grassland,
+                                        label: "Buffer strip on intensive grassland" %>
+                                    <%= f.check_box :management_of_intensive_grassland_adjacent_to_watercourse,
+                                        label: "Management of intensive grassland adjacent to watercourse" %>
+                                    <%= f.check_box :seasonal_livestock_removal_on_intensive_grassland,
+                                        label: "Seasonal livestock removal on intensive grassland" %>
+                                    <%= f.check_box :management_of_hedgerows,
+                                        label: "Management of hedgerows" %>
+                                    <%= f.check_box :hedgerow_gapping_up,
+                                        label: "Hedgerow gapping-up" %>
+                                    <%= f.check_box :planting_new_hedges,
+                                        label: "Planting new hedges" %>
+                                    <%= f.check_box :pond_management,
+                                        label: "Pond management" %>
+                                    <%= f.check_box :buffering_in_field_ponds_and_ditches_on_arable_land,
+                                        label: "Buffering in field ponds and ditches on arable land" %>
+                                    <%= f.check_box :tree_planting,
+                                        label: "Tree planting" %>
                                 </div>
-                                <%= f.hidden_field :farm_id, value: @farm.id %>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between">
                                     <% if @creation %>
                                     <div>
-                                        <%= link_to "Back", farm_creation_path(:schemes_survey_details, farm_id: @farm.id), class: "btn btn-default btn-danger" %>
+                                        <%= link_to "Back",
+                                            farm_creation_path(:schemes_surveys, farm_id: @farm.id),
+                                            class: "btn btn-default btn-danger" %>
                                     </div>
                                     <div>
-                                        <%= f.submit "Next", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                        <%= f.submit "Next",
+                                            class: "btn btn-default btn-primary" %>
                                     </div>
                                     <% else %>
                                     <div>
-                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                        <%= link_to "Back",
+                                            edit_farm_path(@farm),
+                                            class: "btn btn-default btn-danger" %>
                                     </div>
                                     <div>
-                                        <%= f.submit "Save Changes", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                        <%= f.submit "Save Changes",
+                                            class: "btn btn-default btn-primary" %>
                                     </div>
                                     <% end %>
                                 </div>

@@ -15,7 +15,15 @@ class FarmDisplayController < ApplicationController
         @farm = Farm.find(params[:farm_id])
     end
 
+    def sustainability_performance
+        @farm = Farm.find(params[:farm_id])
+    end
+
     def snapshot
+        @farm = Farm.find(params[:farm_id])
+    end
+
+    def profile
         @farm = Farm.find(params[:farm_id])
     end
 end

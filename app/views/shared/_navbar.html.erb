@@ -1,12 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light farm-navbar">
+<nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+    <b class="navbar-brand uppercase snapshot-navbar-title">
+        <% if @estate_user %>
+            <%= @estate_user.estate.name %>
+        <% elsif @farm_user %>
+            <%= @farm_user.farm.name %>
+        <% end %>
+    </b>
     <ul class="navbar-nav ml-auto">
-        <li class="navbar-text mr-2">
-            Guest User
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-cog navbar-icon"></i>
-            </a>
+        <li class="navbar-text">
+            <% if @farm_user %>
+                <%= @farm_user.email %>
+            <% elsif @estate_user %>
+                <%= @estate_user.email %>
+            <% end %>
         </li>
     </ul>
 </nav>

@@ -33,9 +33,9 @@
                         <div class="row px-3 mb-2">
                             <%= column_chart [
                                 ["Emissions", @farm.total_emissions],
-                                ["Sequestration", @farm.sequestration],
+                                ["Sequestration", @farm.total_sequestration],
                                 ["Net", @farm.net_emissions]],
-                                min: @farm.sequestration,
+                                min: @farm.total_sequestration,
                                 max: @farm.total_emissions + 10000,
                                 height: "200px",
                                 library: {
@@ -93,7 +93,7 @@
                                         position: "bottom"
                                     }
                                 }
-                                 %>
+                            %>
                         </div>
                     </div>
                 </div>
@@ -109,22 +109,18 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="py-2 px-4 snapshot-value-div mb-4">
-                                Biodiversity Score: <b> <%= @farm.biodiversity_survey.biodiversity_score.round(2)  %> % </b>
+                                Biodiversity Score: <b> <%= @farm.biodiversity_survey.biodiversity_percentage_score %> % </b>
                             </div>
                         </div>
                         <div class="row px-3 mb-2">
-                            <%= pie_chart [
-                                ["Habitats", @farm.biodiversity_survey.habitat_score],
-                                ["Genetic Diversity", @farm.biodiversity_survey.genetic_diversity_score],
-                                ["Management Practices", @farm.biodiversity_survey.management_practices_score],
-                                ["Species", @farm.biodiversity_survey.species_score]],
+                            <%= pie_chart habitat_area_data,
                                 height: "200px",
                                 library: {
                                     legend: {
                                         position: "bottom"
                                     }
                                 }
-                                %>
+                            %>
                         </div>
                     </div>
                 </div>

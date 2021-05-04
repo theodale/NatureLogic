@@ -1,11 +1,8 @@
 <div class="sidebar">
     <%= render 'shared/display_sidebar' %>
 </div>
-
 <div class="page-content">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
@@ -24,7 +21,7 @@
                         </li>
                         <li class="nav-item">
                             <%= link_to "Soil",
-                            farm_soil_performance_path(@farm),
+                                farm_soil_performance_path(@farm),
                                 class: "nav-link active"
                             %>
                         </li>
@@ -35,8 +32,8 @@
                             %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to "Schemes",
-                                farm_path(@farm),
+                            <%= link_to "Sustainability",
+                                farm_sustainability_performance_path(@farm),
                                 class: "nav-link"
                             %>
                         </li>
@@ -44,11 +41,8 @@
                 </nav>
             </div>
         </div>
-
         <div class="row px-3">
-
             <div class="col-4">
-
                 <div class="card shadow border-primary snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -62,7 +56,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card shadow border-success snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -76,7 +69,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card shadow mb-4" >
                     <div class="card-body">
                         <div class="row justify-content-center">
@@ -84,7 +76,6 @@
                                 <b>In-Field Scores</b>
                             </div>
                         </div>
-
                         <table class="table table-hover">
                             <tr>
                                 <td class="carbon-contributions-first-row">Compaction</th>
@@ -126,59 +117,105 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-8">
-                <% if params[:carbon_captured] %>
                 <div class="card shadow">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
+                            <% if params[:parcel_data] %>
                             <li class="nav-item">
-                                <%= link_to "Raw Soil Carbon",
+                                <%= link_to "Soil Carbon",
                                     farm_soil_performance_path(@farm),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
-                            <li class="nav-item">
-                                <%= link_to "Carbon Capture",
-                                    farm_soil_performance_path(@farm, carbon_captured: true),
+                            <li>
+                                <%= link_to "Parcel Data",
+                                    farm_soil_performance_path(@farm, parcel_data: "SOC"),
                                     class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
-                        </ul>
-                    </div>
-                    <div class="card-body carbon-chart-card-body pt-5">
-                        <%= column_chart @farm.lab_based_soil_test.carbon_capture_data,
-                            suffix: " g/l" %>
-                        <hr class="my-4">
-                        <p class="nunito-font px-2">
-                            The soil carbon contained in each of your soil parcels.
-                        </p>
-                    </div>
-                </div>
-                <% else %>
-                <div class="card shadow">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <%= link_to "Raw Soil Carbon",
+                            <% else %>
+                            <li>
+                                <%= link_to "Soil Carbon",
                                     farm_soil_performance_path(@farm),
                                     class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
-                            <li class="nav-item">
-                                <%= link_to "Carbon Capture",
-                                    farm_soil_performance_path(@farm, carbon_captured: true),
+                            <li>
+                                <%= link_to "Parcel Data",
+                                    farm_soil_performance_path(@farm, parcel_data: "SOC"),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
+                            <% end %>
                         </ul>
                     </div>
                     <div class="card-body carbon-chart-card-body pt-5">
-                        <%= column_chart @farm.lab_based_soil_test.soil_carbon_bulk_density_data,
-                            suffix: " g/l" %>
-                        <hr class="my-4">
-                        <p class="nunito-font px-2">
-                            The soil carbon contained in each of your soil parcels.
-                        </p>
+                        <% if params[:parcel_data] %>
+                            <div class="row">
+                                <div class="col-10">
+                                    <%= column_chart (@farm.lab_based_soil_test.parcel_data params[:parcel_data]),
+                                        ytitle: params[:parcel_data].titleize %>
+                                </div>
+                                <div class="col-2 d-flex justify-content-center">
+                                    <div class="dropdown dropleft">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Data
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <%= link_to "SOC",
+                                                farm_soil_performance_path(@farm, parcel_data: "SOC"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Organic Matter",
+                                                farm_soil_performance_path(@farm, parcel_data: "Organic Matter"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Bulk Density",
+                                                farm_soil_performance_path(@farm, parcel_data: "Bulk Density"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "pH",
+                                                farm_soil_performance_path(@farm, parcel_data: "pH"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Soil Texture",
+                                                farm_soil_performance_path(@farm, parcel_data: "soil_texture"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Nitrogen",
+                                                farm_soil_performance_path(@farm, parcel_data: "total_soil_nitrogen"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Extractable Phosphorus",
+                                                farm_soil_performance_path(@farm, parcel_data: "extractable_phosphorus"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Extractable Potassium",
+                                                farm_soil_performance_path(@farm, parcel_data: "extractable_potassium"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "CatIon Exchange Capacity",
+                                                farm_soil_performance_path(@farm, parcel_data: "cation_exchange_capacity"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Extractable Micronutrients",
+                                                farm_soil_performance_path(@farm, parcel_data: "extractable_micronutrients"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Active Carbon",
+                                                farm_soil_performance_path(@farm, parcel_data: "active_carbon_PoXC"),
+                                                class: "dropdown-item" %>
+                                            <%= link_to "Water Holding Capacity",
+                                                farm_soil_performance_path(@farm, parcel_data: "water_holding_capacity"),
+                                                class: "dropdown-item" %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <hr class="my-4">
+                                    <p class="nunito-font px-2">
+                                        Please select which parcel data you want to be displayed. Hover over the bars to get exact values.
+                                    </p>
+                                </div>
+                            </div>
+                        <% else %>
+                            <%= column_chart @farm.lab_based_soil_test.parcel_soil_carbon_data %>
+                            <hr class="my-4">
+                            <p class="nunito-font px-2">
+                                The areas of your various habitat types. Please hover over the slices to get exact values.
+                            </p>
+                        <% end %>
                     </div>
                 </div>
-                <% end %>
             </div>
         </div>
     </div>

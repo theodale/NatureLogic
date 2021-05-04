@@ -3,7 +3,6 @@ class HedgerowsController < ApplicationController
     def index
         @creation = params[:creation]
         @farm = Farm.find(params[:farm_id])
-        @hedgerows = @farm.hedgerows
     end
 
     def new

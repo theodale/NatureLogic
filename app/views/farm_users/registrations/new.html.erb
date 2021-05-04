@@ -1,0 +1,49 @@
+<div class="home-background">
+    <div class="container">
+        <div class="row home-background">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="card home-card container">
+                    <div class="row h-100">
+                        <div class="col-6">
+                            <div class="d-flex h-100 align-items-center">
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-center mb-4">
+                                        <h1 class="home-text-green">NatureLogic</h1>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <img src="/pilio-logo.png" class="home-logo"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex h-100 align-items-center">
+                                <div class="container">
+                                    <div class="col-12">
+                                      <h5 class="home-text-green mb-3">Create New Farm</h5>
+                                      <%= bootstrap_form_for(resource, as: resource_name,
+                                            url: farm_user_registration_path(resource)) do |f| %>
+                                          <p>Email</p>
+                                          <%= f.email_field :email, hide_label: true, autofocus: true, autocomplete: "email" %>
+                                          <p>Password (6 characters minimum)</p>
+                                          <%= f.password_field :password, hide_label: true, autocomplete: "new-password" %>
+                                          <p>Password Confirmation</p>
+                                          <%= f.password_field :password_confirmation, hide_label: true, autocomplete: "new-password" %>
+                                          <%= f.submit "Sign up", class: "btn btn-info" %>
+                                      <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>
+
+
+
+

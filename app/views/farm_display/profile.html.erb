@@ -1,0 +1,64 @@
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4"
+                     style="background-color: #e3f2fd;">
+                    <b class="navbar-brand uppercase snapshot-navbar-title">
+                        <%= @farm.name %>
+                    </b>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-text">
+                            Farm Profile
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row px-3">
+            <div class="col-12">
+                <div class="card shadow profile-card">
+                    <div class="card-body container">
+                        <div class="row">
+                            <div class="col-6">
+                                <h3>Farm</h3>
+                                <hr>
+                                <p>Name: <b><%= @farm.name %></b><p>
+                                <p>Location: <b><%= @farm.location %></b><p>
+                                <p>Latitude: <b><%= @farm.latitude %></b><p>
+                                <p>Longitude: <b><%= @farm.longitude %></b><p>
+                                <%= link_to "Edit Farm Details",
+                                    farm_edit_details_path(
+                                        @farm,
+                                        from_profile: true
+                                    ),
+                                    class: "btn btn-info" %>
+                            </div>
+                            <div class="col-6">
+                                <h3>Estate</h3>
+                                <hr>
+                                <% if @farm.estate %>
+                                <p>
+                                    Your farm is a part of <b><%= @farm.estate.name %></b>
+                                <p>
+                                <% if @estate_user %>
+                                <%= link_to "Back To Estate",
+                                    estate_path(@farm.estate),
+                                    class: "btn btn-warning" %>
+                                <% end %>
+                                <% else %>
+                                <p>You do not belong to an estate.<p>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

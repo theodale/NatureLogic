@@ -1,11 +1,8 @@
 <div class="sidebar">
     <%= render 'shared/display_sidebar' %>
 </div>
-
 <div class="page-content">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
@@ -35,8 +32,8 @@
                             %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to "Schemes",
-                                farm_path(@farm),
+                            <%= link_to "Sustainability",
+                                farm_sustainability_performance_path(@farm),
                                 class: "nav-link"
                             %>
                         </li>
@@ -44,15 +41,13 @@
                 </nav>
             </div>
         </div>
-
         <div class="row mb-4 px-3">
-
             <div class="col-4">
                 <div class="card shadow border-primary snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Carbon Balance</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Net Emissions</div>
                                 <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.net_emissions %> kg</div>
                             </div>
                             <div class="col-auto">
@@ -61,7 +56,19 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="card shadow border-warning snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Potential Offset Revenue</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value">£ <%= @farm.potential_revenue_from_offset %></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card shadow mb-4" >
                     <div class="card-body">
                         <div class="row justify-content-center">
@@ -69,7 +76,6 @@
                                 <b>Contributions</b>
                             </div>
                         </div>
-
                         <table class="table table-hover">
                             <tr>
                                 <td class="carbon-contributions-first-row">Scope One</th>
@@ -84,12 +90,12 @@
                                 <td class="text-align-center"><%= @farm.scope_three %> kg</td>
                             </tr>
                             <tr>
-                                <td>Woodland Sequestration</th>
-                                <td class="text-align-center"><%= 1500 %> kg</td>
+                                <td>Annual Sequestration</th>
+                                <td class="text-align-center"><%= @farm.annual_sequestration %> kg</td>
                             </tr>
                             <tr>
                                 <td>Farmland Sequestration</th>
-                                <td class="text-align-center"><%= 2000 %> kg</td>
+                                <td class="text-align-center"><%= @farm.farmland_sequestration %> kg</td>
                             </tr>
                             <tr>
                                 <td>Above Ground Carbon</th>
@@ -99,7 +105,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-8">
                 <div class="card shadow">
                     <div class="card-header">
@@ -158,9 +163,7 @@
                     <% if params[:scope_three] %>
                     <div class="card-body carbon-chart-card-body pt-3">
                         <%= pie_chart scope_three_hash %>
-
                         <hr class="my-4">
-
                         <p class="nunito-font px-2">
                             The various components of your scope three emissions. Values shown are in kg CO<sub>2</sub>.
                             Please hover over slices to get exact values.
@@ -168,10 +171,8 @@
                     </div>
                     <% elsif params[:sequestration_contributions] %>
                     <div class="card-body carbon-chart-card-body pt-3">
-                        <%= pie_chart @farm.sequestration_contributions %>
-
+                        <%= pie_chart @farm.sequestration_by_meta_category %>
                         <hr class="my-4">
-
                         <p class="nunito-font px-2">
                             The contributions to your total carbon sequestration made by your different types of land.
                             Values shown are in kg CO<sub>2</sub>.
@@ -182,12 +183,12 @@
                     <div class="card-body carbon-chart-card-body pt-5">
                         <%= column_chart [
                             {
-                                name: "Woodland Sequestration",
-                                data: [["Sequestration", -50000]]
+                                name: "Farmland Sequestration",
+                                data: [["Sequestration", @farm.farmland_sequestration]]
                             },
                             {
-                                name: "Farmland Sequestration",
-                                data: [["Sequestration", -40000]]
+                                name: "Annual Sequestration",
+                                data: [["Sequestration", @farm.annual_sequestration]]
                             },
                             {
                                 name: "Scope One",
@@ -202,18 +203,12 @@
                                 data: [["Emissions", @farm.scope_three]]
                             },
                             {
-                                name: "Above Ground Carbon",
-                                data: [["Above Ground Carbon", @farm.above_ground_carbon]]
-                            },
-                            {
                                 name: "Net",
-                                data: [["Balance", @farm.net_emissions - 90000]]
+                                data: [["Balance", @farm.net_emissions ]]
                             }],
                             stacked: true,
                             legend: false %>
-
                         <hr class="my-4">
-
                         <p class="nunito-font px-2">
                             An overview of the contributions to your net carbon emissions. Values shown are in kg CO<sub>2</sub>.
                             Please hover over the bars to get exact values.

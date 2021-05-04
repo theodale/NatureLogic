@@ -18,7 +18,7 @@ class SustainabilitySurveysController < ApplicationController
             @farm.create_sustainability_survey(sustainability_survey_params)
         end
         if params[:creation]
-            redirect_to farm_creation_path(:schemes_survey_details, farm_id: @farm.id)
+            redirect_to farm_creation_path(:schemes_surveys, farm_id: @farm.id)
         else
             redirect_to edit_farm_path(@farm)
         end
@@ -28,6 +28,8 @@ class SustainabilitySurveysController < ApplicationController
 
     def sustainability_survey_params
         params.require(:sustainability_survey).permit(
+            :grow_three_cover_crops,
+            :hedgerow_grass_margin,
             :crop_protection_use,
             :legumes_or_grass_cover_in_crop_rotation,
             :grow_cover_crops,

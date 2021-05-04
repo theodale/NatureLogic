@@ -1,0 +1,120 @@
+<div class="sidebar">
+    <%= render 'shared/display_sidebar' %>
+</div>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
+                    <ul class="navbar-nav mr-auto justify-content-between w-100">
+                        <li class="nav-item">
+                            <%= link_to "Carbon",
+                                farm_carbon_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Energy",
+                                farm_energy_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Soil",
+                                farm_soil_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Nature",
+                                farm_nature_performance_path(@farm),
+                                class: "nav-link"
+                            %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Sustainability",
+                                farm_sustainability_performance_path(@farm),
+                                class: "nav-link active"
+                            %>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row px-3">
+            <div class="col-4">
+                <div class="card shadow border-success snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Sustainable Practices Score</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.sustainability_survey.sustainable_practice_percentage_score %> %</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-apple-alt fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4" >
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-5 carbon-contributions-header-div justify-content-center d-flex mb-2">
+                                <b>Metrics</b>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <tr>
+                                <td class="carbon-contributions-first-row">Number of Schemes</td>
+                                <td class="carbon-contributions-first-row text-align-center">
+                                    <%= @farm.schemes_survey.participations %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CSS Completion</td>
+                                <td class="text-align-center">
+                                    <%= @farm.countryside_stewardship_survey.percentage_completion %> %
+                                </td>
+                            </tr>
+                            <tr>
+                            <td>CSS Payments</td>
+                            <td class="text-align-center">
+                                £ <%= @farm.countryside_stewardship_survey.payments %>
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <%= link_to "Graph One",
+                                    farm_sustainability_performance_path(@farm),
+                                    class: "nav-link carbon-chart-card-link nunito-font active" %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body carbon-chart-card-body pt-5">
+                        <%= column_chart [
+                            ["Test 1", 100],
+                            ["Test 2", 200],
+                            ["Test 3", 100],
+                            ["Test 4", 400],
+                        ] %>
+                        <hr class="my-4">
+                        <p class="nunito-font px-2">
+                            Holder Graph
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_094204) do
+ActiveRecord::Schema.define(version: 2021_05_04_085650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,41 @@ ActiveRecord::Schema.define(version: 2021_04_08_094204) do
     t.index ["farm_id"], name: "index_countryside_stewardship_surveys_on_farm_id"
   end
 
+  create_table "estate_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_estate_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_estate_users_on_reset_password_token", unique: true
+  end
+
+  create_table "estates", force: :cascade do |t|
+    t.bigint "estate_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "location"
+    t.index ["estate_user_id"], name: "index_estates_on_estate_user_id"
+  end
+
+  create_table "farm_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "estate_user_id"
+    t.index ["email"], name: "index_farm_users_on_email", unique: true
+    t.index ["estate_user_id"], name: "index_farm_users_on_estate_user_id"
+    t.index ["reset_password_token"], name: "index_farm_users_on_reset_password_token", unique: true
+  end
+
   create_table "farms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -161,6 +196,11 @@ ActiveRecord::Schema.define(version: 2021_04_08_094204) do
     t.float "other_spend", default: 0.0
     t.integer "number_of_sheep", default: 0
     t.integer "number_of_cows", default: 0
+    t.bigint "estate_id"
+    t.bigint "farm_user_id"
+    t.boolean "created", default: false
+    t.index ["estate_id"], name: "index_farms_on_estate_id"
+    t.index ["farm_user_id"], name: "index_farms_on_farm_user_id"
   end
 
   create_table "hedgerow_types", force: :cascade do |t|
@@ -341,18 +381,6 @@ ActiveRecord::Schema.define(version: 2021_04_08_094204) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["farm_id"], name: "index_targets_on_farm_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

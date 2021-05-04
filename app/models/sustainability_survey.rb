@@ -42,7 +42,11 @@ class SustainabilitySurvey < ApplicationRecord
             ( to_int (self.pond_dredged_five_years) ) +
             ( to_int (self.pond_shading_prevented) ) +
             ( to_int (self.no_pools_and_ponds ) )
-        (score / 39.0).round(2)
+        score
+    end
+
+    def sustainable_practice_percentage_score
+        (100 * sustainable_practice_score / 39.0).round(1)
     end
 
     private

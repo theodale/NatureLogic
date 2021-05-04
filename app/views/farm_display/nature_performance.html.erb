@@ -1,11 +1,8 @@
 <div class="sidebar">
     <%= render 'shared/display_sidebar' %>
 </div>
-
 <div class="page-content">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
@@ -24,7 +21,7 @@
                         </li>
                         <li class="nav-item">
                             <%= link_to "Soil",
-                            farm_soil_performance_path(@farm),
+                                farm_soil_performance_path(@farm),
                                 class: "nav-link"
                             %>
                         </li>
@@ -35,8 +32,8 @@
                             %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to "Schemes",
-                                farm_path(@farm),
+                            <%= link_to "Sustainability",
+                                farm_sustainability_performance_path(@farm),
                                 class: "nav-link"
                             %>
                         </li>
@@ -44,86 +41,135 @@
                 </nav>
             </div>
         </div>
-
         <div class="row px-3">
-
             <div class="col-4">
-
                 <div class="card shadow border-success snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Biodiversity Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.biodiversity_survey.biodiversity_score %> %</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.biodiversity_survey.biodiversity_percentage_score %> %</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                                <i class="fas fa-seedling fa-2x snapshot-card-value"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="card shadow border-primary snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Space For Nature Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.space_for_nature_score %> %</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.space_for_nature_score %></div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                                <i class="fas fa-leaf fa-2x snapshot-card-value"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="card shadow border-warning snapshot-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Habitat Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.defra_habitat_score %> %</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Defra Habitat Score</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.defra_habitat_score %></div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                                <i class="fas fa-tree fa-2x snapshot-card-value"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="card shadow mb-4" >
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-5 carbon-contributions-header-div justify-content-center d-flex mb-2">
+                                <b>Metrics</b>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <tr>
+                                <td class="carbon-contributions-first-row">Tree Cover</td>
+                                <td class="carbon-contributions-first-row text-align-center">
+                                    <%= tree_cover_percentage %> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nature Positive Areas</td>
+                                <td class="text-align-center">
+                                    <%= nature_positive_areas_percentage %> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Length of Hedgerow</td>
+                                <td class="text-align-center">
+                                    <%= @farm.length_of_hedgerows %> km
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-
             <div class="col-8">
                 <div class="card shadow">
+                    <% if params[:biodiversity_indicators] %>
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                            <%= link_to "Biodiversity Factors",
-                                farm_nature_performance_path(@farm),
-                                class: "nav-link carbon-chart-card-link nunito-font active" %>
+                                <%= link_to "Habitat Areas",
+                                    farm_nature_performance_path(@farm),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Biodiversity Indicators",
+                                    farm_nature_performance_path(@farm, biodiversity_indicators: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body carbon-chart-card-body pt-5">
+                    <div class="card-body carbon-chart-card-body pt-3">
                         <%= column_chart [
-                            ["Habitats", @farm.biodiversity_survey.habitat_score],
-                            ["Genetic Diversity", @farm.biodiversity_survey.genetic_diversity_score],
-                            ["Management Practices", @farm.biodiversity_survey.management_practices_score],
-                            ["Species", @farm.biodiversity_survey.species_score]] %>
-
+                            ["Habitats", @farm.biodiversity_survey.habitat_percentage_score],
+                            ["Tree Cover", tree_cover_percentage],
+                            ["Nature Positive Areas", nature_positive_areas_percentage],
+                            ["Genetic Diversity", @farm.biodiversity_survey.genetic_diversity_percentage_score]
+                        ]%>
                         <hr class="my-4">
-
                         <p class="nunito-font px-2">
-                            An overview of your biodiversity factors. Please hover over the bars to get exact values.
+                            Percentage measures of key biodiversity factors. These values are created by comparing your biodiversity information to
+                            the maximum nature positive performance your farm could achieve.
                         </p>
                     </div>
+                    <% else %>
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <%= link_to "Habitat Areas",
+                                    farm_nature_performance_path(@farm),
+                                    class: "nav-link carbon-chart-card-link nunito-font active" %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Biodiversity Indicators",
+                                    farm_nature_performance_path(@farm, biodiversity_indicators: true),
+                                    class: "nav-link carbon-chart-card-link nunito-font" %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body carbon-chart-card-body pt-3">
+                        <%= pie_chart habitat_area_data %>
+                        <hr class="my-4">
+                        <p class="nunito-font px-2">
+                            The areas of your various habitat types. Please hover over the slices to get exact values.
+                        </p>
+                    </div>
+                    <% end %>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 
 

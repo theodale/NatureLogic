@@ -18,7 +18,7 @@ class BiodiversitySurveysController < ApplicationController
             @farm.create_biodiversity_survey(biodiversity_survey_params)
         end
         if params[:creation]
-            redirect_to farm_creation_path(:sustainability_survey_details, farm_id: @farm.id)
+            redirect_to farm_creation_path(:sustainability_surveys, farm_id: @farm.id)
         else
             redirect_to edit_farm_path(@farm)
         end
@@ -54,6 +54,7 @@ class BiodiversitySurveysController < ApplicationController
             :number_of_composites
         )
     end
+
 end
 
 

@@ -9,3 +9,4 @@ require("chart.js");
 
 import "@fortawesome/fontawesome-free/js/all";
 import "../stylesheets/application";
+

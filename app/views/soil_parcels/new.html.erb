@@ -1,6 +1,6 @@
 <% if @creation %>
 <div class="sidebar">
-    <%= render 'shared/sidebar' %>
+    <%= render 'shared/farm_creation_sidebar' %>
 </div>
 <% else %>
 <div class="sidebar">
@@ -8,10 +8,10 @@
 </div>
 <% end %>
 <div class="page-content">
-    <% if @creation %>
-    <%= render 'shared/navbar' %>
-    <% end %>
     <div class="container-fluid">
+        <% if @creation %>
+        <%= render 'shared/navbar' %>
+        <% end %>
         <% if !@creation %>
         <div class="row">
             <div class="col-12">

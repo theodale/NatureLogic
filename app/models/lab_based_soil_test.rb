@@ -15,33 +15,43 @@ class LabBasedSoilTest < ApplicationRecord
         end
     end
 
-    def total_c
+    def average_bulk_density
         bulk_densities = []
         self.soil_parcels.each do |soil_parcel|
             bulk_densities << soil_parcel.bulk_density
         end
         if bulk_densities.size != 0
-            average_bulk_density = bulk_densities.sum(0.0) / bulk_densities.size
-            mean_soc = mean_SOC
-            carbon_per_metre_squared = average_bulk_density * mean_soc * 300
-            return (carbon_per_metre_squared * 3.6667 * 10000 * self.farm.total_area).round(0)
+            return average_bulk_density = bulk_densities.sum(0.0) / bulk_densities.size
         else
             return 0
         end
     end
 
-    def soil_carbon_bulk_density_data
+    def total_carbon_in_terms_of_CO2e
+        carbon_per_metre_squared = average_bulk_density * mean_SOC * 0.3
+        return (carbon_per_metre_squared * 3.6667 * 10000 * self.farm.total_area).round(1)
+    end
+
+    # Need last years SOC value (set to mean_SOC * )
+    def total_carbon_in_terms_of_CO2e_last_year
+       carbon_per_metre_squared = average_bulk_density * mean_SOC * 0.99999 * 0.3
+       return (carbon_per_metre_squared * 3.6667 * 10000 * self.farm.total_area).round(1)
+    end
+
+    # graph methods
+
+    def parcel_data name
         data = []
         self.soil_parcels.each do |soil_parcel|
-            data << [soil_parcel.name, (soil_parcel.SOC * soil_parcel.bulk_density)]
+            data << [soil_parcel.name, soil_parcel[name]]
         end
         return data
     end
 
-    def carbon_capture_data
+    def parcel_soil_carbon_data
         data = []
         self.soil_parcels.each do |soil_parcel|
-            data << [soil_parcel.name, (soil_parcel.SOC * soil_parcel.bulk_density * 3.667)]
+            data << [soil_parcel.name, (soil_parcel.SOC * soil_parcel.bulk_density)]
         end
         return data
     end

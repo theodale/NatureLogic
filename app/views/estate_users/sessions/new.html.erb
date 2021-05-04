@@ -1,0 +1,47 @@
+<div class="home-background">
+    <div class="container">
+        <div class="row home-background">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="card home-card container">
+                    <div class="row h-100">
+                        <div class="col-6">
+                            <div class="d-flex h-100 align-items-center">
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-center mb-4">
+                                        <h1 class="home-text-green">NatureLogic</h1>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <img src="/pilio-logo.png" class="home-logo"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex h-100 align-items-center">
+                                <div class="container">
+                                    <div class="col-12">
+                                      <h5 class="home-text-green mb-3">Estate Login</h5>
+                                      <%= bootstrap_form_for(resource, as: resource_name,
+                                            url: estate_user_session_path(resource)) do |f| %>
+                                          <p>Email</p>
+                                          <%= f.email_field :email, autofocus: true, hide_label: true,  autocomplete: "email" %>
+                                          <p>Password</p>
+                                          <%= f.password_field :password, hide_label: true, autocomplete: "current-password" %>
+                                          <%= f.submit "Log in", class: "btn btn-info" %>
+                                      <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>
+
+
+
+

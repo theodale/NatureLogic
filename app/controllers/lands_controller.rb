@@ -3,7 +3,6 @@ class LandsController < ApplicationController
     def index
         @creation = params[:creation]
         @farm = Farm.find(params[:farm_id])
-        @lands = @farm.lands
     end
 
     def new

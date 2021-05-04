@@ -84,7 +84,15 @@ class BiodiversitySurvey < ApplicationRecord
         score
     end
 
-    def biodiversity_score
-        (((habitat_score + management_practices_score + genetic_diversity_score + species_score).to_f / 227.0) * 100).round(1)
+    def biodiversity_percentage_score
+        (((habitat_score + management_practices_score + genetic_diversity_score + species_score)/ 227.0) * 100).round(1)
+    end
+
+    def habitat_percentage_score
+        (100 * habitat_score / 65.0).round(1)
+    end
+
+    def genetic_diversity_percentage_score
+        (100 * genetic_diversity_score / 45.0).round(1)
     end
 end

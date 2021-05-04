@@ -1,0 +1,98 @@
+<div class="home-background">
+    <div class="container">
+        <div class="row home-background">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="card home-card container">
+                    <div class="row h-100">
+                        <div class="col-6">
+                            <div class="d-flex h-100 align-items-center">
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-center mb-4">
+                                        <h1 class="home-text-green">NatureLogic</h1>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <img src="/pilio-logo.png" class="home-logo"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex h-100 align-items-center">
+                                <div class="container">
+                                    <div class="col-12">
+                                        <div class="row mb-1">
+                                            <div class="col-12">
+                                                <%= link_to new_estate_user_session_path,
+                                                    class: "home-link" do %>
+                                                    <div class="d-flex justify-content-between home-text-blue home-link-content">
+                                                        <h5>Estate Login</h5>
+                                                        <i class="fas fa-arrow-alt-circle-right fa-lg home-arrow"></i>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div class="col-12">
+                                                <%= link_to new_estate_user_registration_path,
+                                                    class: "home-link" do %>
+                                                    <div class="d-flex justify-content-between home-text-blue home-link-content">
+                                                        <h5>New Estate</h5>
+                                                        <i class="fas fa-arrow-alt-circle-right fa-lg home-arrow"></i>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div class="col-12">
+                                                <%= link_to new_farm_user_session_path,
+                                                    class: "home-link" do %>
+                                                    <div class="d-flex justify-content-between home-text-blue home-link-content">
+                                                        <h5>Farm Login</h5>
+                                                        <i class="fas fa-arrow-alt-circle-right fa-lg home-arrow"></i>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div class="col-12">
+                                                <%= link_to new_farm_user_registration_path,
+                                                    class: "home-link" do %>
+                                                    <div class="d-flex justify-content-between home-text-blue home-link-content">
+                                                        <h5>New Farm</h5>
+                                                        <i class="fas fa-arrow-alt-circle-right fa-lg home-arrow"></i>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div class="col-12">
+                                                <%= link_to destroy_estate_user_session_path,
+                                                    method: :delete,
+                                                    class: "home-link" do %>
+                                                    <div class="d-flex justify-content-between home-text-blue home-link-content">
+                                                        <h5>Logout Estate</h5>
+                                                        <i class="fas fa-arrow-alt-circle-right fa-lg home-arrow"></i>
+                                                    </div>
+                                                <% end %>
+                                                <%= link_to destroy_farm_user_session_path,
+                                                    method: :delete,
+                                                    class: "home-link" do %>
+                                                    <div class="d-flex justify-content-between home-text-blue home-link-content">
+                                                        <h5>Logout Farm</h5>
+                                                        <i class="fas fa-arrow-alt-circle-right fa-lg home-arrow"></i>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>

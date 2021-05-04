@@ -1,20 +1,10 @@
 class FarmsController < ApplicationController
-    def index
-        if params[:destroy]
-            farm = Farm.find(params[:farm_id])
-            farm.destroy
-            redirect_to farms_path
-        end
-        @farms = Farm.all
-    end
 
-    def create
-        @farm = Farm.new(farm_params)
-        if @farm.save
-            redirect_to farm_creation_path(:energy_details, farm_id: @farm.id)
-        else
-          render :new
-        end
+    #estate -> add_farm, create_farm in estates controller
+    #farm -> farm_creation_controller with new_farm = true
+
+    def index
+        @farms = Farm.all
     end
 
     def new
@@ -22,26 +12,42 @@ class FarmsController < ApplicationController
         @creation = true
     end
 
+    def create
+        @farm = Farm.new(farm_params)
+        if @farm.save
+            redirect_to farm_creation_path(:start, request.params)
+        else
+          render :new
+        end
+    end
+
     def show
         @farm = Farm.find(params[:id])
-        redirect_to farm_snapshot_path(@farm)
-        # @farm.lands.each do |land|
-        #     # create if doesn't exist
-        #     request.query_parameters[land.id.to_s] = 0 if !request.query_parameters[land.id.to_s]
-        #     # update request.query_parameters[land.id]
-        #     if request.query_parameters[:from_land_id] == land.id.to_s
-        #         logger.debug "True"
-        #         request.query_parameters[land.id.to_s] = request.query_parameters[land.id.to_s].to_i - 1
-        #     elsif request.query_parameters[:to_land_id] == land.id.to_s
-        #         logger.debug "Else"
-        #         request.query_parameters[land.id.to_s] = request.query_parameters[land.id.to_s].to_i + 1
-        #     end
-        # end
-        # @farm.perform_interventions(request.query_parameters)
+        if @farm.created
+            redirect_to farm_snapshot_path(@farm)
+        else
+            redirect_to farm_creation_path(:start, farm_id: @farm.id)
+        end
     end
 
     def edit
         @farm = Farm.find(params[:id])
+    end
+
+    def update
+        @farm = Farm.find(params[:id])
+        @farm.update(farm_params)
+        if params[:from_profile]
+            redirect_to farm_profile_path
+        else
+            redirect_to edit_farm_path
+        end
+    end
+
+    def destroy
+        @farm = Farm.find(params[:id])
+        @farm.destroy
+        redirect_to farms_path
     end
 
     def edit_details
@@ -59,18 +65,6 @@ class FarmsController < ApplicationController
 
     def edit_livestock
         @farm = Farm.find(params[:farm_id])
-    end
-
-    def destroy
-        @farm = Farm.find(params[:id])
-        @farm.destroy
-        redirect_to farms_path
-    end
-
-    def update
-        @farm = Farm.find(params[:id])
-        @farm.update(farm_params)
-        redirect_to edit_farm_path
     end
 
     private
@@ -96,9 +90,3 @@ class FarmsController < ApplicationController
     end
 
 end
-
-
-
-# steps :farm_details, :energy_details, :resource_details, :livestock_details, :land_details, :hedgerow_details, :habitat_details, :genetic_diversity_details,
-# :crop_protection_use_details, :soil_health_details, :organic_matter_details, :grassland_measures_details, :hedgerow_practices_details,
-# :rivers_and_streams_details, :pools_and_ponds_details, :species_details, :targets_details

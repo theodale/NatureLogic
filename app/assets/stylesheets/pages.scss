@@ -1,0 +1,30 @@
+.home-background {
+    background-color: #23a776;
+}
+
+.home-text-green {
+    color: #23a776;
+}
+
+.home-text-blue {
+    color: fade-out(blue, 0.4);
+}
+
+.home-card {
+    height: 450px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.home-link:hover {
+    text-decoration: none;
+}
+
+.home-link-content:hover {
+    color: fade-out(blue, 0.1);
+}
+
+.home-logo {
+    width: 200px;
+}
+
