@@ -25,11 +25,14 @@
                                       <%= bootstrap_form_for(resource, as: resource_name,
                                             url: farm_user_registration_path(resource)) do |f| %>
                                           <p>Email</p>
-                                          <%= f.email_field :email, hide_label: true, autofocus: true, autocomplete: "email" %>
+                                          <%= f.email_field :email, hide_label: true,
+                                                autofocus: true, autocomplete: "email" %>
                                           <p>Password (6 characters minimum)</p>
-                                          <%= f.password_field :password, hide_label: true, autocomplete: "new-password" %>
+                                          <%= f.password_field :password, hide_label: true,
+                                                autocomplete: "new-password" %>
                                           <p>Password Confirmation</p>
-                                          <%= f.password_field :password_confirmation, hide_label: true, autocomplete: "new-password" %>
+                                          <%= f.password_field :password_confirmation, hide_label: true,
+                                                autocomplete: "new-password" %>
                                           <%= f.submit "Sign up", class: "btn btn-info" %>
                                       <% end %>
                                     </div>

@@ -1,4 +1,5 @@
 class CountrysideStewardshipSurvey < ApplicationRecord
+
     belongs_to :farm
 
     def payments
@@ -28,7 +29,7 @@ class CountrysideStewardshipSurvey < ApplicationRecord
         total += 501 if self.buffering_in_field_ponds_and_ditches_on_arable_land
         # No payment data for tree planting
         # total +=  if self.tree_planting
-        total
+        return total
     end
 
     def percentage_completion
@@ -44,7 +45,7 @@ class CountrysideStewardshipSurvey < ApplicationRecord
                 total += 1
             end
         end
-        (100 * total / attributes.size.to_f).round(1)
+        return (100 * total / attributes.size.to_f).round(1)
     end
 
 end

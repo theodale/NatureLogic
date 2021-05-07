@@ -7,11 +7,7 @@ class FarmCreationController < ApplicationController
     :targets
 
     def show
-        if (params[:id] == "start") and params[:new_farm]
-            @farm = Farm.create(farm_user_id: current_farm_user.id)
-        else
-            @farm = Farm.find(params[:farm_id])
-        end
+        @farm = Farm.find(params[:farm_id])
         if params[:id] == "lands"
             redirect_to farm_lands_path(@farm, creation: true)
         elsif params[:id] == "hedgerows"

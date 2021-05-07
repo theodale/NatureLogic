@@ -1,18 +1,9 @@
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Upload and Edit Farm Information
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/navbar', section: "Upload and Edit Farm Information" %>
             </div>
         </div>
         <div class="row mb-2 px-3">
@@ -59,7 +50,8 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to farm_edit_energy_usage_path(@farm), class: "edit-link" do %>
+                            <%= link_to farm_edit_energy_usage_path(@farm),
+                                class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     Energy Usage
                                 </div>
@@ -85,7 +77,8 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to edit_farm_biodiversity_survey_path(@farm), class: "edit-link" do %>
+                            <%= link_to edit_farm_biodiversity_survey_path(@farm),
+                                class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     Biodiversity Survey
                                 </div>
@@ -120,14 +113,16 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to edit_farm_lab_based_soil_test_path(@farm), class: "edit-link" do %>
+                            <%= link_to edit_farm_lab_based_soil_test_path(@farm),
+                                class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     Lab-Based Soil Test
                                 </div>
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to edit_farm_in_field_soil_test_path(@farm), class: "edit-link" do %>
+                            <%= link_to edit_farm_in_field_soil_test_path(@farm),
+                                class: "edit-link" do %>
                                 <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
                                     In-Field Soil Test
                                 </div>

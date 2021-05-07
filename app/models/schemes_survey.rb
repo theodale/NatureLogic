@@ -1,4 +1,5 @@
 class SchemesSurvey < ApplicationRecord
+
     belongs_to :farm
 
     def participations
@@ -16,7 +17,7 @@ class SchemesSurvey < ApplicationRecord
                 total += 1
             end
         end
-        total + self.conservation_projects_number + self.landscape_networks_number
+        return total + self.conservation_projects_number + self.landscape_networks_number
     end
 
 end

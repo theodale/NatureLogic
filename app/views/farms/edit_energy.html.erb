@@ -1,37 +1,32 @@
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Edit Energy Details
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/navbar', section: "Edit Energy Usage" %>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card shadow form-card">
                     <div class="card-body form-card-body">
-                        <%= bootstrap_form_with model: @farm, url: farm_path(@farm), method: :put, class: "w-100 h-100" do |f| %>
+                        <%= bootstrap_form_with model: @farm, url: farm_path(@farm),
+                            method: :put, class: "w-100 h-100" do |f| %>
                             <div class="d-flex flex-column justify-content-between h-100">
                                 <div>
                                     <%= f.text_field :total_diesel_use, step: :any, label: "Diesel Use (l)" %>
                                     <%= f.number_field :total_gas_use, step: :any, label: "Gas Use (kWh)" %>
-                                    <%= f.number_field :total_electricity_use, step: :any, label: "Electricity Use (kWh)" %>
+                                    <%= f.number_field :total_electricity_use,
+                                        step: :any, label: "Electricity Use (kWh)" %>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <%= link_to "Back", edit_farm_path(@farm), class: "btn btn-default btn-danger" %>
+                                        <%= link_to "Back",
+                                            edit_farm_path(@farm),
+                                            class: "btn btn-default btn-danger" %>
                                     </div>
                                     <div>
-                                        <%= f.submit "Save Changes", data: { turbolinks: false }, class: "btn btn-default btn-primary" %>
+                                        <%= f.submit "Save Changes", class: "btn btn-default btn-primary" %>
                                     </div>
                                 </div>
                             </div>

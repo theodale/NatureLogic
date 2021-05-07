@@ -1,44 +1,9 @@
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <ul class="navbar-nav mr-auto justify-content-between w-100">
-                        <li class="nav-item">
-                            <%= link_to "Carbon",
-                                farm_carbon_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Energy",
-                                farm_energy_performance_path(@farm),
-                                class: "nav-link active"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Soil",
-                                farm_soil_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Nature",
-                                farm_nature_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Sustainability",
-                                farm_sustainability_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/performance/navbar', section: "Energy" %>
             </div>
         </div>
         <div class="row px-3">
@@ -47,8 +12,12 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Total Energy Use</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.scope_one + @farm.scope_two %> kWh</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">
+                                    Total Energy Use
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value">
+                                    <%= @farm.scope_one + @farm.scope_two %> kWh
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-burn fa-2x snapshot-card-value"></i>
@@ -66,15 +35,21 @@
                         <table class="table table-hover">
                             <tr>
                                 <td class="carbon-contributions-first-row">Diesel</th>
-                                <td class="carbon-contributions-first-row text-align-center"><%= @farm.total_diesel_use*0.25278 %> kgCO<sub>2</sub></td>
+                                <td class="carbon-contributions-first-row text-align-center">
+                                    <%= @farm.total_diesel_use*0.25278 %> kgCO<sub>2</sub>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Gas</th>
-                                <td class="text-align-center"><%= @farm.total_gas_use*0.18387 %> kgCO<sub>2</sub></td>
+                                <td class="text-align-center">
+                                    <%= @farm.total_gas_use*0.18387 %> kgCO<sub>2</sub>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Electricity</th>
-                                <td class="text-align-center"><%= @farm.total_electricity_use*0.23314 %> kgCO<sub>2</sub></td>
+                                <td class="text-align-center">
+                                    <%= @farm.total_electricity_use*0.23314 %> kgCO<sub>2</sub>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -86,7 +61,7 @@
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
                                 <%= link_to "Energy Sources",
-                                    farm_carbon_performance_path(@farm),
+                                    farm_carbon_path(@farm),
                                     class: "nav-link active nunito-font" %>
                             </li>
                         </ul>

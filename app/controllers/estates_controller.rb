@@ -9,12 +9,8 @@ class EstatesController < ApplicationController
   end
 
   def create
-    @estate = Estate.new(estate_params)
-    if @estate.save
-      redirect_to estate_path(@estate)
-    else
-      render :new
-    end
+    @estate = Estate.create(estate_params)
+    redirect_to estate_path(@estate)
   end
 
   def update
@@ -28,23 +24,15 @@ class EstatesController < ApplicationController
     @farm = @estate.farms.build
   end
 
-  def create_farm
-    farm = Farm.create(farm_params)
-    redirect_to estate_path(current_estate_user.estate)
-  end
-
   def add_farm_user
     @estate = Estate.find(params[:estate_id])
-    @current_estate_user = current_estate_user
     @farm = Farm.find(params[:farm_id])
+    @farm_user = FarmUser.new
   end
 
   def create_farm_user
-    farm_user = FarmUser.new(farm_params)
-    farm_user.save(validate: false)
-    farm = Farm.find(params[:farm_id])
-    farm.farm_user_id = farm_user.id
-    farm.save
+    @farm_user = FarmUser.create(farm_user_params)
+    Farm.find(params[:farm_id]).update(farm_user_id: @farm_user.id)
     redirect_to estate_path(current_estate_user.estate)
   end
 
@@ -64,6 +52,14 @@ class EstatesController < ApplicationController
       :location,
       :latitude,
       :longitude
+    )
+  end
+
+  def farm_user_params
+    params.require(:farm_user).permit(
+      :email,
+      :password,
+      :password_confirmation
     )
   end
 

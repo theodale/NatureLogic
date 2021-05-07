@@ -1,5 +1,7 @@
 class LandType < ApplicationRecord
+
     def to_s
-        self.category
+        return self.category
     end
+
 end

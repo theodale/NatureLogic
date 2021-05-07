@@ -1,44 +1,9 @@
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <ul class="navbar-nav mr-auto justify-content-between w-100">
-                        <li class="nav-item">
-                            <%= link_to "Carbon",
-                                farm_carbon_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Energy",
-                                farm_energy_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Soil",
-                                farm_soil_performance_path(@farm),
-                                class: "nav-link active"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Nature",
-                                farm_nature_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Sustainability",
-                                farm_sustainability_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/performance/navbar', section: "Soil" %>
             </div>
         </div>
         <div class="row px-3">
@@ -47,8 +12,12 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Soil Health Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.in_field_soil_test.soil_health_score %> %</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">
+                                    Soil Health Score
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value">
+                                    <%= @farm.in_field_soil_test.soil_health_score %> %
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-industry fa-2x snapshot-card-value"></i>
@@ -60,8 +29,12 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Mean SOC</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.lab_based_soil_test.mean_SOC%> %</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">
+                                    Mean SOC
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value">
+                                    <%= @farm.lab_based_soil_test.mean_SOC%> %
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-industry fa-2x snapshot-card-value"></i>
@@ -79,39 +52,57 @@
                         <table class="table table-hover">
                             <tr>
                                 <td class="carbon-contributions-first-row">Compaction</th>
-                                <td class="carbon-contributions-first-row text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_compaction %> </td>
+                                <td class="carbon-contributions-first-row text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_compaction %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Crusting</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_crusting %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_crusting %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Diversity of Macro-Life</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_diversity_of_macro_life %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_diversity_of_macro_life %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Ponding</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_ponding %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_ponding %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Plant Health</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_plant_health %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_plant_health %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Root Growth</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_root_growth %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_root_growth %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Aggregate Stability</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_aggregate_stability %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_aggregate_stability %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Soil Colour</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_soil_colour %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_soil_colour %>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Soil Smell</th>
-                                <td class="text-align-center"><%= soil_health_traffic_light @farm.in_field_soil_test.average_soil_smell %></td>
+                                <td class="text-align-center">
+                                    <%= soil_health_traffic_light @farm.in_field_soil_test.average_soil_smell %>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -124,23 +115,23 @@
                             <% if params[:parcel_data] %>
                             <li class="nav-item">
                                 <%= link_to "Soil Carbon",
-                                    farm_soil_performance_path(@farm),
+                                    farm_soil_path(@farm),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <li>
                                 <%= link_to "Parcel Data",
-                                    farm_soil_performance_path(@farm, parcel_data: "SOC"),
+                                    farm_soil_path(@farm, parcel_data: "SOC"),
                                     class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
                             <% else %>
                             <li>
                                 <%= link_to "Soil Carbon",
-                                    farm_soil_performance_path(@farm),
+                                    farm_soil_path(@farm),
                                     class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
                             <li>
                                 <%= link_to "Parcel Data",
-                                    farm_soil_performance_path(@farm, parcel_data: "SOC"),
+                                    farm_soil_path(@farm, parcel_data: "SOC"),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <% end %>
@@ -155,45 +146,46 @@
                                 </div>
                                 <div class="col-2 d-flex justify-content-center">
                                     <div class="dropdown dropleft">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Data
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <%= link_to "SOC",
-                                                farm_soil_performance_path(@farm, parcel_data: "SOC"),
+                                                farm_soil_path(@farm, parcel_data: "SOC"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Organic Matter",
-                                                farm_soil_performance_path(@farm, parcel_data: "Organic Matter"),
+                                                farm_soil_path(@farm, parcel_data: "Organic Matter"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Bulk Density",
-                                                farm_soil_performance_path(@farm, parcel_data: "Bulk Density"),
+                                                farm_soil_path(@farm, parcel_data: "Bulk Density"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "pH",
-                                                farm_soil_performance_path(@farm, parcel_data: "pH"),
+                                                farm_soil_path(@farm, parcel_data: "pH"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Soil Texture",
-                                                farm_soil_performance_path(@farm, parcel_data: "soil_texture"),
+                                                farm_soil_path(@farm, parcel_data: "soil_texture"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Nitrogen",
-                                                farm_soil_performance_path(@farm, parcel_data: "total_soil_nitrogen"),
+                                                farm_soil_path(@farm, parcel_data: "total_soil_nitrogen"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Extractable Phosphorus",
-                                                farm_soil_performance_path(@farm, parcel_data: "extractable_phosphorus"),
+                                                farm_soil_path(@farm, parcel_data: "extractable_phosphorus"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Extractable Potassium",
-                                                farm_soil_performance_path(@farm, parcel_data: "extractable_potassium"),
+                                                farm_soil_path(@farm, parcel_data: "extractable_potassium"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "CatIon Exchange Capacity",
-                                                farm_soil_performance_path(@farm, parcel_data: "cation_exchange_capacity"),
+                                                farm_soil_path(@farm, parcel_data: "cation_exchange_capacity"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Extractable Micronutrients",
-                                                farm_soil_performance_path(@farm, parcel_data: "extractable_micronutrients"),
+                                                farm_soil_path(@farm, parcel_data: "extractable_micronutrients"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Active Carbon",
-                                                farm_soil_performance_path(@farm, parcel_data: "active_carbon_PoXC"),
+                                                farm_soil_path(@farm, parcel_data: "active_carbon_PoXC"),
                                                 class: "dropdown-item" %>
                                             <%= link_to "Water Holding Capacity",
-                                                farm_soil_performance_path(@farm, parcel_data: "water_holding_capacity"),
+                                                farm_soil_path(@farm, parcel_data: "water_holding_capacity"),
                                                 class: "dropdown-item" %>
                                         </div>
                                     </div>

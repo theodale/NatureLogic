@@ -1,44 +1,9 @@
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <ul class="navbar-nav mr-auto justify-content-between w-100">
-                        <li class="nav-item">
-                            <%= link_to "Carbon",
-                                farm_carbon_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Energy",
-                                farm_energy_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Soil",
-                                farm_soil_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Nature",
-                                farm_nature_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Sustainability",
-                                farm_sustainability_performance_path(@farm),
-                                class: "nav-link active"
-                            %>
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/performance/navbar', section: "Sustainability" %>
             </div>
         </div>
         <div class="row px-3">
@@ -47,8 +12,12 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Sustainable Practices Score</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.sustainability_survey.sustainable_practice_percentage_score %> %</div>
+                                <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">
+                                    Sustainable Practices Score
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value">
+                                    <%= @farm.sustainability_survey.sustainable_practice_percentage_score %> %
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-apple-alt fa-2x snapshot-card-value"></i>
@@ -92,7 +61,7 @@
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
                                 <%= link_to "Graph One",
-                                    farm_sustainability_performance_path(@farm),
+                                    farm_sustainability_path(@farm),
                                     class: "nav-link carbon-chart-card-link nunito-font active" %>
                             </li>
                         </ul>

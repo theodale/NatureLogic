@@ -1,24 +1,34 @@
 Rails.application.routes.draw do
-  get 'pages/home'
+
   devise_for :estate_users, controllers: { sessions: "sessions", registrations: "registrations" }
   devise_for :farm_users, controllers: { sessions: "sessions", registrations: "registrations" }
   devise_for :admin_users, ActiveAdmin::Devise.config
+
   ActiveAdmin.routes(self)
+
+  # Pages
+  root 'pages#home'
+  get 'pages/home'
+
+  # Estates
   resources :estates do
     get 'add-farm', to: 'estates#add_farm', as: 'add_farm'
-    post 'add-farm', to: 'estates#create_farm'
+    post 'add-farm', to: 'estates#create_farm', as: 'estate_add_farm'
     get 'add-farm-user', to: 'estates#add_farm_user', as: 'add_farm_user'
-    post 'add-farm-user', to: 'estates#create_farm_user'
+    post 'add-farm-user', to: 'estates#create_farm_user', as: 'estate_add_farm_user'
     get 'overview', to: 'estates#overview', as: 'overview'
   end
+
+  # Farms
   resources :farms do
-    get 'snapshot', to: 'farm_display#snapshot', as: 'snapshot'
-    get 'carbon-performance', to: 'farm_display#carbon_performance', as: 'carbon_performance'
-    get 'energy-performance', to: 'farm_display#energy_performance', as: 'energy_performance'
-    get 'nature-performance', to: 'farm_display#nature_performance', as: 'nature_performance'
-    get 'sustainability-performance', to: 'farm_display#sustainability_performance', as: 'sustainability_performance'
-    get 'soil-performance', to: 'farm_display#soil_performance', as: 'soil_performance'
-    get 'profile', to: 'farm_display#profile', as: 'profile'
+    get 'snapshot', to: 'farms#snapshot', as: 'snapshot'
+    get 'carbon', to: 'farms#carbon', as: 'carbon'
+    get 'energy', to: 'farms#energy', as: 'energy'
+    get 'nature', to: 'farms#nature', as: 'nature'
+    get 'sustainability', to: 'farms#sustainability', as: 'sustainability'
+    get 'soil', to: 'farms#soil', as: 'soil'
+    get 'strategy', to: 'farms#strategy', as: 'strategy'
+    get 'profile', to: 'farms#profile', as: 'profile'
     get 'edit-details', to: 'farms#edit_details', as: 'edit_details'
     get 'edit-energy-usage', to: 'farms#edit_energy', as: 'edit_energy_usage'
     get 'edit-resources', to: 'farms#edit_resources', as: 'edit_resources'
@@ -37,7 +47,9 @@ Rails.application.routes.draw do
       resources :soil_samples
     end
   end
+
+  # Farm Creation
   resources :farm_creation
-  root 'pages#home'
-  post 'farms/:id', to: 'farms#show'
+  get 'farm-user-create-farm', to: 'farms#create', as: 'farm_user_create_farm'
+
 end

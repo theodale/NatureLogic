@@ -1,18 +1,9 @@
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Snapshot Overview
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/navbar', section: "Snapshot Overview" %>
             </div>
         </div>
         <div class="row mb-2 px-3 snapshot-row">

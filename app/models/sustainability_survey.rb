@@ -1,4 +1,5 @@
 class SustainabilitySurvey < ApplicationRecord
+
     belongs_to :farm
 
     def sustainable_practice_score
@@ -42,11 +43,11 @@ class SustainabilitySurvey < ApplicationRecord
             ( to_int (self.pond_dredged_five_years) ) +
             ( to_int (self.pond_shading_prevented) ) +
             ( to_int (self.no_pools_and_ponds ) )
-        score
+        return score
     end
 
     def sustainable_practice_percentage_score
-        (100 * sustainable_practice_score / 39.0).round(1)
+        return (100 * sustainable_practice_score / 39.0).round(1)
     end
 
     private

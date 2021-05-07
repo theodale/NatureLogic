@@ -6,7 +6,8 @@
             </div>
             <hr class="sidebar-divider"/>
             <div class="sidebar-item">
-                <%= link_to new_farm_path, class: "sidebar-link" do %>
+                <%= link_to estate_path(@current_estate_user.estate),
+                    class: "sidebar-link" do %>
                     <div class="sidebar-item-content">
                         <span>Management</span>
                         <i class="far fa-handshake sidebar-icon"></i>
@@ -14,7 +15,8 @@
                 <% end %>
             </div>
             <div class="sidebar-item">
-                <%= link_to new_farm_path, class: "sidebar-link" do %>
+                <%= link_to estate_overview_path(@current_estate_user.estate),
+                    class: "sidebar-link" do %>
                     <div class="sidebar-item-content">
                         <span>Overview</span>
                         <i class="fas fa-glasses sidebar-icon"></i>
@@ -22,7 +24,8 @@
                 <% end %>
             </div>
             <div class="sidebar-item">
-                <%= link_to farms_path, class: "sidebar-link" do %>
+                <%= link_to estate_overview_path(@current_estate_user.estate),
+                    class: "sidebar-link" do %>
                     <div class="sidebar-item-content">
                         <span>Performance</span>
                         <i class="fas fa-tachometer-alt sidebar-icon"></i>

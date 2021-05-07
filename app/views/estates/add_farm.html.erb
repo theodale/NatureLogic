@@ -1,16 +1,9 @@
-<%= render 'shared/estates_sidebar' %>
+<%= render 'shared/estates/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @estate.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            <%= @current_estate_user.email %>
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/estates/navbar' %>
             </div>
         </div>
         <div class="row">
@@ -21,7 +14,9 @@
                         <h6 class="m-0 font-weight-bold card-header-text">Add New Farm</h6>
                     </div>
                     <div class="card-body">
-                        <%= bootstrap_form_with model: @farm, class: "w-100 h-100" do |f| %>
+                        <%= bootstrap_form_with model: @farm,
+                            url: farms_path(estate: true),
+                            class: "w-100 h-100" do |f| %>
                             <div class="d-flex flex-column justify-content-between h-100">
                                 <div>
                                     <%= f.text_field :name %>

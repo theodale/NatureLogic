@@ -1,44 +1,11 @@
 <div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
+    <%= render 'shared/farms/sidebar' %>
 </div>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <ul class="navbar-nav mr-auto justify-content-between w-100">
-                        <li class="nav-item">
-                            <%= link_to "Carbon",
-                                farm_carbon_performance_path(@farm),
-                                class: "nav-link active"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Energy",
-                                farm_energy_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Soil",
-                                farm_soil_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Nature",
-                                farm_nature_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Sustainability",
-                                farm_sustainability_performance_path(@farm),
-                                class: "nav-link"
-                            %>
-                        </li>
-                    </ul>
-                </nav>
+                <%= render 'shared/farms/performance/navbar', section: "Carbon" %>
             </div>
         </div>
         <div class="row mb-4 px-3">
@@ -112,49 +79,49 @@
                             <% if params[:scope_three] %>
                             <li class="nav-item">
                             <%= link_to "Carbon Balance",
-                                farm_carbon_performance_path(@farm),
+                                farm_carbon_path(@farm),
                                 class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <li class="nav-item">
                                 <%= link_to "Scope Three",
-                                    farm_carbon_performance_path(@farm, scope_three: true),
+                                    farm_carbon_path(@farm, scope_three: true),
                                     class: "nav-link carbon-chart-card-link active nunito-font" %>
                             </li>
                             <li class="nav-item">
                                 <%= link_to "Sequestration Contributions",
-                                    farm_carbon_performance_path(@farm, sequestration_contributions: true),
+                                    farm_carbon_path(@farm, sequestration_contributions: true),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <% elsif params[:sequestration_contributions] %>
                             <li class="nav-item">
                             <%= link_to "Carbon Balance",
-                                farm_carbon_performance_path(@farm),
+                                farm_carbon_path(@farm),
                                 class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <li class="nav-item">
                                 <%= link_to "Scope Three",
-                                    farm_carbon_performance_path(@farm, scope_three: true),
+                                    farm_carbon_path(@farm, scope_three: true),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <li class="nav-item">
                                 <%= link_to "Sequestration Contributions",
-                                    farm_carbon_performance_path(@farm, sequestration_contributions: true),
+                                    farm_carbon_path(@farm, sequestration_contributions: true),
                                     class: "nav-link carbon-chart-card-link active nunito-font" %>
                             </li>
                             <% else %>
                             <li class="nav-item">
                                 <%= link_to "Carbon Balance",
-                                    farm_carbon_performance_path(@farm),
+                                    farm_carbon_path(@farm),
                                     class: "nav-link carbon-chart-card-link active nunito-font" %>
                             </li>
                             <li class="nav-item">
                                 <%= link_to "Scope Three",
-                                    farm_carbon_performance_path(@farm, scope_three: true),
+                                    farm_carbon_path(@farm, scope_three: true),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <li class="nav-item">
                                 <%= link_to "Sequestration Contributions",
-                                    farm_carbon_performance_path(@farm, sequestration_contributions: true),
+                                    farm_carbon_path(@farm, sequestration_contributions: true),
                                     class: "nav-link carbon-chart-card-link nunito-font" %>
                             </li>
                             <% end %>

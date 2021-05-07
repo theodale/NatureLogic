@@ -1,23 +1,12 @@
 class FarmsController < ApplicationController
 
-    #estate -> add_farm, create_farm in estates controller
-    #farm -> farm_creation_controller with new_farm = true
-
-    def index
-        @farms = Farm.all
-    end
-
-    def new
-        @farm = Farm.new
-        @creation = true
-    end
-
     def create
-        @farm = Farm.new(farm_params)
-        if @farm.save
-            redirect_to farm_creation_path(:start, request.params)
+        if params[:estate]
+            @farm = Farm.create(farm_params.merge(estate_id: current_estate_user.estate.id))
+            redirect_to estate_path(current_estate_user.estate)
         else
-          render :new
+            @farm = Farm.create(farm_user_id: current_farm_user.id)
+            redirect_to farm_creation_path(:start, farm_id: @farm.id)
         end
     end
 
@@ -31,7 +20,7 @@ class FarmsController < ApplicationController
     end
 
     def edit
-        @farm = Farm.find(params[:id])
+        @farm = Farm.find(params[:farm_id])
     end
 
     def update
@@ -50,24 +39,58 @@ class FarmsController < ApplicationController
         redirect_to farms_path
     end
 
+    before_action :get_farm_from_farm_id, only: [
+        :snapshot, :carbon, :energy, :nature, :soil,
+        :sustainability, :strategy, :profile,
+        :edit_details, :edit_energy, :edit_resources,
+        :edit_livestock
+    ]
+
+    # Display
+
+    def snapshot
+    end
+
+    def carbon
+    end
+
+    def energy
+    end
+
+    def nature
+    end
+
+    def soil
+    end
+
+    def sustainability
+    end
+
+    def strategy
+    end
+
+    def profile
+    end
+
+    # Edit
+
     def edit_details
-        @creation = params[:creation]
-        @farm = Farm.find(params[:farm_id])
     end
 
     def edit_energy
-        @farm = Farm.find(params[:farm_id])
     end
 
     def edit_resources
-        @farm = Farm.find(params[:farm_id])
     end
 
     def edit_livestock
-        @farm = Farm.find(params[:farm_id])
     end
 
     private
+
+    def get_farm_from_farm_id
+        @farm = Farm.find(params[:farm_id])
+    end
 
     def farm_params
         params.require(:farm).permit(
