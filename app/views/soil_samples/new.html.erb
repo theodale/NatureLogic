@@ -4,35 +4,24 @@
     ["Good", 2]
 ] %>
 <% if @creation %>
-<div class="sidebar">
-    <%= render 'shared/farm_creation_sidebar' %>
-</div>
+<%= render 'shared/farm_creation/sidebar' %>
 <% else %>
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
+<%= render 'shared/farms/sidebar' %>
 </div>
 <% end %>
 <div class="page-content">
     <div class="container-fluid">
-        <% if @creation %>
-        <%= render 'shared/navbar' %>
-        <% end %>
-        <% if !@creation %>
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Create Soil Sample
-                        </li>
-                    </ul>
-                </nav>
+                <% if @creation %>
+                <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Create Soil Sample" %>
+                <% end %>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-        <% end %>
                 <div class="card shadow form-card">
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -44,55 +33,61 @@
                             url: farm_in_field_soil_test_soil_samples_path(@farm, creation: @creation),
                             method: :post,
                             class: "w-100 h-100" do |f| %>
-                        <div class="d-flex flex-column justify-content-between h-100">
-                            <div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <p>
-                                            Please select either poor, fair, or good for each characteristic.
-                                            You will be awarded a score for each of 0, 1, or 2 respectively.
-                                            Leave as poor if not recorded.</p>
-                                        <hr>
+                            <div class="d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>
+                                                Please select either poor, fair, or good for each characteristic.
+                                                You will be awarded a score for each of 0, 1, or 2 respectively.
+                                                Leave as poor if not recorded.</p>
+                                            <hr>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <%= f.text_field :name, value: "", label: "Sample Name" %>
-                                        <%= f.collection_select :compaction, soil_scores, :last, :first, label: "Compaction" %>
-                                        <%= f.collection_select :diversity_of_macro_life,
-                                            soil_scores, :last, :first, label: "Diversity Of Macro-Life" %>
-                                        <%= f.collection_select :crusting, soil_scores, :last, :first, label: "Crusting" %>
-                                        <%= f.collection_select :ground_cover, soil_scores, :last, :first, label: "Ground Cover" %>
-                                        <%= f.collection_select :ponding, soil_scores, :last, :first, label: "Ponding" %>
-                                    </div>
-                                    <div class="col-6">
-                                        <%= f.collection_select :plant_health, soil_scores, :last, :first, label: "Plant Health" %>
-                                        <%= f.collection_select :root_growth, soil_scores, :last, :first, label: "Root Growth" %>
-                                        <%= f.collection_select :aggregate_stability,
-                                            soil_scores, :last, :first, label: "Aggregate Stability" %>
-                                        <%= f.collection_select :soil_colour, soil_scores, :last, :first, label: "Soil Colour" %>
-                                        <%= f.collection_select :soil_smell, soil_scores, :last, :first, label: "Soil Smell" %>
-                                        <div class="mt-5 d-flex justify-content-between">
-                                            <div>
-                                                <%= link_to "Back",
-                                                    edit_farm_in_field_soil_test_path(@farm, creation: @creation),
-                                                    class: "btn btn-default btn-danger" %>
-                                            </div>
-                                            <div>
-                                                <%= f.submit "Create Sample", class: "btn btn-default btn-primary" %>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <%= f.text_field :name, value: "", label: "Sample Name" %>
+                                            <%= f.collection_select :compaction, soil_scores, :last, :first,
+                                                label: "Compaction" %>
+                                            <%= f.collection_select :diversity_of_macro_life,
+                                                soil_scores, :last, :first, label: "Diversity Of Macro-Life" %>
+                                            <%= f.collection_select :crusting, soil_scores, :last, :first,
+                                                label: "Crusting" %>
+                                            <%= f.collection_select :ground_cover, soil_scores, :last, :first,
+                                                label: "Ground Cover" %>
+                                            <%= f.collection_select :ponding, soil_scores, :last, :first,
+                                                label: "Ponding" %>
+                                        </div>
+                                        <div class="col-6">
+                                            <%= f.collection_select :plant_health, soil_scores, :last, :first,
+                                                label: "Plant Health" %>
+                                            <%= f.collection_select :root_growth, soil_scores, :last, :first,
+                                                label: "Root Growth" %>
+                                            <%= f.collection_select :aggregate_stability,
+                                                soil_scores, :last, :first, label: "Aggregate Stability" %>
+                                            <%= f.collection_select :soil_colour, soil_scores, :last, :first,
+                                                label: "Soil Colour" %>
+                                            <%= f.collection_select :soil_smell, soil_scores, :last, :first,
+                                                label: "Soil Smell" %>
+                                            <div class="mt-5 d-flex justify-content-between">
+                                                <div>
+                                                    <%= link_to "Back",
+                                                        edit_farm_in_field_soil_test_path(@farm, creation: @creation),
+                                                        class: "btn btn-default btn-danger" %>
+                                                </div>
+                                                <div>
+                                                    <%= f.submit "Create Sample", class: "btn btn-default btn-primary" %>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <% end %>
                     </div>
                 </div>
-        <% if !@creation %>
             </div>
         </div>
-        <% end %>
     </div>
 </div>
 

@@ -1,5 +1,4 @@
 class SchemesSurvey < ApplicationRecord
-
     belongs_to :farm
 
     def participations

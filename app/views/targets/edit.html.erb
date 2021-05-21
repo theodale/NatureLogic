@@ -1,33 +1,21 @@
 <% if @creation %>
-<div class="sidebar">
-    <%= render 'shared/farm_creation_sidebar' %>
-</div>
+<%= render 'shared/farm_creation/sidebar' %>
 <% else %>
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <% end %>
 <div class="page-content">
     <div class="container-fluid">
-        <% if @creation %>
-        <%= render 'shared/navbar' %>
-        <% end %>
-        <% if !@creation %>
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Edit Targets
-                        </li>
-                    </ul>
-                </nav>
+                <% if @creation %>
+                <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Edit Targets" %>
+                <% end %>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-        <% end %>
                 <div class="card shadow form-card">
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -36,66 +24,64 @@
                     </div>
                     <% end %>
                     <div class="card-body form-card-body">
-                    <%= bootstrap_form_with model: @target,
-                        url: farm_target_path(@farm, creation: @creation),
-                        method: :put,
-                        class: "w-100 h-100" do |f| %>
-                        <div class="d-flex flex-column justify-content-between h-100">
-                            <div class="row">
-                                <div class="col">
-                                    <%= f.number_field :net_carbon_emission, step: :any,
-                                        label: "Net Carbon Emission (kg)" %>
-                                    <%= f.number_field :defra_habitat_score, step: :any,
-                                        label: "Defra Habitat Score" %>
-                                    <%= f.number_field :space_for_nature_score, step: :any,
-                                        label: "Space for Nature Score" %>
-                                    <%= f.number_field :countryside_stewardship_score, step: :any,
-                                        label: "Countryside Stewardship Score" %>
+                        <%= bootstrap_form_with model: @target,
+                            url: farm_target_path(@farm, creation: @creation),
+                            method: :put,
+                            class: "w-100 h-100" do |f| %>
+                            <div class="d-flex flex-column justify-content-between h-100">
+                                <div class="row">
+                                    <div class="col">
+                                        <%= f.number_field :net_carbon_emission, step: :any,
+                                            label: "Net Carbon Emission (kg)" %>
+                                        <%= f.number_field :defra_habitat_score, step: :any,
+                                            label: "Defra Habitat Score" %>
+                                        <%= f.number_field :space_for_nature_score, step: :any,
+                                            label: "Space for Nature Score" %>
+                                        <%= f.number_field :countryside_stewardship_score, step: :any,
+                                            label: "Countryside Stewardship Score" %>
+                                    </div>
+                                    <div class="col">
+                                        <%= f.number_field :biodiversity_score, step: :any,
+                                            label: "Biodiversity Score" %>
+                                        <%= f.number_field :field_based_soil_health_score, step: :any,
+                                            label: "Field-Based Soil Health Score" %>
+                                        <%= f.number_field :lab_based_soil_health_score, step: :any,
+                                            label: "Lab-Based Soil Health Score" %>
+                                        <%= f.number_field :mean_SOC, step: :any,
+                                            label: "Mean SOC" %>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <%= f.number_field :biodiversity_score, step: :any,
-                                        label: "Biodiversity Score" %>
-                                    <%= f.number_field :field_based_soil_health_score, step: :any,
-                                        label: "Field-Based Soil Health Score" %>
-                                    <%= f.number_field :lab_based_soil_health_score, step: :any,
-                                        label: "Lab-Based Soil Health Score" %>
-                                    <%= f.number_field :mean_SOC, step: :any,
-                                        label: "Mean SOC" %>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <% if @creation %>
+                                        <div>
+                                            <%= link_to "Back",
+                                                farm_creation_path(:lab_based_soil_tests, farm_id: @farm.id),
+                                                class: "btn btn-default btn-danger" %>
+                                        </div>
+                                        <div>
+                                            <%= f.submit "Complete",
+                                                class: "btn btn-default btn-primary" %>
+                                        </div>
+                                        <% else %>
+                                        <div>
+                                            <%= link_to "Back",
+                                                edit_farm_path(@farm),
+                                                class: "btn btn-default btn-danger" %>
+                                        </div>
+                                        <div>
+                                            <%= f.submit "Save Changes",
+                                                class: "btn btn-default btn-primary" %>
+                                        </div>
+                                        <% end %>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <% if @creation %>
-                                    <div>
-                                        <%= link_to "Back",
-                                            farm_creation_path(:lab_based_soil_tests, farm_id: @farm.id),
-                                            class: "btn btn-default btn-danger" %>
-                                    </div>
-                                    <div>
-                                        <%= f.submit "Complete",
-                                            class: "btn btn-default btn-primary" %>
-                                    </div>
-                                    <% else %>
-                                    <div>
-                                        <%= link_to "Back",
-                                            edit_farm_path(@farm),
-                                            class: "btn btn-default btn-danger" %>
-                                    </div>
-                                    <div>
-                                        <%= f.submit "Save Changes",
-                                            class: "btn btn-default btn-primary" %>
-                                    </div>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
+                        <% end %>
                     </div>
-                    <% end %>
                 </div>
-        <% if !@creation %>
             </div>
         </div>
-        <% end %>
     </div>
 </div>
 

@@ -1,5 +1,4 @@
 class SustainabilitySurvey < ApplicationRecord
-
     belongs_to :farm
 
     def sustainable_practice_score

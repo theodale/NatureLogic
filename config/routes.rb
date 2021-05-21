@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'add-farm-user', to: 'estates#add_farm_user', as: 'add_farm_user'
     post 'add-farm-user', to: 'estates#create_farm_user', as: 'estate_add_farm_user'
     get 'overview', to: 'estates#overview', as: 'overview'
+    get 'performance', to: 'estates#performance', as: 'performance'
   end
 
   # Farms
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
     get 'soil', to: 'farms#soil', as: 'soil'
     get 'strategy', to: 'farms#strategy', as: 'strategy'
     get 'profile', to: 'farms#profile', as: 'profile'
+    get 'create-in-timeline', to: 'farms#create_in_timeline', as: 'create_in_timeline'
     get 'edit-details', to: 'farms#edit_details', as: 'edit_details'
     get 'edit-energy-usage', to: 'farms#edit_energy', as: 'edit_energy_usage'
     get 'edit-resources', to: 'farms#edit_resources', as: 'edit_resources'

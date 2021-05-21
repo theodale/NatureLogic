@@ -13,7 +13,7 @@
                         <h6 class="m-0 font-weight-bold card-header-text">Your Farms</h6>
                     </div>
                     <div class="card-body">
-                        <% if @estate.farms.length != 0 %>
+                        <% if @estate.farm_timelines.length != 0 %>
                         <table class="table table-bordered farms-table">
                             <thead class="thead-light">
                                 <tr>
@@ -24,22 +24,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% @estate.farms.each do |farm| %>
+                                <% @estate.farm_timelines.each do |farm_timeline| %>
                                 <tr>
-                                    <td class="table-body-text name-data"><%= farm.name %></td>
-                                    <td class="table-body-text location-data"><%= farm.location %></td>
+                                    <td class="table-body-text name-data"><%= farm_timeline.initial_farm.name %></td>
+                                    <td class="table-body-text location-data"><%= farm_timeline.initial_farm.location %></td>
                                     <td class="table-body-text location-data">
-                                        <% if farm.farm_user %>
-                                            <%= farm.farm_user.email %>
+                                        <% if farm_timeline.farm_user %>
+                                            <%= farm_timeline.farm_user.email %>
                                         <% else %>
                                             <%= link_to "Add Farm Account",
-                                                estate_add_farm_user_path(@estate, farm_id: farm.id),
+                                                estate_add_farm_user_path(@estate, farm_timeline_id: farm_timeline.id),
                                                 class: "view-farm-link" %>
                                         <% end %>
                                     </td>
                                     <td class="view-action-data">
                                         <%= link_to "View",
-                                            farm_path(farm),
+                                            farm_path(farm_timeline.initial_farm),
                                             class: "view-farm-link" %>
                                     </td>
                                 </tr>
@@ -63,7 +63,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold snapshot-card-label text-success text-uppercase mb-1">Number of Farms</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @estate.farms.size %></div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @estate.farm_timelines.size %></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-tractor fa-2x snapshot-card-value"></i>

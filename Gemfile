@@ -58,3 +58,4 @@ gem "chartkick"
 gem 'devise'
 gem 'activeadmin'
 gem 'wicked'
+gem 'amoeba'

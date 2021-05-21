@@ -1,26 +1,46 @@
 class FarmsController < ApplicationController
+    before_action :get_farm_from_farm_id, only: [
+        :snapshot, :carbon, :energy, :nature, :soil,
+        :sustainability, :strategy, :profile,
+        :edit_details, :edit_energy, :edit_resources,
+        :edit_livestock, :create_in_timeline
+    ]
 
     def create
+        if current_farm_user
+            @farm_timeline = FarmTimeline.create(
+                farm_user_id: current_farm_user.id)
+            @farm = Farm.create({
+                farm_timeline_id: @farm_timeline.id,
+                year: Date.current.year.to_i})
+        else
+            @farm_timeline = FarmTimeline.create(
+                estate_id: current_estate_user.estate.id)
+            @farm = Farm.create(farm_params.merge({
+                farm_timeline_id: @farm_timeline.id,
+                year: Date.current.year.to_i}))
+        end
+        @farm.create_associations
+        @farm_timeline.update({initial_farm_id: @farm.id})
         if params[:estate]
-            @farm = Farm.create(farm_params.merge(estate_id: current_estate_user.estate.id))
             redirect_to estate_path(current_estate_user.estate)
         else
-            @farm = Farm.create(farm_user_id: current_farm_user.id)
             redirect_to farm_creation_path(:start, farm_id: @farm.id)
         end
+    end
+
+    def create_in_timeline
+        @new_farm = @farm.farm_timeline.add(params[:year], @farm.id)
+        redirect_to farm_path(@new_farm)
     end
 
     def show
         @farm = Farm.find(params[:id])
-        if @farm.created
-            redirect_to farm_snapshot_path(@farm)
-        else
-            redirect_to farm_creation_path(:start, farm_id: @farm.id)
-        end
+        redirect_to farm_snapshot_path(@farm)
     end
 
     def edit
-        @farm = Farm.find(params[:farm_id])
+        @farm = Farm.find(params[:id])
     end
 
     def update
@@ -34,21 +54,20 @@ class FarmsController < ApplicationController
     end
 
     def destroy
-        @farm = Farm.find(params[:id])
         @farm.destroy
         redirect_to farms_path
     end
 
-    before_action :get_farm_from_farm_id, only: [
-        :snapshot, :carbon, :energy, :nature, :soil,
-        :sustainability, :strategy, :profile,
-        :edit_details, :edit_energy, :edit_resources,
-        :edit_livestock
-    ]
-
     # Display
 
     def snapshot
+        if params[:skip_creation]
+            @farm.created = true
+            @farm.save
+        end
+        if !@farm.created
+            redirect_to farm_creation_path(:start, farm_id: @farm.id)
+        end
     end
 
     def carbon
@@ -70,6 +89,7 @@ class FarmsController < ApplicationController
     end
 
     def profile
+        @potential_years = @farm.farm_timeline.free_years
     end
 
     # Edit

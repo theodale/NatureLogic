@@ -6,35 +6,23 @@ wider_countryside_descriptions = [
 ]
 %>
 <% if @creation %>
-<div class="sidebar">
-    <%= render 'shared/farm_creation_sidebar' %>
-</div>
+<%= render 'shared/farm_creation/sidebar' %>
 <% else %>
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <% end %>
 <div class="page-content">
     <div class="container-fluid">
-        <% if @creation %>
-        <%= render 'shared/navbar' %>
-        <% end %>
-        <% if !@creation %>
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Edit Biodiversity Survey
-                        </li>
-                    </ul>
-                </nav>
+                <% if @creation %>
+                <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Edit Biodiversity Survey" %>
+                <% end %>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-        <% end %>
                 <div class="card shadow form-card">
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -50,37 +38,38 @@ wider_countryside_descriptions = [
                         <div class="d-flex flex-column justify-content-between h-100">
                             <div class="overflow-auto mb-2">
                                 <%= f.number_field :area_designated_for_natural_conservation,
-                                        step: :any,
-                                        label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
+                                    step: :any,
+                                    label: "Area Of Habitat Dedicated Solely To Conservation (ha)" %>
                                 <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any,
-                                        label: "Area In Existing Agri-Environmental Schemes (ha)" %>
+                                    label: "Area In Existing Agri-Environmental Schemes (ha)" %>
                                 <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any,
-                                        label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)" %>
-                                <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions, :last, :first %>
+                                    label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)" %>
+                                <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions,
+                                        :last, :first %>
                                 <%= f.number_field :number_of_crop_types, step: :any,
-                                        label: "Number of Crop Types" %>
+                                    label: "Number of Crop Types" %>
                                 <%= f.number_field :number_of_heritage_crops, step: :any,
-                                        label: "Number of Heritage Crops" %>
+                                    label: "Number of Heritage Crops" %>
                                 <%= f.number_field :number_of_livestock_breeds, step: :any,
-                                        label: "Number of Livestock Breeds" %>
+                                    label: "Number of Livestock Breeds" %>
                                 <%= f.number_field :number_of_rare_breeds, step: :any,
-                                        label: "Number of Rare Breeds" %>
+                                    label: "Number of Rare Breeds" %>
                                 <br>
                                 <div class="ml-1">
                                     <%= f.check_box :threatened_species,
-                                            label: "Are there any IUCN Red List Threatened and endemic species known to occur on your farm?" %>
+                                        label: "Are there any IUCN Red List Threatened and endemic species known to occur on your farm?" %>
                                 </div>
                                 <br>
                                 <%= f.number_field :number_of_vascular_plant_species,
-                                        label: "Number of vascular plant species" %>
+                                    label: "Number of vascular plant species" %>
                                 <%= f.number_field :number_of_wild_bee_species,
-                                        label: "Number of wild bee and bumblebee species" %>
+                                    label: "Number of wild bee and bumblebee species" %>
                                 <%= f.number_field :number_of_farmland_bird_species,
-                                        label: "Number of farmland bird species" %>
+                                    label: "Number of farmland bird species" %>
                                 <%= f.number_field :number_of_butterfly_species,
-                                        label: "Number of butterfly species" %>
+                                    label: "Number of butterfly species" %>
                                 <%= f.number_field :number_of_mammal_species,
-                                        label: "Number of mammal species" %>
+                                    label: "Number of mammal species" %>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between">
@@ -111,10 +100,8 @@ wider_countryside_descriptions = [
                     </div>
                     <% end %>
                 </div>
-        <% if !@creation %>
             </div>
         </div>
-        <% end %>
     </div>
 </div>
 

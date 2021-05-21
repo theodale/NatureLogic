@@ -1,10 +1,22 @@
 <% if @estate_user %>
     <%= render 'shared/estates/sidebar' %>
 <% elsif @farm_user %>
-<div class="sidebar">
-    <div class="sidebar-heading">
-        NatureLogic
+<div class="sidebar d-flex flex-column justify-content-between">
+    <div>
+        <div class="sidebar-heading">
+            NatureLogic
+        </div>
+        <hr class="sidebar-divider"/>
     </div>
-    <hr class="sidebar-divider"/>
+    <div class="mb-4">
+    <%= link_to destroy_farm_user_session_path,
+        method: :delete,
+        class: "sidebar-link" do %>
+        <div class="sidebar-item-content">
+            <span>Logout</span>
+            <i class="fas fa-sign-out-alt sidebar-icon"></i>
+        </div>
+    <% end %>
+    </div>
 </div>
 <% end %>

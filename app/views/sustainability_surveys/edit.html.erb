@@ -1,33 +1,21 @@
 <% if @creation %>
-<div class="sidebar">
-    <%= render 'shared/farm_creation_sidebar' %>
-</div>
+<%= render 'shared/farm_creation/sidebar' %>
 <% else %>
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <% end %>
 <div class="page-content">
     <div class="container-fluid">
-        <% if @creation %>
-        <%= render 'shared/navbar' %>
-        <% end %>
-        <% if !@creation %>
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Edit Sustainability Survey
-                        </li>
-                    </ul>
-                </nav>
+                <% if @creation %>
+                <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Edit Sustainability Survey" %>
+                <% end %>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-        <% end %>
                 <div class="card shadow form-card">
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -36,150 +24,148 @@
                     </div>
                     <% end %>
                     <div class="card-body form-card-body">
-                    <%= bootstrap_form_with model: @sustainability_survey,
-                        url: farm_sustainability_survey_path(creation: @creation),
-                        method: :put,
-                        class: "w-100 h-100" do |f| %>
-                        <div class="d-flex flex-column justify-content-between h-100">
-                            <div class="overflow-auto mb-2">
-                                <h6><b>Crop Protection</b></h6>
-                                <hr>
-                                <div class="ml-1 mt-2 mb-4">
-                                    <%= f.check_box :crop_protection_use,
-                                        label: "Do you use any crop protection methods, including those approved for organic farming?"%>
+                        <%= bootstrap_form_with model: @sustainability_survey,
+                            url: farm_sustainability_survey_path(creation: @creation),
+                            method: :put,
+                            class: "w-100 h-100" do |f| %>
+                            <div class="d-flex flex-column justify-content-between h-100">
+                                <div class="overflow-auto mb-2">
+                                    <h6><b>Crop Protection</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mt-2 mb-4">
+                                        <%= f.check_box :crop_protection_use,
+                                            label: "Do you use any crop protection methods, including those approved for organic farming?"%>
+                                    </div>
+                                    <h6 ><b>Soil Health</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mb-4">
+                                        <%= f.check_box :legumes_or_grass_cover_in_crop_rotation,
+                                            label: "Do you have legumes or grass-clover included in crop rotation?" %>
+                                        <%= f.check_box :grow_cover_crops,
+                                            label: "Do you grow cover crops?" %>
+                                        <%= f.check_box :grow_three_cover_crops,
+                                            label: "Do you grow mixtures of at least 3 species of cover crop?" %>
+                                        <%= f.check_box :soil_covered_cereal_grass_or_cover_crops,
+                                            label: "Is your soil covered between the main crops by growing cereal, grass or cover crops?" %>
+                                        <%= f.check_box :conventional_tillage,
+                                            label: "Do you use conventional tillage?" %>
+                                        <%= f.check_box :shallow_tillage,
+                                            label: "Do you use shallow tillage?" %>
+                                        <%= f.check_box :no_tillage,
+                                            label: "Do you have no tillage?" %>
+                                        <%= f.check_box :no_soil_health_measures,
+                                            { checked: false },
+                                            label: "Do you have no soil health measures?" %>
+                                    </div>
+                                    <h6><b>Organic Matter</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mb-4">
+                                        <%= f.check_box :solid_manure, label: "Do you use solid manure?" %>
+                                        <%= f.check_box :compost, label: "Do you use compost?" %>
+                                        <%= f.check_box :residues_not_removed,
+                                            label: "Do you not remove straw or crop residues from your fields?" %>
+                                        <%= f.check_box :grass_mix_incorporated,
+                                            label: "Do you incorporate cut grass/grass-clover into the soil?" %>
+                                        <%= f.check_box :organic_fertilizers_in_response,
+                                            label: "Do you only add organic fertilizers in response to demand for nutrients such as nitrogen or phosphorus, as part of a nutrient management plan?" %>
+                                        <%= f.check_box :no_organic_matter,
+                                            label: "Do you not use any organic matter?" %>
+                                    </div>
+                                    <h6><b>Grassland Measures</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mb-4">
+                                        <%= f.check_box :slurry_mineral_fertilizer_not_used,
+                                            label: "Do you not use slurry or mineral fertiliser?" %>
+                                        <%= f.check_box :bird_nests_marked,
+                                            label: "Do mark/protect your bird nests to prevent damage or trampling by livestock" %>
+                                        <%= f.check_box :extensive_grazing_only,
+                                            label: "Do you employ extensive grazing?" %>
+                                        <%= f.check_box :mowing_grazing_delayed,
+                                            label: "Do you delay mowing and grazing until the 1st of June in at least 1 ha?" %>
+                                        <%= f.check_box :refuge_areas,
+                                            label: "Do you have unmown refuge areas of at least 6m?" %>
+                                        <%= f.check_box :no_grassland_measures,
+                                            label: "Do you have no grassland-based wildlife measures?" %>
+                                    </div>
+                                    <h6><b>Hedgerow Practices</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mb-4">
+                                        <%= f.check_box :hedgerows_pruned_three_years,
+                                            label: "Are your hedgerows pruned no more than once every 3 years (or every 2 years during dormancy), with gaps filled by re-planting or laying?" %>
+                                        <%= f.check_box :hedgerow_grass_margin,
+                                            label: "Do your hedgerows have grass margins at least 2m wide?" %>
+                                        <%= f.check_box :no_hedgerows,
+                                            label: "Do you not have any hedgerows?" %>
+                                    </div>
+                                    <h6><b>Rivers and Streams</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mb-4">
+                                        <%= f.check_box :water_courses,
+                                            label: "Do you have any water courses, including rivers, streams, and ditches?" %>
+                                        <%= f.check_box :river_bank_vegetation_mowed_two_years,
+                                            label: "Is your bank vegetation mown after 1 June, at least once every two years but no more than twice a year?" %>
+                                        <%= f.check_box :river_bank_vegetation_left_standing,
+                                            label: "Do you mow in phases or leave sections of bank vegetation standing?" %>
+                                        <%= f.check_box :water_course_buffered_twelve_metres,
+                                            label: "Do you buffer your water courses by at least 12m when they are next to an open field?" %>
+                                        <%= f.check_box :water_course_cleared_regularly,
+                                            label: "If your water courses are open field drains, are they regularly cleared (every 1-3 years)?" %>
+                                        <%= f.check_box :dredge_cuttings_removed_promptly,
+                                            label: "Are your dredged material and bank cuttings removed promptly?" %>
+                                        <%= f.check_box :no_water_courses, label: "Do you have no water courses?" %>
+                                    </div>
+                                    <h6><b>Pools and Ponds</b></h6>
+                                    <hr>
+                                    <div class="ml-1 mb-4">
+                                        <%= f.check_box :pools_and_ponds, label: "Do you have any pools or ponds?" %>
+                                        <%= f.check_box :pond_ditches_buffered,
+                                            label: "Are you in-field ponds and ditches buffered?" %>
+                                        <%= f.check_box :pond_bank_vegetation_mowed_two_years,
+                                            label: "Is your pool/pond bank vegetation mowed every 1-2 years?" %>
+                                        <%= f.check_box :pond_bank_vegetation_left_standing,
+                                            label: "Do you leave parts of your pool/pond bank vegetation standing during mowing?" %>
+                                        <%= f.check_box :pond_plants_cleared_three_years,
+                                            label: "Do you clear plants from your pool/pond water once every 1-3 years?" %>
+                                        <%= f.check_box :pond_cuttings_removed_promptly,
+                                            label: "Do you promptly remove bank cuttings and clear aquatic plants?" %>
+                                        <%= f.check_box :pond_dredged_five_years,
+                                            label: "Do you dredge your pools/ponds once or twice every 5 years, with dredged material then removed?" %>
+                                        <%= f.check_box :pond_shading_prevented,
+                                            label: "Do you pollard the trees on the banksides of your pools/ponds, preventing shading?" %>
+                                        <%= f.check_box :no_pools_and_ponds, label: "Do you have no pools or ponds?" %>
+                                    </div>
                                 </div>
-                                <h6 ><b>Soil Health</b></h6>
-                                <hr>
-                                <div class="ml-1 mb-4">
-                                    <%= f.check_box :legumes_or_grass_cover_in_crop_rotation,
-                                        label: "Do you have legumes or grass-clover included in crop rotation?" %>
-                                    <%= f.check_box :grow_cover_crops,
-                                        label: "Do you grow cover crops?" %>
-                                    <%= f.check_box :grow_three_cover_crops,
-                                        label: "Do you grow mixtures of at least 3 species of cover crop?" %>
-                                    <%= f.check_box :soil_covered_cereal_grass_or_cover_crops,
-                                        label: "Is your soil covered between the main crops by growing cereal, grass or cover crops?" %>
-                                    <%= f.check_box :conventional_tillage,
-                                        label: "Do you use conventional tillage?" %>
-                                    <%= f.check_box :shallow_tillage,
-                                        label: "Do you use shallow tillage?" %>
-                                    <%= f.check_box :no_tillage,
-                                        label: "Do you have no tillage?" %>
-                                    <%= f.check_box :no_soil_health_measures,
-                                        { checked: false },
-                                        label: "Do you have no soil health measures?" %>
-                                </div>
-                                <h6><b>Organic Matter</b></h6>
-                                <hr>
-                                <div class="ml-1 mb-4">
-                                    <%= f.check_box :solid_manure, label: "Do you use solid manure?" %>
-                                    <%= f.check_box :compost, label: "Do you use compost?" %>
-                                    <%= f.check_box :residues_not_removed,
-                                        label: "Do you not remove straw or crop residues from your fields?" %>
-                                    <%= f.check_box :grass_mix_incorporated,
-                                        label: "Do you incorporate cut grass/grass-clover into the soil?" %>
-                                    <%= f.check_box :organic_fertilizers_in_response,
-                                        label: "Do you only add organic fertilizers in response to demand for nutrients such as nitrogen or phosphorus, as part of a nutrient management plan?" %>
-                                    <%= f.check_box :no_organic_matter,
-                                        label: "Do you not use any organic matter?" %>
-                                </div>
-                                <h6><b>Grassland Measures</b></h6>
-                                <hr>
-                                <div class="ml-1 mb-4">
-                                    <%= f.check_box :slurry_mineral_fertilizer_not_used,
-                                        label: "Do you not use slurry or mineral fertiliser?" %>
-                                    <%= f.check_box :bird_nests_marked,
-                                        label: "Do mark/protect your bird nests to prevent damage or trampling by livestock" %>
-                                    <%= f.check_box :extensive_grazing_only,
-                                        label: "Do you employ extensive grazing?" %>
-                                    <%= f.check_box :mowing_grazing_delayed,
-                                        label: "Do you delay mowing and grazing until the 1st of June in at least 1 ha?" %>
-                                    <%= f.check_box :refuge_areas,
-                                        label: "Do you have unmown refuge areas of at least 6m?" %>
-                                    <%= f.check_box :no_grassland_measures,
-                                        label: "Do you have no grassland-based wildlife measures?" %>
-                                </div>
-                                <h6><b>Hedgerow Practices</b></h6>
-                                <hr>
-                                <div class="ml-1 mb-4">
-                                    <%= f.check_box :hedgerows_pruned_three_years,
-                                        label: "Are your hedgerows pruned no more than once every 3 years (or every 2 years during dormancy), with gaps filled by re-planting or laying?" %>
-                                    <%= f.check_box :hedgerow_grass_margin,
-                                        label: "Do your hedgerows have grass margins at least 2m wide?" %>
-                                    <%= f.check_box :no_hedgerows,
-                                        label: "Do you not have any hedgerows?" %>
-                                </div>
-                                <h6><b>Rivers and Streams</b></h6>
-                                <hr>
-                                <div class="ml-1 mb-4">
-                                    <%= f.check_box :water_courses,
-                                        label: "Do you have any water courses, including rivers, streams, and ditches?" %>
-                                    <%= f.check_box :river_bank_vegetation_mowed_two_years,
-                                        label: "Is your bank vegetation mown after 1 June, at least once every two years but no more than twice a year?" %>
-                                    <%= f.check_box :river_bank_vegetation_left_standing,
-                                        label: "Do you mow in phases or leave sections of bank vegetation standing?" %>
-                                    <%= f.check_box :water_course_buffered_twelve_metres,
-                                        label: "Do you buffer your water courses by at least 12m when they are next to an open field?" %>
-                                    <%= f.check_box :water_course_cleared_regularly,
-                                        label: "If your water courses are open field drains, are they regularly cleared (every 1-3 years)?" %>
-                                    <%= f.check_box :dredge_cuttings_removed_promptly,
-                                        label: "Are your dredged material and bank cuttings removed promptly?" %>
-                                    <%= f.check_box :no_water_courses, label: "Do you have no water courses?" %>
-                                </div>
-                                <h6><b>Pools and Ponds</b></h6>
-                                <hr>
-                                <div class="ml-1 mb-4">
-                                    <%= f.check_box :pools_and_ponds, label: "Do you have any pools or ponds?" %>
-                                    <%= f.check_box :pond_ditches_buffered,
-                                        label: "Are you in-field ponds and ditches buffered?" %>
-                                    <%= f.check_box :pond_bank_vegetation_mowed_two_years,
-                                        label: "Is your pool/pond bank vegetation mowed every 1-2 years?" %>
-                                    <%= f.check_box :pond_bank_vegetation_left_standing,
-                                        label: "Do you leave parts of your pool/pond bank vegetation standing during mowing?" %>
-                                    <%= f.check_box :pond_plants_cleared_three_years,
-                                        label: "Do you clear plants from your pool/pond water once every 1-3 years?" %>
-                                    <%= f.check_box :pond_cuttings_removed_promptly,
-                                        label: "Do you promptly remove bank cuttings and clear aquatic plants?" %>
-                                    <%= f.check_box :pond_dredged_five_years,
-                                        label: "Do you dredge your pools/ponds once or twice every 5 years, with dredged material then removed?" %>
-                                    <%= f.check_box :pond_shading_prevented,
-                                        label: "Do you pollard the trees on the banksides of your pools/ponds, preventing shading?" %>
-                                    <%= f.check_box :no_pools_and_ponds, label: "Do you have no pools or ponds?" %>
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-between">
+                                        <% if @creation %>
+                                        <div>
+                                            <%= link_to "Back",
+                                                farm_creation_path(:biodiversity_surveys, farm_id: @farm.id),
+                                                class: "btn btn-default btn-danger" %>
+                                        </div>
+                                        <div>
+                                            <%= f.submit "Next",
+                                                class: "btn btn-default btn-primary" %>
+                                        </div>
+                                        <% else %>
+                                        <div>
+                                            <%= link_to "Back",
+                                                edit_farm_path(@farm),
+                                                class: "btn btn-default btn-danger" %>
+                                        </div>
+                                        <div>
+                                            <%= f.submit "Save Changes",
+                                                class: "btn btn-default btn-primary" %>
+                                        </div>
+                                        <% end %>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <% if @creation %>
-                                    <div>
-                                        <%= link_to "Back",
-                                            farm_creation_path(:biodiversity_surveys, farm_id: @farm.id),
-                                            class: "btn btn-default btn-danger" %>
-                                    </div>
-                                    <div>
-                                        <%= f.submit "Next",
-                                            class: "btn btn-default btn-primary" %>
-                                    </div>
-                                    <% else %>
-                                    <div>
-                                        <%= link_to "Back",
-                                            edit_farm_path(@farm),
-                                            class: "btn btn-default btn-danger" %>
-                                    </div>
-                                    <div>
-                                        <%= f.submit "Save Changes",
-                                            class: "btn btn-default btn-primary" %>
-                                    </div>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
+                        <% end %>
                     </div>
-                    <% end %>
                 </div>
-        <% if !@creation %>
             </div>
         </div>
-        <% end %>
     </div>
 </div>
 

@@ -26,8 +26,6 @@
                                 ["Emissions", @farm.total_emissions],
                                 ["Sequestration", @farm.total_sequestration],
                                 ["Net", @farm.net_emissions]],
-                                min: @farm.total_sequestration,
-                                max: @farm.total_emissions + 10000,
                                 height: "200px",
                                 library: {
                                     scales: {
@@ -43,9 +41,6 @@
                                             }
                                         }],
                                         xAxes: [{
-                                            ticks: {
-
-                                            },
                                             gridLines: {
                                                 display: false
                                             }

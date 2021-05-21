@@ -1,7 +1,7 @@
 <%= render 'shared/farm_creation/sidebar' %>
 <div class="page-content">
     <div class="container-fluid">
-    <%= render 'shared/navbar' %>
+        <%= render 'shared/farm_creation/navbar' %>
         <div class="card shadow form-card">
             <div class="card-header py-3 d-flex flex-row align-items-center">
                 <h6 class="m-0 font-weight-bold card-header-text">Farm Creation Wizard</h6>
@@ -25,6 +25,11 @@
                             <%= link_to "Begin",
                                 wizard_path(:details, farm_id: @farm.id),
                                 class: "btn btn-default btn-primary" %>
+                            <%= link_to "Skip",
+                                farm_snapshot_path(
+                                    farm_id: @farm.id,
+                                    skip_creation: true),
+                                class: "btn btn-default btn-warning ml-3" %>
                         </div>
                     </div>
                 </div>

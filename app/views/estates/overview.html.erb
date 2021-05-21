@@ -6,6 +6,128 @@
                 <%= render 'shared/estates/navbar' %>
             </div>
         </div>
+        <div class="row mb-2 px-3 snapshot-row">
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body snapshot-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Carbon
+                                <i class="fas fa-industry ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                                Carbon Balance: <b> <%= @estate.get_total(:net_emissions) %> kg </b>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-2">
+                            <%= column_chart emissions_bar_chart_data,
+                                height: "200px",
+                                library: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                display: false,
+                                            },
+                                            gridLines: {
+                                                lineWidth: 0,
+                                                zeroLineWidth: 3,
+                                                zeroLineColor: 'grey',
+                                                z: 10
+                                            }
+                                        }],
+                                        xAxes: [{
+                                            gridLines: {
+                                                display: false
+                                            }
+                                        }],
+                                    },
+                                }
+                            %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body snapshot-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Energy
+                                <i class="fas fa-bolt ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                                Usage: <b> <%= energy_usage %> kWh </b>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-2">
+                            <%= pie_chart energy_pie_chart_data,
+                                height: "200px",
+                                library: {
+                                    legend: {
+                                        position: "bottom"
+                                    }
+                                }
+                            %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body snapshot-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Nature
+                                <i class="fas fa-leaf ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                                Biodiversity Score: <b> <%= @estate.average_biodiversity_score%> % </b>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-2">
+                            <%= pie_chart habitat_pie_chart_data,
+                                height: "200px",
+                                library: {
+                                    legend: {
+                                        position: "bottom"
+                                    }
+                                }
+                            %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 px-3">
+            <div class="col-4">
+                <div class="card shadow mb-4 snapshot-overview-card">
+                    <div class="card-body snapshot-card-body">
+                        <div class="row justify-content-center mb-3">
+                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                Soil
+                                <i class="fas fa-tree ml-1"></i>
+                            </h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Soil Health Score: <b> <%= @estate.average_soil_health_score %> % </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Mean SOC: <b> <%= @estate.average_SOC  %> % </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

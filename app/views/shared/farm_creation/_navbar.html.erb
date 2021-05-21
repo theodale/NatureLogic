@@ -3,7 +3,8 @@
         <% if @estate_user %>
             <%= @estate_user.estate.name %>
         <% elsif @farm_user %>
-            <%= @farm_user.farm.name %>
+            <% farm = Farm.find(@farm_user.farm_timeline.initial_farm_id) %>
+            <%= farm.name %>
         <% end %>
     </b>
     <ul class="navbar-nav ml-auto">

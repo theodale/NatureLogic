@@ -2,9 +2,67 @@
     <b class='navbar-brand uppercase snapshot-navbar-title'>
         <%= @farm.name %>
     </b>
+    <% if @current_estate_user && current_page?(farm_snapshot_path(@farm))%>
+    <div class="container-fluid d-flex justify-content-between">
+        <ul class='navbar-nav'>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= @farm.name %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <% @current_estate_user.estate.farm_timelines.each do |farm_timeline| %>
+                        <% farm = Farm.find(farm_timeline.initial_farm_id) %>
+                        <% if farm.name != @farm.name %>
+                        <%= link_to farm.name,
+                            farm_snapshot_path(farm),
+                            class: "dropdown-item" %>
+                        <% end %>
+                    <% end %>
+                    <%= link_to "Estate",
+                        estate_overview_path(@current_estate_user.estate),
+                        class: "dropdown-item" %>
+                </div>
+            </li>
+        </ul>
+        <ul class='navbar-nav'>
+            <li class='navbar-text mr-2'>
+                <%= section %>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= @farm.year %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <% @farm.farm_timeline.farms.each do |farm| %>
+                        <%= link_to farm.year,
+                            farm_snapshot_path(farm),
+                            class: "dropdown-item" %>
+                    <% end %>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <% else %>
     <ul class='navbar-nav ml-auto'>
-        <li class='navbar-text'>
+        <li class='navbar-text mr-2'>
             <%= section %>
         </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= @farm.year %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% @farm.farm_timeline.farms.each do |farm| %>
+                    <%= link_to farm.year,
+                        farm_snapshot_path(farm),
+                        class: "dropdown-item" %>
+                <% end %>
+            </div>
+        </li>
     </ul>
+    <% end %>
 </nav>
+

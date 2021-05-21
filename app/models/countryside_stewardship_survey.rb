@@ -1,5 +1,4 @@
 class CountrysideStewardshipSurvey < ApplicationRecord
-
     belongs_to :farm
 
     def payments

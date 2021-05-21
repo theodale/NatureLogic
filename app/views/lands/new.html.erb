@@ -13,35 +13,23 @@ rotation_options = [
 ]
 %>
 <% if @creation %>
-<div class="sidebar">
-    <%= render 'shared/farm_creation_sidebar' %>
-</div>
+<%= render 'shared/farm_creation/sidebar' %>
 <% else %>
-<div class="sidebar">
-    <%= render 'shared/display_sidebar' %>
-</div>
+<%= render 'shared/farms/sidebar' %>
 <% end %>
 <div class="page-content">
     <div class="container-fluid">
-        <% if @creation %>
-        <%= render 'shared/navbar' %>
-        <% end %>
-        <% if !@creation %>
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-                    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @farm.name %></b>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="navbar-text">
-                            Add New Land
-                        </li>
-                    </ul>
-                </nav>
+                <% if @creation %>
+                <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Add New Land" %>
+                <% end %>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-        <% end %>
                 <div class="card shadow form-card">
                     <% if @creation %>
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -53,18 +41,19 @@ rotation_options = [
                             url: farm_lands_path(@farm, creation: @creation),
                             method: :post,
                             class: "w-100 h-100" do |f| %>
-                        <div class="d-flex flex-column justify-content-between h-100">
-                            <div>
-                                <%= f.collection_select :land_type_id,
-                                    LandType.all, :id, :category, {label: "Land Type"} %>
-                                <%= f.number_field :area, label: "Area (ha)"%>
-                                <%= f.collection_select :tillage_score, tillage_options, :last, :first %>
-                                <%= f.collection_select :rotation_score, rotation_options, :last, :first %>
-                                <div class="mb-4 mt-4 pl-1">
-                                    <%= f.check_box :sprayed, label: "Sprayed?" %>
+                            <div class="d-flex flex-column justify-content-between h-100">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <%= f.collection_select :land_type_id,
+                                            LandType.all, :id, :category, {label: "Land Type"} %>
+                                        <%= f.number_field :area, label: "Area (ha)"%>
+                                        <%= f.collection_select :tillage_score, tillage_options, :last, :first %>
+                                        <%= f.collection_select :rotation_score, rotation_options, :last, :first %>
+                                        <div class="mb-4 mt-4 pl-1">
+                                            <%= f.check_box :sprayed, label: "Sprayed?" %>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-between">
                                         <div>
@@ -78,13 +67,10 @@ rotation_options = [
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <% end %>
                     </div>
                 </div>
-        <% if !@creation %>
             </div>
         </div>
-        <% end %>
     </div>
 </div>

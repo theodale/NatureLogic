@@ -1,8 +1,6 @@
 class InFieldSoilTest < ApplicationRecord
-
     belongs_to :farm
     has_many :soil_samples, dependent: :destroy
-    accepts_nested_attributes_for :soil_samples
 
     def soil_health_score
         average_sample_scores = []

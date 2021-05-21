@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_04_085650) do
+ActiveRecord::Schema.define(version: 2021_05_11_134522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,16 @@ ActiveRecord::Schema.define(version: 2021_05_04_085650) do
     t.index ["estate_user_id"], name: "index_estates_on_estate_user_id"
   end
 
+  create_table "farm_timelines", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "farm_user_id"
+    t.integer "initial_farm_id"
+    t.bigint "estate_id"
+    t.index ["estate_id"], name: "index_farm_timelines_on_estate_id"
+    t.index ["farm_user_id"], name: "index_farm_timelines_on_farm_user_id"
+  end
+
   create_table "farm_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -196,11 +206,10 @@ ActiveRecord::Schema.define(version: 2021_05_04_085650) do
     t.float "other_spend", default: 0.0
     t.integer "number_of_sheep", default: 0
     t.integer "number_of_cows", default: 0
-    t.bigint "estate_id"
-    t.bigint "farm_user_id"
     t.boolean "created", default: false
-    t.index ["estate_id"], name: "index_farms_on_estate_id"
-    t.index ["farm_user_id"], name: "index_farms_on_farm_user_id"
+    t.bigint "farm_timeline_id"
+    t.integer "year"
+    t.index ["farm_timeline_id"], name: "index_farms_on_farm_timeline_id"
   end
 
   create_table "hedgerow_types", force: :cascade do |t|

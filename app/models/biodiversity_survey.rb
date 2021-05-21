@@ -1,5 +1,4 @@
 class BiodiversitySurvey < ApplicationRecord
-
     belongs_to :farm
 
     def habitat_score

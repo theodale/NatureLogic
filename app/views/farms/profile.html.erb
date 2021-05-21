@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="card shadow profile-card">
                     <div class="card-body container">
-                        <div class="row">
+                        <div class="row h-100">
                             <div class="col-6">
                                 <h3>Farm</h3>
                                 <hr>
@@ -18,28 +18,51 @@
                                 <p>Location: <b><%= @farm.location %></b><p>
                                 <p>Latitude: <b><%= @farm.latitude %></b><p>
                                 <p>Longitude: <b><%= @farm.longitude %></b><p>
-                                <%= link_to "Edit Farm Details",
-                                    farm_edit_details_path(
-                                        @farm,
-                                        from_profile: true
-                                    ),
-                                    class: "btn btn-info" %>
+                                <p>Year: <b><%= @farm.year %></b><p>
+                                <div>
+                                    <%= link_to "Edit Farm Details",
+                                        farm_edit_details_path(
+                                            @farm,
+                                            from_profile: true),
+                                        class: "btn btn-info" %>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <h3>Estate</h3>
                                 <hr>
-                                <% if @farm.estate %>
+                                <% if @farm.farm_timeline.estate %>
                                 <p>
-                                    Your farm is a part of <b><%= @farm.estate.name %></b>
+                                    Your farm is a part of <b><%= @farm.farm_timeline.estate.name %></b>
                                 <p>
                                 <% if @estate_user %>
-                                <%= link_to "Back To Estate",
-                                    estate_path(@farm.estate),
+                                <%= link_to "View Estate Page",
+                                    estate_path(@farm.farm_timeline.estate),
                                     class: "btn btn-warning" %>
                                 <% end %>
                                 <% else %>
                                 <p>You do not belong to an estate.<p>
                                 <% end %>
+                                <h3>Timeline</h3>
+                                <hr>
+                                <p>
+                                    Add farm information for another year to create a farm timeline. Please
+                                    select and click the desired year via the select year dropdown.
+                                <p>
+                                <div class="mt-2 d-flex">
+                                    <div class="dropright">
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Select Year
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <% @potential_years.each do |year| %>
+                                                <%= link_to year,
+                                                    farm_create_in_timeline_path(@farm, year: year),
+                                                    class: "dropdown-item" %>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,5 +71,7 @@
         </div>
     </div>
 </div>
+
+
 
 

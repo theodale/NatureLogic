@@ -1,7 +1,5 @@
 class Farm < ApplicationRecord
-
-    belongs_to :estate, optional: true
-    belongs_to :farm_user, optional: true
+    belongs_to :farm_timeline
     has_many :lands, dependent: :destroy
     has_many :hedgerows, dependent: :destroy
     has_one :target, dependent: :destroy
@@ -11,9 +9,64 @@ class Farm < ApplicationRecord
     has_one :countryside_stewardship_survey, dependent: :destroy
     has_one :lab_based_soil_test, dependent: :destroy
     has_one :in_field_soil_test, dependent: :destroy
-    accepts_nested_attributes_for :target
-    accepts_nested_attributes_for :lands, allow_destroy: true
-    accepts_nested_attributes_for :hedgerows, allow_destroy: true
+
+    def create_deep_copy
+        @copy = self.dup
+        @copy.created = false
+        self.lands.each do |land|
+            @copied_land = land.dup
+            @copied_land.save
+            @copy.lands << @copied_land
+        end
+        self.hedgerows.each do |hedgerow|
+            @copied_hedgerow = hedgerow.dup
+            @copied_hedgerow.save
+            @copy.hedgerows << @copied_hedgerow
+        end
+        @copied_target = self.target.dup
+        @copied_target.save
+        @copy.target = @copied_target
+        @copied_biodiversity_survey = self.biodiversity_survey.dup
+        @copied_biodiversity_survey.save
+        @copy.biodiversity_survey = @copied_biodiversity_survey
+        @copied_sustainability_survey = self.sustainability_survey.dup
+        @copied_sustainability_survey.save
+        @copy.sustainability_survey = @copied_sustainability_survey
+        @copied_schemes_survey = self.schemes_survey.dup
+        @copied_schemes_survey.save
+        @copy.schemes_survey = @copied_schemes_survey
+        @copied_countryside_stewardship_survey = self.countryside_stewardship_survey.dup
+        @copied_countryside_stewardship_survey.save
+        @copy.countryside_stewardship_survey = @copied_countryside_stewardship_survey
+        @copied_in_field_soil_test = self.in_field_soil_test.dup
+        self.in_field_soil_test.soil_samples.each do |soil_sample|
+            @copied_soil_sample = soil_sample.dup
+            @copied_soil_sample.save
+            @copied_in_field_soil_test.soil_samples << @copied_soil_sample
+        end
+        @copied_in_field_soil_test.save
+        @copy.in_field_soil_test = @copied_in_field_soil_test
+        @copied_lab_based_soil_test = self.lab_based_soil_test.dup
+        self.lab_based_soil_test.soil_parcels.each do |soil_parcel|
+            @copied_soil_parcel = soil_parcel.dup
+            @copied_soil_parcel.save
+            @copied_lab_based_soil_test.soil_parcels << @copied_soil_parcel
+        end
+        @copied_lab_based_soil_test.save
+        @copy.lab_based_soil_test = @copied_lab_based_soil_test
+        @copy.save
+        return @copy
+    end
+
+    def create_associations
+        self.create_in_field_soil_test
+        self.create_lab_based_soil_test
+        self.create_countryside_stewardship_survey
+        self.create_schemes_survey
+        self.create_sustainability_survey
+        self.create_target
+        self.create_biodiversity_survey
+    end
 
     # Carbon
 
@@ -56,8 +109,12 @@ class Farm < ApplicationRecord
 
     # Lab-based soil test sequestration
     def farmland_sequestration
-        total = self.lab_based_soil_test.total_carbon_in_terms_of_CO2e_last_year -
-            self.lab_based_soil_test.total_carbon_in_terms_of_CO2e
+        if self.lab_based_soil_test
+            total = self.lab_based_soil_test.total_carbon_in_terms_of_CO2e_last_year -
+                self.lab_based_soil_test.total_carbon_in_terms_of_CO2e
+        else
+            total = 0
+        end
         return total.round(0)
     end
 

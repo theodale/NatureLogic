@@ -21,22 +21,26 @@ class EstatesController < ApplicationController
 
   def add_farm
     @estate = Estate.find(params[:estate_id])
-    @farm = @estate.farms.build
+    @farm = Farm.new
   end
 
   def add_farm_user
     @estate = Estate.find(params[:estate_id])
-    @farm = Farm.find(params[:farm_id])
+    @farm_timeline = FarmTimeline.find(params[:farm_timeline_id])
     @farm_user = FarmUser.new
   end
 
   def create_farm_user
     @farm_user = FarmUser.create(farm_user_params)
-    Farm.find(params[:farm_id]).update(farm_user_id: @farm_user.id)
+    FarmTimeline.find(params[:farm_timeline_id]).update(farm_user_id: @farm_user.id)
     redirect_to estate_path(current_estate_user.estate)
   end
 
   def overview
+    @estate = current_estate_user.estate
+  end
+
+  def performance
     @estate = current_estate_user.estate
   end
 
