@@ -66,6 +66,7 @@ class Farm < ApplicationRecord
         self.create_sustainability_survey
         self.create_target
         self.create_biodiversity_survey
+        self.save
     end
 
     # Carbon

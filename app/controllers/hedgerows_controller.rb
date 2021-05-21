@@ -24,8 +24,7 @@ class HedgerowsController < ApplicationController
 
     def destroy
         @farm = Farm.find(params[:farm_id])
-        @hedgerow = hedgerow.find(params[:id])
-        @hedgerow.destroy
+        Hedgerow.find(params[:id]).destroy
         redirect_to farm_hedgerows_path(@farm, creation: params[:creation])
     end
 
