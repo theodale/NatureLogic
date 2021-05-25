@@ -60,14 +60,18 @@ module FarmsHelper
         end
     end
 
-    def farm_grasslands
-        grasslands = []
+    def non_woodland_farmlands
+        farmlands = []
         @farm.lands.each do |land|
+            logger.debug "TEST"
             if land.land_type.meta_category == "Grassland"
-                grasslands << land
+                farmlands << land
+            end
+            if land.land_type.meta_category == "Cropland"
+                farmlands << land
             end
         end
-        return grasslands
+        return farmlands
     end
 
     def farm_croplands
