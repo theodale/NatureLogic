@@ -86,6 +86,22 @@ class FarmsController < ApplicationController
     end
 
     def strategy
+        @current_farm_values = {
+            carbon_balance: @farm.net_emissions,
+            biodiversity_score: @farm.biodiversity_survey.biodiversity_percentage_score,
+            space_for_nature_score: @farm.space_for_nature_score,
+            defra_habitat_score: @farm.defra_habitat_score
+        }
+        interventions = params.permit!.to_h.slice(
+            :woodland_conversion,
+            :applied_interventions,
+            :hedgerow_conversion,
+            :diesel_reduction,
+            :fertiliser_reduction,
+            :green_energy_tariff,
+            :increase_soc
+        )
+        @applied_interventions = @farm.perform_interventions(interventions)
     end
 
     def profile
@@ -133,3 +149,5 @@ class FarmsController < ApplicationController
     end
 
 end
+
+

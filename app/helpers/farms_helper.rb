@@ -60,4 +60,27 @@ module FarmsHelper
         end
     end
 
+    def farm_grasslands
+        grasslands = []
+        @farm.lands.each do |land|
+            if land.land_type.meta_category == "Grassland"
+                grasslands << land
+            end
+        end
+        return grasslands
+    end
+
+    def farm_croplands
+        croplands = []
+        @farm.lands.each do |land|
+            if land.land_type.meta_category == "Cropland"
+                croplands << land
+            end
+        end
+        return croplands
+    end
+
+    def woodlands
+        return LandType.all.select {|land_type| land_type.meta_category == "Woodland"}
+    end
 end

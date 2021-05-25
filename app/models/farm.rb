@@ -9,6 +9,7 @@ class Farm < ApplicationRecord
     has_one :countryside_stewardship_survey, dependent: :destroy
     has_one :lab_based_soil_test, dependent: :destroy
     has_one :in_field_soil_test, dependent: :destroy
+    accepts_nested_attributes_for :lands, allow_destroy: true
 
     def create_deep_copy
         @copy = self.dup
@@ -169,7 +170,6 @@ class Farm < ApplicationRecord
         end
         if self.total_area != 0
             return  (total / total_area).round(1)
-
         else
             return 0
         end
@@ -191,7 +191,7 @@ class Farm < ApplicationRecord
     def tree_covered_area
         area = 0
         self.lands.each do |land|
-            if land.land_type.meta_category == "Woodland and forest"
+            if land.land_type.meta_category == "Woodland"
                 area += land.area
             end
         end
@@ -232,6 +232,121 @@ class Farm < ApplicationRecord
             area += land.area
         end
         return area
+    end
+
+    # Strategy
+
+    def perform_interventions interventions
+        # update applied_interventions
+        if interventions[:applied_interventions]
+            applied_interventions = interventions[:applied_interventions]
+        else
+            applied_interventions = {}
+        end
+        if !applied_interventions[:land_area_changes]
+            applied_interventions[:land_area_changes] = {}
+        end
+        if !applied_interventions[:new_lands]
+            applied_interventions[:new_lands] = {}
+        end
+        if interventions[:woodland_conversion]
+            target_land_id = interventions[:woodland_conversion][:target_land_id].to_s
+            woodland_type_id = interventions[:woodland_conversion][:woodland_type_id].to_s
+            if applied_interventions[:land_area_changes][target_land_id]
+                applied_interventions[:land_area_changes][target_land_id] =
+                    applied_interventions[:land_area_changes][target_land_id].to_i - 1
+            else
+                applied_interventions[:land_area_changes][target_land_id] = -1
+            end
+            if applied_interventions[:new_lands][woodland_type_id]
+                applied_interventions[:new_lands][woodland_type_id] =
+                    applied_interventions[:new_lands][woodland_type_id].to_i + 1
+            else
+                applied_interventions[:new_lands][woodland_type_id] = 1
+            end
+        end
+        if interventions[:hedgerow_conversion]
+            target_land_id = interventions[:hedgerow_conversion][:target_land_id].to_s
+            if applied_interventions[:land_area_changes][target_land_id]
+                applied_interventions[:land_area_changes][target_land_id] =
+                    applied_interventions[:land_area_changes][target_land_id].to_f - 0.002
+            else
+                applied_interventions[:land_area_changes][target_land_id] = -0.002
+            end
+            applied_interventions[:hedgerow_increase] =
+                applied_interventions[:hedgerow_increase].to_i + 1
+        end
+        if interventions[:diesel_reduction]
+            if applied_interventions[:diesel_reduction]
+                if applied_interventions[:diesel_reduction].to_i < 5
+                    applied_interventions[:diesel_reduction] =
+                        applied_interventions[:diesel_reduction].to_i + 1
+                end
+            else
+                applied_interventions[:diesel_reduction] = 1
+            end
+        end
+        if interventions[:fertiliser_reduction]
+            if applied_interventions[:fertiliser_reduction]
+                if applied_interventions[:fertiliser_reduction].to_i < 5
+                    applied_interventions[:fertiliser_reduction] =
+                        applied_interventions[:fertiliser_reduction].to_i + 1
+                end
+            else
+                applied_interventions[:fertiliser_reduction] = 1
+            end
+        end
+        if interventions[:green_energy_tariff]
+            if interventions[:green_energy_tariff] == "true"
+                applied_interventions[:green_energy_tariff] = interventions[:green_energy_tariff]
+            elsif interventions[:green_energy_tariff] == "false"
+                applied_interventions.delete(:green_energy_tariff)
+            end
+        end
+        if interventions[:increase_soc]
+            if interventions[:increase_soc] == "true"
+                applied_interventions[:increase_soc] = interventions[:increase_soc]
+            elsif interventions[:increase_soc] == "false"
+                applied_interventions.delete(:increase_soc)
+            end
+        end
+        # perform interventions
+        applied_interventions[:land_area_changes].each do |key, value|
+            self.lands.each do |land|
+                if land.id == key.to_i
+                    land.area = land.area + value.to_i
+                end
+            end
+        end
+        applied_interventions[:new_lands].each do |key, value|
+            self.lands.build({
+                farm_id: self.id,
+                land_type_id: key.to_i,
+                area: value
+            })
+        end
+        if applied_interventions[:hedgerow_conversion]
+            self.hedgerows.build({
+                farm_id: self.id,
+                hedgerow_type_id: 14,
+                length: applied_interventions[:hedgerow_conversion]
+            })
+        end
+        if applied_interventions[:diesel_reduction]
+            self.total_diesel_use = self.total_diesel_use *
+                (1 - (0.2 * applied_interventions[:diesel_reduction].to_i))
+        end
+        if applied_interventions[:fertiliser_reduction]
+            self.artificial_fertiliser_use = self.artificial_fertiliser_use *
+                (1 - (0.2 * applied_interventions[:artificial_fertiliser_use].to_i))
+        end
+        if applied_interventions[:green_energy_tariff]
+            self.total_electricity_use = 0
+        end
+        if applied_interventions[:increase_soc]
+            self.lab_based_soil_test.increased = true
+        end
+        return applied_interventions
     end
 
 end

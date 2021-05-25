@@ -8,7 +8,11 @@ class LabBasedSoilTest < ApplicationRecord
             parcels_soc << soil_parcel.SOC
         end
         if parcels_soc.size != 0
-            return (parcels_soc.sum(0.0) / parcels_soc.size).round(2)
+            if self.increased
+                return ((parcels_soc.sum(0.0) * 1.05) / parcels_soc.size).round(2)
+            else
+                return (parcels_soc.sum(0.0) / parcels_soc.size).round(2)
+            end
         else
             return 0
         end

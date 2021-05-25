@@ -6,7 +6,418 @@
                 <%= render 'shared/farms/navbar', section: "Strategy" %>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card shadow mb-4 interventions-card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-12 d-flex justify-content-center">
+                                <h5 class="m-0 font-weight-bold text-primary uppercase">
+                                    Interventions
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <b>Convert to Woodland (1 ha)</b>
+                            </div>
+                        </div>
+                        <%= bootstrap_form_with url: farm_strategy_path(@farm),
+                            method: :get, local: true do |f| %>
+                            <% if params[:habitats] %>
+                                <%= f.hidden_field :habitats, value: true %>
+                            <% end %>
+                            <%= f.fields_for 'woodland_conversion' do |wcf| %>
+                                <div class="row">
+                                    <div class="col-2 pt-2">
+                                        From
+                                    </div>
+                                    <div class="col-10">
+                                        <%= wcf.collection_select :target_land_id,
+                                            farm_grasslands, :id, :type, hide_label: true %>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2 pt-2">
+                                        To
+                                    </div>
+                                    <div class="col-10">
+                                        <%= wcf.collection_select :woodland_type_id,
+                                            woodlands, :id, :category, hide_label: true  %>
+                                    </div>
+                                </div>
+                            <% end %>
+                            <%= f.fields_for 'applied_interventions[land_area_changes]' do |aif| %>
+                                <% @applied_interventions[:land_area_changes].each do |key, value| %>
+                                    <%= aif.hidden_field key, value: value %>
+                                <% end %>
+                            <% end %>
+                            <%= f.fields_for 'applied_interventions[new_lands]' do |aif| %>
+                                <% @applied_interventions[:new_lands].each do |key, value| %>
+                                    <%= aif.hidden_field key, value: value %>
+                                <% end %>
+                            <% end %>
+                            <%= f.fields_for 'applied_interventions' do |aif| %>
+                                <%= aif.hidden_field :hedgerow_increase,
+                                    value: @applied_interventions[:hedgerow_increase] %>
+                            <% end %>
+                            <div class="row mb-1">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <%= f.submit "Convert", class: "btn btn-primary" %>
+                                </div>
+                            </div>
+                        <% end %>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <b>Cropland to Hedgerow</b>
+                            </div>
+                        </div>
+                        <%= bootstrap_form_with url: farm_strategy_path(@farm),
+                            method: :get, local: true do |f| %>
+                            <% if params[:habitats] %>
+                                <%= f.hidden_field :habitats, value: true %>
+                            <% end %>
+                            <div class="row mb-3">
+                                <div class="col-2 pt-2">
+                                    From
+                                </div>
+                                <div class="col-6">
+                                    <%= f.fields_for 'hedgerow_conversion' do |hcf| %>
+                                        <%= hcf.collection_select :target_land_id,
+                                            farm_croplands, :id, :type, hide_label: true %>
+                                    <% end %>
+                                </div>
+                                <%= f.fields_for 'applied_interventions[land_area_changes]' do |aif| %>
+                                    <% @applied_interventions[:land_area_changes].each do |key, value| %>
+                                        <%= aif.hidden_field key, value: value %>
+                                    <% end %>
+                                <% end %>
+                                <%= f.fields_for 'applied_interventions[new_lands]' do |aif| %>
+                                    <% @applied_interventions[:new_lands].each do |key, value| %>
+                                        <%= aif.hidden_field key, value: value %>
+                                    <% end %>
+                                <% end %>
+                                <%= f.fields_for 'applied_interventions' do |aif| %>
+                                    <%= aif.hidden_field :hedgerow_increase,
+                                        value: @applied_interventions[:hedgerow_increase] %>
+                                <% end %>
+                                <%= f.fields_for 'applied_interventions' do |aif| %>
+                                    <%= aif.hidden_field :diesel_reduction,
+                                        value: @applied_interventions[:diesel_reduction] %>
+                                <% end %>
+                                <%= f.fields_for 'applied_interventions' do |aif| %>
+                                    <%= aif.hidden_field :fertiliser_reduction,
+                                        value: @applied_interventions[:fertiliser_reduction] %>
+                                <% end %>
+                                <%= f.fields_for 'applied_interventions' do |aif| %>
+                                    <%= aif.hidden_field :green_energy_tariff,
+                                        value: @applied_interventions[:green_energy_tariff] %>
+                                <% end %>
+                                <%= f.fields_for 'applied_interventions' do |aif| %>
+                                    <%= aif.hidden_field :increase_soc,
+                                        value: @applied_interventions[:increase_soc] %>
+                                <% end %>
+                                <div class="col-4 d-flex justify-content-end">
+                                    <%= f.submit "+1 km Hedgerow",
+                                        class: "btn btn-success increase-hedgerow-button" %>
+                                </div>
+                            </div>
+                        <% end %>
+                        <div class="row mb-3">
+                            <div class="col-4 pt-2">
+                                <b>Diesel Usage</b>
+                            </div>
+                            <div class="col-8 d-flex justify-content-end">
+                                <%= link_to "-20%",
+                                    farm_strategy_path(@farm,
+                                        diesel_reduction: 1,
+                                        habitats: params[:habitats],
+                                        applied_interventions: @applied_interventions),
+                                    class: "btn btn-danger" %>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 pt-2">
+                                <b>Fertiliser Usage</b>
+                            </div>
+                            <div class="col-8 d-flex justify-content-end">
+                                <%= link_to "-20%",
+                                    farm_strategy_path(@farm,
+                                        fertiliser_reduction: 1,
+                                        habitats: params[:habitats],
+                                        applied_interventions: @applied_interventions),
+                                    class: "btn btn-danger" %>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4 pt-2">
+                                <b>Green Energy Tariff</b>
+                            </div>
+                            <div class="col-8 d-flex justify-content-end">
+                                <% if @applied_interventions[:green_energy_tariff] == "true" %>
+                                <%= link_to "Remove Tariff",
+                                    farm_strategy_path(@farm,
+                                        green_energy_tariff: false,
+                                        habitats: params[:habitats],
+                                        applied_interventions: @applied_interventions),
+                                    class: "btn btn-warning" %>
+                                <% else %>
+                                <%= link_to "Apply Tariff",
+                                    farm_strategy_path(@farm,
+                                        green_energy_tariff: true,
+                                        habitats: params[:habitats],
+                                        applied_interventions: @applied_interventions),
+                                    class: "btn btn-primary" %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-8 pt-2">
+                                <b>Increase SOC</b>
+                            </div>
+                            <div class="col-4 d-flex justify-content-end">
+                                <% if @applied_interventions[:increase_soc] == "true" %>
+                                <%= link_to "Cancel",
+                                    farm_strategy_path(
+                                        @farm,
+                                        habitats: params[:habitats],
+                                        increase_soc: false,
+                                        applied_interventions: @applied_interventions),
+                                    class: "btn btn-danger" %>
+                                <% else %>
+                                <%= link_to "+0.5%",
+                                    farm_strategy_path(
+                                        @farm,
+                                        habitats: params[:habitats],
+                                        increase_soc: true,
+                                        applied_interventions: @applied_interventions),
+                                    class: "btn btn-success" %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="row mb-1 mt-5">
+                            <div class="col-12 d-flex justify-content-center">
+                                <%= link_to "Reset",
+                                    farm_strategy_path(@farm),
+                                    habitats: params[:habitats],
+                                    class: "btn btn-danger" %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card shadow mb-4 interventions-card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-12 d-flex justify-content-center">
+                                <h5 class="m-0 font-weight-bold text-success uppercase">
+                                    Results
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4 d-flex justify-content-center">
+                                <b>Current</b>
+                            </div>
+                            <div class="col-4 d-flex justify-content-center">
+                                <b>With Intervention</b>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="row h-100">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                       <p class="my-auto">Carbon Balance</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                            <b><%= @current_farm_values[:carbon_balance] %> kg</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <% if @farm.net_emissions < @current_farm_values[:carbon_balance] %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center success-background">
+                                            <b><%= @farm.net_emissions %> kg</b>
+                                        </div>
+                                        <% elsif @farm.net_emissions > @current_farm_values[:carbon_balance] %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center fail-background">
+                                            <b><%= @farm.net_emissions %> kg</b>
+                                        </div>
+                                        <% else %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                            <b><%= @farm.net_emissions %> kg</b>
+                                        </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="row h-100">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                       <p class="my-auto">Space for Nature</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                            <b><%= @current_farm_values[:space_for_nature_score] %></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <% if @farm.space_for_nature_score > @current_farm_values[:space_for_nature_score] %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center success-background">
+                                            <b><%= @farm.space_for_nature_score %></b>
+                                        </div>
+                                        <% elsif @farm.space_for_nature_score < @current_farm_values[:space_for_nature_score] %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center fail-background">
+                                            <b><%= @farm.space_for_nature_score %></b>
+                                        </div>
+                                        <% else %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                            <b><%= @farm.space_for_nature_score %></b>
+                                        </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-4">
+                                <div class="row h-100">
+                                    <div class="col-12 d-flex justify-content-center align-items-center">
+                                       <p class="my-auto">Defra Habitat Score</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                            <b><%= @current_farm_values[:defra_habitat_score] %></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <% if @farm.defra_habitat_score > @current_farm_values[:defra_habitat_score] %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center success-background">
+                                            <b><%= @farm.net_emissions %></b>
+                                        </div>
+                                        <% elsif @farm.defra_habitat_score < @current_farm_values[:defra_habitat_score] %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center fail-background">
+                                            <b><%= @farm.net_emissions %></b>
+                                        </div>
+                                        <% else %>
+                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                            <b><%= @farm.defra_habitat_score %></b>
+                                        </div>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 pl-2">
+                            <% if params[:habitats] %>
+                                <%= pie_chart habitat_area_data, height: "265px" %>
+                            <% else %>
+                            <%= column_chart [
+                                {
+                                    name: "Farmland Sequestration",
+                                    data: [["Sequestration", @farm.farmland_sequestration]]
+                                },
+                                {
+                                    name: "Annual Sequestration",
+                                    data: [["Sequestration", @farm.annual_sequestration]]
+                                },
+                                {
+                                    name: "Scope One",
+                                    data: [["Emissions", @farm.scope_one]]
+                                },
+                                {
+                                    name: "Scope Two",
+                                    data: [["Emissions", @farm.scope_two]]
+                                },
+                                {
+                                    name: "Scope Three",
+                                    data: [["Emissions", @farm.scope_three]]
+                                },
+                                {
+                                    name: "Net",
+                                    data: [["Balance", @farm.net_emissions ]]
+                                }],
+                                stacked: true,
+                                legend: false,
+                                height: "265px" %>
+                            <% end %>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <nav class="navbar navbar-expand-lg navbar-light strategy-results-navbar">
+                                    <ul class="navbar-nav">
+                                        <% if params[:habitats] %>
+                                        <li class="nav-item">
+                                            <%= link_to "Carbon Balance",
+                                                farm_strategy_path(
+                                                    @farm,
+                                                    applied_interventions: @applied_interventions),
+                                                class: "nav-link" %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "Habitats",
+                                                farm_strategy_path(
+                                                    @farm,
+                                                    habitats: true,
+                                                    applied_interventions: @applied_interventions),
+                                                class: "nav-link active" %>
+                                        </li>
+                                        <% else %>
+                                        <li class="nav-item">
+                                            <%= link_to "Carbon Balance",
+                                                farm_strategy_path(
+                                                    @farm,
+                                                    applied_interventions: @applied_interventions),
+                                                class: "nav-link active" %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "Habitats",
+                                                farm_strategy_path(
+                                                    @farm,
+                                                    habitats: true,
+                                                    applied_interventions: @applied_interventions),
+                                                class: "nav-link" %>
+                                        </li>
+                                        <% end %>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-

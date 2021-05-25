@@ -207,6 +207,34 @@ th {
   background-color: #5cb85c !important;
 }
 
+.interventions-card {
+  border-radius: 25px !important;
+}
+
 .test {
   background-color: red;
+}
+
+.increase-hedgerow-button {
+  height: 70%;
+}
+
+.success-background {
+  background-color: fade-out(#1cc88a, 0.4) !important;
+}
+
+.fail-background {
+  background-color: fade-out(#e74a3b, 0.4) !important;
+}
+
+.results-graphs-card-body {
+  height: 300px;
+}
+
+.results-graphs-card {
+  border: none !important;
+}
+
+.strategy-results-navbar {
+  background-color: rgba(2, 117, 216, 0.55);
 }

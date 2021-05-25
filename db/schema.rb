@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_11_134522) do
+ActiveRecord::Schema.define(version: 2021_05_25_082943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(version: 2021_05_11_134522) do
     t.bigint "farm_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "increased", default: false
     t.index ["farm_id"], name: "index_lab_based_soil_tests_on_farm_id"
   end
 
