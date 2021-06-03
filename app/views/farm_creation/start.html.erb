@@ -1,42 +1,118 @@
 <%= render 'shared/farm_creation/sidebar' %>
 <div class="page-content">
-    <div class="container-fluid">
-        <%= render 'shared/farm_creation/navbar' %>
-        <div class="card shadow form-card">
-            <div class="card-header py-3 d-flex flex-row align-items-center">
-                <h6 class="m-0 font-weight-bold card-header-text">Farm Creation Wizard</h6>
+    <div class="container-fluid d-flex flex-column h-100">
+        <div class="row">
+            <div class="col-12">
+                <%= render 'shared/farm_creation/navbar' %>
             </div>
-            <div class="card-body form-card-body">
-                <div class="d-flex flex-column justify-content-between h-100">
-                    <div>
-                        <p>Welcome to the farm creation wizard!</p>
-                        <p>It is 17 steps long.</p>
-                        <p>Please click begin to start.</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <% if @estate_user %>
-                                <%= link_to "Cancel",
-                                    estate_path(@estate_user.estate),
-                                    class: "btn btn-default btn-danger" %>
-                            <% end %>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
+                    <li class="nav-item mt-3">
+                        <%= link_to "Start",
+                            wizard_path(:start, farm_id: @farm.id),
+                            class: "creation-link-active" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Details",
+                            wizard_path(:details, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Energy",
+                            wizard_path(:energy, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Resources",
+                            wizard_path(:resources, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Livestock",
+                            wizard_path(:livestock, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Land Parcels",
+                            wizard_path(:lands, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Hedgerows",
+                            wizard_path(:hedgerows, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Biodiversity",
+                            wizard_path(:biodiversity_surveys, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Sustainability",
+                            wizard_path(:sustainability_surveys, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Targets",
+                            wizard_path(:targets, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-5 mb-3">
+                        <%= link_to "Skip",
+                            farm_snapshot_path(
+                                farm_id: @farm.id,
+                                skip_creation: true),
+                            class: "skip-creation-link" %>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-10 pr-5">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
+                            Start
                         </div>
-                        <div>
-                            <%= link_to "Begin",
-                                wizard_path(:details, farm_id: @farm.id),
-                                class: "btn btn-default btn-primary" %>
-                            <%= link_to "Skip",
-                                farm_snapshot_path(
-                                    farm_id: @farm.id,
-                                    skip_creation: true),
-                                class: "btn btn-default btn-warning ml-3" %>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="shadow farm-creation-form-card pt-4 pb-3 px-4 d-flex
+                            flex-column justify-content-between">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8 d-flex justify-content-center">
+                                        <div>
+                                            <p class="creation-form-label mt-3">Welcome to the farm creation wizard!</p>
+                                            <p class="creation-form-label mt-4">It is 17 steps long.</p>
+                                            <p class="creation-form-label mt-4">Please click the arrow to start.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <%= link_to wizard_path(:details, farm_id: @farm.id) do %>
+                                    <i class="fas fa-arrow-right fa-2x farm-creation-arrow"></i>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-1"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
 
 
 

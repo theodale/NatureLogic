@@ -2,9 +2,7 @@ class FarmCreationController < ApplicationController
     include Wicked::Wizard
 
     steps :start, :details, :energy, :resources, :livestock, :lands, :hedgerows,
-    :biodiversity_surveys, :sustainability_surveys, :schemes_surveys,
-    :countryside_stewardship_surveys, :in_field_soil_tests, :lab_based_soil_tests,
-    :targets
+    :biodiversity_surveys, :sustainability_surveys, :targets
 
     def show
         @farm = Farm.find(params[:farm_id])
@@ -16,14 +14,6 @@ class FarmCreationController < ApplicationController
             redirect_to edit_farm_biodiversity_survey_path(@farm, creation: true)
         elsif params[:id] == "sustainability_surveys"
             redirect_to edit_farm_sustainability_survey_path(@farm, creation: true)
-        elsif params[:id] == "schemes_surveys"
-            redirect_to edit_farm_schemes_survey_path(@farm, creation: true)
-        elsif params[:id] == "countryside_stewardship_surveys"
-            redirect_to edit_farm_countryside_stewardship_survey_path(@farm, creation: true)
-        elsif params[:id] == "in_field_soil_tests"
-            redirect_to edit_farm_in_field_soil_test_path(@farm, creation: true)
-        elsif params[:id] == "lab_based_soil_tests"
-            redirect_to edit_farm_lab_based_soil_test_path(@farm, creation: true)
         elsif params[:id] == "targets"
             redirect_to edit_farm_target_path(@farm, creation: true)
         else

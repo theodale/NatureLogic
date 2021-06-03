@@ -1,3 +1,131 @@
 // Place all the styles related to the FarmCreation controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.creation-step-nav {
+    background-color: rgba(255,99,71,0.15);
+    border-radius: 25px;
+    padding-top: 20px;
+}
+
+.creation-link-active {
+    font-weight: bold;
+    font-size: 115%;
+}
+
+.creation-link-active:hover {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 115%;
+}
+
+.creation-link {
+    color: gray;
+}
+
+.creation-link:hover {
+    color: DarkSlateGray;
+    text-decoration: none;
+}
+
+.skip-creation-link {
+    color: rgba(220, 20, 60, 0.8);
+}
+
+.skip-creation-link:hover {
+    color: rgba(220, 20, 60, 1);
+    text-decoration: none;
+}
+
+.farm-creation-form-header {
+    color: white;
+    font-size: x-large;
+    background-color: rgba(0, 128, 0, 0.5);
+    border-radius: 25px;
+}
+
+.farm-creation-form-card {
+    min-height: 550px;
+    border-radius: 20px;
+    color: rgb(47, 79, 79);
+    border-style: solid;
+    border-color: rgba(0, 128, 0, 0.5);
+    border-width: 3px;
+}
+
+.creation-form-label {
+    font-size: large;
+    font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.farm-creation-arrow-button {
+    margin: 0px !important;
+    padding: 0 !important;
+}
+
+.farm-creation-arrow {
+    color: rgba(0, 0, 255, 0.5);
+}
+
+.farm-creation-arrow:hover {
+    color: rgba(0, 0, 255, 0.8);
+}
+
+.add-parcel-link {
+    font-size: large;
+    color: cadetblue;
+    text-decoration: none;
+}
+
+.add-parcel-link:hover {
+    font-size: large;
+    border-color: rgba(0, 128, 0, 0.5);
+    text-decoration: none;
+}
+
+.farm-creation-plus-button {
+    color: rgba(0, 128, 0, 0.5);
+}
+
+.farm-creation-plus-button:hover {
+    color: rgb(34,139,34);
+}
+
+.align-text-center {
+    text-align: center;
+}
+
+.delete-link {
+    color: rgba(255, 0, 0, 0.75);
+}
+
+.delete-link:hover {
+    color: rgba(255, 0, 0, 1);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.edit-land-link {
+    color: rgba(44, 130, 201, 0.75);
+}
+
+.edit-land-link:hover {
+    color: rgba(44, 130, 201, 1);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.grey-text {
+    color: rgba(0,0,0,0.6);
+}

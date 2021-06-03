@@ -18,7 +18,7 @@ class SustainabilitySurveysController < ApplicationController
             @farm.create_sustainability_survey(sustainability_survey_params)
         end
         if params[:creation]
-            redirect_to farm_creation_path(:schemes_surveys, farm_id: @farm.id)
+            redirect_to farm_creation_path(:targets, farm_id: @farm.id)
         else
             redirect_to edit_farm_path(@farm)
         end

@@ -11,15 +11,23 @@ class HedgerowsController < ApplicationController
         @hedgerow = @farm.hedgerows.build
     end
 
+    def edit
+        @creation = params[:creation]
+        @farm = Farm.find(params[:farm_id])
+        @hedgerow = Hedgerow.find(params[:id])
+    end
+
     def create
         @farm = Farm.find(params[:farm_id])
         @creation = params[:creation]
-        @hedgerow = @farm.hedgerows.new(hedgerow_params)
-        if @hedgerow.save
-            redirect_to farm_hedgerows_path(@farm, creation: @creation)
-        else
-            render :new
-        end
+        @farm.hedgerows.create(hedgerow_params)
+        redirect_to farm_hedgerows_path(@farm, creation: @creation)
+    end
+
+    def update
+        @farm = Farm.find(params[:farm_id])
+        hedgerow.find(params[:id]).update(hedgerow_params)
+        redirect_to farm_hedgerows_path(@farm, creation: params[:creation])
     end
 
     def destroy
@@ -33,7 +41,8 @@ class HedgerowsController < ApplicationController
     def hedgerow_params
         params.require(:hedgerow).permit(
             :hedgerow_type_id,
-            :length
+            :length,
+            :description
         )
     end
 

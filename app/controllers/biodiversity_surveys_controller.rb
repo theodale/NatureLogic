@@ -35,23 +35,7 @@ class BiodiversitySurveysController < ApplicationController
             :number_of_crop_types,
             :number_of_heritage_crops,
             :number_of_livestock_breeds,
-            :number_of_rare_breeds,
-            :threatened_species,
-            :threatened_species_description,
-            :number_of_vascular_plant_species,
-            :number_of_wild_bee_species,
-            :number_of_farmland_bird_species,
-            :number_of_butterfly_species,
-            :number_of_mammal_species,
-            :number_of_merino,
-            :number_of_rambouillet,
-            :number_of_blue_faced_leicester,
-            :number_of_corridale,
-            :number_of_columbia,
-            :number_of_suffolk,
-            :number_of_dohne,
-            :number_of_poll_dorset,
-            :number_of_composites
+            :number_of_rare_breeds
         )
     end
 

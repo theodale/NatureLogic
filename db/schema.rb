@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_082943) do
+ActiveRecord::Schema.define(version: 2021_06_02_110722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,6 +228,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_082943) do
     t.bigint "hedgerow_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
     t.index ["farm_id"], name: "index_hedgerows_on_farm_id"
     t.index ["hedgerow_type_id"], name: "index_hedgerows_on_hedgerow_type_id"
   end
@@ -267,6 +268,8 @@ ActiveRecord::Schema.define(version: 2021_05_25_082943) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "tillage_score", default: 1.0
     t.float "rotation_score", default: 1.0
+    t.string "name"
+    t.string "code"
     t.index ["farm_id"], name: "index_lands_on_farm_id"
     t.index ["land_type_id"], name: "index_lands_on_land_type_id"
   end

@@ -1,8 +1,19 @@
 <%
-options = [
-    ['Not Applicable', false],
-    ['No', false],
-    ['Yes', true]
+tillage_options = [
+    ["No Tillage", 1],
+    ["Reduced Tillage", 0.3],
+    ["Coventional Tillage", 0.01],
+    ["Does Not Apply", 1]
+]
+rotation_options = [
+    ["No Crop Rotation", 0.01],
+    ["Intercropping", 1],
+    ["Crop Rotation (less than 2 year cycles)", 1],
+    ["Does Not Apply", 1]
+]
+sprayed_options = [
+    ["Yes", true],
+    ["No", false]
 ]
 %>
 <% if @creation %>
@@ -14,7 +25,11 @@ options = [
     <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
             <div class="col-12">
+                <% if @creation %>
                 <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Edit Lands" %>
+                <% end %>
             </div>
         </div>
         <div class="row">
@@ -53,7 +68,7 @@ options = [
                     <li class="nav-item mt-3">
                         <%= link_to "Hedgerows",
                             farm_creation_path(:hedgerows, farm_id: @farm.id),
-                            class: "creation-link" %>
+                            class: "creation-link-active" %>
                     </li>
                     <li class="nav-item mt-3">
                         <%= link_to "Biodiversity",
@@ -63,7 +78,7 @@ options = [
                     <li class="nav-item mt-3">
                         <%= link_to "Sustainability",
                             farm_creation_path(:sustainability_surveys, farm_id: @farm.id),
-                            class: "creation-link-active" %>
+                            class: "creation-link" %>
                     </li>
                     <li class="nav-item mt-3">
                         <%= link_to "Targets",
@@ -84,40 +99,51 @@ options = [
                     <div class="col-1"></div>
                     <div class="col-10">
                         <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
-                            Sustainability
+                            Land Parcels - Edit
                         </div>
                     </div>
                     <div class="col-1"></div>
                 </div>
                 <div class="row no-gutters">
-                <div class="col-1"></div>
+                    <div class="col-1"></div>
                     <div class="col-10">
-                        <%= bootstrap_form_with model: @sustainability_survey,
-                            url: farm_sustainability_survey_path(creation: @creation),
+                        <%= bootstrap_form_with model: @land,
+                            url: farm_land_path(@farm, @land, creation: @creation),
                             method: :put do |f| %>
                             <div class="shadow farm-creation-form-card pt-4 pb-3 px-4 d-flex
                                 flex-column justify-content-between">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-2"></div>
-                                        <div class="col-8">
-                                            <%= f.collection_select :pools_and_ponds, options,
-                                                :last, :first, {label: "Do you have pools or ponds?", label_class: "creation-form-label my-3"} %>
-                                            <%= f.collection_select :pond_ditches_buffered, options,
-                                                :last, :first, {label: "Are you in-field ponds and ditches buffered?", label_class: "creation-form-label my-3"} %>
-                                            <%= f.collection_select :pond_bank_vegetation_left_standing, options, :last, :first,
-                                                {label: "Do you leave parts of your pool/pond bank vegetation standing?", label_class: "creation-form-label my-3"} %>
-                                        </div>
+                                            <div class="col-8">
+                                                <%= f.text_field :name, label_class: "creation-form-label mt-1 mb-3" %>
+                                                <%= f.text_field :code, label: "Code (optional)", label_class: "creation-form-label mt-1 mb-3" %>
+                                                <%= f.collection_select :land_type_id,
+                                                    LandType.all, :id, :category, {label: "Habitat Type", label_class: "creation-form-label mt-1 mb-3"} %>
+                                                <%= f.number_field :area, label: "Area (ha)", step: :any, label_class: "creation-form-label mt-1 mb-3" %>
+                                                <%= f.collection_select :tillage_score, tillage_options, :last, :first,
+                                                    {label: "Tillage Practice", label_class: "creation-form-label mt-1 mb-3" } %>
+                                                <%= f.collection_select :rotation_score, rotation_options, :last, :first,
+                                                    {label: "Rotation Practice", label_class: "creation-form-label mt-1 mb-3" } %>
+                                                <%= f.collection_select :sprayed, sprayed_options, :last, :first,
+                                                    {label: "Sprayed", label_class: "creation-form-label mt-1 mb-3" } %>
+                                            </div>
                                         <div class="col-2"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <%= link_to farm_creation_path(:biodiversity_surveys, **farm_and_estate_ids) do %>
-                                        <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
+                                    <% if @creation %>
+                                        <%= link_to farm_creation_path(:lands, **farm_and_estate_ids) do %>
+                                            <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
+                                        <% end %>
+                                        <button type="submit" class="btn farm-creation-arrow-button">
+                                            <i class="fas fa-save fa-2x farm-creation-plus-button"></i>
+                                        </button>
+                                    <% else %>
+                                        <%= link_to "Back",
+                                            farm_lands_path(@farm, creation: @creation),
+                                            class: "btn btn-default btn-danger" %>
                                     <% end %>
-                                    <button type="submit" class="btn farm-creation-arrow-button">
-                                        <i class="fas fa-arrow-right fa-2x farm-creation-arrow"></i>
-                                    </button>
                                 </div>
                             </div>
                         <% end %>
@@ -128,4 +154,3 @@ options = [
         </div>
     </div>
 </div>
-

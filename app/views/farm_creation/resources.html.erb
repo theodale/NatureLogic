@@ -1,44 +1,125 @@
 <%= render 'shared/farm_creation/sidebar' %>
 <div class="page-content">
-    <div class="container-fluid">
-        <%= render 'shared/farm_creation/navbar' %>
-        <div class="card shadow form-card">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold card-header-text">Resource Consumption</h6>
-                <h6 class="m-0 font-weight-bold card-header-text">3 / 13</h6>
+    <div class="container-fluid d-flex flex-column h-100">
+        <div class="row">
+            <div class="col-12">
+                <%= render 'shared/farm_creation/navbar' %>
             </div>
-            <div class="card-body form-card-body">
-                <%= bootstrap_form_with model: @farm,
-                    url: wizard_path(:resources, **farm_and_estate_ids),
-                    method: :put,
-                    class: "w-100 h-100" do |f| %>
-                    <div class="d-flex flex-column justify-content-between h-100">
-                        <div>
-                            <%= f.number_field :artificial_fertiliser_use, step: :any, label: "Artificial Fertiliser Use (kg)" %>
-                            <%= f.number_field :agriculture_products_spend, step: :any, label: "Agriculture Products Spend (£)" %>
-                            <%= f.number_field :wood_and_wood_products_spend, step: :any, label: "Wood and Wood Products Spend (£)" %>
-                            <%= f.number_field :pesticides_spend, step: :any, label: "Pesticides Spend (£)" %>
-                            <%= f.number_field :machinery_and_equipment_spend, step: :any, label: "Machinery and Equipment Spend (£)" %>
-                            <%= f.number_field :other_spend, step: :any, label: "Other Spend (£)" %>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <%= link_to "Back",
-                                    wizard_path(:energy, **farm_and_estate_ids),
-                                    class: "btn btn-default btn-danger" %>
-                            </div>
-                            <div>
-                                <%= f.submit "Next",
-                                    class: "btn btn-default btn-primary" %>
-                            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
+                    <li class="nav-item mt-3">
+                        <%= link_to "Start",
+                            wizard_path(:start, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Details",
+                            wizard_path(:details, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Energy",
+                            wizard_path(:energy, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Resources",
+                            wizard_path(:resources, farm_id: @farm.id),
+                            class: "creation-link-active" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Livestock",
+                            wizard_path(:livestock, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Land Parcels",
+                            wizard_path(:lands, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Hedgerows",
+                            wizard_path(:hedgerows, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Biodiversity",
+                            wizard_path(:biodiversity_surveys, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Sustainability",
+                            wizard_path(:sustainability_surveys, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Targets",
+                            wizard_path(:targets, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-5 mb-3">
+                        <%= link_to "Skip",
+                            farm_snapshot_path(
+                                farm_id: @farm.id,
+                                skip_creation: true),
+                            class: "skip-creation-link" %>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-10 pr-5 mb-5">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
+                            Resources
                         </div>
                     </div>
-                <% end %>
+                    <div class="col-1"></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <%= bootstrap_form_with model: @farm,
+                            url: wizard_path(:resources,  **farm_and_estate_ids),
+                            method: :put do |f| %>
+                            <div class="shadow farm-creation-form-card pt-4 pb-3 px-4 d-flex
+                                flex-column justify-content-between">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8">
+                                            <%= f.number_field :artificial_fertiliser_use, step: :any, value: "",
+                                                label: "Artificial Fertiliser Use (kg)", label_class: "creation-form-label mt-1 mb-3" %>
+                                            <%= f.number_field :agriculture_products_spend, step: :any, value: "",
+                                                label: "Agriculture Products Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                            <%= f.number_field :wood_and_wood_products_spend, step: :any, value: "",
+                                                label: "Wood and Wood Products Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                            <%= f.number_field :pesticides_spend, step: :any, value: "",
+                                                label: "Pesticides Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                            <%= f.number_field :machinery_and_equipment_spend, step: :any, value: "",
+                                                label: "Machinery and Equipment Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                            <%= f.number_field :other_spend, step: :any, value: "", label: "Other Spend (£)",
+                                                label_class: "creation-form-label mt-1 mb-3"  %>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <%= link_to wizard_path(:energy, **farm_and_estate_ids) do %>
+                                        <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
+                                    <% end %>
+                                    <button type="submit" class="btn farm-creation-arrow-button">
+                                        <i class="fas fa-arrow-right fa-2x farm-creation-arrow"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-

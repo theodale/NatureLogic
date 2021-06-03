@@ -1,87 +1,137 @@
-<% if @creation %>
 <%= render 'shared/farm_creation/sidebar' %>
-<% else %>
-<%= render 'shared/farms/sidebar' %>
-<% end %>
 <div class="page-content">
-    <div class="container-fluid">
+    <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
             <div class="col-12">
-                <% if @creation %>
                 <%= render 'shared/farm_creation/navbar' %>
-                <% else %>
-                <%= render 'shared/farms/navbar', section: "Edit Targets" %>
-                <% end %>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <div class="card shadow form-card">
-                    <% if @creation %>
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold card-header-text">Targets</h6>
-                        <h6 class="m-0 font-weight-bold card-header-text">13 / 13</h6>
+            <div class="col-2">
+                <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
+                    <li class="nav-item mt-3">
+                        <%= link_to "Start",
+                            farm_creation_path(:start, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Details",
+                            farm_creation_path(:details, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Energy",
+                            farm_creation_path(:energy, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Resources",
+                            farm_creation_path(:resources, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Livestock",
+                            farm_creation_path(:livestock, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Land Parcels",
+                            farm_creation_path(:lands, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Hedgerows",
+                            farm_creation_path(:hedgerows, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Biodiversity",
+                            farm_creation_path(:biodiversity_surveys, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Sustainability",
+                            farm_creation_path(:sustainability_surveys, farm_id: @farm.id),
+                            class: "creation-link" %>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <%= link_to "Targets",
+                            farm_creation_path(:targets, farm_id: @farm.id),
+                            class: "creation-link-active" %>
+                    </li>
+                    <li class="nav-item mt-5 mb-3">
+                        <%= link_to "Skip",
+                            farm_snapshot_path(
+                                farm_id: @farm.id,
+                                skip_creation: true),
+                            class: "skip-creation-link" %>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-10 pr-5 mb-5">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
+                            Targets
+                        </div>
                     </div>
-                    <% end %>
-                    <div class="card-body form-card-body">
+                    <div class="col-1"></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-1"></div>
+                    <div class="col-10">
                         <%= bootstrap_form_with model: @target,
                             url: farm_target_path(@farm, creation: @creation),
-                            method: :put,
-                            class: "w-100 h-100" do |f| %>
-                            <div class="d-flex flex-column justify-content-between h-100">
-                                <div class="row">
-                                    <div class="col">
-                                        <%= f.number_field :net_carbon_emission, step: :any,
-                                            label: "Net Carbon Emission (kg)" %>
-                                        <%= f.number_field :defra_habitat_score, step: :any,
-                                            label: "Defra Habitat Score" %>
-                                        <%= f.number_field :space_for_nature_score, step: :any,
-                                            label: "Space for Nature Score" %>
-                                        <%= f.number_field :countryside_stewardship_score, step: :any,
-                                            label: "Countryside Stewardship Score" %>
-                                    </div>
-                                    <div class="col">
-                                        <%= f.number_field :biodiversity_score, step: :any,
-                                            label: "Biodiversity Score" %>
-                                        <%= f.number_field :field_based_soil_health_score, step: :any,
-                                            label: "Field-Based Soil Health Score" %>
-                                        <%= f.number_field :lab_based_soil_health_score, step: :any,
-                                            label: "Lab-Based Soil Health Score" %>
-                                        <%= f.number_field :mean_SOC, step: :any,
-                                            label: "Mean SOC" %>
+                            method: :put do |f| %>
+                            <div class="shadow farm-creation-form-card pt-4 pb-3 px-4 d-flex
+                                flex-column justify-content-between">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8">
+                                            <%= f.number_field :net_carbon_emission, step: :any,
+                                                label: "Net Carbon Emission (kg)",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :defra_habitat_score, step: :any,
+                                                label: "Defra Habitat Score",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :space_for_nature_score, step: :any,
+                                                label: "Space for Nature Score",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :countryside_stewardship_score, step: :any,
+                                                label: "Countryside Stewardship Score",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :biodiversity_score, step: :any,
+                                                label: "Biodiversity Score",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :field_based_soil_health_score, step: :any,
+                                                label: "Field-Based Soil Health Score",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :lab_based_soil_health_score, step: :any,
+                                                label: "Lab-Based Soil Health Score",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                            <%= f.number_field :mean_SOC, step: :any,
+                                                label: "Mean SOC",
+                                                value: "", label_class: "creation-form-label my-3" %>
+                                        </div>
+                                        <div class="col-2"></div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <% if @creation %>
-                                        <div>
-                                            <%= link_to "Back",
-                                                farm_creation_path(:lab_based_soil_tests, farm_id: @farm.id),
-                                                class: "btn btn-default btn-danger" %>
-                                        </div>
-                                        <div>
-                                            <%= f.submit "Complete",
-                                                class: "btn btn-default btn-primary" %>
-                                        </div>
-                                        <% else %>
-                                        <div>
-                                            <%= link_to "Back",
-                                                edit_farm_path(@farm),
-                                                class: "btn btn-default btn-danger" %>
-                                        </div>
-                                        <div>
-                                            <%= f.submit "Save Changes",
-                                                class: "btn btn-default btn-primary" %>
-                                        </div>
-                                        <% end %>
-                                    </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <%= link_to farm_creation_path(:sustainability_surveys, **farm_and_estate_ids) do %>
+                                        <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
+                                    <% end %>
+                                    <button type="submit" class="btn farm-creation-arrow-button">
+                                        <i class="fas fa-flag-checkered fa-2x farm-creation-arrow"></i>
+                                    </button>
                                 </div>
                             </div>
                         <% end %>
                     </div>
+                    <div class="col-1"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
