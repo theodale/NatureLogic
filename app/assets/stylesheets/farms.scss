@@ -165,20 +165,6 @@ th {
   border: none !important;
 }
 
-.name-data {
-  border-right: none !important;
-}
-
-.location-data {
-  border-right: none !important;
-  border-left: none !important;
-}
-
-.view-action-data {
-  border-left: none !important;
-  vertical-align: middle;
-}
-
 .view-farm-link:hover {
   text-decoration: none;
 }
@@ -237,4 +223,77 @@ th {
 
 .strategy-results-navbar {
   background-color: rgba(2, 117, 216, 0.55);
+}
+
+.farm-navbar-dropdown {
+  background-color: white;
+  border-radius: 20px;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+}
+
+.farm-navbar-text {
+  color: white;
+}
+
+.edit-farm-navbar {
+  border-radius: 25px;
+  background-color: #1167b1;
+}
+
+.edit-sub-link {
+  text-align: center;
+  width: 150px;
+  color: rgba(42, 157, 244, 1);
+  text-decoration: none;
+  border-style: solid;
+  border-radius: 25px;
+  border-color: rgba(42, 157, 244, 1);
+  padding: 10px;
+}
+
+.edit-sub-link:hover {
+  background-color: rgba(42, 157, 244, 0.5);
+  color: white;
+  text-decoration: none;
+}
+
+.edit-sub-link-active {
+  text-align: center;
+  width: 150px;
+  background-color: rgba(42, 157, 244, 0.25);
+  color: rgba(42, 157, 244, 1);
+  text-decoration: none;
+  border-color: rgba(42, 157, 244, 1);
+  border-style: solid;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.edit-sub-link-active:hover {
+  background-color: rgba(42, 157, 244, 0.5);
+  color: white;
+  text-decoration: none;
+}
+
+.edit-nav-link {
+  color: white;
+}
+
+.edit-nav-link:hover {
+  color: lightgrey;
+}
+
+.edit-nav-link-active {
+  color: #1167b1;
+  background-color: white;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  border-radius: 15px;
+}
+
+.edit-nav-link-active:hover {
+  color: #03254c;
 }

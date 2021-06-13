@@ -132,8 +132,8 @@ class FarmsController < ApplicationController
         params.require(:farm).permit(
             :name,
             :location,
-            :latitude,
-            :longitude,
+            :postcode,
+            :region,
             :total_diesel_use,
             :total_gas_use,
             :total_electricity_use,

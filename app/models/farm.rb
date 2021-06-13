@@ -188,24 +188,18 @@ class Farm < ApplicationRecord
         end
     end
 
-    def tree_covered_area
-        area = 0
-        self.lands.each do |land|
-            if land.land_type.meta_category == "Woodland"
-                area += land.area
+    def tree_coverage
+        if self.total_area == 0
+            return 0
+        else
+            tree_covered_area = 0
+            self.lands.each do |land|
+                if land.land_type.meta_category == "Woodland"
+                    tree_covered_area += land.area
+                end
             end
+            return (100 * tree_covered_area / self.total_area).round(1)
         end
-        return area
-    end
-
-    def scrubland_area
-        area = 0
-        self.lands.each do |land|
-            if land.land_type.meta_category == "Heathland & Scrub"
-                area += land.area
-            end
-        end
-        return area
     end
 
     def nature_positive_area
@@ -216,8 +210,6 @@ class Farm < ApplicationRecord
         return area
     end
 
-    # Utilities
-
     def length_of_hedgerows
         length = 0
         self.hedgerows.each do |hedgerow|
@@ -225,6 +217,8 @@ class Farm < ApplicationRecord
         end
         return length
     end
+
+    # Utilities
 
     def total_area
         area = 0

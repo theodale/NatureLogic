@@ -1,0 +1,115 @@
+<%= render 'shared/estates/sidebar', page: "settings" %>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <%= render 'shared/estates/navbar' %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <%= render 'shared/estates/settings/navbar', section: "farms" %>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="naturelogic-card purple shadow mb-5 p-4 fluid-container">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between align-items-end">
+                                    <h1 class="grey">Estate Farms</h1>
+                                    <%= link_to estate_add_farm_path(@estate), class: "no-hover-underline" do %>
+                                        <div class="d-flex align-items-stretch green-link">
+                                            <h3 class="mr-2">New Farm</h3>
+                                            <i class="fas fa-plus fa-2x"></i>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <% if @estate.farm_timelines.length != 0 %>
+                                    <table class="table table-bordered farms-table">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th class="text-center">Farm Name</th>
+                                                <th class="text-center">Location</th>
+                                                <th class="text-center">Postcode</th>
+                                                <th class="text-center">Region</th>
+                                                <th class="text-center">Area (ha)</th>
+                                                <th class="text-center">Overview</th>
+                                                <th class="text-center">Edit</th>
+                                                <th class="text-center">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @estate.farm_timelines.each do |farm_timeline| %>
+                                            <tr class="table-body-text text-center">
+                                                <td class="no-right-border">
+                                                    <%= farm_timeline.initial_farm.name %>
+                                                </td>
+                                                <td class="no-right-left-borders">
+                                                    <%= farm_timeline.initial_farm.location %>
+                                                </td>
+                                                <td class="no-right-left-borders">
+                                                    <%= farm_timeline.initial_farm.postcode %>
+                                                </td>
+                                                <td class="no-right-left-borders">
+                                                    <%= farm_timeline.initial_farm.region %>
+                                                </td>
+                                                <td class="no-right-left-borders">
+                                                    <%= farm_timeline.initial_farm.total_area %>
+                                                </td>
+                                                <td class="no-right-left-borders">
+                                                    <%= link_to farm_path(farm_timeline.initial_farm),
+                                                        class: "view-farm-link" do %>
+                                                        <i class="fas fa-arrow-right"></i>
+                                                    <% end %>
+                                                </td>
+                                                <td class="no-right-left-borders">
+                                                    <%= link_to farm_path(farm_timeline.initial_farm),
+                                                        class: "green-link" do %>
+                                                        <i class="fas fa-edit"></i>
+                                                    <% end %>
+                                                </td>
+                                                <td class="no-left-border">
+                                                    <%= link_to farm_path(farm_timeline.initial_farm),
+                                                        class: "delete-link" do %>
+                                                        <i class="fas fa-trash"></i>
+                                                    <% end %>
+                                                </td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                    <% else %>
+                                    <div class="alert alert-primary mt-3" role="alert">
+                                        You have no farms!
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+

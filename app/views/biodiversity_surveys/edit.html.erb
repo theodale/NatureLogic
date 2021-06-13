@@ -14,11 +14,16 @@ wider_countryside_descriptions = [
     <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
             <div class="col-12">
+                <% if @creation %>
                 <%= render 'shared/farm_creation/navbar' %>
+                <% else %>
+                <%= render 'shared/farms/navbar', section: "Edit Biodiversity"  %>
+                <% end %>
             </div>
         </div>
         <div class="row">
-            <div class="col-2">
+            <% if @creation %>
+            <div class="col-3">
                 <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
                     <li class="nav-item mt-3">
                         <%= link_to "Start",
@@ -79,18 +84,8 @@ wider_countryside_descriptions = [
                     </li>
                 </ul>
             </div>
-            <div class="col-10 pr-5 mb-5">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
-                            Biodiversity
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-                <div class="row no-gutters">
-                <div class="col-1"></div>
+            <div class="col-9 pr-5 mb-5">
+                <div class="row no-gutters mt-3">
                     <div class="col-10">
                         <%= bootstrap_form_with model: @biodiversity_survey,
                             url: farm_biodiversity_survey_path(creation: @creation),
@@ -100,31 +95,69 @@ wider_countryside_descriptions = [
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-2"></div>
-                                        <div class="col-8">
+                                        <div class="col-8 mt-3">
+                                            <% if @biodiversity_survey.area_designated_for_natural_conservation != 0 %>
                                             <%= f.number_field :area_designated_for_natural_conservation,
                                                 step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)",
-                                                value:"", label_class: "creation-form-label my-3" %>
+                                                label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :area_designated_for_natural_conservation,
+                                                step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)",
+                                                value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @biodiversity_survey.area_in_existing_agri_environment_schemes != 0 %>
                                             <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any,
                                                 label: "Area In Existing Agri-Environmental Schemes (ha)",
-                                                value:"", label_class: "creation-form-label my-3" %>
+                                                label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any,
+                                                label: "Area In Existing Agri-Environmental Schemes (ha)",
+                                                value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @biodiversity_survey.area_of_grass_wildflower_scrub_not_for_production != 0 %>
                                             <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any,
                                                 label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)",
-                                                value:"", label_class: "creation-form-label my-3" %>
+                                                label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any,
+                                                label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)",
+                                                value:"", label_class: "form-label my-3" %>
+                                            <% end %>
                                             <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions,
-                                                :last, :first, {label_class: "creation-form-label my-3"} %>
+                                                :last, :first, {label_class: "form-label my-3"} %>
+                                            <% if @biodiversity_survey.number_of_crop_types != 0 %>
                                             <%= f.number_field :number_of_crop_types, step: :any,
-                                                label: "Number of Crop Types", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Number of Crop Types", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :number_of_crop_types, step: :any,
+                                                label: "Number of Crop Types", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @biodiversity_survey.number_of_heritage_crops != 0 %>
                                             <%= f.number_field :number_of_heritage_crops, step: :any,
-                                                label: "Number of Heritage Crops", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Number of Heritage Crops", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :number_of_heritage_crops, step: :any,
+                                                label: "Number of Heritage Crops", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @biodiversity_survey.number_of_livestock_breeds != 0 %>
                                             <%= f.number_field :number_of_livestock_breeds, step: :any,
-                                                label: "Number of Livestock Breeds", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Number of Livestock Breeds", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :number_of_livestock_breeds, step: :any,
+                                                label: "Number of Livestock Breeds", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @biodiversity_survey.number_of_rare_breeds != 0 %>
                                             <%= f.number_field :number_of_rare_breeds, step: :any,
-                                                label: "Number of Rare Breeds", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Number of Rare Breeds", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :number_of_rare_breeds, step: :any,
+                                                label: "Number of Rare Breeds", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div class="d-flex align-items-center justify-content-between mt-5">
                                     <%= link_to farm_creation_path(:hedgerows, **farm_and_estate_ids) do %>
                                         <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
                                     <% end %>
@@ -135,9 +168,109 @@ wider_countryside_descriptions = [
                             </div>
                         <% end %>
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-2"></div>
                 </div>
             </div>
+            <% else %>
+            <div class="col-2"></div>
+            <div class="col-8 mb-5">
+                <%= render 'shared/farms/edit/navbar', section: "Nature" %>
+                <div class="row mt-2">
+                    <div class="col-12 d-flex justify-content-center px-4">
+                        <%= link_to "Biodiversity",
+                            edit_farm_biodiversity_survey_path(@farm),
+                            class: "edit-sub-link-active" %>
+                        <%= link_to "Lands",
+                            farm_lands_path(@farm),
+                            class: "edit-sub-link mx-5" %>
+                        <%= link_to "Hedgerows",
+                            farm_hedgerows_path(@farm),
+                            class: "edit-sub-link" %>
+                    </div>
+                </div>
+                <%= bootstrap_form_with model: @biodiversity_survey,
+                    url: farm_biodiversity_survey_path(creation: @creation),
+                    method: :put do |f| %>
+                    <div class="shadow farm-edit-form-card pt-4 pb-3 px-4 d-flex
+                        flex-column justify-content-between mt-3">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8 mt-3">
+                                    <% if @biodiversity_survey.area_designated_for_natural_conservation != 0 %>
+                                    <%= f.number_field :area_designated_for_natural_conservation,
+                                        step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)",
+                                        label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :area_designated_for_natural_conservation,
+                                        step: :any, label: "Area Of Habitat Dedicated Solely To Conservation (ha)",
+                                        value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                    <% if @biodiversity_survey.area_in_existing_agri_environment_schemes != 0 %>
+                                    <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any,
+                                        label: "Area In Existing Agri-Environmental Schemes (ha)",
+                                        label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :area_in_existing_agri_environment_schemes, step: :any,
+                                        label: "Area In Existing Agri-Environmental Schemes (ha)",
+                                        value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                    <% if @biodiversity_survey.area_of_grass_wildflower_scrub_not_for_production != 0 %>
+                                    <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any,
+                                        label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)",
+                                        label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :area_of_grass_wildflower_scrub_not_for_production, step: :any,
+                                        label: "Area of Grassland, Scrub, Or Wildflower Not Used For Production (ha)",
+                                        value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                    <%= f.collection_select :wider_countryside_description, wider_countryside_descriptions,
+                                        :last, :first, {label_class: "form-label my-3"} %>
+                                    <% if @biodiversity_survey.number_of_crop_types != 0 %>
+                                    <%= f.number_field :number_of_crop_types, step: :any,
+                                        label: "Number of Crop Types", label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :number_of_crop_types, step: :any,
+                                        label: "Number of Crop Types", value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                    <% if @biodiversity_survey.number_of_heritage_crops != 0 %>
+                                    <%= f.number_field :number_of_heritage_crops, step: :any,
+                                        label: "Number of Heritage Crops", label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :number_of_heritage_crops, step: :any,
+                                        label: "Number of Heritage Crops", value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                    <% if @biodiversity_survey.number_of_livestock_breeds != 0 %>
+                                    <%= f.number_field :number_of_livestock_breeds, step: :any,
+                                        label: "Number of Livestock Breeds", label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :number_of_livestock_breeds, step: :any,
+                                        label: "Number of Livestock Breeds", value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                    <% if @biodiversity_survey.number_of_rare_breeds != 0 %>
+                                    <%= f.number_field :number_of_rare_breeds, step: :any,
+                                        label: "Number of Rare Breeds", label_class: "form-label my-3" %>
+                                    <% else %>
+                                    <%= f.number_field :number_of_rare_breeds, step: :any,
+                                        label: "Number of Rare Breeds", value:"", label_class: "form-label my-3" %>
+                                    <% end %>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-5">
+                            <%= link_to edit_farm_path(@farm) do %>
+                                <i class="fas fa-times fa-2x farm-creation-arrow"></i>
+                            <% end %>
+                            <button type="submit" class="btn farm-creation-arrow-button">
+                                <i class="fas fa-save fa-2x farm-creation-arrow"></i>
+                            </button>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="col-2"></div>
+            <% end %>
         </div>
     </div>
 </div>

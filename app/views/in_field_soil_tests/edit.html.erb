@@ -1,115 +1,93 @@
-<% if @creation %>
-<%= render 'shared/farm_creation/sidebar' %>
-<% else %>
 <%= render 'shared/farms/sidebar' %>
-<% end %>
 <div class="page-content">
-    <div class="container-fluid">
+    <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
             <div class="col-12">
-                <% if @creation %>
-                <%= render 'shared/farm_creation/navbar' %>
-                <% else %>
                 <%= render 'shared/farms/navbar', section: "Edit In-Field Soil Test" %>
-                <% end %>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <div class="card shadow form-card">
-                    <% if @creation %>
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold card-header-text">In-Field Soil Test</h6>
-                        <h6 class="m-0 font-weight-bold card-header-text">11 / 13</h6>
+            <div class="col-2"></div>
+            <div class="col-8">
+                <%= render 'shared/farms/edit/navbar', section: "Soil" %>
+                <div class="row mt-2">
+                    <div class="col-12 d-flex justify-content-center px-4">
+                        <%= link_to "In-Field Tests",
+                            edit_farm_in_field_soil_test_path(@farm),
+                            class: "edit-sub-link-active" %>
+                        <%= link_to "Lab-Based Tests",
+                            edit_farm_lab_based_soil_test_path(@farm),
+                            class: "edit-sub-link mx-5" %>
                     </div>
-                    <% end %>
-                    <div class="card-body form-card-body d-flex flex-column justify-content-between">
-                        <div class="overflow-auto">
-                            <div class="row">
-                                <div class="col-12">
-                                    <% if @in_field_soil_test.soil_samples.size > 0 %>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Sample Name</th>
-                                                <th scope="col">Compaction</th>
-                                                <th scope="col">Diversity of Macro-Life</th>
-                                                <th scope="col">Crusting</th>
-                                                <th scope="col">Ground Cover</th>
-                                                <th scope="col">Ponding</th>
-                                                <th scope="col">Plant Health</th>
-                                                <th scope="col">Root Growth</th>
-                                                <th scope="col">Aggregate Stability</th>
-                                                <th scope="col">Soil Colour</th>
-                                                <th scope="col">Soil Smell</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% @in_field_soil_test.soil_samples.each do |soil_sample| %>
-                                            <tr>
-                                                <td><%= soil_sample.name %></td>
-                                                <td><%= soil_sample.compaction %></td>
-                                                <td><%= soil_sample.diversity_of_macro_life %></td>
-                                                <td><%= soil_sample.crusting %></td>
-                                                <td><%= soil_sample.ground_cover %></td>
-                                                <td><%= soil_sample.ponding %></td>
-                                                <td><%= soil_sample.plant_health %></td>
-                                                <td><%= soil_sample.root_growth %></td>
-                                                <td><%= soil_sample.aggregate_stability %></td>
-                                                <td><%= soil_sample.soil_colour %></td>
-                                                <td><%= soil_sample.soil_smell %></td>
-                                                <td>
-                                                    <%= link_to farm_in_field_soil_test_soil_sample_path(@farm, soil_sample, creation: @creation),
-                                                        method: :delete do %>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    <% end %>
-                                                </td>
-                                            </tr>
-                                            <% end %>
-                                        </tbody>
-                                    </table>
-                                    <% else %>
-                                    <div class="alert alert-primary" role="alert">
-                                        You have no soil samples.
-                                    </div>
-                                    <% end %>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="shadow farm-edit-form-card pt-4 pb-3 px-4 mt-3">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <% if @in_field_soil_test.soil_samples.size > 0 %>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="align-text-center">Name</th>
+                                            <th class="align-text-center">Compaction</th>
+                                            <th class="align-text-center">Macro-Life</th>
+                                            <th class="align-text-center">Crusting</th>
+                                            <th class="align-text-center">Cover</th>
+                                            <th class="align-text-center">Ponding</th>
+                                            <th class="align-text-center">Plant Health</th>
+                                            <th class="align-text-center">Root Growth</th>
+                                            <th class="align-text-center">Stability</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% @in_field_soil_test.soil_samples.each do |soil_sample| %>
+                                        <tr>
+                                            <td class="align-text-center"><%= soil_sample.name %></td>
+                                            <td class="align-text-center"><%= soil_sample.compaction %></td>
+                                            <td class="align-text-center"><%= soil_sample.diversity_of_macro_life %></td>
+                                            <td class="align-text-center"><%= soil_sample.crusting %></td>
+                                            <td class="align-text-center"><%= soil_sample.ground_cover %></td>
+                                            <td class="align-text-center"><%= soil_sample.ponding %></td>
+                                            <td class="align-text-center"><%= soil_sample.plant_health %></td>
+                                            <td class="align-text-center"><%= soil_sample.root_growth %></td>
+                                            <td class="align-text-center"><%= soil_sample.aggregate_stability %></td>
+                                            <td class="align-text-center">
+                                                <%= link_to edit_farm_in_field_soil_test_soil_sample_path(@farm, soil_sample),
+                                                    class: "edit-land-link" do %>
+                                                    <i class="fas fa-edit fa-lg"></i>
+                                                <% end %>
+                                            </td>
+                                            <td class="align-text-center">
+                                                <%= link_to farm_in_field_soil_test_soil_sample_path(@farm, soil_sample),
+                                                    method: :delete, class: "delete-link" do %>
+                                                    <i class="fas fa-trash fa-lg"></i>
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                                <% else %>
+                                <div class="alert alert-primary" role="alert">
+                                    You have no soil samples!
                                 </div>
-                                <div class="col-12 mb-4">
-                                    <%= link_to new_farm_in_field_soil_test_soil_sample_path(@farm, creation: @creation) do %>
-                                        <button type="button" class="btn btn-success">Add Soil Sample</button>
-                                    <% end %>
-                                </div>
+                                <% end %>
                             </div>
                         </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <% if @creation %>
-                                    <div>
-                                        <%= link_to "Back",
-                                            farm_creation_path(:countryside_stewardship_surveys, farm_id: @farm.id),
-                                            class: "btn btn-default btn-danger" %>
-                                    </div>
-                                    <div>
-                                        <%= link_to "Next",
-                                            farm_creation_path(:lab_based_soil_tests, farm_id: @farm.id),
-                                            class: "btn btn-default btn-primary" %>
-                                    </div>
-                                    <% else %>
-                                    <div>
-                                        <%= link_to "Back",
-                                            edit_farm_path(@farm),
-                                            class: "btn btn-default btn-danger" %>
-                                    </div>
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <%= link_to "Add Soil Sample",
+                            new_farm_in_field_soil_test_soil_sample_path(@farm),
+                            class: "add-parcel-link" %>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

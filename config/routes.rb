@@ -18,6 +18,11 @@ Rails.application.routes.draw do
     post 'add-farm-user', to: 'estates#create_farm_user', as: 'estate_add_farm_user'
     get 'overview', to: 'estates#overview', as: 'overview'
     get 'performance', to: 'estates#performance', as: 'performance'
+    get 'settings/estate', to: 'estates#settings_estate', as: 'settings_estate'
+    get 'settings/farms', to: 'estates#settings_farms', as: 'settings_farms'
+    get 'settings/members', to: 'estates#settings_members', as: 'settings_members'
+    get 'settings/targets', to: 'estates#settings_targets', as: 'settings_targets'
+    resource :target
   end
 
   # Farms

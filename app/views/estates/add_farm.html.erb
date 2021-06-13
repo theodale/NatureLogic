@@ -1,4 +1,4 @@
-<%= render 'shared/estates/sidebar' %>
+<%= render 'shared/estates/sidebar', page: "settings" %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -9,23 +9,39 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <div class="card farms-card shadow">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold card-header-text">Add New Farm</h6>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <%= render 'shared/estates/settings/navbar', section: "farms" %>
                     </div>
-                    <div class="card-body">
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
                         <%= bootstrap_form_with model: @farm,
-                            url: farms_path(estate: true),
-                            class: "w-100 h-100" do |f| %>
-                            <div class="d-flex flex-column justify-content-between h-100">
-                                <div>
-                                    <%= f.text_field :name %>
-                                    <%= f.text_field :location %>
-                                    <%= f.text_field :latitude %>
-                                    <%= f.text_field :longitude %>
+                            url: farms_path(estate: true) do |f| %>
+                            <div class="naturelogic-card purple shadow mb-5 p-4
+                                fluid-container d-flex flex-column justify-content-between">
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8">
+                                        <h4 class="estate-farms-card-header my-2">Create New Farm</h4>
+                                        <%= f.text_field :name, label_class: "form-label my-3" %>
+                                        <%= f.text_field :location, label_class: "form-label my-3" %>
+                                        <%= f.text_field :postcode, label_class: "form-label my-3" %>
+                                        <%= f.text_field :region, label: "Region/County", label_class: "form-label my-3" %>
+                                        <%= f.select :farm_type, ["Arable", "Livestock", "Woodland", "Mixed"],
+                                            {label_class: "form-label my-3"} %>
+                                    </div>
+                                    <div class="col-2"></div>
                                 </div>
-                                <div>
-                                    <%= f.submit "Submit", class: "btn btn-info" %>
+                                <div class="d-flex justify-content-between mt-5">
+                                    <%= link_to estate_path(@estate) do %>
+                                        <i class="fas fa-times-circle fa-2x farm-creation-arrow"></i>
+                                    <% end %>
+                                    <button type="submit" class="btn farm-creation-arrow-button">
+                                        <i class="fas fa-save fa-2x farm-creation-arrow"></i>
+                                    </button>
                                 </div>
                             </div>
                         <% end %>
@@ -36,8 +52,4 @@
         </div>
     </div>
 </div>
-
-
-
-
 

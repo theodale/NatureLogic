@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2">
+            <div class="col-3">
                 <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
                     <li class="nav-item mt-3">
                         <%= link_to "Start",
@@ -68,19 +68,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-10 pr-5">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
-                            Energy
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-
-                </div>
-                <div class="row no-gutters">
-                <div class="col-1"></div>
+            <div class="col-9 pr-5">
+                <div class="row no-gutters mt-3">
                     <div class="col-10">
                         <%= bootstrap_form_with model: @farm,
                             url: wizard_path(:energy,  **farm_and_estate_ids),
@@ -90,18 +79,33 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-2"></div>
-                                        <div class="col-8">
+                                        <div class="col-8 mt-3">
+                                            <% if @farm.total_diesel_use != 0.0 %>
                                             <%= f.number_field :total_diesel_use, step: :any,
-                                                label: "Diesel use (l)", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Diesel use (l)", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :total_diesel_use, step: :any,
+                                                label: "Diesel use (l)", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @farm.total_gas_use != 0.0 %>
                                             <%= f.number_field :total_gas_use, step: :any,
-                                                label: "Gas use (kWh)", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Gas use (kWh)", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :total_gas_use, step: :any,
+                                                label: "Gas use (kWh)", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
+                                            <% if @farm.total_gas_use != 0.0 %>
                                             <%= f.number_field :total_electricity_use, step: :any,
-                                                label: "Electricity use (kWh)", value:"", label_class: "creation-form-label my-3" %>
+                                                label: "Electricity use (kWh)", label_class: "form-label my-3" %>
+                                            <% else %>
+                                            <%= f.number_field :total_electricity_use, step: :any,
+                                                label: "Electricity use (kWh)", value:"", label_class: "form-label my-3" %>
+                                            <% end %>
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center justify-content-between mt-5">
                                     <%= link_to wizard_path(:details, **farm_and_estate_ids) do %>
                                         <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
                                     <% end %>
@@ -112,7 +116,7 @@
                             </div>
                         <% end %>
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-2"></div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light mb-4 mt-4" style="background-color: #e3f2fd;">
-    <b class="navbar-brand uppercase snapshot-navbar-title"><%= @estate.name %></b>
+<nav class="navbar navbar-expand-lg mb-4 mt-4 estate-navbar shadow py-3">
+    <b class="navbar-brand uppercase"><%= @estate.name %></b>
     <% if current_page?(estate_overview_path(@current_estate_user.estate)) %>
     <div class="container-fluid d-flex justify-content-between">
         <ul class="navbar-nav">

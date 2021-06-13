@@ -1,0 +1,132 @@
+/* General + Utils */
+
+* {
+  font-family: "Nunito", sans-serif;
+}
+
+.no-hover-underline:hover {
+  text-decoration: none;
+}
+
+.page-content {
+  margin-left: 200px;
+}
+
+.naturelogic-card {
+  min-height: 550px;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.naturelogic-card.purple {
+  border-color: rgba(0, 0, 255, 0.4);
+}
+
+.green-link:hover {
+  color: rgba(0, 128, 0, 0.75);
+}
+
+.green-link {
+  color: rgba(0, 128, 0, 1);
+}
+
+.grey {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* Navbars */
+
+.naturelogic-navbar {
+  background-color: rgba(0, 0, 205, 0.7);
+  color: white;
+  border-radius: 10px;
+}
+
+.sidebar-divider {
+  background-color: white;
+  width: 85%;
+}
+
+.sub-navbar {
+  border-radius: 25px;
+  background-color: #1167b1;
+}
+
+.edit-nav-link-active:hover {
+  color: #03254c;
+}
+
+.sub-nav-link {
+  color: white;
+}
+
+.sub-nav-link:hover {
+  color: lightgrey;
+}
+
+.sub-nav-link.active {
+  color: #1167b1;
+  background-color: white;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  border-radius: 15px;
+}
+
+.sub-nav-link.active:hover {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+/* Sidebars */
+
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 139, 139, 0.9);
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidebar-heading {
+  color: white;
+  font-weight: 800;
+  font-size: x-large;
+  text-align: center;
+}
+
+.sidebar-link-content {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3% 7% 3% 7%;
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: large;
+  width: 90%;
+}
+
+.sidebar-link-content:hover {
+  font-size: 115%;
+}
+
+.sidebar-link-content.active {
+  border-style: solid;
+  border-color: darkorange;
+  border-width: 2px;
+  background-color: orange;
+  border-radius: 20px;
+  font-size: 100% !important;
+}
+
+.sidebar-link-content.active:hover {
+  background-color: darkorange;
+  font-weight: normal !important;
+  color: white !important;
+  font-size: 100% !important;
+}

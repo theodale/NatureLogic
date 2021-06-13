@@ -26,7 +26,7 @@ class HedgerowsController < ApplicationController
 
     def update
         @farm = Farm.find(params[:farm_id])
-        hedgerow.find(params[:id]).update(hedgerow_params)
+        Hedgerow.find(params[:id]).update(hedgerow_params)
         redirect_to farm_hedgerows_path(@farm, creation: params[:creation])
     end
 

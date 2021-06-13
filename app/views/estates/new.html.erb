@@ -25,6 +25,15 @@
                                         <%= bootstrap_form_with model: @estate do |f| %>
                                             <%= f.text_field :name %>
                                             <%= f.text_field :location %>
+                                            <%= f.number_field :carbon_price %>
+                                            <%= f.fields_for :target do |tf| %>
+                                                <%= tf.number_field :net_carbon_emission, step: :any,
+                                                    label: "Net Carbon Emission (kg)" %>
+                                                <%= tf.number_field :mean_SOC, step: :any, label: "Mean SOC"%>
+                                                <%= tf.number_field :soil_health, step: :any %>
+                                                <%= tf.number_field :nature_positive_areas, step: :any %>
+                                                <%= tf.number_field :sustainable_practices, step: :any %>
+                                            <% end %>
                                             <%= f.hidden_field :estate_user_id, value: @estate.estate_user_id %>
                                             <%= f.submit "Submit", class: "btn btn-info" %>
                                         <% end %>
@@ -39,3 +48,5 @@
         </div>
     </div>
 </div>
+
+

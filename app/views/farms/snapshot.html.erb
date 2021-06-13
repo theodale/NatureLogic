@@ -6,7 +6,7 @@
                 <%= render 'shared/farms/navbar', section: "Snapshot Overview" %>
             </div>
         </div>
-        <div class="row mb-2 px-3 snapshot-row">
+        <div class="row mb-2 snapshot-row">
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
                     <div class="card-body snapshot-card-body">
@@ -51,6 +51,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
@@ -94,25 +95,35 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
                                 Biodiversity Score: <b> <%= @farm.biodiversity_survey.biodiversity_percentage_score %> % </b>
                             </div>
                         </div>
-                        <div class="row px-3 mb-2">
-                            <%= pie_chart habitat_area_data,
-                                height: "200px",
-                                library: {
-                                    legend: {
-                                        position: "bottom"
-                                    }
-                                }
-                            %>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Habitat Score: <b> <%= @farm.defra_habitat_score %> % </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Space For Nature Score: <b> <%= @farm.space_for_nature_score %> % </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Hedgerows: <b> <%= @farm.length_of_hedgerows %> km </b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                                Tree Coverage: <b> <%= @farm.tree_coverage %> % </b>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mb-4 px-3">
+        <div class="row mb-4">
             <div class="col-4">
                 <div class="card shadow mb-4 snapshot-overview-card">
                     <div class="card-body snapshot-card-body">
@@ -146,22 +157,7 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="py-2 px-4 snapshot-value-div mb-3">
-                                Number of Schemes: <b>4 </b>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-3">
-                                Countryside Stewardship: <b> 11.6 % </b>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-3">
-                                CSS Payments: <b> £ 1726</b>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-3">
-                                Sustainable Practices Score: <b> <%= @farm.sustainability_survey.sustainable_practice_score %> % </b>
+                                Sustainable Practices: <b> <%= @farm.sustainability_survey.sustainable_practice_score %> % </b>
                             </div>
                         </div>
                     </div>

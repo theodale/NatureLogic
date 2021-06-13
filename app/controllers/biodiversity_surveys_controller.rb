@@ -11,11 +11,21 @@ class BiodiversitySurveysController < ApplicationController
     end
 
     def update
+        logger.debug "BS PARAMS"
+        logger.debug biodiversity_survey_params
         @farm = Farm.find(params[:farm_id])
+        fixed_params = {}
+        biodiversity_survey_params.each do |key, value|
+            if value == ""
+                fixed_params[key] = 0
+            else
+                fixed_params[key] = value
+            end
+        end
         if @farm.biodiversity_survey
-            @farm.biodiversity_survey.update(biodiversity_survey_params)
+            @farm.biodiversity_survey.update(fixed_params)
         else
-            @farm.create_biodiversity_survey(biodiversity_survey_params)
+            @farm.create_biodiversity_survey(fixed_params)
         end
         if params[:creation]
             redirect_to farm_creation_path(:sustainability_surveys, farm_id: @farm.id)

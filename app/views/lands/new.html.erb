@@ -28,12 +28,13 @@ sprayed_options = [
                 <% if @creation %>
                 <%= render 'shared/farm_creation/navbar' %>
                 <% else %>
-                <%= render 'shared/farms/navbar', section: "Edit Lands" %>
+                <%= render 'shared/farms/navbar', section: "New Land" %>
                 <% end %>
             </div>
         </div>
         <div class="row">
-            <div class="col-2">
+            <% if @creation %>
+            <div class="col-3">
                 <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
                     <li class="nav-item mt-3">
                         <%= link_to "Start",
@@ -94,18 +95,8 @@ sprayed_options = [
                     </li>
                 </ul>
             </div>
-            <div class="col-10 pr-5 mb-5">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
-                            Land Parcels - New
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-                <div class="row no-gutters">
-                    <div class="col-1"></div>
+            <div class="col-9 pr-5 mb-5">
+                <div class="row no-gutters mt-3">
                     <div class="col-10">
                         <%= bootstrap_form_with model: @land,
                             url: farm_lands_path(@farm, creation: @creation),
@@ -115,23 +106,24 @@ sprayed_options = [
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-2"></div>
-                                            <div class="col-8">
-                                                <%= f.text_field :name, label_class: "creation-form-label mt-1 mb-3" %>
-                                                <%= f.text_field :code, label: "Code (optional)", label_class: "creation-form-label mt-1 mb-3" %>
+                                            <div class="col-8 mt-3">
+                                                <%= f.text_field :name, label_class: "form-label mt-1 mb-3" %>
+                                                <%= f.text_field :code, label: "Code (optional)", label_class: "form-label mt-1 mb-3" %>
                                                 <%= f.collection_select :land_type_id,
-                                                    LandType.all, :id, :category, {label: "Habitat Type", label_class: "creation-form-label mt-1 mb-3"} %>
-                                                <%= f.number_field :area, label: "Area (ha)", step: :any, value: "", label_class: "creation-form-label mt-1 mb-3" %>
+                                                    LandType.all, :id, :category, {label: "Habitat Type", label_class: "form-label mt-1 mb-3"} %>
+                                                <%= f.number_field :area, label: "Area (ha)", step: :any,
+                                                    value: "", label_class: "form-label mt-1 mb-3" %>
                                                 <%= f.collection_select :tillage_score, tillage_options, :last, :first,
-                                                    {label: "Tillage Practice", label_class: "creation-form-label mt-1 mb-3" } %>
+                                                    {label: "Tillage Practice", label_class: "form-label mt-1 mb-3" } %>
                                                 <%= f.collection_select :rotation_score, rotation_options, :last, :first,
-                                                    {label: "Rotation Practice", label_class: "creation-form-label mt-1 mb-3" } %>
+                                                    {label: "Rotation Practice", label_class: "form-label mt-1 mb-3" } %>
                                                 <%= f.collection_select :sprayed, sprayed_options, :last, :first,
-                                                    {label: "Sprayed", label_class: "creation-form-label mt-1 mb-3" } %>
+                                                    {label: "Sprayed", label_class: "form-label mt-1 mb-3" } %>
                                             </div>
                                         <div class="col-2"></div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div class="d-flex align-items-center justify-content-between mt-5">
                                     <% if @creation %>
                                         <%= link_to farm_creation_path(:lands, **farm_and_estate_ids) do %>
                                             <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
@@ -148,9 +140,64 @@ sprayed_options = [
                             </div>
                         <% end %>
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-2"></div>
                 </div>
             </div>
+            <% else %>
+            <div class="col-2"></div>
+            <div class="col-8 mb-5">
+                <%= render 'shared/farms/edit/navbar', section: "Nature" %>
+                <div class="row mt-2">
+                    <div class="col-12 d-flex justify-content-center px-4">
+                        <%= link_to "Biodiversity",
+                            edit_farm_biodiversity_survey_path(@farm),
+                            class: "edit-sub-link" %>
+                        <%= link_to "Lands",
+                            farm_lands_path(@farm),
+                            class: "edit-sub-link-active mx-5" %>
+                        <%= link_to "Hedgerows",
+                            farm_hedgerows_path(@farm),
+                            class: "edit-sub-link" %>
+                    </div>
+                </div>
+                <%= bootstrap_form_with model: @land,
+                    url: farm_lands_path(@farm, creation: @creation),
+                    method: :post do |f| %>
+                    <div class="shadow farm-edit-form-card pt-4 pb-3 px-4 d-flex
+                        flex-column justify-content-between mt-3">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8 mt-3">
+                                    <%= f.text_field :name, label_class: "form-label mt-1 mb-3" %>
+                                    <%= f.text_field :code, label: "Code (optional)", label_class: "form-label mt-1 mb-3" %>
+                                    <%= f.collection_select :land_type_id,
+                                        LandType.all, :id, :category, {label: "Habitat Type", label_class: "form-label mt-1 mb-3"} %>
+                                    <%= f.number_field :area, label: "Area (ha)", step: :any,
+                                        value: "", label_class: "form-label mt-1 mb-3" %>
+                                    <%= f.collection_select :tillage_score, tillage_options, :last, :first,
+                                        {label: "Tillage Practice", label_class: "form-label mt-1 mb-3" } %>
+                                    <%= f.collection_select :rotation_score, rotation_options, :last, :first,
+                                        {label: "Rotation Practice", label_class: "form-label mt-1 mb-3" } %>
+                                    <%= f.collection_select :sprayed, sprayed_options, :last, :first,
+                                        {label: "Sprayed", label_class: "form-label mt-1 mb-3" } %>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-5">
+                            <%= link_to farm_lands_path(@farm) do %>
+                                <i class="fas fa-times fa-2x farm-creation-arrow"></i>
+                            <% end %>
+                            <button type="submit" class="btn farm-creation-arrow-button">
+                                <i class="fas fa-save fa-2x farm-creation-arrow"></i>
+                            </button>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="col-2"></div>
+            <% end %>
         </div>
     </div>
 </div>

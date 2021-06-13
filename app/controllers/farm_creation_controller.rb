@@ -23,7 +23,15 @@ class FarmCreationController < ApplicationController
 
     def update
         farm = Farm.find(params[:farm_id])
-        farm.update(farm_params)
+        fixed_params = {}
+        farm_params.each do |key, value|
+            if value == ""
+                fixed_params[key] = 0
+            else
+                fixed_params[key] = value
+            end
+        end
+        farm.update(fixed_params)
         redirect_to wizard_path(
             next_step,
             farm_id: farm.id

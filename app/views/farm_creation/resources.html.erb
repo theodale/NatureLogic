@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2">
+            <div class="col-3">
                 <ul class="nav d-flex flex-column mt-3 creation-step-nav align-items-center">
                     <li class="nav-item mt-3">
                         <%= link_to "Start",
@@ -68,18 +68,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-10 pr-5 mb-5">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <div class="farm-creation-form-header mt-3 mb-3 py-2 pl-4">
-                            Resources
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-                <div class="row no-gutters">
-                    <div class="col-1"></div>
+            <div class="col-9 pr-5 mb-5">
+                <div class="row no-gutters mt-3">
                     <div class="col-10">
                         <%= bootstrap_form_with model: @farm,
                             url: wizard_path(:resources,  **farm_and_estate_ids),
@@ -89,24 +79,54 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-2"></div>
-                                        <div class="col-8">
-                                            <%= f.number_field :artificial_fertiliser_use, step: :any, value: "",
-                                                label: "Artificial Fertiliser Use (kg)", label_class: "creation-form-label mt-1 mb-3" %>
+                                        <div class="col-8 mt-3">
+                                            <% if @farm.artificial_fertiliser_use != 0.0 %>
+                                            <%= f.number_field :artificial_fertiliser_use, step: :any,
+                                                label: "Artificial Fertiliser Use (kg)", label_class: "form-label mt-1 mb-3" %>
+                                            <% else %>
+                                                <%= f.number_field :artificial_fertiliser_use, step: :any, value: "",
+                                                label: "Artificial Fertiliser Use (kg)", label_class: "form-label mt-1 mb-3" %>
+                                            <% end %>
+                                            <% if @farm.agriculture_products_spend != 0.0 %>
+                                            <%= f.number_field :agriculture_products_spend, step: :any,
+                                                label: "Agriculture Products Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% else %>
                                             <%= f.number_field :agriculture_products_spend, step: :any, value: "",
-                                                label: "Agriculture Products Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                                label: "Agriculture Products Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% end %>
+                                            <% if @farm.wood_and_wood_products_spend != 0.0 %>
+                                            <%= f.number_field :wood_and_wood_products_spend, step: :any,
+                                                label: "Wood and Wood Products Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% else %>
                                             <%= f.number_field :wood_and_wood_products_spend, step: :any, value: "",
-                                                label: "Wood and Wood Products Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                                label: "Wood and Wood Products Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% end %>
+                                            <% if @farm.pesticides_spend != 0.0 %>
+                                            <%= f.number_field :pesticides_spend, step: :any,
+                                                label: "Pesticides Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% else %>
                                             <%= f.number_field :pesticides_spend, step: :any, value: "",
-                                                label: "Pesticides Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                                label: "Pesticides Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% end %>
+                                            <% if @farm.machinery_and_equipment_spend != 0.0 %>
+                                            <%= f.number_field :machinery_and_equipment_spend, step: :any,
+                                                label: "Machinery and Equipment Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% else %>
                                             <%= f.number_field :machinery_and_equipment_spend, step: :any, value: "",
-                                                label: "Machinery and Equipment Spend (£)", label_class: "creation-form-label mt-1 mb-3" %>
+                                                label: "Machinery and Equipment Spend (£)", label_class: "form-label mt-1 mb-3" %>
+                                            <% end %>
+                                            <% if @farm.machinery_and_equipment_spend != 0.0 %>
+                                            <%= f.number_field :other_spend, step: :any, label: "Other Spend (£)",
+                                                label_class: "form-label mt-1 mb-3"  %>
+                                            <% else %>
                                             <%= f.number_field :other_spend, step: :any, value: "", label: "Other Spend (£)",
-                                                label_class: "creation-form-label mt-1 mb-3"  %>
+                                                label_class: "form-label mt-1 mb-3"  %>
+                                            <% end %>
                                         </div>
                                         <div class="col-2"></div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div class="d-flex align-items-center justify-content-between mt-5">
                                     <%= link_to wizard_path(:energy, **farm_and_estate_ids) do %>
                                         <i class="fas fa-arrow-left fa-2x farm-creation-arrow"></i>
                                     <% end %>
@@ -117,7 +137,7 @@
                             </div>
                         <% end %>
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-2"></div>
                 </div>
             </div>
         </div>

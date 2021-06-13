@@ -1,6 +1,8 @@
 class Estate < ApplicationRecord
     has_many :farm_timelines
     belongs_to :estate_user
+    has_one :target
+    accepts_nested_attributes_for :target
 
     def get_total quantity
         total = 0
@@ -50,4 +52,21 @@ class Estate < ApplicationRecord
         end
     end
 
+    def total_area
+        total_area = 0
+        self.farm_timelines.each do |farm_timeline|
+            @farm = Farm.find(farm_timeline.initial_farm_id)
+            total_area += @farm.total_area
+        end
+        return total_area
+    end
+
+    def total_number_of_livestock
+        amount = 0
+        self.farm_timelines.each do |farm_timeline|
+            @farm = Farm.find(farm_timeline.initial_farm_id)
+            amount += (@farm.number_of_cows + @farm.number_of_sheep)
+        end
+        return amount
+    end
 end

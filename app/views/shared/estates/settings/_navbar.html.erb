@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg sub-navbar">
+    <ul class="navbar-nav mr-auto justify-content-between w-100">
+        <li class="nav-item">
+        <% if section == "estate" %>
+            <%= link_to "Estate",
+                "#",
+                class: "nav-link sub-nav-link active" %>
+        <% else %>
+            <%= link_to "Estate",
+                estate_settings_estate_path(@current_estate_user.estate),
+                class: "nav-link sub-nav-link " %>
+        <% end %>
+        </li>
+        <li class="nav-item">
+        <% if section == "farms" %>
+        <%= link_to "Farms", "#",
+            class: "nav-link sub-nav-link active" %>
+        <% else %>
+            <%= link_to "Farms",
+                estate_settings_farms_path(@current_estate_user.estate),
+                class: "nav-link sub-nav-link " %>
+        <% end %>
+        </li>
+        <li class="nav-item">
+        <% if section == "members" %>
+            <%= link_to "Members", "#",
+                class: "nav-link sub-nav-link active" %>
+        <% else %>
+            <%= link_to "Members",
+                estate_settings_estate_path(@current_estate_user.estate),
+                class: "nav-link sub-nav-link " %>
+        <% end %>
+        </li>
+        <li class="nav-item">
+        <% if section == "targets" %>
+            <%= link_to "Targets", "#",
+                class: "nav-link sub-nav-link active" %>
+        <% else %>
+            <%= link_to "Targets",
+                estate_settings_targets_path(@current_estate_user.estate),
+                class: "nav-link sub-nav-link " %>
+        <% end %>
+        </li>
+    </ul>
+</nav>

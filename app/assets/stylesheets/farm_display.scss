@@ -13,10 +13,6 @@
   color: fade-out(black, 0.4);
 }
 
-.snapshot-card:hover {
-  background-color: fade-out(grey, 0.9);
-}
-
 .carbon-chart-card-body {
   height: 550px;
 }
@@ -31,10 +27,6 @@
 
 .uppercase {
   text-transform: uppercase;
-}
-
-.snapshot-navbar-title {
-  color: fade-out(black, 0.3) !important;
 }
 
 .snapshot-overview-card {

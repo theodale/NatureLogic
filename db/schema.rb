@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_110722) do
+ActiveRecord::Schema.define(version: 2021_06_11_163221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_110722) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "location"
+    t.float "carbon_price"
     t.index ["estate_user_id"], name: "index_estates_on_estate_user_id"
   end
 
@@ -193,8 +194,6 @@ ActiveRecord::Schema.define(version: 2021_06_02_110722) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "location"
-    t.string "latitude"
-    t.string "longitude"
     t.float "total_diesel_use", default: 0.0
     t.float "total_gas_use", default: 0.0
     t.float "total_electricity_use", default: 0.0
@@ -209,6 +208,9 @@ ActiveRecord::Schema.define(version: 2021_06_02_110722) do
     t.boolean "created", default: false
     t.bigint "farm_timeline_id"
     t.integer "year"
+    t.string "postcode"
+    t.string "farm_type"
+    t.string "region"
     t.index ["farm_timeline_id"], name: "index_farms_on_farm_timeline_id"
   end
 
@@ -326,11 +328,12 @@ ActiveRecord::Schema.define(version: 2021_06_02_110722) do
     t.integer "plant_health", default: 0
     t.integer "root_growth", default: 0
     t.integer "aggregate_stability", default: 0
-    t.integer "soil_colour", default: 0
-    t.integer "soil_smell", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", default: "Unnamed Sample"
+    t.string "soil_colour"
+    t.string "soil_smell"
+    t.string "earthworm_count"
     t.index ["in_field_soil_test_id"], name: "index_soil_samples_on_in_field_soil_test_id"
   end
 
@@ -382,17 +385,16 @@ ActiveRecord::Schema.define(version: 2021_06_02_110722) do
   end
 
   create_table "targets", force: :cascade do |t|
-    t.bigint "farm_id"
     t.float "net_carbon_emission", default: 0.0
-    t.float "defra_habitat_score", default: 0.0
-    t.float "space_for_nature_score", default: 0.0
-    t.float "countryside_stewardship_score", default: 0.0
-    t.float "biodiversity_score", default: 0.0
-    t.float "field_based_soil_health_score", default: 0.0
-    t.float "lab_based_soil_health_score", default: 0.0
     t.float "mean_SOC", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "nature_positive_areas"
+    t.float "sustainable_practices"
+    t.float "soil_health"
+    t.bigint "estate_id"
+    t.bigint "farm_id"
+    t.index ["estate_id"], name: "index_targets_on_estate_id"
     t.index ["farm_id"], name: "index_targets_on_farm_id"
   end
 

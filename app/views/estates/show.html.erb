@@ -8,27 +8,26 @@
         </div>
         <div class="row">
             <div class="col-8">
-                <div class="card farms-card shadow">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold card-header-text">Your Farms</h6>
-                    </div>
-                    <div class="card-body">
+                <div class="estate-farms-card shadow mb-5 d-flex flex-column justify-content-between p-4">
+                    <div>
                         <% if @estate.farm_timelines.length != 0 %>
                         <table class="table table-bordered farms-table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Farm Name</th>
-                                    <th>Location</th>
-                                    <th>Farm User</th>
+                                    <th class="text-center">Farm Name</th>
+                                    <th class="text-center">Location</th>
+                                    <th class="text-center">Area (ha)</th>
+                                    <th class="text-center">Farm User</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% @estate.farm_timelines.each do |farm_timeline| %>
                                 <tr>
-                                    <td class="table-body-text name-data"><%= farm_timeline.initial_farm.name %></td>
-                                    <td class="table-body-text location-data"><%= farm_timeline.initial_farm.location %></td>
-                                    <td class="table-body-text location-data">
+                                    <td class="table-body-text name-data text-center"><%= farm_timeline.initial_farm.name %></td>
+                                    <td class="table-body-text location-data text-center"><%= farm_timeline.initial_farm.location %></td>
+                                    <td class="table-body-text location-data text-center"><%= farm_timeline.initial_farm.total_area %></td>
+                                    <td class="table-body-text location-data text-center">
                                         <% if farm_timeline.farm_user %>
                                             <%= farm_timeline.farm_user.email %>
                                         <% else %>
@@ -38,9 +37,10 @@
                                         <% end %>
                                     </td>
                                     <td class="view-action-data">
-                                        <%= link_to "View",
-                                            farm_path(farm_timeline.initial_farm),
-                                            class: "view-farm-link" %>
+                                        <%= link_to farm_path(farm_timeline.initial_farm),
+                                            class: "view-farm-link" do %>
+                                            <i class="fas fa-arrow-right"></i>
+                                            <% end %>
                                     </td>
                                 </tr>
                                 <% end %>
@@ -51,9 +51,11 @@
                                 You have no farms!
                         </div>
                         <% end %>
-                        <%= link_to "Add New Farm To Estate",
-                            estate_add_farm_path(@estate),
-                            class: "btn btn-default btn-success" %>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <%= link_to estate_add_farm_path(@estate), class: "add-farm-link" do %>
+                            <i class="fas fa-plus-circle fa-2x"></i>
+                        <% end %>
                     </div>
                 </div>
             </div>
@@ -71,8 +73,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="card short-farms-card shadow">
-
+                <div class="card shadow border-primary snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Total Area (ha)</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @estate.total_area %></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-area fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-warning snapshot-card mb-4" >
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Total Livestock</div>
+                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @estate.total_number_of_livestock %></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-paw fa-2x snapshot-card-value"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
