@@ -21,32 +21,32 @@
                         <%= bootstrap_form_with model: @estate,
                             url: estate_path(@estate),
                             method: :put, class: "w-100 h-100" do |f| %>
-                            <div class="naturelogic-card purple shadow mb-5 d-flex p-4 d-flex
+                            <div class="form-card purple shadow mb-5 d-flex p-4 d-flex
                                 flex-column justify-content-between">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-2"></div>
-                                            <div class="col-8 mt-3">
-                                                <% if params[:updated] %>
-                                                <div class="alert alert-success alert-dismissible" role="alert">
-                                                    Estate details updated!
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <% end %>
-                                                <%= f.text_field :name %>
-                                                <%= f.text_field :location %>
-                                                <%= f.number_field :carbon_price %>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                        <div class="col-8 mt-3">
+                                            <% if params[:updated] %>
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                                Estate details updated!
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                            <div class="col-2"></div>
+                                            <% end %>
+                                            <%= f.text_field :name %>
+                                            <%= f.text_field :location %>
+                                            <%= f.number_field :carbon_price %>
                                         </div>
+                                        <div class="col-2"></div>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-end mt-5">
-                                        <button type="submit" class="btn farm-creation-arrow-button">
-                                            <i class="fas fa-save fa-2x farm-creation-arrow"></i>
-                                        </button>
-                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-end mt-5">
+                                    <button type="submit" class="btn farm-creation-arrow-button">
+                                        <i class="fas fa-save fa-2x farm-creation-arrow"></i>
+                                    </button>
+                                </div>
                                 </div>
                             <% end %>
                         </div>

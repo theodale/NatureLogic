@@ -1,4 +1,4 @@
-<%= render 'shared/farms/sidebar' %>
+<%= render 'shared/farms/sidebar', page: "data" %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -8,7 +8,7 @@
         </div>
         <div class="row mb-2 px-3">
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -18,21 +18,21 @@
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to farm_edit_details_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Details
                                 </div>
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to farm_edit_livestock_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Livestock
                                 </div>
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to edit_farm_target_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Targets
                                 </div>
                             <% end %>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -52,14 +52,14 @@
                         <div class="row justify-content-center">
                             <%= link_to farm_edit_energy_usage_path(@farm),
                                 class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Energy Usage
                                 </div>
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to farm_edit_resources_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Resource Use
                                 </div>
                             <% end %>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -79,21 +79,21 @@
                         <div class="row justify-content-center">
                             <%= link_to edit_farm_biodiversity_survey_path(@farm),
                                 class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Biodiversity Survey
                                 </div>
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to farm_lands_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Lands
                                 </div>
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to farm_hedgerows_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Hedgerows
                                 </div>
                             <% end %>
@@ -104,7 +104,7 @@
         </div>
         <div class="row mb-4 px-3">
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -115,7 +115,7 @@
                         <div class="row justify-content-center">
                             <%= link_to edit_farm_lab_based_soil_test_path(@farm),
                                 class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Lab-Based Soil Test
                                 </div>
                             <% end %>
@@ -123,7 +123,7 @@
                         <div class="row justify-content-center">
                             <%= link_to edit_farm_in_field_soil_test_path(@farm),
                                 class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     In-Field Soil Test
                                 </div>
                             <% end %>
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -142,8 +142,15 @@
                         </div>
                         <div class="row justify-content-center">
                             <%= link_to edit_farm_sustainability_survey_path(@farm), class: "edit-link" do %>
-                                <div class="py-2 px-4 snapshot-value-div mb-2 edit-link-div">
-                                    Sustainable Practices
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
+                                    Practices
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="row justify-content-center">
+                            <%= link_to edit_farm_schemes_survey_path(@farm), class: "edit-link" do %>
+                                <div class="py-2 px-4 value-div mb-2 edit-link-div">
+                                    Schemes
                                 </div>
                             <% end %>
                         </div>

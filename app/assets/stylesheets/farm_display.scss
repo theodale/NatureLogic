@@ -1,15 +1,15 @@
-.snapshot-card {
+.value-card {
   border-top: 0 !important;
   border-right: 0 !important;
   border-bottom: 0 !important;
   border-width: medium !important;
 }
 
-.snapshot-card-label {
+.value-card-label {
   color: fade-out(#4e73df, 0.1);
 }
 
-.snapshot-card-value {
+.value-card-value {
   color: fade-out(black, 0.4);
 }
 
@@ -29,15 +29,6 @@
   text-transform: uppercase;
 }
 
-.snapshot-overview-card {
-  border-radius: 25px !important;
-}
-
-.snapshot-value-div {
-  border-radius: 25px !important;
-  background-color: fade-out(#23a776, 0.9);
-}
-
 .carbon-contributions-header-div {
   width: 90%;
   border-radius: 25px !important;
@@ -50,10 +41,6 @@
 
 .text-align-center {
   text-align: center;
-}
-
-.snapshot-card-body {
-  height: 350px;
 }
 
 .red-traffic-light {

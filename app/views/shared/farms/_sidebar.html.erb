@@ -1,70 +1,98 @@
-<div class="sidebar d-flex flex-column justify-content-between">
+<div class="sidebar d-flex flex-column h-100 justify-content-between pb-4">
     <div>
         <div class="sidebar-heading">
             NatureLogic
         </div>
         <hr class="sidebar-divider"/>
-        <div class="sidebar-item">
-            <%= link_to farm_snapshot_path(@farm), class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Snapshot</span>
-                    <i class="fas fa-search sidebar-icon"></i>
-                </div>
-            <% end %>
-        </div>
-        <div class="sidebar-item">
-            <%= link_to farm_carbon_path(@farm), class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Performance</span>
-                    <i class="fas fa-tachometer-alt sidebar-icon"></i>
-                </div>
-            <% end %>
-        </div>
-        <div class="sidebar-item">
-            <%= link_to farm_strategy_path(@farm), class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Strategy</span>
-                    <i class="fas fa-brain sidebar-icon"></i>
-                </div>
-            <% end %>
-        </div>
-        <div class="sidebar-item">
-            <%= link_to edit_farm_path(@farm), class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Data</span>
-                    <i class="fas fa-file-alt sidebar-icon"></i>
-                </div>
-            <% end %>
-        </div>
-        <div class="sidebar-item">
-            <%= link_to farm_profile_path(@farm), class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Profile</span>
-                    <i class="fas fa-user sidebar-icon"></i>
-                </div>
-            <% end %>
-        </div>
-    </div>
-    <div class="mb-4">
-        <div class="sidebar-item">
-        <% if @estate_user %>
-            <%= link_to estate_path(@estate_user.estate),
-                class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Back to Estate</span>
-                    <i class="fas fa-arrow-circle-right sidebar-icon"></i>
-                </div>
-            <% end %>
-        <% elsif @farm_user %>
-            <%= link_to destroy_farm_user_session_path,
-                    method: :delete,
-                    class: "sidebar-link" do %>
-                <div class="sidebar-item-content">
-                    <span>Logout</span>
-                    <i class="fas fa-sign-out-alt sidebar-icon"></i>
-                </div>
+        <%= link_to farm_snapshot_path(@farm),
+            class: "no-hover-underline" do %>
+            <% if page == "snapshot" %>
+            <div class="sidebar-link-content active">
+                <span>Snapshot</span>
+                <i class="fas fa-glasses"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content">
+                <span>Snapshot</span>
+                <i class="fas fa-glasses"></i>
+            </div>
             <% end %>
         <% end %>
-        </div>
+        <%= link_to farm_carbon_path(@farm),
+            class: "no-hover-underline" do %>
+            <% if page == "performance" %>
+            <div class="sidebar-link-content active">
+                <span>Performance</span>
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content non-active">
+                <span>Performance</span>
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <% end %>
+        <% end %>
+        <%= link_to farm_strategy_path(@farm),
+            class: "no-hover-underline" do %>
+            <% if page == "strategy" %>
+            <div class="sidebar-link-content active">
+                <span>Strategy</span>
+                <i class="fas fa-paper-plane"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content">
+                <span>Strategy</span>
+                <i class="fas fa-paper-plane"></i>
+            </div>
+            <% end %>
+        <% end %>
+        <%= link_to edit_farm_path(@farm),
+            class: "no-hover-underline" do %>
+            <% if page == "data" %>
+            <div class="sidebar-link-content active">
+                <span>Data</span>
+                <i class="fas fa-database"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content">
+                <span>Data</span>
+                <i class="fas fa-database"></i>
+            </div>
+            <% end %>
+        <% end %>
+        <%= link_to farm_profile_path(@farm),
+            class: "no-hover-underline" do %>
+            <% if page == "profile" %>
+            <div class="sidebar-link-content active">
+                <span>Profile</span>
+                <i class="fas fa-user"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content">
+                <span>Profile</span>
+                <i class="fas fa-user"></i>
+            </div>
+            <% end %>
+        <% end %>
+    </div>
+    <div>
+        <% if @estate_user %>
+        <%= link_to estate_overview_path(@estate_user.estate),
+            class: "no-hover-underline" do %>
+            <div class="sidebar-link-content">
+                <span>Back to Estate</span>
+                <i class="fas fa-arrow-circle-right sidebar-icon"></i>
+            </div>
+        <% end %>
+        <% elsif @farm_user %>
+        <%= link_to destroy_farm_user_session_path,
+            method: :delete,
+            class: "no-hover-underline" do %>
+            <div class="sidebar-link-content">
+                <span>Sign Out</span>
+                <i class="fas fa-sign-out-alt sidebar-icon"></i>
+            </div>
+        <% end %>
+        <% end %>
     </div>
 </div>

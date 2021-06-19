@@ -12,14 +12,34 @@
   margin-left: 200px;
 }
 
-.naturelogic-card {
+.form-card {
   min-height: 550px;
   border-radius: 20px;
   border-style: solid;
   border-width: 3px;
 }
 
-.naturelogic-card.purple {
+.no-right-left-borders {
+  border-right: none !important;
+  border-left: none !important;
+}
+
+.no-left-border {
+  border-left: none !important;
+}
+
+.no-right-border {
+  border-right: none !important;
+}
+
+.vertical-center {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* Colours */
+
+.form-card.purple {
   border-color: rgba(0, 0, 255, 0.4);
 }
 
@@ -35,17 +55,84 @@
   color: rgba(0, 0, 0, 0.75);
 }
 
+.dark-grey {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.light-grey {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.green {
+  color: #a1d055;
+}
+
+.light-green {
+  color: #b9ed64;
+}
+
+.blue {
+  color: rgba(0, 0, 255, 0.75);
+}
+
+.light-blue {
+  color: #5bcde8;
+}
+
+.red {
+  color: #d92626;
+}
+
+.pink {
+  color: #ea5ba8;
+}
+
+.yellow {
+  color: #fbb03b;
+}
+
+.species-value-div {
+  border-radius: 25px;
+  min-width: 75px;
+  color: white;
+  text-align: center;
+  background-color: rgba(35, 167, 118, 0.1);
+}
+
+.light-green-background {
+  background-color: rgba(35, 167, 118, 0.1);
+}
+
+.table-body-text {
+  color: #858796;
+}
+
+/* Backgrounds */
+
+.moss-background {
+  background-image: url("/assets/moss-background.jpg");
+}
+
+/* Text */
+
+.text-large {
+  font-size: 125%;
+}
+
+.text-x-large {
+  font-size: 150%;
+}
+
+.wide-text {
+  font-stretch: expanded;
+}
+
 /* Navbars */
 
 .naturelogic-navbar {
-  background-color: rgba(0, 0, 205, 0.7);
+  background-color: #031b52;
   color: white;
   border-radius: 10px;
-}
-
-.sidebar-divider {
-  background-color: white;
-  width: 85%;
 }
 
 .sub-navbar {
@@ -77,6 +164,10 @@
   color: rgba(0, 0, 0, 0.65);
 }
 
+.form-card {
+  border-radius: 25px !important;
+}
+
 /* Sidebars */
 
 .sidebar {
@@ -86,7 +177,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(0, 139, 139, 0.9);
+  background-color: rgba(3, 27, 82, 0.7);
   overflow-x: hidden;
   padding-top: 20px;
 }
@@ -101,7 +192,7 @@
 .sidebar-link-content {
   margin-left: auto;
   margin-right: auto;
-  padding: 3% 7% 3% 7%;
+  padding: 5% 7% 5% 7%;
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
@@ -111,15 +202,17 @@
   width: 90%;
 }
 
+.sidebar-divider {
+  background-color: white;
+  width: 85%;
+}
+
 .sidebar-link-content:hover {
   font-size: 115%;
 }
 
 .sidebar-link-content.active {
-  border-style: solid;
-  border-color: darkorange;
-  border-width: 2px;
-  background-color: orange;
+  background-color: rgba(255, 122, 5, 0.9);
   border-radius: 20px;
   font-size: 100% !important;
 }
@@ -129,4 +222,23 @@
   font-weight: normal !important;
   color: white !important;
   font-size: 100% !important;
+}
+
+/* displays */
+
+.value-div {
+  border-radius: 25px;
+  min-width: 275px;
+  text-align: center;
+  background-color: rgba(35, 167, 118, 0.1);
+}
+
+.value-bubble {
+  border-radius: 25px;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.value-bubble.green {
+  background-color: rgba(35, 167, 118, 0.1);
 }

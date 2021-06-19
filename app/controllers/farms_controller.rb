@@ -61,13 +61,6 @@ class FarmsController < ApplicationController
     # Display
 
     def snapshot
-        if params[:skip_creation]
-            @farm.created = true
-            @farm.save
-        end
-        if !@farm.created
-            redirect_to farm_creation_path(:start, farm_id: @farm.id)
-        end
     end
 
     def carbon

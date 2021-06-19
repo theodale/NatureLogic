@@ -2,7 +2,6 @@ class BiodiversitySurveysController < ApplicationController
 
     def edit
         @farm = Farm.find(params[:farm_id])
-        @creation = params[:creation]
         if @farm.biodiversity_survey
             @biodiversity_survey = @farm.biodiversity_survey
         else
@@ -11,8 +10,6 @@ class BiodiversitySurveysController < ApplicationController
     end
 
     def update
-        logger.debug "BS PARAMS"
-        logger.debug biodiversity_survey_params
         @farm = Farm.find(params[:farm_id])
         fixed_params = {}
         biodiversity_survey_params.each do |key, value|
@@ -45,10 +42,20 @@ class BiodiversitySurveysController < ApplicationController
             :number_of_crop_types,
             :number_of_heritage_crops,
             :number_of_livestock_breeds,
-            :number_of_rare_breeds
+            :number_of_rare_breeds,
+            :grassland_condition,
+            :threatened_species,
+            :threatened_species_description,
+            :number_of_vascular_plant_species,
+            :number_of_wild_bee_species,
+            :number_of_farmland_bird_species,
+            :number_of_butterfly_species,
+            :number_of_mammal_species
         )
     end
 
 end
+
+
 
 

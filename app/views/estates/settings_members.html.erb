@@ -1,0 +1,83 @@
+<%= render 'shared/estates/sidebar', page: "settings" %>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <%= render 'shared/estates/navbar' %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <%= render 'shared/estates/settings/navbar', section: "members" %>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                    <div class="form-card purple shadow mb-5 p-4 fluid-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="grey">Estate Farms</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                A farm member will be provided with a login that will allow
+                                them to view and edit the information of a single farm.
+                            </p>
+                            <% if @estate.farm_timelines.length != 0 %>
+                                <table class="table table-bordered farms-table">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center">Farm Name</th>
+                                            <th class="text-center">Location</th>
+                                            <th class="text-center">Member</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% @estate.farm_timelines.each do |farm_timeline| %>
+                                        <tr class="table-body-text text-center">
+                                            <td class="no-right-border">
+                                                <%= farm_timeline.initial_farm.name %>
+                                            </td>
+                                            <td class="no-right-left-borders">
+                                                <%= farm_timeline.initial_farm.location %>
+                                            </td>
+                                            <td class="no-right-left-borders">
+                                                <% if farm_timeline.farm_user %>
+                                                <%= farm_timeline.farm_user.email %>
+                                                <% else %>
+                                                <%= link_to "Add Member",
+                                                    estate_add_farm_user_path(@estate, farm_timeline_id: farm_timeline.id),
+                                                    class: "view-farm-link" %>
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                                <% else %>
+                                <div class="alert alert-primary mt-3" role="alert">
+                                    You have no farms!
+                                </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>
+

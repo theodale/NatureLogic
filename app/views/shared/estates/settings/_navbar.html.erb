@@ -27,7 +27,7 @@
                 class: "nav-link sub-nav-link active" %>
         <% else %>
             <%= link_to "Members",
-                estate_settings_estate_path(@current_estate_user.estate),
+                estate_settings_members_path(@current_estate_user.estate),
                 class: "nav-link sub-nav-link " %>
         <% end %>
         </li>
@@ -37,7 +37,7 @@
                 class: "nav-link sub-nav-link active" %>
         <% else %>
             <%= link_to "Targets",
-                estate_settings_targets_path(@current_estate_user.estate),
+                edit_estate_target_path(@current_estate_user.estate),
                 class: "nav-link sub-nav-link " %>
         <% end %>
         </li>

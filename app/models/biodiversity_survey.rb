@@ -7,7 +7,30 @@ class BiodiversitySurvey < ApplicationRecord
         score += 2 if self.area_in_existing_agri_environment_schemes > 0
         score += 6 if self.area_of_grass_wildflower_scrub_not_for_production > 0
         score += 18 if self.farm.length_of_hedgerows > 0
-        score += self.wider_countryside_description
+        if self.wider_countryside_description ==
+            "A diverse landscape, with small fields, traditional farming practices and frequent patches of natural habitat."
+            score += 12
+        elsif self.wider_countryside_description ==
+            "An intermediate landscape, with a mix of traditional and modern farming practices and some patches of natural habitat."
+            score += 6
+        end
+        score += 6 if self.farm.area_of("Grassland") > 0
+        if self.grassland_condition ==
+            "Cover of rye-grasses and white clover is less than 10% and cover of wildflowers is more than 30%."
+            score += 12
+        elsif self.grassland_condition ==
+            "Cover of rye-grasses and white clover is less than 30% and cover of wildflowers is 10% or more."
+            score += 6
+        end
+        score -= 6 if self.farm.area_of("Cropland") > 0
+        score += 18 if (self.farm.area_of("Heathland & Scrub") + farm.area_of("Woodland")) > 9
+        score += 6 if (self.farm.area_of("Heathland & Scrub") + farm.area_of("Woodland"))  > 0 and (self.farm.area_of("Heathland & Scrub") + farm.area_of("Woodland")) < 10
+        score += 18 if self.farm.length_of_hedgerows > 2
+        score += 6 if self.farm.length_of_hedgerows > 0 and self.farm.length_of_hedgerows < 3
+        score += 18 if self.farm.tree_coverage_percentage > 9
+        score += 6 if self.farm.tree_coverage_percentage > 0 and self.farm.tree_coverage_percentage < 10
+        score += 18 if self.farm.ecological_focus_area_percentage > 9
+        score += 6 if self.farm.ecological_focus_area_percentage > 0 and self.farm.ecological_focus_area_percentage < 10
         return score
     end
 
@@ -23,73 +46,37 @@ class BiodiversitySurvey < ApplicationRecord
         return score
     end
 
-    def management_practices_score
-        score = 0
-        if self.crop_protection_use
-            score += 5
-        else
-            score -= 15
-        end
-        if self.shallow_tillage || self.no_tillage
-            score += 3
-        elsif self.legumes_or_grass_cover_in_crop_rotation || self.grow_cover_crops || self.grow_three_cover_crops ||
-            self.soil_covered_cereal_grass_or_cover_crops
-            score += 2
-        elsif self.no_soil_health_measures
-            score -= 4
-        elsif self.conventional_tillage
-            score -= 5
-        end
-        if self.solid_manure || self.compost
-            score += 7
-        elsif self.residues_not_removed || self.grass_mix_incorporated || self.organic_fertilizers_in_response
-            score += 2
-        end
-        if self.slurry_mineral_fertilizer_not_used || self.mowing_grazing_delayed
-            score += 4
-        elsif self.bird_nests_marked || self.refuge_areas || self.extensive_grazing_only
-            score += 2
-        end
-
-        if self.hedgerows_pruned_three_years || self.hedgerow_grass_margin
-            score += 2
-        end
-        if self.river_bank_vegetation_mowed_two_years
-            score += 4
-        elsif self.water_courses || self.river_bank_vegetation_left_standing || self.water_course_buffered_twelve_metres ||
-            self.water_course_cleared_regularly || self.dredge_cuttings_removed_promptly
-            score += 2
-        end
-        if self.pools_and_ponds || self.pond_ditches_buffered || self.pond_bank_vegetation_mowed_two_years ||
-            self.pond_bank_vegetation_left_standing || self.pond_plants_cleared_three_years ||
-            self.pond_cuttings_removed_promptly || self.pond_dredged_five_years || self.pond_shading_prevented
-            score += 2
-        end
-        return score
-    end
-
     def species_score
         score = 0
-        score += 5 if self.threatened_species
-        score += 2 if self.number_of_vascular_plant_species > 0
-        score += 2 if self.number_of_wild_bee_species > 0
-        score += 2 if self.number_of_farmland_bird_species > 0
-        score += 2 if self.number_of_butterfly_species > 0
-        score += 2 if self.number_of_mammal_species > 0
+        score += 18 if self.threatened_species
+        score += 18 if self.number_of_vascular_plant_species > 39
+        score += 6 if self.number_of_vascular_plant_species < 40 and self.number_of_vascular_plant_species > 0
+        score += 18 if self.number_of_wild_bee_species > 14
+        score += 6 if self.number_of_wild_bee_species > 0 and self.number_of_wild_bee_species < 15
+        score += 18 if self.number_of_farmland_bird_species > 29
+        score += 6 if self.number_of_farmland_bird_species > 0 and self.number_of_farmland_bird_species < 30
+        score += 18 if self.number_of_butterfly_species > 24
+        score += 6 if self.number_of_butterfly_species > 0 and self.number_of_butterfly_species < 25
+        score += 18 if self.number_of_mammal_species > 9
+        score += 6 if self.number_of_mammal_species > 0 and self.number_of_mammal_species < 10
         return score
     end
 
     def biodiversity_percentage_score
-        return (((habitat_score + management_practices_score +
-            genetic_diversity_score + species_score)/ 227.0) * 100).round(1)
+        total_score = self.habitat_score + genetic_diversity_score + species_score
+        return (total_score * 100 / 284.0).round(0)
     end
 
     def habitat_percentage_score
-        return (100 * habitat_score / 65.0).round(1)
+        return (100 * habitat_score / 146.0).round(1)
     end
 
     def genetic_diversity_percentage_score
-        return (100 * genetic_diversity_score / 45.0).round(1)
+        return (100 * genetic_diversity_score / 30.0).round(1)
+    end
+
+    def species_percentage_score
+        return (100 * species_score / 108.0).round(1)
     end
 
 end

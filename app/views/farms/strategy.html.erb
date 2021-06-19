@@ -1,4 +1,4 @@
-<%= render 'shared/farms/sidebar' %>
+<%= render 'shared/farms/sidebar', page: "strategy" %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -237,7 +237,7 @@
                             <div class="col-4">
                                 <div class="row justify-content-center">
                                     <div class="col-12">
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center">
                                             <b><%= @current_farm_values[:carbon_balance] %> kg</b>
                                         </div>
                                     </div>
@@ -247,15 +247,15 @@
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <% if @farm.net_emissions < @current_farm_values[:carbon_balance] %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center success-background">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center success-background">
                                             <b><%= @farm.net_emissions %> kg</b>
                                         </div>
                                         <% elsif @farm.net_emissions > @current_farm_values[:carbon_balance] %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center fail-background">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center fail-background">
                                             <b><%= @farm.net_emissions %> kg</b>
                                         </div>
                                         <% else %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center">
                                             <b><%= @farm.net_emissions %> kg</b>
                                         </div>
                                         <% end %>
@@ -274,7 +274,7 @@
                             <div class="col-4">
                                 <div class="row justify-content-center">
                                     <div class="col-12">
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center">
                                             <b><%= @current_farm_values[:space_for_nature_score] %></b>
                                         </div>
                                     </div>
@@ -284,15 +284,15 @@
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <% if @farm.space_for_nature_score > @current_farm_values[:space_for_nature_score] %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center success-background">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center success-background">
                                             <b><%= @farm.space_for_nature_score %></b>
                                         </div>
                                         <% elsif @farm.space_for_nature_score < @current_farm_values[:space_for_nature_score] %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center fail-background">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center fail-background">
                                             <b><%= @farm.space_for_nature_score %></b>
                                         </div>
                                         <% else %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center">
                                             <b><%= @farm.space_for_nature_score %></b>
                                         </div>
                                         <% end %>
@@ -311,7 +311,7 @@
                             <div class="col-4">
                                 <div class="row justify-content-center">
                                     <div class="col-12">
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center">
                                             <b><%= @current_farm_values[:defra_habitat_score] %></b>
                                         </div>
                                     </div>
@@ -321,15 +321,15 @@
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <% if @farm.defra_habitat_score > @current_farm_values[:defra_habitat_score] %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center success-background">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center success-background">
                                             <b><%= @farm.net_emissions %></b>
                                         </div>
                                         <% elsif @farm.defra_habitat_score < @current_farm_values[:defra_habitat_score] %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center fail-background">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center fail-background">
                                             <b><%= @farm.net_emissions %></b>
                                         </div>
                                         <% else %>
-                                        <div class="py-2 px-4 snapshot-value-div d-flex justify-content-center">
+                                        <div class="py-2 px-4 value-div d-flex justify-content-center">
                                             <b><%= @farm.defra_habitat_score %></b>
                                         </div>
                                         <% end %>

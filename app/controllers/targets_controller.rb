@@ -1,28 +1,28 @@
 class TargetsController < ApplicationController
 
     def edit
-        @farm = Farm.find(params[:farm_id])
-        @creation = params[:creation]
-        if @farm.target
+        if params[:farm_target]
+            @farm = Farm.find(params[:farm_id])
             @target = @farm.target
         else
-            @target = @farm.build_target
+            @estate = Estate.find(params[:estate_id])
+            if @estate.target
+                @target = @estate.target
+            else
+                @target = @estate.build_target
+            end
         end
     end
 
     def update
-        if params[:estate]
+        if params[:farm_target]
+            @farm = Farm.find(params[:farm_id])
+            @farm.target.update(targets_params)
+            redirect_to edit_farm_path(@farm)
+        else
             @estate = Estate.find(params[:estate_id])
             @estate.target.update(targets_params)
-            redirect_to estate_settings_targets_path(@estate, updated: true)
-        else
-            @farm = Farm.find(params[:farm_id])
-            if @farm.target
-                @farm.target.update(targets_params)
-            else
-                @farm.create_target(targets_params)
-            end
-            redirect_to edit_farm_path(@farm)
+            redirect_to edit_estate_target_path(@estate, updated: true)
         end
     end
 

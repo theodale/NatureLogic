@@ -12,11 +12,6 @@ class EstatesController < ApplicationController
     @estate = current_estate_user.estate
   end
 
-  def settings_targets
-    @estate = current_estate_user.estate
-    @target = @estate.target
-  end
-
   def show
     @estate = current_estate_user.estate
   end
@@ -28,6 +23,7 @@ class EstatesController < ApplicationController
 
   def create
     @estate = Estate.create(estate_params)
+    @estate.create_associations
     redirect_to estate_path(@estate)
   end
 
@@ -51,7 +47,7 @@ class EstatesController < ApplicationController
   def create_farm_user
     @farm_user = FarmUser.create(farm_user_params)
     FarmTimeline.find(params[:farm_timeline_id]).update(farm_user_id: @farm_user.id)
-    redirect_to estate_settings_estate_path(current_estate_user.estate)
+    redirect_to estate_settings_members_path(current_estate_user.estate)
   end
 
   def overview

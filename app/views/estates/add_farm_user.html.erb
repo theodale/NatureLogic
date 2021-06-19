@@ -1,4 +1,4 @@
-<%= render 'shared/estates/sidebar' %>
+<%= render 'shared/estates/sidebar', page: "settings" %>
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
@@ -9,35 +9,45 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <%= bootstrap_form_with model: @farm_user,
-                    url: estate_add_farm_user_path(farm_timeline_id: @farm_timeline.id) do |f| %>
-                <div class="estate-farms-card shadow p-4 d-flex flex-column justify-content-between">
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-8">
-                            <h4 class="estate-farms-card-header my-2">Create Farm User</h4>
-                            <%= f.email_field :email, label_class: "form-label my-3" %>
-                            <%= f.password_field :password, label_class: "form-label my-3" %>
-                            <%= f.password_field :password_confirmation, label: "Password Confirmation", label_class: "form-label my-3" %>
-                        </div>
-                        <div class="col-2"></div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <%= render 'shared/estates/settings/navbar', section: "members" %>
                     </div>
-                    <div class="d-flex justify-content-between mt-5">
-                        <%= link_to estate_path(@estate) do %>
-                            <i class="fas fa-times-circle fa-2x farm-creation-arrow"></i>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <%= bootstrap_form_with model: @farm_user,
+                            url: estate_add_farm_user_path(farm_timeline_id: @farm_timeline.id) do |f| %>
+                            <div class="form-card purple shadow mb-5 p-4
+                                fluid-container d-flex flex-column justify-content-between">
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8">
+                                        <h4 class="estate-farms-card-header my-2">Add Farm Member</h4>
+                                        <%= f.email_field :email, label_class: "form-label my-3" %>
+                                        <%= f.password_field :password, label_class: "form-label my-3" %>
+                                        <%= f.password_field :password_confirmation, label: "Password Confirmation",
+                                            label_class: "form-label my-3" %>
+                                    </div>
+                                    <div class="col-2"></div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-5">
+                                    <%= link_to estate_settings_members_path(@estate) do %>
+                                        <i class="fas fa-times-circle fa-2x farm-creation-arrow"></i>
+                                    <% end %>
+                                    <button type="submit" class="btn farm-creation-arrow-button">
+                                        <i class="fas fa-save fa-2x farm-creation-arrow"></i>
+                                    </button>
+                                </div>
+                            </div>
                         <% end %>
-                        <button type="submit" class="btn farm-creation-arrow-button">
-                            <i class="fas fa-save fa-2x farm-creation-arrow"></i>
-                        </button>
                     </div>
                 </div>
-                <% end %>
             </div>
             <div class="col-2"></div>
         </div>
     </div>
 </div>
-
-
-
 

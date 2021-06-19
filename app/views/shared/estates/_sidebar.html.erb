@@ -1,64 +1,60 @@
-<div class="sidebar">
-    <div class="d-flex flex-column h-100 justify-content-between pb-4">
-        <div>
-            <div class="sidebar-heading">
-                NatureLogic
-            </div>
-            <hr class="sidebar-divider"/>
-            <%= link_to estate_overview_path(@current_estate_user.estate),
-                class: "no-hover-underline" do %>
-                <% if page == "overview" %>
-                <div class="sidebar-link-content active">
-                    <span>Overview</span>
-                    <i class="fas fa-glasses"></i>
-                </div>
-                <% else %>
-                <div class="sidebar-link-content">
-                    <span>Overview</span>
-                    <i class="fas fa-glasses"></i>
-                </div>
-                <% end %>
-            <% end %>
-            <%= link_to estate_performance_path(@current_estate_user.estate),
-                class: "no-hover-underline" do %>
-                <% if page == "performance" %>
-                <div class="sidebar-link-content active">
-                    <span>Performance</span>
-                    <i class="fas fa-tachometer-alt"></i>
-                </div>
-                <% else %>
-                <div class="sidebar-link-content non-active">
-                    <span>Performance</span>
-                    <i class="fas fa-tachometer-alt"></i>
-                </div>
-                <% end %>
-            <% end %>
-            <%= link_to estate_settings_estate_path(@current_estate_user.estate),
-                class: "no-hover-underline" do %>
-                <% if page == "settings" %>
-                <div class="sidebar-link-content active">
-                    <span>Settings</span>
-                    <i class="fas fa-cog"></i>
-                </div>
-                <% else %>
-                <div class="sidebar-link-content">
-                    <span>Settings</span>
-                    <i class="fas fa-cog"></i>
-                </div>
-                <% end %>
-            <% end %>
+<div class="sidebar d-flex flex-column h-100 justify-content-between pb-4">
+    <div>
+        <div class="sidebar-heading">
+            NatureLogic
         </div>
-        <div>
-            <div class="sidebar-item">
-                <%= link_to destroy_estate_user_session_path,
-                    method: :delete,
-                    class: "no-hover-underline" do %>
-                    <div class="sidebar-link-content">
-                        <span>Sign Out</span>
-                        <i class="fas fa-sign-out-alt sidebar-icon"></i>
-                    </div>
-                <% end %>
+        <hr class="sidebar-divider"/>
+        <%= link_to estate_overview_path(@current_estate_user.estate),
+            class: "no-hover-underline" do %>
+            <% if page == "overview" %>
+            <div class="sidebar-link-content active">
+                <span>Overview</span>
+                <i class="fas fa-glasses"></i>
             </div>
-        </div>
+            <% else %>
+            <div class="sidebar-link-content">
+                <span>Overview</span>
+                <i class="fas fa-glasses"></i>
+            </div>
+            <% end %>
+        <% end %>
+        <%= link_to estate_performance_path(@current_estate_user.estate),
+            class: "no-hover-underline" do %>
+            <% if page == "performance" %>
+            <div class="sidebar-link-content active">
+                <span>Performance</span>
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content non-active">
+                <span>Performance</span>
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <% end %>
+        <% end %>
+        <%= link_to estate_settings_estate_path(@current_estate_user.estate),
+            class: "no-hover-underline" do %>
+            <% if page == "settings" %>
+            <div class="sidebar-link-content active">
+                <span>Settings</span>
+                <i class="fas fa-cog"></i>
+            </div>
+            <% else %>
+            <div class="sidebar-link-content">
+                <span>Settings</span>
+                <i class="fas fa-cog"></i>
+            </div>
+            <% end %>
+        <% end %>
+    </div>
+    <div>
+        <%= link_to destroy_estate_user_session_path,
+            method: :delete,
+            class: "no-hover-underline" do %>
+            <div class="sidebar-link-content">
+                <span>Sign Out</span>
+                <i class="fas fa-sign-out-alt sidebar-icon"></i>
+            </div>
+        <% end %>
     </div>
 </div>

@@ -44,8 +44,11 @@ class LandsController < ApplicationController
             :land_type_id,
             :area,
             :sprayed,
-            :tillage_score,
-            :rotation_score
+            :tillage_method,
+            :rotation_practice,
+            :habitat_condition,
+            :ecological_connectivity,
+            :strategic_significance
         )
     end
 

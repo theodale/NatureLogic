@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <%= render 'shared/farms/sidebar' %>
+    <%= render 'shared/farms/sidebar', page: "performance" %>
 </div>
 <div class="page-content">
     <div class="container-fluid">
@@ -10,28 +10,28 @@
         </div>
         <div class="row mb-4 px-3">
             <div class="col-4">
-                <div class="card shadow border-primary snapshot-card mb-4" >
+                <div class="card shadow border-primary value-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-primary text-uppercase mb-1">Net Emissions</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value"><%= @farm.net_emissions %> kg</div>
+                                <div class="text-xs font-weight-bold value-card-label text-primary text-uppercase mb-1">Net Emissions</div>
+                                <div class="h5 mb-0 font-weight-bold value-card-value"><%= @farm.net_emissions %> kg</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-industry fa-2x snapshot-card-value"></i>
+                                <i class="fas fa-industry fa-2x value-card-value"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card shadow border-warning snapshot-card mb-4" >
+                <div class="card shadow border-warning value-card mb-4" >
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold snapshot-card-label text-warning text-uppercase mb-1">Potential Offset Revenue</div>
-                                <div class="h5 mb-0 font-weight-bold snapshot-card-value">£ <%= @farm.potential_revenue_from_offset %></div>
+                                <div class="text-xs font-weight-bold value-card-label text-warning text-uppercase mb-1">Potential Offset Revenue</div>
+                                <div class="h5 mb-0 font-weight-bold value-card-value">£ <%= 0 %></div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x snapshot-card-value"></i>
+                                <i class="fas fa-dollar-sign fa-2x value-card-value"></i>
                             </div>
                         </div>
                     </div>

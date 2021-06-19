@@ -24,7 +24,7 @@
             <div class="col-10">
                 <div class="row mt-4">
                     <div class="col-12">
-                        <div class="naturelogic-card purple shadow mb-5 p-4 fluid-container">
+                        <div class="form-card purple shadow mb-5 p-4 fluid-container">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between align-items-end">
                                     <h1 class="grey">Estate Farms</h1>
@@ -52,7 +52,7 @@
                                                 <th class="text-center">Postcode</th>
                                                 <th class="text-center">Region</th>
                                                 <th class="text-center">Area (ha)</th>
-                                                <th class="text-center">Overview</th>
+                                                <th class="text-center">View</th>
                                                 <th class="text-center">Edit</th>
                                                 <th class="text-center">Delete</th>
                                             </tr>
@@ -82,7 +82,7 @@
                                                     <% end %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= link_to farm_path(farm_timeline.initial_farm),
+                                                    <%= link_to farm_snapshot_path(farm_timeline.initial_farm),
                                                         class: "green-link" do %>
                                                         <i class="fas fa-edit"></i>
                                                     <% end %>

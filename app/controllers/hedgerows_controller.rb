@@ -42,7 +42,10 @@ class HedgerowsController < ApplicationController
         params.require(:hedgerow).permit(
             :hedgerow_type_id,
             :length,
-            :description
+            :description,
+            :habitat_condition,
+            :ecological_connectivity,
+            :strategic_significance
         )
     end
 

@@ -1,4 +1,4 @@
-<%= render 'shared/farms/sidebar' %>
+<%= render 'shared/farms/sidebar', page: "data" %>
 <div class="page-content">
     <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
@@ -17,7 +17,7 @@
                             class: "edit-sub-link" %>
                         <%= link_to "Lab-Based Tests",
                             edit_farm_lab_based_soil_test_path(@farm),
-                            class: "edit-sub-link-active mx-5" %>
+                            class: "edit-sub-link active mx-5" %>
                     </div>
                 </div>
             </div>

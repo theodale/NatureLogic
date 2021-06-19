@@ -59,3 +59,5 @@ gem 'devise'
 gem 'activeadmin'
 gem 'wicked'
 gem 'amoeba'
+gem 'chartjs-ror'
+

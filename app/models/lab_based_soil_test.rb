@@ -2,46 +2,25 @@ class LabBasedSoilTest < ApplicationRecord
     belongs_to :farm
     has_many :soil_parcels, dependent: :destroy
 
-    def mean_SOC
-        parcels_soc = []
-        self.soil_parcels.each do |soil_parcel|
-            parcels_soc << soil_parcel.SOC
-        end
-        if parcels_soc.size != 0
-            if self.increased
-                return ((parcels_soc.sum(0.0) * 1.05) / parcels_soc.size).round(2)
-            else
-                return (parcels_soc.sum(0.0) / parcels_soc.size).round(2)
+    def mean_of value
+        if self.soil_parcels.size == 0
+            return 0
+        else
+            values = []
+            self.soil_parcels.each do |soil_parcel|
+                values << soil_parcel.send(value)
             end
-        else
-            return 0
+            return values.sum.to_f / values.size.to_f
         end
     end
 
-    def average_bulk_density
-        bulk_densities = []
-        self.soil_parcels.each do |soil_parcel|
-            bulk_densities << soil_parcel.bulk_density
-        end
-        if bulk_densities.size != 0
-            return average_bulk_density = bulk_densities.sum(0.0) / bulk_densities.size
-        else
-            return 0
-        end
+    def total_soil_carbon
+        carbon_per_metre_squared = self.mean_of(:bulk_density) * self.mean_of(:SOC) * 3/1000
+        total_carbon = carbon_per_metre_squared * self.farm.total_area * 440000/12
+        return total_carbon
     end
 
-    def total_carbon_in_terms_of_CO2e
-        carbon_per_metre_squared = average_bulk_density * mean_SOC * 0.3
-        return (carbon_per_metre_squared * 3.6667 * 10000 * self.farm.total_area).round(1)
-    end
-
-    # Need last years SOC value (set to mean_SOC * )
-    def total_carbon_in_terms_of_CO2e_last_year
-       carbon_per_metre_squared = average_bulk_density * mean_SOC * 0.99999 * 0.3
-       return (carbon_per_metre_squared * 3.6667 * 10000 * self.farm.total_area).round(1)
-    end
-
-    # graph methods
+    # graph methods - remove these
 
     def parcel_data name
         data = []

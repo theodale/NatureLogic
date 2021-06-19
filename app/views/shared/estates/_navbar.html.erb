@@ -4,16 +4,20 @@
     <div class="container-fluid d-flex justify-content-between">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle farm-navbar-dropdown" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Estate
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <% @estate.farm_timelines.each do |farm_timeline| %>
+                    <% @current_estate_user.estate.farm_timelines.each do |farm_timeline| %>
                         <% farm = Farm.find(farm_timeline.initial_farm_id) %>
                         <%= link_to farm.name,
                             farm_snapshot_path(farm),
                             class: "dropdown-item" %>
                     <% end %>
+                    <%= link_to "Estate",
+                        estate_overview_path(@current_estate_user.estate),
+                        class: "dropdown-item" %>
                 </div>
             </li>
         </ul>

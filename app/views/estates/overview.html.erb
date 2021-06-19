@@ -6,9 +6,9 @@
                 <%= render 'shared/estates/navbar', page: "performance" %>
             </div>
         </div>
-        <div class="row mb-2 px-3 snapshot-row">
+        <div class="row mb-2 px-3">
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -17,7 +17,7 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                            <div class="py-2 px-4 value-div mb-4">
                                 Carbon Balance: <b> <%= @estate.get_total(:net_emissions) %> kg </b>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -59,7 +59,7 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                            <div class="py-2 px-4 value-div mb-4">
                                 Usage: <b> <%= energy_usage %> kWh </b>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -86,7 +86,7 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-4">
+                            <div class="py-2 px-4 value-div mb-4">
                                 Biodiversity Score: <b> <%= @estate.average_biodiversity_score%> % </b>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
         </div>
         <div class="row mb-4 px-3">
             <div class="col-4">
-                <div class="card shadow mb-4 snapshot-overview-card">
+                <div class="card shadow mb-4 form-card">
                     <div class="card-body snapshot-card-body">
                         <div class="row justify-content-center mb-3">
                             <h5 class="m-0 font-weight-bold text-primary uppercase">
@@ -115,13 +115,13 @@
                             </h5>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-3">
+                            <div class="py-2 px-4 value-div mb-3">
                                 Soil Health Score: <b> <%= @estate.average_soil_health_score %> % </b>
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="py-2 px-4 snapshot-value-div mb-3">
-                                Mean SOC: <b> <%= @estate.average_SOC  %> % </b>
+                            <div class="py-2 px-4 value-div mb-3">
+                                Mean SOC: <b> <%= 0 %> % </b>
                             </div>
                         </div>
                     </div>

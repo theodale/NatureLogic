@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_163221) do
+ActiveRecord::Schema.define(version: 2021_06_19_075323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,73 +42,25 @@ ActiveRecord::Schema.define(version: 2021_06_11_163221) do
   end
 
   create_table "biodiversity_surveys", force: :cascade do |t|
-    t.integer "area_designated_for_natural_conservation", default: 0
-    t.integer "area_in_existing_agri_environment_schemes", default: 0
-    t.integer "area_of_grass_wildflower_scrub_not_for_production", default: 0
-    t.integer "wider_countryside_description", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "farm_id"
+    t.float "area_designated_for_natural_conservation", default: 0.0
+    t.float "area_in_existing_agri_environment_schemes", default: 0.0
+    t.float "area_of_grass_wildflower_scrub_not_for_production", default: 0.0
+    t.string "wider_countryside_description", default: ""
     t.integer "number_of_crop_types", default: 0
     t.integer "number_of_heritage_crops", default: 0
     t.integer "number_of_livestock_breeds", default: 0
     t.integer "number_of_rare_breeds", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "farm_id"
     t.boolean "threatened_species", default: false
-    t.string "threatened_species_description", default: "No Description"
+    t.string "threatened_species_description", default: ""
     t.integer "number_of_vascular_plant_species", default: 0
     t.integer "number_of_wild_bee_species", default: 0
     t.integer "number_of_farmland_bird_species", default: 0
     t.integer "number_of_butterfly_species", default: 0
     t.integer "number_of_mammal_species", default: 0
-    t.boolean "crop_protection_use", default: false
-    t.boolean "legumes_or_grass_cover_in_crop_rotation", default: false
-    t.boolean "grow_cover_crops", default: false
-    t.boolean "grow_three_cover_crops", default: false
-    t.boolean "soil_covered_cereal_grass_or_cover_crops", default: false
-    t.boolean "shallow_tillage", default: false
-    t.boolean "no_tillage", default: false
-    t.boolean "conventional_tillage", default: false
-    t.boolean "no_soil_health_measures", default: false
-    t.boolean "solid_manure", default: false
-    t.boolean "compost", default: false
-    t.boolean "residues_not_removed", default: false
-    t.boolean "grass_mix_incorporated", default: false
-    t.boolean "organic_fertilizers_in_response", default: false
-    t.boolean "no_organic_matter", default: false
-    t.boolean "slurry_mineral_fertilizer_not_used", default: false
-    t.boolean "bird_nests_marked", default: false
-    t.boolean "extensive_grazing_only", default: false
-    t.boolean "mowing_grazing_delayed", default: false
-    t.boolean "refuge_areas", default: false
-    t.boolean "no_grassland_measures", default: false
-    t.boolean "hedgerows_pruned_three_years", default: false
-    t.boolean "hedgerow_grass_margin", default: false
-    t.boolean "no_hedgerows", default: false
-    t.boolean "water_courses", default: false
-    t.boolean "river_bank_vegetation_mowed_two_years", default: false
-    t.boolean "river_bank_vegetation_left_standing", default: false
-    t.boolean "water_course_buffered_twelve_metres", default: false
-    t.boolean "water_course_cleared_regularly", default: false
-    t.boolean "dredge_cuttings_removed_promptly", default: false
-    t.boolean "no_water_courses", default: false
-    t.boolean "pools_and_ponds", default: false
-    t.boolean "pond_ditches_buffered", default: false
-    t.boolean "pond_bank_vegetation_mowed_two_years", default: false
-    t.boolean "pond_bank_vegetation_left_standing", default: false
-    t.boolean "pond_plants_cleared_three_years", default: false
-    t.boolean "pond_cuttings_removed_promptly", default: false
-    t.boolean "pond_dredged_five_years", default: false
-    t.boolean "pond_shading_prevented", default: false
-    t.boolean "no_pools_and_ponds", default: false
-    t.integer "number_of_merino", default: 0
-    t.integer "number_of_rambouillet", default: 0
-    t.integer "number_of_blue_faced_leicester", default: 0
-    t.integer "number_of_corridale", default: 0
-    t.integer "number_of_columbia", default: 0
-    t.integer "number_of_suffolk", default: 0
-    t.integer "number_of_dohne", default: 0
-    t.integer "number_of_poll_dorset", default: 0
-    t.integer "number_of_composites", default: 0
+    t.string "grassland_condition", default: ""
     t.index ["farm_id"], name: "index_biodiversity_surveys_on_farm_id"
   end
 
@@ -205,7 +157,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_163221) do
     t.float "other_spend", default: 0.0
     t.integer "number_of_sheep", default: 0
     t.integer "number_of_cows", default: 0
-    t.boolean "created", default: false
     t.bigint "farm_timeline_id"
     t.integer "year"
     t.string "postcode"
@@ -231,6 +182,9 @@ ActiveRecord::Schema.define(version: 2021_06_11_163221) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
+    t.string "habitat_condition", default: ""
+    t.string "ecological_connectivity", default: ""
+    t.string "strategic_significance", default: ""
     t.index ["farm_id"], name: "index_hedgerows_on_farm_id"
     t.index ["hedgerow_type_id"], name: "index_hedgerows_on_hedgerow_type_id"
   end
@@ -268,10 +222,13 @@ ActiveRecord::Schema.define(version: 2021_06_11_163221) do
     t.boolean "sprayed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "tillage_score", default: 1.0
-    t.float "rotation_score", default: 1.0
     t.string "name"
     t.string "code"
+    t.string "habitat_condition", default: ""
+    t.string "ecological_connectivity", default: ""
+    t.string "strategic_significance", default: ""
+    t.string "rotation_practice", default: ""
+    t.string "tillage_method", default: ""
     t.index ["farm_id"], name: "index_lands_on_farm_id"
     t.index ["land_type_id"], name: "index_lands_on_land_type_id"
   end
@@ -341,46 +298,51 @@ ActiveRecord::Schema.define(version: 2021_06_11_163221) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "farm_id"
-    t.boolean "crop_protection_use", default: false
-    t.boolean "legumes_or_grass_cover_in_crop_rotation", default: false
-    t.boolean "grow_cover_crops", default: false
-    t.boolean "grow_three_cover_crops", default: false
-    t.boolean "soil_covered_cereal_grass_or_cover_crops", default: false
-    t.boolean "shallow_tillage", default: false
-    t.boolean "no_tillage", default: false
-    t.boolean "conventional_tillage", default: false
-    t.boolean "no_soil_health_measures", default: false
-    t.boolean "solid_manure", default: false
-    t.boolean "compost", default: false
-    t.boolean "residues_not_removed", default: false
-    t.boolean "grass_mix_incorporated", default: false
-    t.boolean "organic_fertilizers_in_response", default: false
-    t.boolean "no_organic_matter", default: false
-    t.boolean "slurry_mineral_fertilizer_not_used", default: false
-    t.boolean "bird_nests_marked", default: false
     t.boolean "extensive_grazing_only", default: false
     t.boolean "mowing_grazing_delayed", default: false
     t.boolean "refuge_areas", default: false
-    t.boolean "no_grassland_measures", default: false
-    t.boolean "hedgerows_pruned_three_years", default: false
-    t.boolean "hedgerow_grass_margin", default: false
-    t.boolean "no_hedgerows", default: false
-    t.boolean "water_courses", default: false
-    t.boolean "river_bank_vegetation_mowed_two_years", default: false
-    t.boolean "river_bank_vegetation_left_standing", default: false
+    t.boolean "river_bank_vegetation_mown", default: false
+    t.boolean "river_bank_vegetation_left_standing_or_mown_in_phases", default: false
     t.boolean "water_course_buffered_twelve_metres", default: false
     t.boolean "water_course_cleared_regularly", default: false
     t.boolean "dredge_cuttings_removed_promptly", default: false
-    t.boolean "no_water_courses", default: false
-    t.boolean "pools_and_ponds", default: false
     t.boolean "pond_ditches_buffered", default: false
-    t.boolean "pond_bank_vegetation_mowed_two_years", default: false
+    t.boolean "pond_bank_vegetation_mown_every_one_two_years", default: false
     t.boolean "pond_bank_vegetation_left_standing", default: false
-    t.boolean "pond_plants_cleared_three_years", default: false
-    t.boolean "pond_cuttings_removed_promptly", default: false
-    t.boolean "pond_dredged_five_years", default: false
-    t.boolean "pond_shading_prevented", default: false
-    t.boolean "no_pools_and_ponds", default: false
+    t.boolean "pond_plants_cleared", default: false
+    t.boolean "pond_cuttings_cleared_plants_removed_promptly", default: false
+    t.boolean "cover_crops", default: false
+    t.boolean "intercropping", default: false
+    t.boolean "minimum_tillage", default: false
+    t.boolean "crop_rotations", default: false
+    t.boolean "legumes_or_grass_clover_crop_rotations", default: false
+    t.boolean "mulch_management", default: false
+    t.boolean "green_manure", default: false
+    t.boolean "integrated_pest_management", default: false
+    t.boolean "local_seed_varieties", default: false
+    t.boolean "avoidance_of_chemical_fertilisers_pesticides_herbicides", default: false
+    t.boolean "no_irrigation", default: false
+    t.boolean "overwinter_stubble", default: false
+    t.boolean "winter_cover_crops", default: false
+    t.boolean "flower_rich_margins", default: false
+    t.boolean "four_to_six_metre_buffers_cultivated_land", default: false
+    t.boolean "avoidance_of_chemical_fertilisers", default: false
+    t.boolean "avoidance_of_slurry_and_mineral_fertiliser", default: false
+    t.boolean "control_problem_weeds", default: false
+    t.boolean "soil_and_grass_root_stock_left_intact", default: false
+    t.boolean "livestock_grazed_manure_retained", default: false
+    t.boolean "no_grazing_between_march_june", default: false
+    t.boolean "mowing_between_july_september", default: false
+    t.boolean "mowing_in_phases", default: false
+    t.boolean "cuttings_removed", default: false
+    t.boolean "in_field_grass_strips", default: false
+    t.boolean "dead_wood_retention", default: false
+    t.boolean "buffer_strips", default: false
+    t.boolean "re_stocking", default: false
+    t.boolean "deer_proof_fencing", default: false
+    t.boolean "open_areas", default: false
+    t.boolean "pond_bank_trees_shrubs_pruned_pollarded_coppiced", default: false
+    t.boolean "dredged_once_twice_every_five_years_material_removed", default: false
     t.index ["farm_id"], name: "index_sustainability_surveys_on_farm_id"
   end
 
@@ -389,9 +351,9 @@ ActiveRecord::Schema.define(version: 2021_06_11_163221) do
     t.float "mean_SOC", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "nature_positive_areas"
+    t.float "ecological_focus_area"
     t.float "sustainable_practices"
-    t.float "soil_health"
+    t.float "soil_health_score"
     t.bigint "estate_id"
     t.bigint "farm_id"
     t.index ["estate_id"], name: "index_targets_on_estate_id"

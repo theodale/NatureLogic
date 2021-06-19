@@ -4,6 +4,11 @@ class Estate < ApplicationRecord
     has_one :target
     accepts_nested_attributes_for :target
 
+    def create_associations
+        self.create_target
+    end
+
+
     def get_total quantity
         total = 0
         self.farm_timelines.each do |farm_timeline|

@@ -97,6 +97,13 @@ class Farm < ApplicationRecord
         return scope_one + scope_two + scope_three
     end
 
+    def total_energy_usage
+        usage = self.total_electricity_use * 0.23314 +
+            self.total_diesel_use * 2.6870514 +
+            self.total_gas_use * 0.18387
+        return usage.round(0)
+    end
+
     # Land and hedgerow sequestration
     def annual_sequestration
         total = 0
@@ -111,13 +118,14 @@ class Farm < ApplicationRecord
 
     # Lab-based soil test sequestration
     def farmland_sequestration
-        if self.lab_based_soil_test
-            total = self.lab_based_soil_test.total_carbon_in_terms_of_CO2e_last_year -
-                self.lab_based_soil_test.total_carbon_in_terms_of_CO2e
-        else
-            total = 0
-        end
-        return total.round(0)
+        # if self.lab_based_soil_test
+        #     total = self.lab_based_soil_test.total_carbon_in_terms_of_CO2e_last_year -
+        #         self.lab_based_soil_test.total_carbon_in_terms_of_CO2e
+        # else
+        #     total = 0
+        # end
+        # return total.round(0)
+        return 100
     end
 
     def total_sequestration
@@ -128,8 +136,8 @@ class Farm < ApplicationRecord
         return (total_emissions + annual_sequestration + farmland_sequestration).round(0)
     end
 
-    def potential_revenue_from_offset
-        (net_emissions * 0.06).round(2)
+    def offset_revenue
+        return (-1 * net_emissions * self.farm_timeline.estate.carbon_price)
     end
 
     def above_ground_carbon
@@ -175,11 +183,25 @@ class Farm < ApplicationRecord
         end
     end
 
+    def biodiversity_units_per_hectare_percentage
+        if self.total_area == 0
+            return 0
+        else
+            total_units = 0
+            self.lands.each do |land|
+                total_units += land.biodiversity_units
+            end
+            percentage = (total_units * 100) / (self.total_area * 23.805)
+            return percentage.round(0)
+        end
+    end
+
     def space_for_nature_score
         total_space_for_nature_index = 0
         self.lands.each do |land|
             spray_factor = land.sprayed ? 0.2 : 1
-            total_space_for_nature_index += spray_factor * land.area * land.land_type.area_for_nature_rating
+            total_space_for_nature_index += spray_factor *
+                land.area * land.land_type.area_for_nature_rating
         end
         if self.total_area != 0
             return (total_space_for_nature_index / (self.total_area * 10)).round(1)
@@ -188,17 +210,39 @@ class Farm < ApplicationRecord
         end
     end
 
-    def tree_coverage
+    # Features and coverage
+
+    def area_of type
         if self.total_area == 0
             return 0
         else
-            tree_covered_area = 0
+            area = 0
             self.lands.each do |land|
-                if land.land_type.meta_category == "Woodland"
-                    tree_covered_area += land.area
+                if land.land_type.meta_category == type
+                    area += land.area
                 end
             end
-            return (100 * tree_covered_area / self.total_area).round(1)
+            return area
+        end
+    end
+
+    def ecological_focus_area_percentage
+        if self.total_area == 0
+            return 0
+        else
+            focus_area = self.biodiversity_survey.area_of_grass_wildflower_scrub_not_for_production +
+                self.area_of("Woodland") +
+                self.area_of("Heathland & Scrub") +
+                self.biodiversity_survey.area_designated_for_natural_conservation
+            return (focus_area * 100 / total_area).round(1)
+        end
+    end
+
+    def tree_coverage_percentage
+        if self.total_area == 0
+            return 0
+        else
+            return (100 * area_of("Woodland") / self.total_area).round(1)
         end
     end
 
@@ -217,8 +261,6 @@ class Farm < ApplicationRecord
         end
         return length
     end
-
-    # Utilities
 
     def total_area
         area = 0

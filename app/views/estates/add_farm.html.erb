@@ -20,7 +20,7 @@
                     <div class="col-12">
                         <%= bootstrap_form_with model: @farm,
                             url: farms_path(estate: true) do |f| %>
-                            <div class="naturelogic-card purple shadow mb-5 p-4
+                            <div class="form-card purple shadow mb-5 p-4
                                 fluid-container d-flex flex-column justify-content-between">
                                 <div class="row">
                                     <div class="col-2"></div>
@@ -36,7 +36,7 @@
                                     <div class="col-2"></div>
                                 </div>
                                 <div class="d-flex justify-content-between mt-5">
-                                    <%= link_to estate_path(@estate) do %>
+                                    <%= link_to estate_settings_farms_path(@estate) do %>
                                         <i class="fas fa-times-circle fa-2x farm-creation-arrow"></i>
                                     <% end %>
                                     <button type="submit" class="btn farm-creation-arrow-button">

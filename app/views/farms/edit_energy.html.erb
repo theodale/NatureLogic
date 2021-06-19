@@ -1,4 +1,4 @@
-<%= render 'shared/farms/sidebar' %>
+<%= render 'shared/farms/sidebar', page: "data" %>
 <div class="page-content">
     <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
@@ -14,7 +14,7 @@
                     <div class="col-12 d-flex justify-content-center px-4">
                         <%= link_to "Energy Usage",
                             farm_edit_energy_usage_path(@farm),
-                            class: "edit-sub-link-active" %>
+                            class: "edit-sub-link active" %>
                         <%= link_to "Resources",
                             farm_edit_resources_path(@farm),
                             class: "edit-sub-link mx-5" %>
