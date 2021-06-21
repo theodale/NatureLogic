@@ -11,7 +11,7 @@
                 <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
-                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                            <h5 class="m-0 font-weight-bold text-primary text-uppercase">
                                 Farm
                                 <i class="fas fa-tractor ml-1"></i>
                             </h5>
@@ -31,7 +31,7 @@
                             <% end %>
                         </div>
                         <div class="row justify-content-center">
-                            <%= link_to edit_farm_target_path(@farm), class: "edit-link" do %>
+                            <%= link_to edit_farm_target_path(@farm, from_farm: true), class: "edit-link" do %>
                                 <div class="py-2 px-4 value-div mb-2 edit-link-div">
                                     Targets
                                 </div>
@@ -44,7 +44,7 @@
                 <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
-                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                            <h5 class="m-0 font-weight-bold text-primary text-uppercase">
                                 Energy
                                 <i class="fas fa-bolt ml-1"></i>
                             </h5>
@@ -71,7 +71,7 @@
                 <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
-                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                            <h5 class="m-0 font-weight-bold text-primary text-uppercase">
                                 Nature
                                 <i class="fas fa-leaf ml-1"></i>
                             </h5>
@@ -107,7 +107,7 @@
                 <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
-                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                            <h5 class="m-0 font-weight-bold text-primary text-uppercase">
                                 Soil
                                 <i class="fas fa-tree ml-1"></i>
                             </h5>
@@ -135,7 +135,7 @@
                 <div class="card shadow mb-4 form-card">
                     <div class="card-body data-card-body">
                         <div class="row justify-content-center mb-3">
-                            <h5 class="m-0 font-weight-bold text-primary uppercase">
+                            <h5 class="m-0 font-weight-bold text-primary text-uppercase">
                                 Sustainability
                                 <i class="fas fa-sun ml-1"></i>
                             </h5>

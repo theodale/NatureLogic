@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_075323) do
+ActiveRecord::Schema.define(version: 2021_06_20_095721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,8 +121,12 @@ ActiveRecord::Schema.define(version: 2021_06_19_075323) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "farm_user_id"
-    t.integer "initial_farm_id"
     t.bigint "estate_id"
+    t.string "name"
+    t.string "location"
+    t.string "farm_type"
+    t.string "postcode"
+    t.string "region"
     t.index ["estate_id"], name: "index_farm_timelines_on_estate_id"
     t.index ["farm_user_id"], name: "index_farm_timelines_on_farm_user_id"
   end
@@ -144,8 +148,6 @@ ActiveRecord::Schema.define(version: 2021_06_19_075323) do
   create_table "farms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "location"
     t.float "total_diesel_use", default: 0.0
     t.float "total_gas_use", default: 0.0
     t.float "total_electricity_use", default: 0.0
@@ -159,9 +161,6 @@ ActiveRecord::Schema.define(version: 2021_06_19_075323) do
     t.integer "number_of_cows", default: 0
     t.bigint "farm_timeline_id"
     t.integer "year"
-    t.string "postcode"
-    t.string "farm_type"
-    t.string "region"
     t.index ["farm_timeline_id"], name: "index_farms_on_farm_timeline_id"
   end
 
@@ -347,8 +346,6 @@ ActiveRecord::Schema.define(version: 2021_06_19_075323) do
   end
 
   create_table "targets", force: :cascade do |t|
-    t.float "net_carbon_emission", default: 0.0
-    t.float "mean_SOC", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "ecological_focus_area"
@@ -356,6 +353,8 @@ ActiveRecord::Schema.define(version: 2021_06_19_075323) do
     t.float "soil_health_score"
     t.bigint "estate_id"
     t.bigint "farm_id"
+    t.float "mean_SOC"
+    t.float "net_carbon_emission"
     t.index ["estate_id"], name: "index_targets_on_estate_id"
     t.index ["farm_id"], name: "index_targets_on_farm_id"
   end

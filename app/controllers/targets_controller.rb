@@ -1,41 +1,37 @@
 class TargetsController < ApplicationController
-
-    def edit
-        if params[:farm_target]
-            @farm = Farm.find(params[:farm_id])
-            @target = @farm.target
-        else
-            @estate = Estate.find(params[:estate_id])
-            if @estate.target
-                @target = @estate.target
-            else
-                @target = @estate.build_target
-            end
-        end
+  def edit
+    if params[:from_estate]
+      @estate = Estate.find(params[:estate_id])
+      @target = @estate.target
+    elsif params[:from_farm]
+      @farm = Farm.find(params[:farm_id])
+      @target = @farm.target
     end
+  end
 
-    def update
-        if params[:farm_target]
-            @farm = Farm.find(params[:farm_id])
-            @farm.target.update(targets_params)
-            redirect_to edit_farm_path(@farm)
-        else
-            @estate = Estate.find(params[:estate_id])
-            @estate.target.update(targets_params)
-            redirect_to edit_estate_target_path(@estate, updated: true)
-        end
+  def update
+      if params[:from_estate]
+        @estate = Estate.find(params[:estate_id])
+        @estate.target.update(target_params)
+        redirect_to edit_estate_target_path(estate_id: @estate.id, from_estate: true, updated: true)
+      elsif params[:from_farm]
+        @farm = Farm.find(params[:farm_id])
+        @farm.target.update(target_params)
+        redirect_to edit_farm_path(@farm)
     end
+  end
 
-    private
+  private
 
-    def targets_params
-        params.require(:target).permit(
-            :net_carbon_emission,
-            :mean_SOC,
-            :soil_health,
-            :nature_positive_areas,
-            :sustainable_practices
-        )
-    end
-
+  def target_params
+    params.require(:target).permit(
+      :net_carbon_emission,
+      :mean_SOC,
+      :soil_health_score,
+      :ecological_focus_area,
+      :sustainable_practices
+    )
+  end
 end
+
+

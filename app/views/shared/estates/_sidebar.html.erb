@@ -4,7 +4,7 @@
             NatureLogic
         </div>
         <hr class="sidebar-divider"/>
-        <%= link_to estate_overview_path(@current_estate_user.estate),
+        <%= link_to estate_overview_path(current_estate_user.estate),
             class: "no-hover-underline" do %>
             <% if page == "overview" %>
             <div class="sidebar-link-content active">
@@ -18,7 +18,7 @@
             </div>
             <% end %>
         <% end %>
-        <%= link_to estate_performance_path(@current_estate_user.estate),
+        <%= link_to estate_performance_path(current_estate_user.estate),
             class: "no-hover-underline" do %>
             <% if page == "performance" %>
             <div class="sidebar-link-content active">
@@ -32,7 +32,7 @@
             </div>
             <% end %>
         <% end %>
-        <%= link_to estate_settings_estate_path(@current_estate_user.estate),
+        <%= link_to estate_settings_estate_path(current_estate_user.estate),
             class: "no-hover-underline" do %>
             <% if page == "settings" %>
             <div class="sidebar-link-content active">

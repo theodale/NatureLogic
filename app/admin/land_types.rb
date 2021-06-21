@@ -1,13 +1,12 @@
 require 'csv'
 
 ActiveAdmin.register LandType do
-
   permit_params :category, :sequestration_per_ha, :defra_uniqueness_score,
-  :area_for_nature_rating, :above_ground_carbon_per_ha, :meta_category
+                :area_for_nature_rating, :above_ground_carbon_per_ha, :meta_category
 
   # Add a button to top of screen
-  action_item :only => :index do
-    link_to 'Upload Land Types CSV', :action => 'upload_csv'
+  action_item only: :index do
+    link_to 'Upload Land Types CSV', action: 'upload_csv'
   end
 
   # Collection action adds an action and generates its route
@@ -16,7 +15,7 @@ ActiveAdmin.register LandType do
   collection_action :upload_csv do
   end
 
-  collection_action :import_csv, :method => :post do
+  collection_action :import_csv, method: :post do
     land_types_csv_file = params[:land_types_csv].read
     first_row = true
     CSV.parse(land_types_csv_file) do |row|
@@ -33,10 +32,6 @@ ActiveAdmin.register LandType do
         new_land_type.save
       end
     end
-    redirect_to :action => :index, :notice => "Imported Successfully"
+    redirect_to action: :index, notice: 'Imported Successfully'
   end
-
 end
-
-
-

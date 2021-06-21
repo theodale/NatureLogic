@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
-  devise_for :estate_users, controllers: { sessions: "sessions", registrations: "registrations" }
-  devise_for :farm_users, controllers: { sessions: "sessions", registrations: "registrations" }
+  devise_for :estate_users, controllers: { sessions: 'sessions', registrations: 'registrations' }
+  devise_for :farm_users, controllers: { sessions: 'sessions', registrations: 'registrations' }
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   ActiveAdmin.routes(self)
@@ -12,8 +11,6 @@ Rails.application.routes.draw do
 
   # Estates
   resources :estates do
-    get 'add-farm', to: 'estates#add_farm', as: 'add_farm'
-    post 'add-farm', to: 'estates#create_farm', as: 'estate_add_farm'
     get 'add-farm-user', to: 'estates#add_farm_user', as: 'add_farm_user'
     post 'add-farm-user', to: 'estates#create_farm_user', as: 'estate_add_farm_user'
     get 'overview', to: 'estates#overview', as: 'overview'
@@ -24,6 +21,8 @@ Rails.application.routes.draw do
     get 'settings/targets', to: 'estates#settings_targets', as: 'settings_targets'
     resource :target
   end
+
+  resources :farm_timelines
 
   # Farms
   resources :farms do
@@ -56,7 +55,5 @@ Rails.application.routes.draw do
   end
 
   # Farm Creation
-  resources :farm_creation
   get 'farm-user-create-farm', to: 'farms#create', as: 'farm_user_create_farm'
-
 end

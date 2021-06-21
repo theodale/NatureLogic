@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between align-items-end">
                                     <h1 class="grey">Estate Farms</h1>
-                                    <%= link_to estate_add_farm_path(@estate), class: "no-hover-underline" do %>
+                                    <%= link_to new_farm_timeline_path, class: "no-hover-underline" do %>
                                         <div class="d-flex align-items-stretch green-link">
                                             <h3 class="mr-2">New Farm</h3>
                                             <i class="fas fa-plus fa-2x"></i>
@@ -61,35 +61,36 @@
                                             <% @estate.farm_timelines.each do |farm_timeline| %>
                                             <tr class="table-body-text text-center">
                                                 <td class="no-right-border">
-                                                    <%= farm_timeline.initial_farm.name %>
+                                                    <%= farm_timeline.name %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= farm_timeline.initial_farm.location %>
+                                                    <%= farm_timeline.location %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= farm_timeline.initial_farm.postcode %>
+                                                    <%= farm_timeline.postcode %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= farm_timeline.initial_farm.region %>
+                                                    <%= farm_timeline.region %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= farm_timeline.initial_farm.total_area %>
+                                                    <%= farm_timeline.present_farm.total_area %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= link_to farm_path(farm_timeline.initial_farm),
+                                                    <%= link_to farm_path(farm_timeline.present_farm),
                                                         class: "view-farm-link" do %>
                                                         <i class="fas fa-arrow-right"></i>
                                                     <% end %>
                                                 </td>
                                                 <td class="no-right-left-borders">
-                                                    <%= link_to farm_snapshot_path(farm_timeline.initial_farm),
+                                                    <%= link_to farm_snapshot_path(farm_timeline.present_farm),
                                                         class: "green-link" do %>
                                                         <i class="fas fa-edit"></i>
                                                     <% end %>
                                                 </td>
                                                 <td class="no-left-border">
-                                                    <%= link_to farm_path(farm_timeline.initial_farm),
-                                                        class: "delete-link" do %>
+                                                    <%= link_to farm_timeline_path(farm_timeline),
+                                                        class: "red-link",
+                                                        method: :delete do %>
                                                         <i class="fas fa-trash"></i>
                                                     <% end %>
                                                 </td>

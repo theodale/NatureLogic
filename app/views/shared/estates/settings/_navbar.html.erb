@@ -7,7 +7,7 @@
                 class: "nav-link sub-nav-link active" %>
         <% else %>
             <%= link_to "Estate",
-                estate_settings_estate_path(@current_estate_user.estate),
+                estate_settings_estate_path(current_estate_user.estate),
                 class: "nav-link sub-nav-link " %>
         <% end %>
         </li>
@@ -17,7 +17,7 @@
             class: "nav-link sub-nav-link active" %>
         <% else %>
             <%= link_to "Farms",
-                estate_settings_farms_path(@current_estate_user.estate),
+                estate_settings_farms_path(current_estate_user.estate),
                 class: "nav-link sub-nav-link " %>
         <% end %>
         </li>
@@ -27,7 +27,7 @@
                 class: "nav-link sub-nav-link active" %>
         <% else %>
             <%= link_to "Members",
-                estate_settings_members_path(@current_estate_user.estate),
+                estate_settings_members_path(current_estate_user.estate),
                 class: "nav-link sub-nav-link " %>
         <% end %>
         </li>
@@ -37,7 +37,7 @@
                 class: "nav-link sub-nav-link active" %>
         <% else %>
             <%= link_to "Targets",
-                edit_estate_target_path(@current_estate_user.estate),
+                edit_estate_target_path(current_estate_user.estate, from_estate: true),
                 class: "nav-link sub-nav-link " %>
         <% end %>
         </li>

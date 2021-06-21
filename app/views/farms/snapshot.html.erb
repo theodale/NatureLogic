@@ -17,50 +17,40 @@
                             </h4>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Farm Type
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center dark-grey my-auto">
-                                <%= @farm.farm_type %>
+                                <div class="dark-grey my-auto">
+                                    <%= @farm.farm_timeline.farm_type %>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
-                                    Area
+                                    Area (ha)
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.total_area %>
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Livestock
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.number_of_cows + @farm.number_of_sheep %>
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Habitats
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.lands.size %>
                                 </h3>
@@ -186,9 +176,8 @@
                                 <i class="fas fa-industry ml-1"></i>
                             </h4>
                         </div>
-                        <div class="row justify-content-center mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-10 d-flex justify-content-between">
+                        <div class="row mb-4">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Balance
                                 </h5>
@@ -196,11 +185,12 @@
                                     <%= @farm.net_emissions %> kg
                                 </h3>
                             </div>
-                            <div class="col-1"></div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-12 px-3">
-                                <%= chartjs_bar_chart emission_chart_data, emission_chart_options %>
+                                <% if !(@farm.total_emissions == 0) || !(@farm.sequestration == 0) %>
+                                    <%= chartjs_bar_chart emission_chart_data, emission_chart_options %>
+                                <% end %>
                             </div>
                         </div>
                     </div>
@@ -218,39 +208,30 @@
                             </h4>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Soil Health
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.in_field_soil_test.soil_health_score.round(0) %> %
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Mean SOC
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.lab_based_soil_test.mean_of(:SOC).round(2) %> %
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Soil Carbon
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.lab_based_soil_test.total_soil_carbon.round(0) %> kg
                                 </h3>
@@ -269,34 +250,30 @@
                             </h4>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Biodiversity
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
-                                <h3 class="font-weight-bold green my-auto">
-                                    <%= @farm.in_field_soil_test.soil_health_score.round(0) %> %
+                                <h3 class="font-weight-bold pink my-auto">
+                                    <%= @farm.biodiversity_survey.biodiversity_percentage_score %> %
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Units/ha
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
-                                <h3 class="font-weight-bold green my-auto">
+                                <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.biodiversity_units_per_hectare_percentage %> %
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-12 px-5">
-                                <%= chartjs_pie_chart habitat_chart_data, habitat_chart_options %>
+                                <% if @farm.lands.size > 0 %>
+                                    <%= chartjs_pie_chart habitat_chart_data, habitat_chart_options %>
+                                <% end %>
                             </div>
                         </div>
                     </div>
@@ -370,27 +347,21 @@
                             </h4>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Practices
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
-                                <h3 class="font-weight-bold green my-auto">
+                                <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.sustainability_survey.sustainable_practice_score %> %
                                 </h3>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Schemes
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
-                                <h3 class="font-weight-bold green my-auto">
+                                <h3 class="font-weight-bold pink my-auto">
                                     <%= @farm.schemes_survey.participations %>
                                 </h3>
                             </div>
@@ -460,13 +431,10 @@
                             </h4>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-1"></div>
-                            <div class="col-5 d-flex">
+                            <div class="col-12 px-5 d-flex justify-content-between">
                                 <h5 class="dark-grey font-weight-bold my-auto">
                                     Usage
                                 </h5>
-                            </div>
-                            <div class="col-6 d-flex justify-content-center">
                                 <h3 class="font-weight-bold red my-auto">
                                     <%=  @farm.total_energy_usage %> kWh
                                 </h3>
@@ -474,7 +442,9 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-12 px-5">
+                                <% if @farm.scope_one > 0 %>
                                 <%= chartjs_pie_chart energy_chart_data, energy_chart_options %>
+                                <% end %>
                             </div>
                         </div>
                     </div>
@@ -509,9 +479,6 @@
                             </div>
                             <div class="col-1"></div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>

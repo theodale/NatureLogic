@@ -5,40 +5,40 @@ class EstatesControllerTest < ActionDispatch::IntegrationTest
     @estate = estates(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get estates_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_estate_url
     assert_response :success
   end
 
-  test "should create estate" do
+  test 'should create estate' do
     assert_difference('Estate.count') do
-      post estates_url, params: { estate: {  } }
+      post estates_url, params: { estate: {} }
     end
 
     assert_redirected_to estate_url(Estate.last)
   end
 
-  test "should show estate" do
+  test 'should show estate' do
     get estate_url(@estate)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_estate_url(@estate)
     assert_response :success
   end
 
-  test "should update estate" do
-    patch estate_url(@estate), params: { estate: {  } }
+  test 'should update estate' do
+    patch estate_url(@estate), params: { estate: {} }
     assert_redirected_to estate_url(@estate)
   end
 
-  test "should destroy estate" do
+  test 'should destroy estate' do
     assert_difference('Estate.count', -1) do
       delete estate_url(@estate)
     end

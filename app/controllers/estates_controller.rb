@@ -1,5 +1,4 @@
 class EstatesController < ApplicationController
-
   def settings_estate
     @estate = current_estate_user.estate
   end
@@ -17,25 +16,27 @@ class EstatesController < ApplicationController
   end
 
   def new
-    @estate = current_estate_user.build_estate
-    @target = @estate.build_target
+    @estate = Estate.new
+    @estate.build_target
   end
 
   def create
-    @estate = Estate.create(estate_params)
-    @estate.create_associations
-    redirect_to estate_path(@estate)
+    logger.debug estate_params.merge({
+      estate_user_id: current_estate_user.id
+    })
+    @estate = Estate.new(estate_params.merge({
+      estate_user_id: current_estate_user.id
+    }))
+    @estate.save
+    logger.debug "ESTATE ID"
+    logger.debug @estate.id
+    redirect_to estate_overview_path(estate_id: @estate.id)
   end
 
   def update
     @estate = Estate.find(params[:id])
     @estate.update(estate_params)
     redirect_to estate_settings_estate_path(@estate, updated: true)
-  end
-
-  def add_farm
-    @estate = Estate.find(params[:estate_id])
-    @farm = Farm.new
   end
 
   def add_farm_user
@@ -47,7 +48,7 @@ class EstatesController < ApplicationController
   def create_farm_user
     @farm_user = FarmUser.create(farm_user_params)
     FarmTimeline.find(params[:farm_timeline_id]).update(farm_user_id: @farm_user.id)
-    redirect_to estate_settings_members_path(current_estate_user.estate)
+    redirect_to estate_settings_members_path(@current_estate_user.estate)
   end
 
   def overview
@@ -61,7 +62,18 @@ class EstatesController < ApplicationController
   private
 
   def estate_params
-    params.require(:estate).permit!
+    params.require(:estate).permit(
+      :name,
+      :location,
+      :carbon_price,
+      target_attributes: [
+        :ecological_focus_area,
+        :sustainable_practices,
+        :soil_health_score,
+        :mean_SOC,
+        :net_carbon_emission
+      ]
+    )
   end
 
   def farm_params
@@ -80,5 +92,4 @@ class EstatesController < ApplicationController
       :password_confirmation
     )
   end
-
 end

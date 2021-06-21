@@ -43,6 +43,3 @@ class AddDetailsToSustainabilitySurveys < ActiveRecord::Migration[6.0]
     add_column :sustainability_surveys, :no_pools_and_ponds, :boolean, default: false
   end
 end
-
-
-

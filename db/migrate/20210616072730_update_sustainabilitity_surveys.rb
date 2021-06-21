@@ -39,7 +39,8 @@ class UpdateSustainabilititySurveys < ActiveRecord::Migration[6.0]
     add_column :sustainability_surveys, :green_manure, :boolean, default: false
     add_column :sustainability_surveys, :integrated_pest_management, :boolean, default: false
     add_column :sustainability_surveys, :local_seed_varieties, :boolean, default: false
-    add_column :sustainability_surveys, :avoidance_of_chemical_fertilisers_pesticides_herbicides, :boolean, default: false
+    add_column :sustainability_surveys, :avoidance_of_chemical_fertilisers_pesticides_herbicides, :boolean,
+               default: false
     add_column :sustainability_surveys, :no_irrigation, :boolean, default: false
     add_column :sustainability_surveys, :overwinter_stubble, :boolean, default: false
     add_column :sustainability_surveys, :winter_cover_crops, :boolean, default: false
@@ -70,18 +71,17 @@ class UpdateSustainabilititySurveys < ActiveRecord::Migration[6.0]
     # rivers and streams
 
     rename_column :sustainability_surveys, :river_bank_vegetation_mowed_two_years, :river_bank_vegetation_mown
-    rename_column :sustainability_surveys, :river_bank_vegetation_left_standing, :river_bank_vegetation_left_standing_or_mown_in_phases
+    rename_column :sustainability_surveys, :river_bank_vegetation_left_standing,
+                  :river_bank_vegetation_left_standing_or_mown_in_phases
 
     # pools and ponds
 
-    rename_column :sustainability_surveys, :pond_bank_vegetation_mowed_two_years, :pond_bank_vegetation_mown_every_one_two_years
+    rename_column :sustainability_surveys, :pond_bank_vegetation_mowed_two_years,
+                  :pond_bank_vegetation_mown_every_one_two_years
     add_column :sustainability_surveys, :pond_bank_trees_shrubs_pruned_pollarded_coppiced, :boolean, default: false
     rename_column :sustainability_surveys, :pond_plants_cleared_three_years, :pond_plants_cleared
-    rename_column :sustainability_surveys, :pond_cuttings_removed_promptly, :pond_cuttings_cleared_plants_removed_promptly
+    rename_column :sustainability_surveys, :pond_cuttings_removed_promptly,
+                  :pond_cuttings_cleared_plants_removed_promptly
     add_column :sustainability_surveys, :dredged_once_twice_every_five_years_material_removed, :boolean, default: false
-
   end
 end
-
-
-

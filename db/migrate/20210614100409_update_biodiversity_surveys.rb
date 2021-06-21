@@ -32,4 +32,3 @@ class UpdateBiodiversitySurveys < ActiveRecord::Migration[6.0]
     add_column :biodiversity_surveys, :number_of_mammal_species, :integer
   end
 end
-

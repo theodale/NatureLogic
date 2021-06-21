@@ -1,6 +1,5 @@
 class AddManagementPracticesToBiodiversitySurveys < ActiveRecord::Migration[6.0]
   def change
-
     add_column :biodiversity_surveys, :crop_protection_use, :boolean, default: false
     add_column :biodiversity_surveys, :legumes_or_grass_cover_in_crop_rotation, :boolean, default: false
     add_column :biodiversity_surveys, :grow_cover_crops, :boolean, default: false
@@ -46,6 +45,5 @@ class AddManagementPracticesToBiodiversitySurveys < ActiveRecord::Migration[6.0]
     add_column :biodiversity_surveys, :pond_dredged_five_years, :boolean, default: false
     add_column :biodiversity_surveys, :pond_shading_prevented, :boolean, default: false
     add_column :biodiversity_surveys, :no_pools_and_ponds, :boolean, default: false
-
   end
 end

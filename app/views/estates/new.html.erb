@@ -23,6 +23,7 @@
                                     <div class="col-12">
                                       <h5 class="home-text-green mb-3">Enter Estate Name</h5>
                                         <%= bootstrap_form_with model: @estate do |f| %>
+                                            <h1><%= @estate.id %></h1>
                                             <%= f.text_field :name %>
                                             <%= f.text_field :location %>
                                             <%= f.number_field :carbon_price %>
@@ -30,11 +31,11 @@
                                                 <%= tf.number_field :net_carbon_emission, step: :any,
                                                     label: "Net Carbon Emission (kg)" %>
                                                 <%= tf.number_field :mean_SOC, step: :any, label: "Mean SOC"%>
-                                                <%= tf.number_field :soil_health, step: :any %>
-                                                <%= tf.number_field :nature_positive_areas, step: :any %>
+                                                <%= tf.number_field :soil_health_score, step: :any %>
+                                                <%= tf.number_field :ecological_focus_area, step: :any %>
                                                 <%= tf.number_field :sustainable_practices, step: :any %>
+                                                <%= tf.hidden_field :estate_id, value: @estate.id %>
                                             <% end %>
-                                            <%= f.hidden_field :estate_user_id, value: @estate.estate_user_id %>
                                             <%= f.submit "Submit", class: "btn btn-info" %>
                                         <% end %>
                                     </div>

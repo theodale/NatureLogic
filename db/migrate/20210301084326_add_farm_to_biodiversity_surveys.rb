@@ -3,5 +3,3 @@ class AddFarmToBiodiversitySurveys < ActiveRecord::Migration[6.0]
     add_reference :biodiversity_surveys, :farm
   end
 end
-
-

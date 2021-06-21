@@ -1,17 +1,17 @@
 require 'csv'
 
 ActiveAdmin.register HedgerowType do
+  permit_params :category, :sequestration_per_ha, :defra_uniqueness_score, :area_for_nature_rating,
+                :above_ground_carbon_per_ha
 
-  permit_params :category, :sequestration_per_ha, :defra_uniqueness_score, :area_for_nature_rating, :above_ground_carbon_per_ha
-
-  action_item :only => :index do
-    link_to 'Upload Hedgerow Types CSV', :action => 'upload_csv'
+  action_item only: :index do
+    link_to 'Upload Hedgerow Types CSV', action: 'upload_csv'
   end
 
   collection_action :upload_csv do
   end
 
-  collection_action :import_csv, :method => :post do
+  collection_action :import_csv, method: :post do
     hedgerow_types_csv_file = params[:hedgerow_types_csv].read
     first_row = true
     CSV.parse(hedgerow_types_csv_file) do |row|
@@ -27,8 +27,6 @@ ActiveAdmin.register HedgerowType do
         new_hedgerow_type.save
       end
     end
-    redirect_to :action => :index, :notice => "Imported Successfully"
+    redirect_to action: :index, notice: 'Imported Successfully'
   end
-
 end
-

@@ -3,4 +3,3 @@ class AddCarbonPriceToEstates < ActiveRecord::Migration[6.0]
     add_column :estates, :carbon_price, :float
   end
 end
-

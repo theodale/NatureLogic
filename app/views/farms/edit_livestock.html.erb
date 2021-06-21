@@ -1,4 +1,4 @@
-<%= render 'shared/farms/sidebar' %>
+<%= render 'shared/farms/sidebar', page: "data" %>
 <div class="page-content">
     <div class="container-fluid d-flex flex-column h-100">
         <div class="row">
@@ -12,14 +12,11 @@
                 <%= render 'shared/farms/edit/navbar', section: "Farm" %>
                 <div class="row mt-2">
                     <div class="col-12 d-flex justify-content-center px-4">
-                    <%= link_to "Details",
-                        farm_edit_details_path(@farm),
-                        class: "edit-sub-link" %>
                     <%= link_to "Livestock",
                         farm_edit_livestock_path(@farm),
                         class: "edit-sub-link active mx-5" %>
                     <%= link_to "Targets",
-                        edit_farm_target_path(@farm),
+                        edit_farm_target_path(@farm, from_farm: true),
                         class: "edit-sub-link" %>
                     </div>
                 </div>

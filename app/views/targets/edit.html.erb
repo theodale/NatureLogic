@@ -1,3 +1,64 @@
+<% if params[:from_farm] %>
+<%= render 'shared/farms/sidebar', page: "data" %>
+<div class="page-content">
+    <div class="container-fluid d-flex flex-column h-100">
+        <div class="row">
+            <div class="col-12">
+                <%= render 'shared/farms/navbar', section: "Edit Targets"  %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 mb-5">
+                <%= render 'shared/farms/edit/navbar', section: "Farm" %>
+                <div class="row mt-2">
+                    <div class="col-12 d-flex justify-content-center px-4">
+                        <%= link_to "Livestock",
+                            farm_edit_livestock_path(@farm),
+                            class: "edit-sub-link mx-5" %>
+                        <%= link_to "Targets",
+                            edit_farm_target_path(@farm, from_farm: true),
+                            class: "edit-sub-link active" %>
+                    </div>
+                </div>
+                <%= bootstrap_form_with model: @target,
+                    url: farm_target_path(farm_id: @farm.id, from_farm: true),
+                    method: :put,
+                    class: "w-100 h-100" do |f| %>
+                    <div class="shadow farm-edit-form-card pt-4 pb-3 px-4 d-flex
+                        flex-column justify-content-between mt-3">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8 mt-3">
+                                    <%= f.number_field :net_carbon_emission, step: :any,
+                                        label: "Net Carbon Emission (kg)" %>
+                                    <%= f.number_field :mean_SOC, step: :any, label: "Mean SOC (%)"%>
+                                    <%= f.number_field :soil_health_score, step: :any, label: "Soil Health (%)" %>
+                                    <%= f.number_field :ecological_focus_area, step: :any,
+                                        label: "Ecological Focus Areas (%)" %>
+                                    <%= f.number_field :sustainable_practices, step: :any,
+                                        label: "Sustainable Practices (%)" %>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-5">
+                            <%= link_to edit_farm_path(@farm) do %>
+                                <i class="fas fa-times fa-2x farm-creation-arrow"></i>
+                            <% end %>
+                            <button type="submit" class="btn farm-creation-arrow-button">
+                                <i class="fas fa-save fa-2x farm-creation-arrow"></i>
+                            </button>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>
+<% else %>
 <%= render 'shared/estates/sidebar', page: "settings" %>
 <div class="page-content">
     <div class="container-fluid">
@@ -19,7 +80,7 @@
                 <div class="row mt-4">
                     <div class="col-12">
                         <%= bootstrap_form_with model: @target,
-                            url: estate_target_path(@estate, farm_target: params[:farm_target], updated: true),
+                            url: estate_target_path(estate_id: @estate.id, from_estate: true),
                             method: :put do |f| %>
                             <div class="form-card purple shadow mb-5 d-flex p-4 d-flex
                                 flex-column justify-content-between">
@@ -35,11 +96,13 @@
                                                     </button>
                                                 </div>
                                                 <% end %>
+                                                <h4><%= @target.id %>
+                                                <h4><%= @estate.id %>
                                                 <%= f.number_field :net_carbon_emission, step: :any,
                                                     label: "Net Carbon Emission (kg)" %>
                                                 <%= f.number_field :mean_SOC, step: :any, label: "Mean SOC (%)"%>
-                                                <%= f.number_field :soil_health, step: :any, label: "Soil Health (%)" %>
-                                                <%= f.number_field :ecological_focus_areas, step: :any,
+                                                <%= f.number_field :soil_health_score, step: :any, label: "Soil Health (%)" %>
+                                                <%= f.number_field :ecological_focus_area, step: :any,
                                                     label: "Ecological Focus Areas (%)" %>
                                                 <%= f.number_field :sustainable_practices, step: :any,
                                                     label: "Sustainable Practices (%)" %>
@@ -62,4 +125,4 @@
         </div>
     </div>
 </div>
-
+<% end %>
